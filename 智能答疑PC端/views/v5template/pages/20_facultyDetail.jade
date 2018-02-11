@@ -1,0 +1,53 @@
+//
+   Created by abbydu on 17/7/26.
+extends ../components/layout03
+block content
+    div(class="details")
+        div(class="details_container")
+            include ../components/sidebar
+            div(class="Article_details")
+                //常见问题
+                div(class="Article_details_container")
+                    div(class="Article_details_tltle")
+                        span(class="Article_details_tips") 您的当前位置：
+                        a(class="cur") 学院&专业
+                        a(class="sur") 院系详情
+                    div(class="professionalDetail_content")
+                        if facultyDetail
+                            div(class="professionalDetail_head",departmentId="#{facultyDetail.departmentId}") 院系名称:&nbsp;&nbsp;#{facultyDetail.departmentName}
+                            a(class="professionalDetail_msg",href="#{facultyDetail.officialWebsite}") 院系官网:&nbsp;&nbsp; #{facultyDetail.officialWebsite}
+                            div(class="professionalDetail_table")
+                                span 开设专业:
+                                div(class="professionalDetail_list_table")
+                                    table(class="professionalDetailInfoTable")
+                                        tbody
+                                            tr(class="professionalDetailInfoTable_head")
+                                                th 专业名称
+                                                th 学制
+                                                th 授予学位
+                                        tbody(class="professionalDetailInfoTable_body",id="professionalDetailInfoTable_body")
+                                            if facultyDetail && facultyDetail.mojorList
+                                                each item, i in facultyDetail.mojorList
+                                                    tr
+                                                        td
+                                                            a(class="major",majorId="#{item.id}") #{item.name}
+                                                        td #{item.schoolYear}
+                                                        td #{item.degree}
+                            div(class="professionalDetail_msg") 院系介绍:&nbsp;&nbsp;!{facultyDetail.depDescribe}
+                            div(class="professionalDetail_msg01") 学院简介:&nbsp;&nbsp; !{facultyDetail.remark}
+            include ../components/rightMode
+
+    script.
+        sidebarManager.setClassClickCallback(function(catId){
+            var sCode = $(".header_container").attr('sCode');
+            var parentId = catId;
+            var url = getAppServer() + '/page/list/' + sCode + "/" + parentId + "?curPage=1&pageSize=10";
+            window.location.href = url;
+        });
+        $(".professionalDetailInfoTable_body a.major").click(function () {
+            var parentId = "#{sidebarData.secondCatId}";
+            var majorId = $(this).attr('majorId');
+            var sCode = $(".header_container").attr('sCode');
+            var url = getAppServer() + '/page/major/' + sCode + "/" + majorId + "/" + parentId;
+            window.location.href = url;
+        })

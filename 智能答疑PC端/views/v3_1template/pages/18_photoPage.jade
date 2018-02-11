@@ -1,0 +1,61 @@
+//
+   Created by abbydu on 17/8/20.
+extends ../components/layout01
+block content
+       // 新导航栏。显示全部一级分类
+       include ../components/navNew
+       // 详情页
+       div(class="details")
+          div(class="details_container")
+              div(class="sidebar")
+                  div(class="side_bar")
+                      img(class="side_bg_img",src="#{host}#{sidebarBgImg}")
+                      img(class="side_icon_img",src="#{locals.global.img_sever_url}#{schoolInfo.yrScholar}")
+                      span(class="side_bar_tips") 校园风采
+              div(class="Article_details")
+                  //常见问题
+                  div(class="Article_details_container")
+                      div(class="Article_details_tltle")
+                          span(class="Article_details_tips") 您的当前位置：
+                          a(class="aur") 校园风采
+                      // 视频在线
+                      div(class="photo_right")
+                         if photo && photo.length >0
+                              ul(class="gallery")
+                                  if  photo
+                                     each photoList in photo
+                                        li
+                                            if photoList.imgUrl && photoList.imgUrl.indexOf('http') != -1
+                                                a(class="sub_video",id="#{photoList.id}",rel="prettyPhoto[校园风采]",href="#{photoList.imgUrl}")
+                                                    img(src="#{photoList.imgUrl}")
+                                                p(class="video_msg") #{photoList.title}
+                                            else
+                                                a(class="sub_video",id="#{photoList.id}",rel="prettyPhoto[校园风采]",href="#{locals.global.img_sever_url}#{photoList.imgUrl}")
+                                                    img(src="#{locals.global.img_sever_url}#{photoList.imgUrl}")
+
+                                                p(class="video_msg") #{photoList.title}
+                         else
+                            span(class="no_data") 很抱歉 ,暂无数据
+              include ../components/rightMode
+       include ../components/footer
+
+
+       link(href='#{host}/stylesheets/v3_1template/v3_1home.css',rel="stylesheet",type="text/css")
+       link(href='#{host}/stylesheets/v3_1template/v3_1articleDetails.css',rel="stylesheet",type="text/css")
+       link(href='#{host}/stylesheets/v3_1template/v3_1sidebar.css',rel="stylesheet",type="text/css")
+       link(href='#{host}/stylesheets/v3_1template/themecolor.css',rel="stylesheet",type="text/css")
+       script(type="text/javascript",src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js")
+       link(rel="stylesheet" href="#{host}/javascripts/v4template/libs/prettyPhoto/prettyPhoto.css")
+       script(src="#{host}/javascripts/v4template/libs/prettyPhoto/jquery.prettyPhoto.js")
+
+       script.
+          function getAppServer() {
+             return "";
+          };
+          function getApiServer() {
+             return '!{locals.global.api_sever_url}'
+          }
+          $(function(){
+              $("a[rel^='prettyPhoto']").prettyPhoto();
+          })
+

@@ -1,0 +1,180 @@
+//                                    Created by abbydu on 17/11/28.
+// 首页导航栏
+// 返回顶部
+div(id="toTop")
+    img(src="/images/v4template/backtop.png")
+div(class="nav",style="background:#{themeColor}")
+   div(class="nav_container")
+      //左边导航栏
+      div(class="nav_left_new")
+          span(class="home_page") 首页
+          ul(class="first_nav_new")
+             if SPBMenu.data
+                each moduleSPBMenu01 in SPBMenu.data
+                    li
+                        div(class="first_navItems",catId="#{moduleSPBMenu01.catId}",ntype="#{moduleSPBMenu01.ntype}",refUrl="#{moduleSPBMenu01.refUrl}")
+                            a(class="first_msg") #{moduleSPBMenu01.name}
+                            span(class="nav_icon icon-double_shang")
+                            div(class="second_nav",style="display:none")
+                                ul(class="second_navItems")
+                                   if moduleSPBMenu01.children
+                                      each moduleSPBMenu01Child in moduleSPBMenu01.children
+                                          li
+                                              a(class="second_msg",id="#{moduleSPBMenu01Child.id}",ntype="#{moduleSPBMenu01Child.ntype}",refUrl="#{moduleSPBMenu01Child.refUrl}")
+                                                 if moduleSPBMenu01Child && moduleSPBMenu01Child.icon
+                                                    i(class="#{moduleSPBMenu01Child.icon}")
+                                                 else
+                                                    i(class="usericon usericon-webicon-74")
+                                                  span(class="second_msg") #{moduleSPBMenu01Child.name}
+script.
+    // 返回顶部
+    $('#toTop').click(function () {
+       $('html,body').animate({scrollTop: 0}, 500);
+    })
+
+    function getAppServer() {
+        return "";
+    }
+    function getApiServer() {
+        return '!{locals.global.api_sever_url}'
+    }
+    // 机器人
+    function getRobotServer() {
+        return '!{locals.global.robot_sever_url}'
+    }
+    $(function(){
+        function addEvent(elem, event, fn) {
+            if (elem.addEventListener) {
+                elem.addEventListener(event, fn, false);
+            } else if (elem.attachEvent) {
+                elem.attachEvent('on' + event, fn);
+            } else {
+                elem['on' + event] = fn;
+            }
+        }
+        addEvent(window, 'scroll', function () {
+            var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+            if (scrollTop > 110) {
+                $('#toTop').show();
+            } else {
+                $('#toTop').hide();
+            }
+        })
+        // 用户点击首页 跳转到首页
+        $(".home_page").click(function () {
+            var identify = $(".header").attr('identify');
+            var url = getAppServer() + "/" + identify;
+            window.location.href = toDetailPage(url);
+        })
+
+
+        $(".first_msg").mouseenter(function () {
+            // 计算导航栏左侧的偏移量
+            var totalWidth = 0;
+            var index = $(this).parent().parent().index();
+
+            for(var j = 0;j<index;j++){
+                var w = $(".first_nav_new>li").eq(j).outerWidth();
+                totalWidth += w
+            }
+            totalWidth+=$(".home_page").outerWidth();
+            $(this).parent().find('.second_nav').css('left',-totalWidth+'px');
+            $(this).parent().find(".nav_icon").show();
+            var iconWeight = $(this).width();
+            var iconWeight01 = iconWeight / 2
+            $(this).parent().find(".nav_icon").css('left', (iconWeight01 + 10) + "px");
+
+            // 下拉二级菜单悬浮
+            var THIS = this;
+            $(".first_msg").each(function () {
+                // 不是当前的, 全部隐藏
+                if (this != THIS) {
+                    $(this).parent().find(".nav_icon").hide();
+                    $(this).parent().find('.second_nav').hide();
+                } else {
+                    var display = $(this).css('display') == 'block';
+                    if (display) {
+                        $(this).parent().find(".nav_icon").hide();
+                        $(this).parent().find('.second_nav').hide();
+                    } else {
+                        $(this).parent().find('.second_nav').show();
+                        $(this).parent().find('.second_msg').show();
+                    }
+                }
+            });
+
+        });
+
+        // 鼠标离开事件
+        $(".first_nav_new").mouseleave(function () {
+            $(this).parent().find('.second_nav').hide();
+            $(this).parent().find(".nav_icon").hide();
+        });
+
+
+        // 导航栏点击事件
+        $(".first_msg").click(function(){
+            var ntype = $(this).parent().attr('ntype');
+            var catId = $(this).parent().attr('catId');
+            var refUrl = $(this).parent().attr('refUrl');
+            // 点击首页导航栏的各级分类,跳转到二级页面
+            if (ntype == '0') {
+                //跳转到文章列表
+                var parentId = $(this).parent().attr('catId');
+                var sCode = $(".main_container").attr('sCode');
+                var url = getAppServer() + '/page/list/' + sCode + "/"  + parentId+"?curPage=1&pageSize=10";
+                //var url = getAppServer() + '/secondPage/secondPageArticleList?' + "catId=" + catId + "&sCode=" + sCode + "&curPage=1&pageSize=10";
+                window.location.href = toDetailPage(url);
+            } else if (ntype == 1) {
+                return;
+            } else if (ntype == 2) {
+                var url = refUrl;
+                window.location.href = toDetailPage(url);
+            } else if (ntype == 3) {
+                // 跳转到 校园风采
+                var sCode = $(".main_container").attr('sCode');
+                var url = getAppServer() + '/page/photo/' + sCode;
+                window.location.href = toDetailPage(url);
+            } else if (ntype == 4) {
+                // 跳转到 视频在线
+                var sCode = $(".main_container").attr('sCode');
+                var url = getAppServer() + '/page/video/' + sCode;
+                window.location.href = toDetailPage(url);
+            }
+        })
+        // 导航栏下拉菜单点击事件
+        $(".second_msg").click(function(){
+            var ntype = $(this).attr('ntype');
+            var refUrl  = $(this).attr('refUrl');
+            var infoId = $(this).attr('id');
+            var parentId = $(this).parent().parent().parent().parent().attr('catId');
+            if (ntype == '0') {
+                //跳转到文章列表
+                var sCode = $(".main_container").attr('sCode');
+                var parentId = infoId
+                var url = getAppServer() + '/page/list/' + sCode + "/"  + parentId+"?curPage=1&pageSize=10";
+                //var url = getAppServer() + '/secondPage/secondPageArticleList?' + "catId=" + infoId + "&sCode=" + sCode + "&curPage=1&pageSize=10";
+                window.location.href = toDetailPage(url);
+            } else if (ntype == "1") {
+                //调转到文章详情
+                var sCode = $(".main_container").attr('sCode');
+                var parentId = $(this).parent().parent().parent().parent().attr('catId');
+                var url = getAppServer() + '/page/detail/' + sCode + "/" + infoId + "/" + parentId;
+                window.location.href = toDetailPage(url);
+            } else if (ntype == "2") {
+                var refUrl = $(this).attr('refUrl');
+                var url = refUrl;
+                window.location.href = toDetailPage(url);
+            } else if(ntype == "3"){
+                // 跳转到 校园风采
+                var sCode = $(".header_container").attr('sCode');
+                var url = getAppServer() + '/page/photo/' + sCode;
+                window.location.href = toDetailPage(url);
+            } else if(ntype =="4"){
+                // 跳转到 视频在线
+                var sCode = $(".header_container").attr('sCode');
+                var url = getAppServer() + '/page/video/' + sCode;
+                window.location.href = toDetailPage(url);
+            }
+        })
+    })

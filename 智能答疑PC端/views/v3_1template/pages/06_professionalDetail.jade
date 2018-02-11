@@ -1,0 +1,215 @@
+//
+   Created by abbydu on 17/7/26.
+
+extends ../components/layout01
+block content
+      // 新导航栏。显示全部一级分类
+      include ../components/navNew
+      // 专业详情
+      div(class="details")
+         div(class="details_container")
+            include ../components/sidebar
+            div(class="Article_details")
+                //常见问题
+                div(class="Article_details_container")
+                    div(class="Article_details_tltle")
+                        span(class="Article_details_tips") 您的当前位置：
+                        a(class="cur") 学院&专业
+                        a(class="sur") 专业详情
+                    div(class="professionalDetail_content")
+                        if ProfessionalDetail
+                            div(class="professionalDetail_head")
+                                h1(class="info_title",majorId="#{ProfessionalDetail.id}") #{ProfessionalDetail.name}
+                                if ProfessionalDetail && ProfessionalDetail.viewTimes && ProfessionalDetail.viewTimes != null
+                                    h1(class="view") 浏览量: #{ProfessionalDetail.viewTimes}
+                                else
+                                    h1(class="view")
+                                h2(departId="#{ProfessionalDetail.departId}") 所属院系: #{ProfessionalDetail.departName}
+                                h2 学制：#{ProfessionalDetail.schoolYear}
+                                h2 授予学位：#{ProfessionalDetail.degree}
+                                h2 学费标准: #{ProfessionalDetail.tuitionStandard}
+                                div(class="professionalDetail_item02")
+                                    span(class="name") 招生计划 :
+                                    a(class="look_detail") 点击查看详情
+                                div(class="professionalDetail_item03")
+                                    span(class="name") 历史录取 :
+                                    a(class="look_history") 点击查看详情
+                                if ProfessionalDetail.showConfig
+                                    if ProfessionalDetail.showConfig.showFeature ==1
+                                        if ProfessionalDetail && ProfessionalDetail.feature && ProfessionalDetail.feature.length > 0
+                                            div(class="professionalDetail_item01")
+                                                h2 专业特色
+                                                div(class="professionalDetail_item01Msg") !{ProfessionalDetail.feature}
+                                    if ProfessionalDetail.showConfig.showMainSubject == 1
+                                        if ProfessionalDetail && ProfessionalDetail.mainSubject && ProfessionalDetail.mainSubject.length > 0
+                                            div(class="professionalDetail_item01")
+                                                h2 主要学科
+                                                div(class="professionalDetail_item01Msg") !{ProfessionalDetail.mainSubject}
+                                    if ProfessionalDetail.showConfig.showTarget == 1
+                                        if ProfessionalDetail && ProfessionalDetail.target && ProfessionalDetail.target.length > 0
+                                            div(class="showTarget")
+                                                h2 培养目标
+                                                div(class="professionalDetail_item01Msg") !{ProfessionalDetail.target}
+                                    if ProfessionalDetail.showConfig.showMainClass == 1
+                                        if ProfessionalDetail && ProfessionalDetail.mainClass && ProfessionalDetail.mainClass.length > 0
+                                            div(class="showTarget")
+                                                h2 核心课程
+                                                div(class="professionalDetail_item01Msg") !{ProfessionalDetail.mainClass}
+                                    if ProfessionalDetail.showConfig.showWorkInfo == 1
+                                        if ProfessionalDetail && ProfessionalDetail.workInfo && ProfessionalDetail.workInfo.length > 0
+                                            div(class="showTarget")
+                                                h2 就业历史
+                                                div(class="professionalDetail_item01Msg") !{ProfessionalDetail.workInfo}
+                                    if ProfessionalDetail.showConfig.showTrainCondition == 1
+                                        if ProfessionalDetail && ProfessionalDetail.trainCondition && ProfessionalDetail.trainCondition.length > 0
+                                            div(class="showTarget")
+                                                h2 培养要求
+                                                div(class="professionalDetail_item01Msg") !{ProfessionalDetail.trainCondition}
+                                    if ProfessionalDetail.showConfig.showWorkOutlook == 1
+                                        if ProfessionalDetail && ProfessionalDetail.workOutlook && ProfessionalDetail.workOutlook.length > 0
+                                            div(class="showTarget")
+                                                h2 就业前景
+                                                div(class="professionalDetail_item01Msg") !{ProfessionalDetail.workOutlook}
+                                    if ProfessionalDetail.showConfig.showWorkDir == 1
+                                        if ProfessionalDetail && ProfessionalDetail.workDir && ProfessionalDetail.workDir.length > 0
+                                            div(class="showTarget")
+                                                h2 就业去向
+                                                div(class="professionalDetail_item01Msg") !{ProfessionalDetail.workDir}
+                                    if ProfessionalDetail.showConfig.showResearchDir == 1
+                                        if ProfessionalDetail && ProfessionalDetail.researchDir &&ProfessionalDetail.researchDir.length > 0
+                                            div(class="showTarget")
+                                                h2 研究方向
+                                                div(class="professionalDetail_item01Msg") !{ProfessionalDetail.researchDir}
+                                    if ProfessionalDetail.showConfig.showTutor == 1
+                                        if ProfessionalDetail && ProfessionalDetail.tutor && ProfessionalDetail.tutor.length >0
+                                            div(class="showTarget")
+                                                h2 导师
+                                                div(class="professionalDetail_item01Msg") !{ProfessionalDetail.tutor}
+                                    if ProfessionalDetail.showConfig.showEnrollment == 1
+                                        if ProfessionalDetail && ProfessionalDetail.enrollment && ProfessionalDetail.enrollment.length >0
+                                            div(class="showTarget")
+                                                h2 招生人数
+                                                div(class="professionalDetail_item01Msg") !{ProfessionalDetail.enrollment}
+                                    if ProfessionalDetail.showConfig.showMarxTheoryCourse == 1
+                                        if ProfessionalDetail && ProfessionalDetail.marxTheoryCourse && ProfessionalDetail.marxTheoryCourse.length >0
+                                            div(class="showTarget")
+                                                h2 马克思主义理论课
+                                                div(class="professionalDetail_item01Msg") !{ProfessionalDetail.marxTheoryCourse}
+                                    if ProfessionalDetail.showConfig.showForeignLan == 1
+                                        if ProfessionalDetail && ProfessionalDetail.foreignLan && ProfessionalDetail.foreignLan.length > 0
+                                            div(class="showTarget")
+                                                h2 外语
+                                                div(class="professionalDetail_item01Msg") !{ProfessionalDetail.foreignLan}
+                                    if ProfessionalDetail.showConfig.showBusinessCourse1 == 1
+                                        if ProfessionalDetail && ProfessionalDetail.businessCourse1 && ProfessionalDetail.businessCourse1.length > 0
+                                            div(class="showTarget")
+                                                h2 业务课考试科目一
+                                                div(class="professionalDetail_item01Msg") !{ProfessionalDetail.businessCourse1}
+                                    if ProfessionalDetail.showConfig.showBusinessCourse2 == 1
+                                        if ProfessionalDetail && ProfessionalDetail.businessCourse2 && ProfessionalDetail.businessCourse2.length > 0
+                                            div(class="showTarget")
+                                                h2 业务课考试科目二
+                                                div(class="professionalDetail_item01Msg") !{ProfessionalDetail.businessCourse2}
+                                    if ProfessionalDetail.showConfig.showRemarks == 1
+                                        if ProfessionalDetail && ProfessionalDetail.remarks && ProfessionalDetail.remarks.length > 0
+                                            div(class="showTarget")
+                                                h2 备注
+                                                div(class="professionalDetail_item01Msg") !{ProfessionalDetail.remarks}
+                                    if ProfessionalDetail.showConfig.showBibliography == 1
+                                        if ProfessionalDetail && ProfessionalDetail.bibliography && ProfessionalDetail.bibliography.length > 0
+                                            div(class="showTarget")
+                                                h2 参考书目
+                                                div(class="professionalDetail_item01Msg") !{ProfessionalDetail.bibliography}
+
+                        else
+                            div(class="professionalDetail_head") 很抱歉,暂无数据
+            include ../components/rightMode
+      include ../components/footer
+      script.
+          sidebarManager.setClassClickCallback(function(catId){
+              var sCode = $(".main_container").attr('sCode');
+              var parentId = catId;
+              var url = getAppServer() + '/page/list/' + sCode + "/"  + parentId +"?curPage=1&pageSize=10";
+              window.location.href = toDetailPage(url);
+          });
+          $(function(){
+              // 添加用户访问记录
+              // 获取地址栏参数
+              function GetQueryString(name) {
+                  var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                  var r = window.location.search.substr(1).match(reg);
+                  if (r != null)return unescape(r[2]);
+                  return null;
+              }
+
+              // 专业id
+              var majorId = "#{majorId}"
+              // 前端加入统计代码
+
+              // 用户省份
+              var userProvince = remote_ip_info.province;
+              // 用户城市
+              var userCity = remote_ip_info.city;
+              // 学校唯一标识
+              var sCode = $(".main_container").attr('sCode');
+              // 用户token
+              var userToken = $(".fast_login_msg").attr('userToken');
+              var userId = $(".fast_login_msg").attr('id');
+              // 访问来源
+              //var viewSourceUrl = document.referrer;
+              // 访问来源
+              var viewSourceUrl = sessionStorage.getItem('viewSourceUrl') ? sessionStorage.getItem('viewSourceUrl') : document.referrer;
+              sessionStorage.setItem('viewSourceUrl', viewSourceUrl);
+              // 当前页面 url
+              var pageUrl = location.href;
+              $.ajax({
+                  type: "post",
+                  url: getApiServer() + "/front/addUserViewLog",
+                  data: {
+                      'userId': userId,
+                      'userToken': userToken,
+                      'userProvince': userProvince,
+                      'userCity': userCity,
+                      'sCode': sCode,
+                      'viewSourceUrl': viewSourceUrl,
+                      'pageUrl': pageUrl,
+                      'majorId': majorId
+                  },
+                  success: function (data) {
+                      if (data && data.code == '000000') {
+                          return;
+                      } else {
+                          return;
+                      }
+                  }
+              })
+
+
+              //--------------------专业列表 点击招生计划 跳转招生计划页面 点击事件
+              $(".look_detail").click(function () {
+                  var parentId = "#{sidebarData.secondCatId}";
+                  var sCode = $(".main_container").attr('sCode');
+                  var url = getAppServer() + '/page/enrollment/' + sCode + "/" + parentId;
+                  window.location.href = toDetailPage(url);
+              })
+              //------------------- 专业列表 点击历史录取页面 跳转历史录取页面 点击事件------------------------------------
+              $(".look_history").click(function () {
+                  var parentId = "#{sidebarData.secondCatId}";
+                  var sCode = $(".main_container").attr('sCode');
+                  var url = getAppServer() + '/page/admission/' + sCode + "/" + parentId;
+                  window.location.href = toDetailPage(url);
+              })
+
+
+
+
+
+
+
+
+
+
+
+
+
+          })

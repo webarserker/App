@@ -1,0 +1,54 @@
+.books a{
+  color:#333;
+  &:hover{
+    text-decoration:none !important;
+  }
+}
+#rightBooks{
+  width:100px;
+  height:180px;
+  float:right;
+  text-align:center;
+  background:url(../../../images/v3_2template/rightBook.png) 0 0 no-repeat;
+  margin-top:90px;
+  position:relative;
+  &.fix{
+    position:fixed;
+    top:188px;
+    z-index:400;
+    margin:0;
+  }
+  &>a{
+    width:80px;
+    position:absolute;
+    top:-52px;
+    left:10px;
+    img{
+      width:100%;
+    }
+  }
+  #books{
+    position:absolute;
+    width:100%;
+    height:84px;
+    top:51px;
+    a{
+      display:block;
+      height:28px;
+      width:100%;
+      line-height:28px;
+    }
+  }
+  .toTop{
+    position:absolute;
+    top:135px;
+    left:0;
+    width:100%;
+    height:45px;
+    padding-top:8px;
+    h4{
+      font-weight:normal;
+      font-size:12px;
+    }
+  }
+}

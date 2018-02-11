@@ -1,0 +1,11 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>智能答疑注册页面</title><link href="../stylesheets/v5template/layout01.css" rel="stylesheet" type="text/css"/><link href="../stylesheets/v5template/pages/03_v5users.css" rel="stylesheet" type="text/css"/><link href="../stylesheets/v5template/themecolor.css" rel="stylesheet" type="text/css"/><script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js"></script></head><body><div class="new_wrapper"><div class="new_container"><!-- 头部--><div class="new_header"><div class="new_header_container"><div class="new_header_left"><img src="../../images/v5template/32-pic.png"/><span> • 研招智能咨询系统</span></div></div></div><!--分隔线--><div class="new_separate"></div><!-- 在线留言--><div class="online"><div class="online_container"><div class="online_content"><!--左边选择项--><div class="online_left"><ul><li><a><span class="online_tips01"></span><span class="online_tips02">我的资料</span></a></li><li><a><span class="online_tips01"></span><span class="online_tips02">招办回复</span></a></li><li><a><span class="online_tips01 active"></span><span class="online_tips02">在线留言</span></a></li></ul></div><div class="online_right"><textarea id="online_message" class="online_message"></textarea><a class="online_btn">提交</a></div></div></div></div><script>var t = document.getElementById('online_message');
+t.onfocus = function () {
+    if (this.innerHTML == '请输入您要咨询的问题') {
+        this.innerHTML = ''
+    }
+};
+t.onblur = function () {
+    if (this.innerHTML == '') {
+        this.innerHTML = '请输入您要咨询的问题'
+    }
+};</script><div class="new_footer"><div class="new_footer_container"><span class="msg01">Copyright 2017 ALL Right Reserved</span><span class="msg02">京ICP备16030849号 招办管理</span></div></div></div></div></body></html>

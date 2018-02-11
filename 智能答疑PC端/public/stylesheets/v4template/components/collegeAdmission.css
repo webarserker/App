@@ -1,0 +1,33 @@
+.footprint{
+    border-bottom:1px dashed #ddd;
+    color:#555;
+    font-size:13px;
+    padding-bottom:8px;
+}
+#show-collegeData{
+    margin-top:30px;
+}
+table.score-table{
+    width:100%;
+    text-align:center;
+    margin-top:20px;
+}
+table.score-table th,table.score-table td{
+    line-height:30px;
+    border:1px solid #d2d2d2;
+    font-size:14px;
+}
+table.score-table thead{
+    background-color:#DFE5F1;
+
+}
+table.score-table tbody{
+    background-color:#F7F9FD;
+}
+
+.by-lines{
+    margin-top:30px;
+}
+#lines{
+    margin-top:20px;
+}

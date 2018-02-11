@@ -1,0 +1,20 @@
+body{background:#f4f4f4;}
+/*页面机构布局*/
+#findPwdTopBox{background:#FFF;}
+#findPwdTopBox .wp{width:1160px;margin:0px auto;height:100px;line-height:100px;}
+#findPwdTopBox .wp img{margin-top:15px;}
+.pageStructP2{background:#f4f4f4;padding: 20px 0px;}
+/*盒子样式*/
+#findPwdBox{width:1160px;margin:0px auto;background:#FFF; padding:50px 0px;}
+#findPwdBox .w345{width:345px;}
+#findPwdBox .step{border-bottom:#e5eaee solid 1px;}
+#findPwdBox .step .stepWp{width:700px;margin:0px auto;}
+#findPwdBox .step .item{color:#cacaca;border-bottom:#e5eaee solid 1px;margin: 0px 20px;margin-bottom: -1px;padding: 0px 20px 0px 10px;line-height:36px;font-size:16px;}
+#findPwdBox .step .item .lstNum{display:inline-block;*display:inline;*zoom:1;vertical-align:middle;width:22px;border-radius:11px;-moz-border-radius:11px;-webkit-border-radius:11px;color:#FFF;margin-right:10px;text-align:center;height:22px;line-height:22px;background:#cacaca;}
+#findPwdBox .step .itemCur {border-color:#fe6c00;color:#fe6c00;}
+#findPwdBox .step .itemCur .lstNum{background:#fe6c00;}
+#findPwdBox .findPwdForm{width:600px;margin:50px auto;font-size:14px;color:#666666;}
+#findPwdBox .findPwdForm td{padding:10px 0px;}
+#findPwdBox .findPwdForm .lbl{font-size:16px; margin-right: 10px;}
+#findPwdBox .findPwdForm .submitBtn{margin-left:160px;padding-top:10px;}
+#findPwdBox .findPwdForm .step4 .tipTxt{color:#ff7f29;font-size:28px;padding:100px 0px;}

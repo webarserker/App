@@ -1,0 +1,141 @@
+doctype html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+html
+    head
+        meta(http-equiv="Content-Type", content="text/html; charset=utf-8")
+        if schoolInfo.isPostGraduate == "1"
+            meta(name ="keywords",content="#{schoolInfo.name},#{schoolInfo.name}研究生招生信息网,#{schoolInfo.name}介绍,#{schoolInfo.name}分数线,#{schoolInfo.name}自主招生,#{schoolInfo.name}招生计划,#{schoolInfo.name}专业介绍")
+        else
+            meta(name ="keywords",content="#{schoolInfo.name},#{schoolInfo.name}本科生招生信息网,#{schoolInfo.name}介绍,#{schoolInfo.name}分数线,#{schoolInfo.name}自主招生,#{schoolInfo.name}招生计划,#{schoolInfo.name}专业介绍")
+        title #{schoolInfo.name}#{schoolInfo.professor}
+        meta(name="description",content="#{schoolInfo.name}介绍")
+        link(rel='stylesheet', href='/stylesheets/v4_1template/reset.css')
+        link(rel='stylesheet', href='/stylesheets/v4_1template/variable.css')
+        link(rel='stylesheet', href='/stylesheets/v4_1template/font/bjfu/common/style.css')
+        link(rel='stylesheet', href='/stylesheets/v4_1template/font/bjfu/user/style.css')
+        link(rel='stylesheet', href='/stylesheets/v4_1template/otherFont/style.css')
+        link(rel='stylesheet', href='/stylesheets/v4_1template/common.css')
+        link(rel='stylesheet', href='/stylesheets/v4_1template/index.css')
+        link(rel='stylesheet', href='/stylesheets/v4_1template/articleDetail.css')
+        if schoolInfo && schoolInfo.yrScholar
+            link(rel="shortcut icon",href="#{locals.global.img_sever_url}#{schoolInfo.yrScholar}")
+        script(src='http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js')
+        script(src='http://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js')
+        script(src="/javascripts/ueditor.parse.js")
+        script(src='/javascripts/v4_1template/libs/echarts-all.js')
+        script(src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js")
+        meta(http-equiv="X-UA-Compatible",content="IE=8")
+        meta(http-equiv="X-UA-Compatible",content="IE=8")
+        script.
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?5da3b86d8f4fb163154ef561d3aa860b";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+
+
+            var ROBOT_HOST = '!{locals.global.robot_sever_url}'
+            var BASE_HOST = '!{locals.global.api_sever_url}'
+            var HOST = BASE_HOST + '/weixin/api';
+            var IMG_HOST = '!{locals.global.img_sever_url}'
+            var APP_SERVER = ''
+            var PARENTID='#{parentId}',INFOID='#{infoId}',MAJORID='#{majorId}'
+
+
+            // 跳转页面，统一处理参数
+            function toDetailPage(url) {
+                if (sessionStorage.getItem("spreadToken") && sessionStorage.getItem("spreadToken") != 'null') {
+                    if (url.indexOf("?") > -1) {
+                        url += "&spreadToken=" + sessionStorage.getItem("spreadToken");
+                    } else {
+                        url += "?spreadToken=" + sessionStorage.getItem("spreadToken");
+                    }
+                }
+                return url;
+            }
+
+            //用户宣传检测获取地址栏的userToken
+            // 获取地址栏参数
+            function GetQueryString(name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null)return unescape(r[2]);
+                return null;
+            }
+
+            var userToken = GetQueryString("userToken");
+
+            var viewSourceUrl = sessionStorage.getItem('viewSourceUrl') ? sessionStorage.getItem('viewSourceUrl') : document.referrer;
+            sessionStorage.setItem('viewSourceUrl', viewSourceUrl);
+
+
+            var timer = setTimeout(function () {
+                var ipData = remote_ip_info;
+                if (PARENTID && MAJORID) {
+                    $.ajax({
+                        type: "post",
+                        url: BASE_HOST + "/front/addUserViewLog",
+                        data: {
+                            'userToken':userToken,
+                            'userProvince': ipData.province,
+                            'userCity': ipData.city,
+                            'sCode': SCODE,
+                            'viewSourceUrl': sessionStorage.viewSourceUrl,
+                            'pageUrl': location.href,
+                            'parentId': PARENTID,
+                            'majorId': MAJORID
+                        },
+                        success: function (data) {
+                            if (data && data.code == '000000') {
+                                /* console.log('添加用户访问记录成功!') */
+                            } else {
+                                /* console.log('添加用户访问记录失败!') */
+                            }
+                        }
+                    })
+                } else if (PARENTID && INFOID) {
+                    $.ajax({
+                        type: "post",
+                        url: BASE_HOST + "/front/addUserViewLog",
+                        data: {
+                            'userToken':userToken,
+                            'userProvince': ipData.province,
+                            'userCity': ipData.city,
+                            'sCode': SCODE,
+                            'viewSourceUrl': sessionStorage.viewSourceUrl,
+                            'pageUrl': location.href,
+                            'parentId': PARENTID,
+                            'infoId': INFOID
+                        },
+                        success: function (data) {
+                            if (data && data.code == '000000') {
+                                /* console.log('添加用户访问记录成功!') */
+                            } else {
+                                /* console.log('添加用户访问记录失败!') */
+                            }
+                        }
+                    })
+                } else {
+                    $.ajax({
+                        type: "post",
+                        url: BASE_HOST + "/front/addUserViewLog",
+                        data: {
+                            'userToken':userToken,
+                            'userProvince': ipData.province,
+                            'userCity': ipData.city,
+                            'sCode': SCODE,
+                            'viewSourceUrl': sessionStorage.viewSourceUrl,
+                            'pageUrl': location.href
+                        },
+                        success: function (data) {
+                            if (data && data.code == '000000') {
+                                /* console.log('添加用户访问记录成功!') */
+                            } else {
+                                /* console.log('添加用户访问记录失败!') */
+                            }
+                        }
+                    })
+                }
+
+            }, 1000)
+
+    body
+    block content

@@ -1,0 +1,93 @@
+//
+   Created by abbydu on 17/9/21.
+extends ../components/layout01
+block content
+   // 新导航栏。显示全部一级分类
+   include ../components/navNew
+   // 文章列表
+   div(class="details")
+      div(class="details_container")
+         include ../components/sidebar
+         div(class="Article_details")
+            div(class="Article_details_container")
+               // data 为空的判断
+               div(class="Article_details_tltle")
+                  span(class="Article_details_tips") 您的当前位置：
+                     if sidebarData && sidebarData.firstCatName && sidebarData.secondCatName.length > 0
+                        a(class="aur",firstCatId="#{sidebarData.firstCatId}") #{sidebarData.firstCatName}
+                     else
+                        a(class="aur")
+                     if sidebarData && sidebarData.secondCatName && sidebarData.secondCatName.length > 0
+                        a(class="cur",secondCatId="#{sidebarData.secondCatId}") #{sidebarData.secondCatName}
+                     else
+                        a(class="cur")
+                     if sidebarData && sidebarData.threeCatName && sidebarData.threeCatName.length > 0
+                        a(class="sur",threeCatId = "#{sidebarData.threeCatId}") #{sidebarData.threeCatName}
+                     else
+                        a(class="sur")
+               // 招生计划
+               div(class="ResearchDirectionDetail")
+                  div(class="ResearchDirectionDetail_head")
+                     h1(class="info_title") #{MajorResearchDetail.name}
+                        h2 专业名称: #{MajorResearchDetail.majorName}
+                        h2 专业代码：#{MajorResearchDetail.majorCode}
+                        h2 所属院系：#{MajorResearchDetail.department}
+                        h2 指导老师: #{MajorResearchDetail.mentors}
+                        if MajorResearchDetail && MajorResearchDetail.typeStr && MajorResearchDetail.typeStr.length>0
+                           h2 类别: #{MajorResearchDetail.typeStr}
+                        if MajorResearchDetail && MajorResearchDetail.enrollPlanNum && MajorResearchDetail.enrollPlanNum.length>0
+                           h2 拟招人数: #{MajorResearchDetail.enrollPlanNum}
+                        if MajorResearchDetail && MajorResearchDetail.recommendNoTest && MajorResearchDetail.recommendNoTest.length>0
+                           h2 推免: #{MajorResearchDetail.recommendNoTest}
+                        if MajorResearchDetail.showConfig
+                           if MajorResearchDetail.showConfig.showPreTestSubject == 1
+                              if MajorResearchDetail && MajorResearchDetail.preTestSubject && MajorResearchDetail.preTestSubject.length> 0
+                                 div(class="professionalDetail_item01")
+                                    h2 初试科目
+                                    div(class="professionalDetail_item01Msg") !{MajorResearchDetail.preTestSubject}
+                           if MajorResearchDetail.showConfig.showReTestSubject == 1
+                              if MajorResearchDetail && MajorResearchDetail.reTestSubject && MajorResearchDetail.reTestSubject.length> 0
+                                 div(class="professionalDetail_item01")
+                                    h2 复试科目
+                                    div(class="professionalDetail_item01Msg") !{MajorResearchDetail.reTestSubject}
+                           if MajorResearchDetail.showConfig.showAddTestSubject == 1
+                              if MajorResearchDetail && MajorResearchDetail.addTestSubject && MajorResearchDetail.addTestSubject.length> 0
+                                 div(class="professionalDetail_item01")
+                                    h2 加试科目
+                                    div(class="professionalDetail_item01Msg") !{MajorResearchDetail.addTestSubject}
+                           if MajorResearchDetail.showConfig.showRemark == 1
+                              if MajorResearchDetail && MajorResearchDetail.remark && MajorResearchDetail.remark.length > 0
+                                 div(class="professionalDetail_item01")
+                                    h2 备注
+                                    div(class="professionalDetail_item01Msg") !{MajorResearchDetail.remark}
+                           if MajorResearchDetail.showConfig.showSummary == 1
+                              if MajorResearchDetail && MajorResearchDetail.summary && MajorResearchDetail.summary.length > 0
+                                 div(class="professionalDetail_item01")
+                                    h2 研究方向简介
+                                    div(class="professionalDetail_item01Msg") !{MajorResearchDetail.summary}
+                           if MajorResearchDetail.showConfig.showReTestPlan == 1
+                              if MajorResearchDetail && MajorResearchDetail.reTestPlan && MajorResearchDetail.reTestPlan.length > 0
+                                 div(class="professionalDetail_item01")
+                                    h2 复试方案
+                                    div(class="professionalDetail_item01Msg") !{MajorResearchDetail.reTestPlan}
+         include ../components/rightMode
+   include ../components/footer
+   script.
+      $(document).ready(function () {
+         // 侧边栏分类列表点击事件-->跳转列表页即可
+         sidebarManager.setClassClickCallback(function (catId) {
+            var parentId = catId
+            var sCode = $(".main_container").attr('sCode');
+            var url = getAppServer() + '/page/list/' + sCode + "/" + parentId+"?curPage=1&pageSize=10";
+            window.location.href = toDetailPage(url);
+         })
+      })
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,133 @@
+div(class="facultyList_content")
+   // 院系列表  表格部分
+   div(class="facultyList_list")
+      //搜索框
+      div(class="facultyList_list_title")
+         span(class="tips") 院系名称:
+         input(class="sub_int",type="text",name="",placeholder="请输入院系名称")
+         input(class="sub_btn_faculty",type="button",name="",value="查询")
+      // 下拉表格
+      div(class="facultyList_list_table")
+         table(class="facultyInfoTable")
+            tbody
+               tr(class="facultyInfoTable_head")
+                  th 序号
+                  th 院系名称
+                  th 专业名称
+                  th 学制
+                  th 授予学位
+            tbody(class="facultyInfoTable_body",id="facultyInfoTable_body")
+               if facultyList && facultyList.data && facultyList.data.length > 0
+                     each item, i in facultyList.data
+                        tr
+                           td #{i+1}
+                           td
+                              a(departId ="#{item.departId}",class="departId") #{item.departName}
+
+                           td
+                              a(class="major",id="#{item.id}") #{item.name}
+                           td #{item.schoolYear}
+                           td #{item.degree}
+link(href='#{host}/stylesheets/v5template/layout01.css',rel="stylesheet",type="text/css")
+link(href='#{host}/stylesheets/v5template/pages/01_graduateStudentRecruiting.css',rel="stylesheet",type="text/css")
+link(href='#{host}/stylesheets/v5template/pages/02_v5templateDetail.css',rel="stylesheet",type="text/css")
+link(href='#{host}/stylesheets/v5template/themecolor.css',rel="stylesheet",type="text/css")
+script(type="text/javascript",src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js")
+script(type="text/javascript",src="#{host}/javascripts/v5template/layout01.js")
+script.
+   function getAppServer() {
+      return "";
+   };
+   document.onkeydown = function (e) {
+      var theEvent = window.event || e;
+      //获取键盘上当前按下的键
+      var code = theEvent.keyCode || theEvent.which;
+      if (code == 13) {
+         //这里调用上面给button添加点击登录事件方法
+         $(".sub_btn_faculty").click();
+      }
+   }
+   $(function(){
+      // 合并 院系名称单元格
+      var tdNo2 = $('#facultyInfoTable_body td:nth-child(2)');
+      var rowSpan = 1;
+      var newIndex = 0;
+      tdNo2.each(function (i, v) {
+         if (i >= 1) {
+            if ($(this).text().trim() == tdNo2.eq(newIndex).text().trim()) {
+               rowSpan++;
+               tdNo2.eq(newIndex).attr('rowspan', rowSpan);
+               $(this).remove();
+            } else {
+               rowSpan = 1;
+               newIndex = i;
+            }
+         }
+      })
+
+
+      //查询点击事件   院系列表
+      $(".sub_btn_faculty").click(function(){
+         var sCode = $(".header_container").attr('sCode');
+         var facultyInput=$(".sub_int").val();
+         $.ajax({
+            type: "post",
+            url: getAppServer() + "/v5templateHome/facultyListPage_json",
+            data:{
+               'sCode':sCode,
+               'name':facultyInput
+            },
+            success: function (data) {
+               if (data&& data.data.length>0 ) {
+                  $(".facultyList_list_table table tbody.facultyInfoTable_body").html("");
+                  var data=data;
+                  for (var i = 0; i < data.data.length; i++) {
+                     var tr = $("<tr>");
+                     tr.html('<td>' + (i+1) + '</<td><td><a class="departId" departId="'+data.data[i].departId+'">' +data.data[i].departName+'</a></td><td><a class="major" id="'+data.data[i].id+'">'+data.data[i].name+'</a></td><td>'+data.data[i].schoolYear+'</td><td>'+data.data[i].degree+'</td>');
+                     $(".facultyList_list_table table tbody.facultyInfoTable_body").append(tr);
+                  }
+                  // 合并单元格
+                  var tdNo2 = $('#facultyInfoTable_body td:nth-child(2)');
+                  var rowSpan = 1;
+                  var newIndex = 0;
+                  tdNo2.each(function (i, v) {
+                     if (i >= 1) {
+                        if ($(this).text().trim() == tdNo2.eq(newIndex).text().trim()) {
+                           rowSpan++;
+                           tdNo2.eq(newIndex).attr('rowspan', rowSpan);
+                           $(this).remove();
+                        } else {
+                           rowSpan = 1;
+                           newIndex = i;
+                        }
+                     }
+                  })
+                  //---------------------院系列表，点击 院系跳转到院系详情点击事件
+
+                  $(".facultyInfoTable tbody.facultyInfoTable_body tr td a.departId").click(function(){
+                     var parentId = $(".cur").attr('secondCatId');
+                     var sCode = $(".header_container").attr('sCode');
+                     var departmentId = $(this).attr('departid');
+                     var url = getAppServer() + '/page/faculty/' + sCode + "/" + departmentId + "/" + parentId;
+                     window.location.href = url;
+                  })
+
+                  //---------------------院系列表   点击专业跳转到专业详情点击事件
+                  $(".facultyInfoTable tbody.facultyInfoTable_body tr td a.major").click(function () {
+                     var parentId = $(".cur").attr('secondCatId');
+                     var sCode = $(".header_container").attr('sCode');
+                     var majorId = $(this).attr('id');
+                     var url = getAppServer() + '/page/major/' + sCode + "/" + majorId + "/" + parentId;
+                     window.location.href = url;
+                  })
+
+               } else {
+                  alert("院系列表请求失败")
+                  return;
+               }
+            }
+         })
+      })
+   })
+
+

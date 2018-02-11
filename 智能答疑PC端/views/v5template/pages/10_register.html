@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>智能答疑注册页面</title><link href="../stylesheets/v5template/layout01.css" rel="stylesheet" type="text/css"/><link href="../stylesheets/v5template/pages/03_v5users.css" rel="stylesheet" type="text/css"/><link href="../stylesheets/v5template/themecolor.css" rel="stylesheet" type="text/css"/><script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js"></script></head><body><div class="new_wrapper"><div class="new_container"><!-- 头部--><div class="new_header"><div class="new_header_container"><div class="new_header_left"><img src="../../images/v5template/32-pic.png"/><span> • 研招智能咨询系统</span></div></div></div><!--分隔线--><div class="new_separate"></div><div class="register"><div class="register_container"><div class="register_content"><p class="register_titles">欢迎注册高校招录智能咨询平台</p><!-- 昵称--><div class="register_name"><div class="name_content"><span class="name_icon"></span><input type="text" value="" name="" placeholder="昵称" class="name_input"/></div><span class="name_error"></span></div><!-- 邮箱--><div class="register_email"><div class="email_content"><span class="email_icon"></span><input type="text" value="" name="" placeholder="邮箱" class="email_input"/></div><span class="email_error"></span></div><!-- 邮箱验证码--><div class="register_code"><div class="code_content"><div class="code_contents"><span class="code_icon"></span><input type="text" value="" name="" placeholder="邮箱验证码" class="code_input"/></div><a class="code_send">获取邮箱验证码</a></div><span class="code_error"></span></div><!--生源地--><div class="register_origin"><div class="origin_content"><span class="origin_icon"></span><input type="text" value="" name="" placeholder="生源地" class="origin_input"/></div><span class="origin_error"></span></div><!--密码--><div class="register_password"><div class="password_content"><span class="password_icon"></span><input type="text" value="" name="" placeholder="请输入密码" class="password_input"/></div><span class="password_error"></span></div><!-- 请再次输入密码--><div class="register_confirm"><div class="confirm_content"><span class="confirm_icon"></span><input type="text" value="" name="" placeholder="请再次输入密码" class="confirm_input"/></div><span class="confirm_error"></span></div><!-- 立即注册--><a id="register_btn" class="register_btn">立即注册</a><div class="register_msg"><a class="register_go">马上登录</a><span class="msg01">已有账号,</span></div></div></div></div><script>$(function () {
+    // 发送验证码点击事件
+    $(".code_send").click(function(){
+        var name = $('.name_input').val();          // 昵称
+        var email = $('.email_input').val();       //   邮箱
+        var code = $('.code_input').val();          // 邮箱验证码
+        var origin = $('.origin_input').val();       // 生源地
+        var password = $(".password_input").val();      // 密码
+        var confirm = $(".confirm_input").val();        //确认密码
+        // 错误提示
+        var nameTip = $('.name_error');                     // 昵称错误提示,
+        var emailTip = $('.email_error');                   // 邮箱错误提示,
+        var codeTip = $('.code_error');                     // 邮箱验证码错误提示,
+        var originTip = $('.origin_error');                 // 生源地错误提示,
+        var passwordTip = $('.password_error');              // 密码错误提示,
+        var confirmTip = $('.confirm_error');                 // 确认密码错误提示,
+        nameTip.html('');
+        emailTip.html('');
+        codeTip.html('');
+        originTip.html('');
+        passwordTip.html('');
+        confirmTip.html('');
+        // 用户邮箱验证
+        if (!email || email.length == 0) {
+            return emailTip.html('请输入邮箱号');
+        }
+        if (!((/\w@\w*\.\w/).test(email))) {
+            return emailTip.html('请输入正确的邮箱号');
+        }
+        emailTip.html('');
+        $(this).css('opacity','0.3');
+        $(this).unbind("click");
+        
+    })
+
+
+
+
+
+
+
+    // 注册点击事件
+    $('#register_btn').click(function () {
+        var name = $('.name_input').val();          // 昵称
+        var email = $('.email_input').val();       //   邮箱
+        var code = $('.code_input').val();          // 邮箱验证码
+        var origin = $('.origin_input').val();       // 生源地
+        var password = $(".password_input").val();      // 密码
+        var confirm = $(".confirm_input").val();        //确认密码
+        // 错误提示
+        var nameTip = $('.name_error');                     // 昵称错误提示,
+        var emailTip = $('.email_error');                   // 邮箱错误提示,
+        var codeTip = $('.code_error');                     // 邮箱验证码错误提示,
+        var originTip = $('.origin_error');                 // 生源地错误提示,
+        var passwordTip = $('.password_error');              // 密码错误提示,
+        var confirmTip = $('.confirm_error');                 // 确认密码错误提示,
+        nameTip.html('');
+        emailTip.html('');
+        codeTip.html('');
+        originTip.html('');
+        passwordTip.html('');
+        confirmTip.html('');
+        // 用户昵称判断
+        if (!name || name.length == 0) {
+            return nameTip.html('请输入昵称')
+        }
+        if (!0<name.length<20) {
+            return nameTip.html('昵称长度不能超过20个字符');
+        }
+        nameTip.html('');
+        // 用户邮箱验证
+        if (!email || email.length == 0) {
+            return emailTip.html('请输入邮箱号');
+        }
+        if (!((/\w@\w*\.\w/).test(email))) {
+            return emailTip.html('请输入正确的邮箱号');
+        }
+        emailTip.html('');
+        // 邮箱判断
+        if (!code || code.length == 0) {
+            return codeTip.html('请输入验证码');
+        }
+        if(!1<code.length<6){
+            return codeTip.html('请输入6位数以内的验证码');
+        }
+        // 密码判断
+        if (!password || password.length == 0) {
+            return pwdTip.html('请输入密码');
+        }
+        if (!password.match(psw)) {
+            return pwdTip.html('请输入6-20个字母或数字');
+        }
+    });
+})</script><div class="new_footer"><div class="new_footer_container"><span class="msg01">Copyright 2017 ALL Right Reserved</span><span class="msg02">京ICP备16030849号 招办管理</span></div></div></div></div></body></html>

@@ -1,0 +1,42 @@
+extends layout.jade
+block content
+    include ./components/header
+
+    div.containers
+        include ./components/sidebar
+
+
+        div#main
+
+        include ./components/rightBooks
+        div.clear
+    include ./components/footer
+
+    script.
+        var SCODE = '#{sCode}'
+        var QUESTION = '#{question}'
+        var PARENTID = '#{parentId}'
+        var BASE_HOST = '!{locals.global.api_sever_url}'
+        var HOST = BASE_HOST + '/weixin/api';
+        var IMG_HOST = '!{locals.global.img_sever_url}'
+        var APP_SERVER = '!{host}'
+
+
+
+
+        $(function () {
+
+
+            $('#menu .themeMenuHead').html('常见问题')
+
+
+            $.get(BASE_HOST + '/front/info/form/search?question=' + QUESTION + '&sCode=' + SCODE, function (data) {
+                $('#main').html(data);
+            })
+
+        })
+
+    script(src='/javascripts/v4template/common.js')
+    script(src='/javascripts/v4template/articleDetail.js')
+
+

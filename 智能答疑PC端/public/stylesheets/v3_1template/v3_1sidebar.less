@@ -1,0 +1,293 @@
+@import "ba";
+//标题
+.sidebar{
+  width:220px;
+  height: auto;
+  float: left;
+}
+
+.side_bar{
+  width: 220px;
+  height: 70px;
+  line-height: 58px;
+  text-align: center;
+  font-size: 18px;
+  background: #f4f4f4;
+  color: #ffffff;
+  position: relative;
+  z-index: 1;
+
+}
+.side_bg_img{
+  width: 154px;
+  height: 55px;
+  position: absolute;
+  top: 4px;
+  left: -10px;
+  z-index: 2;
+}
+.side_icon_img{
+  width: 45px;
+  height: 45px;
+  position: absolute;
+  top: 4px;
+  z-index: 3;
+  left: 0px;
+  border-radius: 50%;
+
+}
+.side_bar_tips{
+  width: 143px;
+  height: 45px;
+  position: absolute;
+  z-index: 4;
+  top: 4px;
+  left: 0px;
+  color: #ffffff;
+  text-align: right;
+  padding-right: 10px;
+  box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -webkit-box-sizing:border-box;
+
+
+}
+
+
+
+
+
+//侧边栏
+
+.side_content{
+  width: 220px;
+  position: relative;
+}
+.side_content ul{
+  width: 220px;
+  height: auto;
+}
+
+.side_content ul li.sidebar_menu {
+  width: 220px;
+  height: auto;
+  background: #f4f4f4;
+  font-size: 0;
+
+}
+
+.side_content ul li a.sidebar_menu_level1{
+  display: inline-block;
+  width: 220px;
+  height: 50px;
+  line-height: 50px;
+  background: #f4f4f4;
+  cursor: pointer;
+
+
+}
+.side_content ul li.active a{
+  color: #ffffff;
+}
+.side_content ul li a span.side_content{
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #a3a3a3;
+  margin-left: 25px;
+  margin-top: 22.5px;
+  float: left;
+}
+.side_content ul li a span.side_tips {
+  display: inline-block;
+  margin-left: 15px;
+  height: 50px;
+  width: 138px;
+  float: left;
+  font-size: 15px;
+  text-decoration: none;
+  vertical-align: middle;
+}
+
+.side_content ul li a i{
+  display: inline-block;
+  color: #666666;
+  float: left;
+  width: 15px;
+  height: 8px;
+  margin-top: 21px;
+  margin-left:0px;
+}
+.side_content ul li a i.fanzhuan{
+  transform:rotate(180deg);
+  -ms-transform:rotate(180deg); /* IE 9 */
+  -webkit-transform:rotate(180deg);
+  display: inline-block;
+  font-size: 5px;
+  color: #666666;
+  float: left;
+  width: 5px;
+  height: 5px;
+  margin-top: 22.5px;
+  margin-left: 18px;
+}
+
+
+
+
+
+
+
+/*样式待定*/
+//二级菜单下的三级菜单
+.sidebar_menu_level2Items {
+  width: 200px;
+  height: auto;
+  background: #f4f4f4;
+  box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -webkit-box-sizing:border-box;
+  margin: 0 10px;
+  border-top: 1px solid #e6e6e6;
+  border-bottom: 1px solid  #e6e6e6;
+
+}
+
+.sidebar_menu_level2Items ul.sidebar_menu_level2{
+  width: 200px;
+  height: auto;
+  box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -webkit-box-sizing:border-box;
+}
+.sidebar_menu_level2Items ul.sidebar_menu_level2 li{
+  width: 200px;
+  height: 35px;
+}
+.sidebar_menu_level2Items ul.sidebar_menu_level2 li a{
+  display: inline-block;
+  line-height: 35px;
+  height: 35px;
+  font-size: 14px;
+  color: #333;
+  width: 200px;
+  cursor: pointer;
+  text-indent: 4em;
+}
+.sidebar_menu_level2Items ul.sidebar_menu_level2 li a:hover{
+  text-decoration: none;
+}
+
+
+.none{
+  display: none;
+}
+
+
+
+// 二级页面 公共部分。最右边，机器人和三个股东按钮样式
+.rightMode{
+  width: 150px;
+  float: left;
+  height: auto;
+}
+
+
+
+#rightBooks.fix {
+  position: fixed;
+  top: 4px;
+}
+.rightMode_robot{
+  width: 93px;
+  height: 124px;
+  margin:0 auto;
+  cursor: pointer;
+  margin-left: 60px;
+}
+.rightMode_robot img{
+  width: 93px;
+  height: 124px;
+
+}
+.v3rightMode_book {
+  width: 152px;
+  height:auto;
+  margin-left: 34px;
+}
+.v3rightMode_book01{
+  width: 152px;
+  height: 40px;
+  position: relative;
+  top: -5px;
+}
+.v3rightMode_book01 img{
+  width: 152px;
+  height: 40px;
+  position: absolute;
+  z-index: 1;
+}
+.v3rightMode_book01 span.v3rightMode_btn01Msg{
+  width: 153px;
+  height: 40px;
+  position: absolute;
+  z-index: 2;
+  line-height: 40px;
+  color: #333333;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.v3rightMode_book02{
+  width: 152px;
+  height: 40px;
+  position: relative;
+  top: -10px;
+}
+.v3rightMode_book02 img{
+  width: 152px;
+  height: 40px;
+  position: absolute;
+  z-index: 1;
+}
+.v3rightMode_book02 span.v3rightMode_btn02Msg{
+  width: 153px;
+  height: 40px;
+  position: absolute;
+  z-index: 2;
+  line-height: 40px;
+  color: #333333;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+}
+.v3rightMode_book03{
+  width: 152px;
+  height: 40px;
+  position: relative;
+  top: -15px;
+}
+.v3rightMode_book03 img{
+  width: 152px;
+  height: 40px;
+  position: absolute;
+  z-index: 1;
+}
+.v3rightMode_book03 span.v3rightMode_btn03Msg{
+  width: 153px;
+  height: 40px;
+  position: absolute;
+  z-index: 2;
+  line-height: 40px;
+  color: #333333;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+}
+
+
+
+
+

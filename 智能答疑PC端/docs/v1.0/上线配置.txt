@@ -1,0 +1,14 @@
+// 微信移动端跳转的配置
+if(CONFIG.DEBUG==1) CONFIG.MOBILE_SERVER_FULL_URL = 'http://test.rocklee.com.cn';        // 开发本地调试
+else if(CONFIG.DEBUG==2) CONFIG.MOBILE_SERVER_FULL_URL = 'http://test.rocklee.com.cn';   // 测试服务器
+else CONFIG.MOBILE_SERVER_FULL_URL = 'http://weixin.zhinengdayi.com';                   //  外网部署
+
+
+// 引入第三方库  如node中识别浏览器的第三方插件 express-useragent
+//第一步
+cnpm install express-useragent
+ // 第二步
+ 在package.json里面添加
+  "express-useragent":"*",
+ // 第三步
+ 重新启动工程

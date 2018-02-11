@@ -1,0 +1,60 @@
+link(rel="stylesheet" href="/stylesheets/v3_2template/components/collegePhotos.css")
+link(rel="stylesheet" href="/javascripts/v4template/libs/prettyPhoto/prettyPhoto.css")
+script(src="/javascripts/v4template/libs/prettyPhoto/jquery.prettyPhoto.js")
+style.
+    .pp_nav {
+        display: block;
+    }
+
+
+
+ul.gallery.clearfix#ul1
+
+
+
+script.
+
+    function addEvent(elem, event, fn) {
+        if (elem.addEventListener) {
+            elem.addEventListener(event, fn, false);
+        } else if (elem.attachEvent) {
+            elem.attachEvent('on' + event, fn);
+        } else {
+            elem['on' + event] = fn;
+        }
+    }
+
+    $(function () {
+        $('#toTop').click(function () {
+            $('html,body').animate({scrollTop: 0}, 500);
+        })
+        $.get(BASE_HOST + '/front/template/scenery/' + SCODE, function (data) {
+            var str = '';
+            for (var i = 0; i < data.length; i++) {
+                str += '<li>'
+                    + '<a href="' + IMG_HOST + data[i].imgUrl + '" rel="prettyPhoto[校园风采]"><img src="' + IMG_HOST + data[i].imgUrl + '" ></a>'
+                    + '<p class="imgTitle">' + data[i].title + '</p>'
+                    + '</li>'
+            }
+            $('#ul1').html(str);
+
+
+            addEvent(window, 'scroll', function () {
+                var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+                if (scrollTop > 110) {
+                    $('#toTop').show();
+                } else {
+                    $('#toTop').hide();
+                }
+            })
+
+            $("a[rel^='prettyPhoto']").prettyPhoto();
+            $(".gallery a[rel^='prettyPhoto']").prettyPhoto({
+                animation_speed: 'fast',
+                slideshow: 10000,
+                hideflash: true
+            });
+
+        })
+    })
+

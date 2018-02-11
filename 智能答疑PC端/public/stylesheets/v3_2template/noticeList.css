@@ -1,0 +1,92 @@
+.containers.noticeList{
+    /*margin-top:136px;*/
+}
+#main2{
+    width:840px;
+    min-height:580px;
+    float:left;
+    padding:30px 40px 50px 40px;
+    margin-bottom:30px;
+    font-size:14px;
+    margin-top:40px;
+    position:relative;
+    margin-left:30px;
+}
+#main2 #footprint{
+    padding-bottom:25px;
+    border-bottom:1px dashed #ddd;
+}
+
+#articleList{
+    padding:20px 0;
+    height:450px;
+}
+#articleList .noneData{
+    margin-top:200px;
+    text-align:center;
+}
+#articleList>a{
+    font-size:14px;
+}
+span.date{
+    margin-right:20px;
+    color:#999;
+    display: inline-block;
+    vertical-align: middle;
+    line-height:40px;
+}
+span.title{
+    width: 660px;
+    display: inline-block;
+    color: #555555;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    line-height:40px;
+}
+#pagination{
+    text-align:center;
+    position:absolute;
+    bottom:30px;
+    left:0;
+    width:100%;
+    display:none;
+}
+#pagination>p{
+    display:inline-block;
+}
+#pagination .iconContainer{
+    width:22px;
+    height:22px;
+    border-radius:50%;
+    text-align:center;
+}
+#pagination .iconContainer:hover{
+    cursor:pointer;
+}
+#pagination .iconContainer i{
+    line-height:20px;
+    font-size:12px;
+}
+#pagination .iconContainer i.icon-prev{
+    position:relative;
+    left:-1px;
+}
+#pagination .iconContainer i.icon-next{
+    position:relative;
+    right:-1px;
+}
+#pagination .iconContainer i.active{
+    color:#fff;
+}
+#pagination #pages{
+    margin-left:20px;
+}
+#pagination #pages a.themeColor{
+    text-decoration: underline;
+}
+#pagination #pages a{
+    margin-right:20px;
+}
+

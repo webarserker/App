@@ -1,0 +1,32 @@
+extends layout.jade
+block content
+    include ./components/headerNew
+
+    div.containers
+        include ./components/sidebar
+
+
+        div#main
+
+            include ./components/majorInfo
+
+        include ./components/rightBooks
+        div.clear
+    include ./components/footer
+
+    script.
+        var SCODE ='#{sCode}',PARENTID='#{parentId}',INFOID='#{infoId}',MAJORID='#{majorId}';
+        var BASE_HOST='!{locals.global.api_sever_url}'
+        var HOST= BASE_HOST+'/weixin/api';
+        var IMG_HOST='!{locals.global.img_sever_url}'
+        var APP_SERVER=''
+
+
+
+        $(function(){
+
+
+        })
+
+
+

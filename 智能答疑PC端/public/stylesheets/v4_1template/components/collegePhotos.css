@@ -1,0 +1,34 @@
+.footprint{
+    border-bottom:1px dashed #ddd;
+    color:#555;
+    font-size:13px;
+    padding-bottom:8px;
+}
+ul.gallery:after{
+    content:'';
+    clear:both;
+    display:table;
+}
+ul.gallery li{
+    float:left;
+    margin-left:7px;
+    margin-right:7px;
+    margin-bottom:15px;
+    margin-top:15px;
+    padding:10px;
+    text-align:center;
+    box-shadow:0 0 5px rgba(0,0,0,0.1)
+}
+ul.gallery li a{
+    display:block;
+    width:100%;
+    height:100%;
+}
+ul.gallery li img{
+    width:228px;
+    height:178px;
+}
+ul.gallery li p.imgTitle{
+    margin-top:15px;
+    margin-bottom:15px;
+}

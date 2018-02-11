@@ -1,0 +1,198 @@
+
+div(class="professionalList_content")
+    // 专业列表  表格部分
+    div(class="professionalList_list")
+        //搜索框
+        div(class="professionalList_list_title")
+            span(class="tips") 专业名称:
+            input(class="sub_int",type="text",name="",placeholder="请输入专业名称")
+            input(class="sub_btn",type="button",name="",value="查询")
+        // 下拉表格
+        div(class="professionalList_list_table")
+            table(class="majorInfoTable")
+                tbody
+                    tr(class="majorInfoTable_head")
+                        th 序号
+                        th 专业名称
+                        th 所属院系
+                        th 学制
+                        th 授予学位
+                        if professionalDetailShow&&professionalDetailShow.showDetail=="1"
+                            th(class="details_professional_view") 专业详解
+                        else
+                        if professionalDetailShow&&professionalDetailShow.showEntroll=="1"
+                            th(class="plans_professional_view") 招生计划
+                        else
+                        if professionalDetailShow&&professionalDetailShow.showEntrollHistory =="1"
+                            th(class="history_professional_view") 历史录取
+                        else
+                tbody(class="majorInfoTable_body",id="majorInfoTable_body")
+                    if professionalList && professionalList.data
+                        each item, i in professionalList.data
+                            tr
+                                td #{i+1}
+                                td
+                                    a(class="major",majorId="#{item.id}") #{item.name}
+                                td
+                                    a(class="depart",departId="#{item.departId}") #{item.departName}
+                                td #{item.schoolYear}
+                                td #{item.degree}
+                                if professionalDetailShow&&professionalDetailShow.showDetail=="1"
+                                    td
+                                        a(class="detailPage") 点击查看
+                                else
+                                if professionalDetailShow&&professionalDetailShow.showEntroll=="1"
+                                    td
+                                        a(class="enrollmentPage") 点击查看
+                                else
+                                if professionalDetailShow&&professionalDetailShow.showEntrollHistory =="1"
+                                    td
+                                        a(class="admissionPage") 点击查看
+                                else
+link(href='#{host}/stylesheets/v5template/layout01.css',rel="stylesheet",type="text/css")
+link(href='#{host}/stylesheets/v5template/pages/01_graduateStudentRecruiting.css',rel="stylesheet",type="text/css")
+link(href='#{host}/stylesheets/v5template/pages/02_v5templateDetail.css',rel="stylesheet",type="text/css")
+link(href='#{host}/stylesheets/v5template/themecolor.css',rel="stylesheet",type="text/css")
+script(type="text/javascript",src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js")
+script(type="text/javascript",src="#{host}/javascripts/v5template/layout01.js")
+script.
+  function getAppServer() {
+      return "";
+  };
+  document.onkeydown = function (e) {
+      var theEvent = window.event || e;
+      //获取键盘上当前按下的键
+      var code = theEvent.keyCode || theEvent.which;
+      if (code == 13) {
+          //这里调用上面给button添加点击登录事件方法
+          $(".sub_btn").click();
+      }
+  }
+  // 查询点击事件
+  $(function(){
+      // 合并 院系名称单元格
+      var tdNo2 = $('#majorInfoTable_body td:nth-child(3)');
+      var rowSpan = 1;
+      var newIndex = 0;
+      tdNo2.each(function (i, v) {
+          if (i >= 1) {
+              if ($(this).text().trim() == tdNo2.eq(newIndex).text().trim()) {
+                  rowSpan++;
+                  tdNo2.eq(newIndex).attr('rowspan', rowSpan);
+                  $(this).remove();
+              } else {
+                  rowSpan = 1;
+                  newIndex = i;
+              }
+          }
+      })
+
+
+
+      // 查询点击事件
+      $(".sub_btn").click(function(){
+          var sCode = $(".header_container").attr('sCode');
+          var professionalInput=$(".sub_int").val();
+          $.ajax({
+              type: "post",
+              url: getAppServer() + "/v5templateHome/v5templateProfessionalList_json",
+              data:{
+                  'sCode':sCode,
+                  'name':professionalInput
+              },
+              success: function (data) {
+                  if (data&& data.data.length>0 ) {
+                      $(".professionalList_list_table table tbody.majorInfoTable_body").html("");
+                      var data=data;
+                      for (var i = 0; i < data.data.length; i++) {
+                          var tr = $("<tr>");
+                          tr.html('<td>' + (i+1) + '</<td><td><a class="major" majorId="'+data.data[i].id+'">' +data.data[i].name+'</a></td><td><a class="depart" departId="'+data.data[i].departId+'">'+data.data[i].departName+'</a></td><td>'+data.data[i].schoolYear+'</td><td>'+data.data[i].degree+'</td><td class="professional_detail_look"><a class="detailPage">点击查看</a></td><td class="professional_plan_look"><a class="enrollmentPage">点击查看</a></td><td class="professional_history_look"><a class="admissionPage">点击查看</a></td>');
+                          $(".professionalList_list_table table tbody.majorInfoTable_body").append(tr);
+                          //  是否显示专业详情
+                          if (data.professionalDetailShow && data.professionalDetailShow.showDetail == "0") {
+                              $(".professional_detail_look").hide();
+                              $("th.details_professional_view").hide();
+
+                          }
+                          //  是否显示招生计划
+                          if (data.professionalDetailShow && data.professionalDetailShow.showEntroll == "0") {
+                              $(".professional_plan_look").hide();
+                              $(".plans_professional_view").hide();
+
+                          }
+                          // 是否显示历史录取
+                          if (data.professionalDetailShow && data.professionalDetailShow.showEntrollHistory == "0") {
+                              $(".professional_history_look").hide();
+                              $(".history_professional_view").hide()
+                          }
+
+                      }
+                      // 合并 院系名称单元格
+                      var tdNo2 = $('#majorInfoTable_body td:nth-child(3)');
+                      var rowSpan = 1;
+                      var newIndex = 0;
+                      tdNo2.each(function (i, v) {
+                          if (i >= 1) {
+                              if ($(this).text().trim() == tdNo2.eq(newIndex).text().trim()) {
+                                  rowSpan++;
+                                  tdNo2.eq(newIndex).attr('rowspan', rowSpan);
+                                  $(this).remove();
+                              } else {
+                                  rowSpan = 1;
+                                  newIndex = i;
+                              }
+                          }
+                      })
+
+                      // 专业详情点击事件
+                      $(".majorInfoTable tbody.majorInfoTable_body tr td a.major").click(function () {
+                          var parentId = $(".cur").attr('secondCatId');
+                          var majorId = $(this).attr('majorId');
+                          var sCode = $(".header_container").attr('sCode');
+                          var url = getAppServer() + '/page/major/' + sCode + "/" + majorId + "/" + parentId;
+                          window.location.href = url;
+                      })
+                      //--------------------专业列表  点击 院系跳转到院系详情 点击事件
+                      $(".majorInfoTable tbody.majorInfoTable_body tr td a.depart").click(function () {
+                          var parentId = $(".cur").attr('secondCatId');
+                          var departmentId = $(this).attr('departId');
+                          var sCode = $(".header_container").attr('sCode');
+                          var url = getAppServer() + '/page/faculty/' + sCode + "/" + departmentId + "/" + parentId;
+                          window.location.href = url;
+                      })
+                      //-------------------
+
+                      // ----------------专业列表 点击 专业详解跳转到专业详情页面----------------
+                      $(".majorInfoTable tbody.majorInfoTable_body tr td a.detailPage").click(function () {
+                          var parentId = $(".cur").attr('secondCatId');
+                          var majorId = $(this).parent().parent().find(".major").attr('majorId');
+                          var sCode = $(".header_container").attr('sCode');
+                          var url = getAppServer() + '/page/major/' + sCode + "/" + majorId + "/" + parentId;
+                          window.location.href = url;
+                      })
+                      //--------------------专业列表 点击招生计划 跳转招生计划页面 点击事件
+                      $(".majorInfoTable tbody.majorInfoTable_body tr td a.enrollmentPage").click(function () {
+                          var parentId = $(".cur").attr('secondCatId');
+                          var sCode = $(".header_container").attr('sCode');
+                          var url = getAppServer() + '/page/enrollment/' + sCode + "/" + parentId;
+                          window.location.href = url;
+                      })
+                      //------------------- 专业列表 点击历史录取页面 跳转历史录取页面 点击事件------------------------------------
+                      $(".majorInfoTable tbody.majorInfoTable_body tr td a.admissionPage").click(function () {
+                          var parentId = $(".cur").attr('secondCatId');
+                          var sCode = $(".header_container").attr('sCode');
+                          var url = getAppServer() + '/page/admission/' + sCode + "/" + parentId;
+                          window.location.href = url;
+                      })
+
+                  } else {
+                      alert("请求失败")
+                  }
+              }
+          })
+      })
+
+
+
+
+  });

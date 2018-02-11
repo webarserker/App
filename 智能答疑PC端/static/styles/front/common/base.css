@@ -1,0 +1,232 @@
+﻿@charset "utf-8";
+/* CSS Document  */
+/*reset*/
+article,aside,details,figcaption,figure,footer,header,main,nav,section {display: block}
+audio,canvas,video {display: inline-block;*display: inline;*zoom: 1}
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td { margin:0; padding:0; }
+body, button, input, select, textarea { font:12px Microsoft YaHei,Arial, Tahoma, Simsun; color:#333; }
+button, input, select, textarea, h1, h2, h3, h4, h5, h6 { font-size:100%; }
+h2, h3 { font-size:14px; } 
+button, input, select, textarea, label { vertical-align:middle; }
+img { vertical-align:top; border:none;}
+ul, ol { list-style:none; }
+a { text-decoration:none; color:#2367dc; vertical-align:baseline; cursor:pointer; }
+a:hover { text-decoration:underline;}
+table { border-collapse:collapse; border-spacing:0; }
+body { _height:100%; _background:url(about:blank) fixed; }
+
+/*盒子阴影效果:*/
+.g-box-shadow{
+    -webkit-box-shadow:0 0 5px rgba(0,0,0,0.1);
+	-moz-box-shadow: 0 0 5px rgba(0,0,0,0.1);
+	box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+/*透明蒙版*/
+.g-transparent{opacity: 0.5;-moz-opacity: 0.5;filter:alpha(opacity=50);}
+
+/*边框*/
+.g-b-db { border:1px solid #dbdbdb; }
+.g-bt-db { border-top:1px solid #dbdbdb; }
+.g-bb-db { border-bottom:1px solid #dbdbdb; }
+.g-br-db { border-right:1px solid #dbdbdb; }
+.g-bl-db { border-left:1px solid #dbdbdb; }
+.g-b-ee { border:1px solid #eee; }
+.g-bt-ee { border-top:1px solid #eee; }
+.g-bb-ee { border-bottom:1px solid #eee; }
+.g-br-ee { border-right:1px solid #eee; }
+.g-bl-ee { border-left:1px solid #eee; }
+.g-b-e6{ border: 1px solid #e6e6e6; }
+.g-bt-e6 { border-top:1px solid #e6e6e6; }
+.g-bb-e6 { border-bottom:1px solid #e6e6e6; }
+.g-br-e6 { border-right:1px solid #e6e6e6; }
+.g-bl-e6 { border-left:1px solid #e6e6e6; }
+/*字体灰色*/
+.g-c-cc{color:#CCC;}
+.g-c-33 { color:#333; }
+.g-c-66 { color:#666; }
+.g-c-99 { color:#999; }
+
+/*字体蓝色*/
+.g-c-b { color:#016ec2!important;; }
+.g-c-0cf{color:#00ccff;}
+
+/*字体白色*/
+.g-c-w { color:#fff; }
+
+/*字体红色*/
+.g-c-r{ color:#eb0101; }
+.g-c-r1{color:#ed4343; }
+
+/*清浮*/
+.g-cf:after { content:""; clear:both; display:table; }
+.g-cf { zoom:1; }
+
+/*浮动*/
+.g-f-l { float:left; }
+.g-f-r { float:right; }
+
+/*显示隐藏*/
+.g-d-n { display:none; }
+.g-d-b { display:block; }
+.g-d-i { display:inline; }
+.g-d-ib {display:inline-block;*display:inline; *zoom:1;}
+.g-v-h { visibility:hidden; }
+
+/*字体宋体*/
+.g-ff-s { font-family:Simsun; }
+
+/*字体风格*/
+.g-fs-n { font-style:normal; }
+
+/*字体加粗*/
+.g-fw-b { font-weight:bold; }
+.g-fw-n { font-weight:normal; }
+
+/*字体大小*/
+.g-fz-40 { font-size:40px; }
+.g-fz-30 { font-size:30px; }
+.g-fz-28 { font-size:28px; }
+.g-fz-26 { font-size:26px; }
+.g-fz-24 { font-size:24px; }
+.g-fz-22 { font-size:22px; }
+.g-fz-20 { font-size:20px; }
+.g-fz-18 { font-size:18px; }
+.g-fz-16 { font-size:16px; }
+.g-fz-15 { font-size:15px; }
+.g-fz-14 { font-size:14px; }
+.g-fz-12 { font-size:12px; }
+
+/*打点显示*/
+.g-e{overflow:hidden;-ms-text-overflow:ellipsis;text-overflow:ellipsis;white-space:nowrap;word-wrap:normal;}
+
+/*行高*/
+.g-h-21 { height:21px !important; }
+.g-h-22 { height:22px !important; }
+.g-h-24 { height:24px !important; }
+.g-h-25 { height:25px !important; }
+.g-h-35{height:35px !important;}
+.g-h-a { height:auto !important; }
+.g-lh-18 { line-height:18px !important; }
+.g-lh-22 { line-height:22px !important; }
+.g-lh-24 { line-height:24px !important; }
+.g-lh-25 { line-height:25px !important; }
+.g-lh-25 { line-height:28px \9 !important; }
+:root .g-lh-25 { line-height:25px \9 !important; }
+/*最小高度*/
+.g-mh-20 { min-height:20px; _height:20px; }
+.g-mh-50 { min-height:50px; _height:expression(this.scrollHeight < 50 ? "50px":"auto"); }
+/*最小宽度*/
+.g-mw-40 { width:auto;min-width:40px; _width:expression(document.body.clientWidth < 40 ? "40px" : "auto"); }
+/*外边距*/
+.g-mlr-a { margin:0px auto;}
+.g-m-5 { margin:5px; }
+.g-mtb-5 { margin-top:5px; margin-bottom:5px; }
+.g-mlr-5 { margin-left:5px; margin-right:5px; }
+.g-mt-5 { margin-top:5px; }
+.g-mb-5 { margin-bottom:5px; }
+.g-ml-5 { margin-left:5px; }
+.g-mr-5 { margin-right:5px; }
+.g-m-10 { margin:10px; }
+.g-mtb-10 { margin-top:10px; margin-bottom:10px; }
+.g-mlr-10 { margin-left:10px; margin-right:10px; }
+.g-mt-10 { margin-top:10px; }
+.g-mb-10 { margin-bottom:10px; }
+.g-ml-10 { margin-left:10px; }
+.g-mr-10 { margin-right:10px; }
+.g-mb-15 { margin-bottom:15px; }
+.g-mtb-15{ margin-top:15px; margin-bottom:15px; }
+.g-mlr-15 { margin-left:15px; margin-right:15px; }
+.g-mt-15 { margin-top:15px; }
+.g-mb-15 { margin-bottom:15px; }
+.g-ml-15 { margin-left:15px; }
+.g-mr-15 { margin-right:15px; }
+.g-m-20 { margin:20px; }
+.g-mtb-20 { margin-top:20px; margin-bottom:20px; }
+.g-mlr-20 { margin-left:20px; margin-right:20px; }
+.g-mt-20 { margin-top:20px; }
+.g-mb-20 { margin-bottom:20px; }
+.g-ml-20 { margin-left:20px; }
+.g-mr-20 { margin-right:20px; }
+.g-mtb-30 { margin-top:30px; margin-bottom:30px; }
+.g-mtb-40 { margin-top:40px; margin-bottom:40px; }
+
+/*内边距*/
+.g-p-1{padding:1px;}
+.g-mlr-5 { margin-left:5px; margin-right:5px; }
+.g-mt-5 { margin-top:5px; }
+.g-mb-5 { margin-bottom:5px; }
+.g-ml-5 { margin-left:5px; }
+.g-mr-5 { margin-right:5px; }
+.g-p-10 { padding:10px; }
+.g-ptb-10 { padding-top:10px; padding-bottom:10px; }
+.g-plr-10 { padding-left:10px; padding-right:10px; }
+.g-pt-10 { padding-top:10px; }
+.g-pb-10 { padding-bottom:10px; }
+.g-pl-10 { padding-left:10px; }
+.g-pr-10 { padding-right:10px; }
+.g-p-15 { padding:15px; }
+.g-ptb-15 { padding-top:15px; padding-bottom:15px; }
+.g-plr-15 { padding-left:15px; padding-right:15px; }
+.g-pt-15 { padding-top:15px; }
+.g-pb-15 { padding-bottom:15px; }
+.g-pl-15 { padding-left:15px; }
+.g-pr-15 { padding-right:15px; }
+.g-p-20 { padding:20px; }
+.g-ptb-20 { padding-top:20px; padding-bottom:20px; }
+.g-plr-20 { padding-left:20px; padding-right:20px; }
+.g-pt-20 { padding-top:20px; }
+.g-pb-20 { padding-bottom:20px; }
+.g-pl-20 { padding-left:20px; }
+.g-pr-20 { padding-right:20px; }
+.g-p-30 { padding:30px; }
+.g-ptb-30 { padding-top:30px; padding-bottom:30px; }
+.g-plr-30 { padding-left:30px; padding-right:30px; }
+.g-pt-30 { padding-top:30px; }
+.g-pb-30 { padding-bottom:20px; }
+.g-pl-30 { padding-left:30px; }
+.g-pr-30 { padding-right:30px; }
+.g-p-40 { padding:40px; }
+.g-ptb-40 { padding-top:40px; padding-bottom:40px; }
+.g-plr-40 { padding-left:40px; padding-right:40px; }
+.g-pt-40 { padding-top:40px; }
+.g-pb-40 { padding-bottom:40px; }
+.g-pl-40 { padding-left:40px; }
+.g-pr-40 { padding-right:40px; }
+.pd-100 {padding-bottom : 100px;}
+/*overflow*/
+.g-o-h { overflow:hidden !important; }
+.g-o-a { overflow:auto !important; }
+/*vertical-align*/
+.g-v-m{vertical-align:middle;}
+.g-v-b{vertical-align:baseline;}
+.g-v-t{vertical-align:top;}
+/*相对定位*/
+.g-p-r { position:relative; }
+/*绝对定位*/
+.g-p-a { position:absolute; }
+/*居右、中、左*/
+.g-ta-r { text-align:right; }
+.g-ta-c { text-align:center; }
+.g-ta-l { text-align:left; }
+.g-ta-j {text-align:justify;}
+/*缩进2个字符*/
+.g-ti-2 { text-indent:2em; }
+/*不换行*/
+.g-ws-w { white-space:nowrap; }
+/*手指鼠标*/
+.g-cr-p{ cursor: pointer;}
+
+/*fixed*/
+.ie6fixedTL{z-index:999;position:fixed;left:0;top:0}
+.ie6fixedBL{z-index:999;position:fixed;left:0;bottom:0}
+.ie6fixedBR{z-index:999;position:fixed;right:0;bottom:0}
+* html,* html body{background-image:url(about:blank);background-attachment:fixed}
+* html .ie6fixedTL{position:absolute;left:expression(eval(document.documentElement.scrollLeft));top:expression(eval(document.documentElement.scrollTop))}
+* html .ie6fixedBL{position:absolute;left:expression(eval(document.documentElement.scrollLeft));top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0)))}
+* html .ie6fixedBR{position:absolute;left:expression(eval(document.documentElement.scrollLeft+document.documentElement.clientWidth-this.offsetWidth)-(parseInt(this.currentStyle.marginLeft,10)||0)-(parseInt(this.currentStyle.marginRight,10)||0));top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0)))}
+/*强制换行*/
+.g-ww-bw { white-space:normal; word-wrap: break-word; word-break: break-all; }
+
+#container {
+	font-size:14px;
+}

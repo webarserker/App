@@ -1,0 +1,321 @@
+//
+   Created by abbydu on 17/7/26.
+
+extends ../components/layout01
+block content
+    div(class="register")
+        div(class="register_container")
+            div(class="register_content")
+                p(class="register_titles") 欢迎注册高校招录智能咨询平台
+                // 昵称
+                div(class="register_name")
+                    div(class="name_content")
+                        span(class="name_icon")
+                        input(type="text",value="",name="",class="name_input",placeholder="昵称")
+                    span(class="name_error")
+                // 邮箱
+                div(class="register_email")
+                    div(class="email_content")
+                        span(class="email_icon")
+                        input(type="text",value="",name="",class="email_input",placeholder="邮箱")
+                    span(class="email_error")
+                // 邮箱验证码
+                div(class="register_code")
+                    div(class="code_content")
+                        div(class="code_contents")
+                            span(class="code_icon")
+                            input(type="text",value="",name="",class="code_input",placeholder="邮箱验证码")
+                        a(class="code_send",id="code_send",style="background:#{themeColor}") 获取邮箱验证码
+                    span(class="code_error")
+                //生源地
+                div(class="register_origin")
+                    div(class="origin_content")
+                        span(class="origin_icon")
+                        div(class="origin_input")
+                            a(id="select_origin",onclick="ChangeNumber(this)") 请选择生源地
+                            div(class="origin_id")
+                                ul(class="allOrigin",style="display:none;")
+                    span(class="origin_error")
+                //密码
+                div(class="register_password")
+                    div(class="password_content")
+                        span(class="password_icon")
+                        input(type="password",value="",name="password",class="password_input",placeholder="请输入密码",onfocus="this.type='password'",autocomplete="off")
+                    span(class="password_error")
+                // 请再次输入密码
+                div(class="register_confirm")
+                    div(class="confirm_content")
+                        span(class="confirm_icon")
+                        input(type="password",value="",name="",class="confirm_input",placeholder="请再次输入密码")
+                    span(class="confirm_error")
+                // 立即注册
+                a(class="register_btn",id="register_btn",style="background:#{themeColor}",needOpen="#{needOpen}",hoster="#{hoster}") 立即注册
+                div(class="register_msg")
+                    span(class="register_go",style="color:#{themeColor}") 马上登录
+                    span(class="msg01") 已有账号,
+    include  ../components/new_footer
+    script.
+        function getAppServer() {
+            return ""
+        }
+        function getApiServer() {
+            return '!{locals.global.api_sever_url}'
+        }
+        // 登录跳转事件
+        $(".register_go").click(function(){
+            var sCode = $(".main_container").attr('sCode');
+            // needOpen
+            var needOpen = $(".register_btn").attr('needOpen');
+            // hoster
+            var hoster = $(".register_btn").attr('hoster');
+            if (needOpen && needOpen.length > 0 && hoster && hoster.length > 0) {
+                var url = getAppServer() + '/page/login/' + sCode + "?needOpen=" + needOpen + "&hoster=" + hoster;
+                window.location.href = url;
+            } else {
+                var url = getAppServer() + '/page/login/' + sCode;
+                window.location.href = url;
+            }
+        })
+        $(function () {
+            document.onkeydown = function (e) {
+                var theEvent = window.event || e;
+                //获取键盘上当前按下的键
+                var code = theEvent.keyCode || theEvent.which;
+                if (code == 13) {
+                    //这里调用上面给button添加点击登录事件方法
+                    $("#register_btn").click();
+                }
+            }
+            // 发送验证码点击事件
+            var flag = true;
+            var s;
+            var i = 60;
+            var email = null;
+
+            //获取验证码
+            $(".code_send").unbind("click");
+            $(".code_send").click(function () {
+                var emailTip = $('.email_error');                   // 邮箱错误提示,
+                emailTip.html("");
+                if (flag) {
+                    email = $(".email_input").val();
+                    // 用户邮箱验证
+                    if (!email || email.length == 0) {
+                        return emailTip.html('请输入邮箱号');
+                    }
+                    if (!((/\w@\w*\.\w/).test(email))) {
+                        return emailTip.html('请输入正确的邮箱号');
+                    }
+                    // 首先发请求，验证该用户是否已注册。未注册发验证码，已注册，提示该用户已注册
+                    $.ajax({
+                        type: "POST",
+                        url: getAppServer() + "/v5users/checkEmailIsexist_json",
+                        data: {
+                            'email': email
+                        },
+                        dataType: "json",
+                        success: function (data) {
+                            if(data && data.retCode == '0'){
+                                $.ajax({
+                                    type: "POST",
+                                    url: getAppServer() + "/v5users/v5sendVerCode",
+                                    data: {
+                                        'codeType':"0",
+                                        'email': email
+                                    },
+                                    dataType: "json",
+                                    success: function (data) {
+                                        if (data && data.retCode == '0') {
+                                            var emailTip = $('.email_input');
+                                            emailTip.html("验证码已经以邮件形式发送到您的邮箱");
+                                            flag = false;
+                                            $(".code_send").html(" 秒后重新发送");
+                                            $(".code_send").html(i);
+                                            $(".code_send").css('opacity', '0.3')
+                                            s = setInterval(function () {
+                                                i--;
+                                                $(".code_send").html(i);
+                                                if (i == 0) {
+                                                    clearInterval(s);
+                                                    $(".code_send").css('opacity', '1');
+                                                    $(".code_send").html("重新获取");
+                                                    flag = true;
+                                                    i = 60;
+                                                }
+                                            }, 1000);
+                                        } else {
+                                            var emailTip = $('.email_error');                   // 邮箱错误提示,
+                                            emailTip.html(data.message);
+                                        }
+                                    }
+                                })
+                            }else{
+                                var emailTip = $('.email_error');                   // 邮箱已注册错误提示,
+                                emailTip.html(data.message);
+                            }
+
+                        }
+                    })
+                }
+            });
+
+
+
+            // 注册点击事件
+            $('#register_btn').click(function () {
+                var name = $('.name_input').val();          // 昵称
+                var email = $('.email_input').val();       //   邮箱
+                var code = $('.code_input').val();          // 邮箱验证码
+                var origin = $('.origin_input a').html();       // 生源地
+                var password = $(".password_input").val();      // 密码
+                var confirm = $(".confirm_input").val();        //确认密码
+                // 错误提示
+                var nameTip = $('.name_error');                     // 昵称错误提示,
+                var emailTip = $('.email_error');                   // 邮箱错误提示,
+                var codeTip = $('.code_error');                     // 邮箱验证码错误提示,
+                var originTip = $('.origin_error');                 // 生源地错误提示,
+                var passwordTip = $('.password_error');              // 密码错误提示,
+                var confirmTip = $('.confirm_error');                 // 确认密码错误提示,
+                nameTip.html('');
+                emailTip.html('');
+                codeTip.html('');
+                originTip.html('');
+                passwordTip.html('');
+                confirmTip.html('');
+                var sCode = $(".main_container").attr('sCode');
+                // 用户昵称判断
+                if (!name || name.length == 0) {
+                    return nameTip.html('请输入昵称')
+                }
+                if (name.length <0||name.length >20) {
+                    return nameTip.html('昵称长度不能超过20个字符');
+                }
+                nameTip.html('');
+                // 用户邮箱验证
+                if (!email || email.length == 0) {
+                    return emailTip.html('请输入邮箱号');
+                }
+                if (!((/\w@\w*\.\w/).test(email))) {
+                    return emailTip.html('请输入正确的邮箱号');
+                }
+                emailTip.html('');
+                // 邮箱验证码判断
+                if (!code || code.length == 0) {
+                    return codeTip.html('请输入验证码');
+                }
+                if(code.length>6||code.length<0){
+                    return codeTip.html('请输入6位数以内的验证码');
+                }
+                // 生源地判断
+                if (origin =="请选择生源地") {
+                    return originTip.html('请点击选择您的生源地省份');
+                }
+
+                // 密码判断
+                if (!password || password.length == 0) {
+                    return passwordTip.html('请输入密码');
+                }
+                if (!((/^[0-9a-zA-Z]{6,12}$/).test(password))) {
+                    return passwordTip.html('请输入密码是6-12位的字母或者数字');
+                }
+                // 确认密码
+                if (!confirm || confirm.length == 0) {
+                    return confirmTip.html('请再次输入密码');
+                }
+                if(password !=confirm){
+                    return confirmTip.html('两次密码输入不一致,请重新输入');
+                }
+                var originId = $("#select_origin").attr("originId");
+
+                $.ajax({
+                    type: "post",
+                    url: getAppServer() + "/v5users/v5register_json",
+                    data:{
+                        'sCode':sCode,
+                        'account':email,
+                        'nickName': name,
+                        'email': email,
+                        'valiCode': code,
+                        'provinceId': originId,
+                        'provinceName': origin,
+                        'password': password,
+                        'emailValicode':code
+                    },
+                    dataType: "json",
+                    success: function (ret) {
+                        var confirmTip = $('.confirm_error');
+                        if (ret&&ret.retCode == 0) {
+                            confirmTip.html("注册成功");
+                            var sCode = $(".main_container").attr('sCode');
+                            // needOpen
+                            var needOpen = $(".register_btn").attr('needOpen');
+                            // hoster
+                            var hoster = $(".register_btn").attr('hoster');
+                            if (needOpen && needOpen.length > 0 && hoster && hoster.length > 0) {
+                                var url = getAppServer() + '/page/login/' + sCode + "?needOpen=" + needOpen + "&hoster=" + hoster;
+                                window.location.href = url;
+                            } else {
+                                var url = getAppServer() + '/page/login/' + sCode;
+                                window.location.href = url;
+                            }
+                        } else {
+                            var confirmTip = $('.confirm_error');
+                            confirmTip.html(ret.message);
+                        }
+                    }
+                })
+
+            });
+        })
+
+
+        // 获取生源地省份列表
+        function ChangeNumber(THIS) {
+            $(document).unbind("click");
+            // 显示状态, 隐藏
+            var goodsCntHidden = $('.origin_id').is(":hidden");
+            if (!goodsCntHidden) {
+                return $(".origin_id").hide();
+            }
+            // 隐藏状态, 显示
+            var number = $(THIS);
+            //点击修改数量按钮出现数量列表
+            $(".origin_id,.allOrigin").show();
+            $.ajax({
+                type: "get",
+                url: getAppServer() + "/v5users/origin_json",
+                dataType: "json",
+                success: function (ret) {
+                    if(ret.length>0){
+                        // 显示 li
+                        $(".origin_id,.allOrigin").show();
+                        var name = ret;
+                        var ul = $(".origin_id ul");
+                        ul.html("");
+                        for (var i = 0; i < name.length; i++) {
+                            var li = $("<li originId="+name[i].id+">");
+                            li.html(name[i].name);
+                            ul.append(li);
+                        }
+                        // 添加点击消失事件
+                        $(document).unbind("click");
+                        $(document).click(function () {
+                            $(".origin_id").hide();
+                        });
+                        // 给 li 绑定事件
+                        $(".origin_id ul li").click(function () {
+                            $("#select_origin").html("");
+                            $("#select_origin").html($(this).text());
+                            $('.origin_id,.allOrigin').hide();
+                            var originId = $(this).attr('originId');
+                            $("#select_origin").attr('originId',originId);
+
+                        })
+                    }else{
+                        alert("获取省份信息列表失败");
+                    }
+
+                }
+            })
+
+        }

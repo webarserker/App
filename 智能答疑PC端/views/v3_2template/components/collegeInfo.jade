@@ -1,0 +1,52 @@
+link(rel="stylesheet" href="/stylesheets/v3_2template/components/collegeInfo.css")
+
+div#footprint
+div.info-box
+    div.college-name
+        span.label 院系名称：
+        span#departmentName
+    div.college-web
+        span.label 院系官网：
+        a(id="officialWebsite" target="_blank")
+    div.open-major
+        span.label 开设专业：
+        table.major-list
+            thead
+                tr
+                    th 专业名称
+                    th 学制
+                    th 授予学位
+            tbody#tbody1
+
+
+    div.info-detail
+        span.label 院系介绍：
+        div#info-content
+
+
+script.
+    $(function () {
+        $.get(HOST + '/department/findDepartmentDetail', {departmentId: DEPARTID}, function (data) {
+            console.log(data)
+            if (data.code = '000000') {
+                data = data.data;
+                $('#departmentName').html(data.departmentName)
+                $('#officialWebsite').html(data.officialWebsite);
+                $('#officialWebsite').attr("href", data.officialWebsite);
+                $('#info-content').html(data.depDescribe);
+                var mojorList = ''
+                if(data.mojorList){
+                    for (var i = 0; i < data.mojorList.length; i++) {
+                        mojorList += '<tr>'
+                            + '<td class="themeColor">' + '<a class="themeColor" href="' + toDetailPage(APP_SERVER + '/page/major/'+ SCODE+'/'+data.mojorList[i].id+'/'+ PARENTID) + '">' + data.mojorList[i].name + '</a></td><td>' + data.mojorList[i].schoolYear + '</td><td>' + data.mojorList[i].degree + '</td>'
+                            + '</tr>'
+                    }
+                    $('#tbody1').html(mojorList);
+                }
+
+            }
+        })
+
+    })
+
+<!--script(src="/javascripts/v4template/components/collegeInfo.js")-->

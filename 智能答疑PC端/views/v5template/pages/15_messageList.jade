@@ -1,0 +1,111 @@
+//
+   Created by abbydu on 17/7/26.
+
+extends ../components/layout02
+block content
+    // 在线留言
+    div(class="online")
+        div(class="online_container")
+            div(class="online_content")
+                //左边选择项
+                div(class="online_left")
+                    ul
+                        li
+                            a(class="online_personal") 我的资料
+                        li
+                            a(class="online_huifu active") 招办回复
+                            if NoticeNum && NoticeNum.num && NoticeNum.num !==0
+                                span(class="online_tips03") #{NoticeNum.num}
+                        li
+                            a(class="online_message") 在线留言
+                div(class="messageList_right")
+                   ul
+                       if NoticeList && NoticeList.data && NoticeList.data.length > 0
+                           each item in NoticeList.data
+                               li(messageId="#{item.id}")
+                                    div(class="messageList_item_top")
+                                        span(class="messageList_tips01") #{item.title}
+                                        if item.isRead == "0"
+                                            span(class="messageList_tips02")
+                                        span(class="messageList_tips03") #{item.createTimeStr}
+                                    div(class="messageList_item_down")
+                                        span(class="messageList_tips04") 招办回复:
+                                        span(class="messageList_tips05") #{item.content}
+                       else
+                           div(class="no_list_msg")
+                               img(src="../../images/v5template/no_list.png")
+                               span 您还没有收到消息，去别处看看吧!
+    script.
+        function getAppServer() {
+            return "";
+        }
+        function getApiServer() {
+            return '!{locals.global.api_sever_url}'
+        }
+        $(function () {
+
+            //  点击在线留言  14
+            $(".online_message").click(function(){
+                var sCode = $(".new_header").attr('sCode');
+                $(this).addClass("active").siblings().removeClass("active");
+                var url = getAppServer() + '/page/online/' + sCode;
+                window.location.href = url;
+            });
+            // 点击我的资料16
+            $(".online_personal").click(function () {
+                var sCode = $(".new_header").attr('sCode');
+                $(this).addClass("active").siblings().removeClass("active");
+                window.location.href = getAppServer() + '/page/personal/' + sCode;
+            });
+
+            // 消息列表li 点击事件
+            $(".messageList_right ul li").click(function(){
+                $(this).find(".messageList_tips02").hide();
+                var messageId = $(this).attr('messageId');
+                // 获取消息列表的id 然后向后台发请求
+                $.ajax({
+                    type: "get",
+                    url: getAppServer() + "/v5users/updateToRead_json",
+                    data: {
+                        'id': messageId
+                    },
+                    success: function (data) {
+                        if (data.success="true") {
+                            // 向后台消息总数发请求
+                            var sCode = $(".new_header").attr('sCode');
+                            $.ajax({
+                                type: "get",
+                                url: getAppServer() + "/v5users/NoticeNum_json",
+                                data:{
+                                    'sCode':sCode
+                                },
+                                success: function (data) {
+                                    if (data) {
+                                        var number = data.num;
+                                        if(number > 0){
+                                            $(".online_tips03").html(number);
+                                        }else{
+                                            $(".online_tips03").html("");
+                                            $(".online_tips03").css('background','none');
+                                        }
+
+                                    } else {
+                                        alert("消息总数更新失败")
+                                    }
+                                }
+                            })
+
+                        } else {
+                            alert("更新读取消息失败")
+                        }
+                    }
+                })
+            });
+
+
+        });
+
+
+
+
+

@@ -1,0 +1,456 @@
+div(id="header" data-identify="#{schoolInfo.identify}" data-scode="#{schoolInfo.code}")
+    div.themeBackgroundColor
+    div.containers
+        div.outside
+            ul.lf
+                li
+                    a(id="mobile-qrcode")
+                        i.icon-mobile &nbsp;
+                        | 扫码进入移动版 &nbsp;|&nbsp;&nbsp;
+                        div#qrcode
+                            img
+                if  userInfo && userInfo.id
+                    li.user-container
+                        a.fast-login#creator
+                            i.icon-user.themeColor
+                            span(class="fast-login-msg" id="#{userInfo.id}" ) &nbsp;&nbsp;您好，#{userInfo.nickName}
+
+                        div.user-menu
+                            a#personal-data 我的资料
+                            a#reply 招办回复
+                            a#feedback 意见反馈
+                            a#log-out 退出登录
+                else
+                    li
+                        a.fast-login
+                            i.icon-huojian &nbsp;
+                            span.fast-login-msg 快捷登录
+                            span &nbsp;&nbsp;|&nbsp;
+                    li
+                        a.fast_register
+                            | &nbsp;免费注册
+            div.rt
+                p.search-box
+                    input(placeholder="站内搜索")
+                    i.comicon-search
+                ul.m01-links.themeBackgroundColor
+                    //li
+                    //    p.icon-container
+                    //        i.comicon-search.themeColor
+                    //    a 网上报名系统
+                    //li
+                    //    p.icon-container
+                    //        i.comicon-search.themeColor
+                    //    a 录取查询系统
+
+    div.header-nav-container
+        div.header-nav
+            .containers
+                div.lf
+                    a#logo-target
+                        img(id="school-logo")
+                    span#professor
+                ul.rt#headerNav
+
+script.
+    // 跳转页面，统一处理参数
+    function toDetailPage(url) {
+        if (sessionStorage.getItem("spreadToken") && sessionStorage.getItem("spreadToken") != 'null') {
+            if (url.indexOf("?") > -1) {
+                url += "&spreadToken=" + sessionStorage.getItem("spreadToken");
+            } else {
+                url += "?spreadToken=" + sessionStorage.getItem("spreadToken");
+            }
+        }
+        return url;
+    }
+
+    function getSpreadToken() {
+        var frontUserId = $('.fast_login_msg').attr('userid') && $('.fast_login_msg').attr('userid') != '' ? $('.fast_login_msg').attr('userid') : $('.fast-login-msg').attr('userid');
+        $.ajax({
+            url: BASE_HOST + '/front/spread/getSpreaderByUserId',
+            data: {frontUserId: frontUserId, sCode: $('#header').data('scode')},
+            type: "POST",
+            dataType: 'json',
+            success: function (res) {
+                var spreadToken = GetQueryString("spreadToken");
+                var userToken = GetQueryString("userToken");
+                if (res.code == '000000' && !res.data && spreadToken) {
+                    $.ajax({
+                        type: "get",
+                        url: BASE_HOST + "/front/spread/bindUserAndSpread",
+                        data: {
+                            'spreadToken': spreadToken,
+                            'userToken': userToken,
+                            'frontUserId': frontUserId
+                        },
+                        success: function (res) {
+                            if (res && res.code == '000000') {
+                                sessionStorage.setItem('spreadToken', res.data ? res.data : '');
+                            }
+                        }
+                    })
+                } else {
+                    sessionStorage.setItem('spreadToken', res.data ? res.data : '');
+                }
+            }
+        });
+    }
+
+    $(function () {
+        $(window).on('scroll',function(){
+            var left=document.body.scrollLeft||document.documentElement.scrollLeft;
+            var top=document.body.scrollTop||document.documentElement.scrollTop;
+            if(top>45){
+                $('#header .header-nav').addClass('fixed');
+                $('.slide-menu-container').addClass('fixed');
+            }else{
+                $('#header .header-nav').removeClass('fixed');
+                $('.slide-menu-container').removeClass('fixed');
+            }
+            if(left>0){
+                $('#header .header-nav').css('left',-left+'px');
+            }
+        })
+        $(window).bind('resize',function(){
+            var w = document.body.clientWidth;
+            if (w >= 1200) {
+                $('#header .header-nav').css('left',0);
+            }
+        })
+
+        getSpreadToken();
+
+        $('.outside ul.lf>li>a').hover(function () {
+            $(this).addClass('themeColor')
+        }, function () {
+            $(this).removeClass('themeColor')
+        })
+
+
+        $('#qrcode img').attr('src', IMG_HOST + '/imgServer/qrcode/' + $("#header").data("identify") + '.jpg');
+        $('#logo-target').attr('href', toDetailPage(APP_SERVER + '/' + $("#header").data("identify")));
+
+        $('.user-container').hover(function () {
+            $('.user-menu').show();
+        }, function () {
+            $('.user-menu').hide();
+        })
+
+        //移动端二维码交互
+        $('#mobile-qrcode').hover(function () {
+            $('#qrcode').show();
+        }, function () {
+            $('#qrcode').hide();
+        })
+
+
+        //搜索框
+        $('.search-box input').on('focus', function () {
+            $(this).css('color', '#333');
+            $(this).siblings('i').addClass('themeColor');
+        })
+        $('.search-box input').on('blur', function () {
+            $(this).siblings('i').removeClass('themeColor');
+        })
+
+        /*搜索点击*/
+        $('.search-box i.comicon-search').on('click', function () {
+            var text = $('.search-box input').val();
+            if (text) {
+                $.get(BASE_HOST + '/front/template/getInfoCatByFAQ/' + SCODE, function (data) {
+                    var parentId = data.data.catId;
+                    var url = APP_SERVER + '/page/search/' + SCODE + '/' + parentId + '/' + text;
+                    window.open(toDetailPage(url),'_blank');
+                })
+            }
+        })
+
+
+        /*登陆点击*/
+        $('.fast-login').on('click', function () {
+            if ($(this).find('.fast-login-msg').html() == '快捷登录') {
+                localStorage.needOpen = "2";
+                var url = APP_SERVER + "/page/login/" + SCODE;
+                window.location.href = toDetailPage(url);
+            }
+        })
+
+        /*我的资料点击*/
+        /*
+        $('#personal-data').on('click', function () {
+            var url = APP_SERVER + "/secondPage/secondPagePersonalPage?" + "sCode=" + SCODE;
+            window.open(toDetailPage(url));
+        })
+        */
+        $('#personal-data').attr({
+            'href': toDetailPage(APP_SERVER + "/page/personal/" + SCODE),
+            'target': '_blank'
+        })
+
+        /*招办回复点击*/
+        /*
+        $('#reply').on('click', function () {
+            var url = APP_SERVER + "/v5users/v5messageList?" + "sCode=" + SCODE;
+            window.open(toDetailPage(url));
+        })
+        */
+        $('#reply').attr({
+            'href': toDetailPage(APP_SERVER + "/v5users/v5messageList?" + "sCode=" + SCODE),
+            'target': '_blank'
+        })
+
+        /*意见反馈点击 */
+        /*
+        $('#feedback').on('click', function () {
+            var url = APP_SERVER + "/v5users/v5onlineMessage?" + "sCode=" + SCODE;
+            window.open(toDetailPage(url));
+        })
+        */
+        $('#feedback').attr({
+            'href': toDetailPage(APP_SERVER + "/v5users/v5onlineMessage?" + "sCode=" + SCODE),
+            'target': '_blank'
+        })
+
+        /*退出登录点击*/
+        $('#log-out').on('click', function () {
+            var identify = $("#header").data('identify');
+            var url = APP_SERVER + "/v5users/logOut?" + "identify=" + identify;
+            window.location.href = toDetailPage(url);
+        })
+
+        /*注册点击*/
+        $('.fast_register').on('click', function () {
+            var url = APP_SERVER + "/page/register/" + SCODE;
+            window.location.href = toDetailPage(url);
+        })
+
+        /*搜索点击*/
+        $('.input-group i.comicon-search').on('click', function () {
+            var text = $('#search').val();
+            $.get(BASE_HOST + '/front/template/getInfoCatByFAQ/' + SCODE, function (data) {
+                var parentId = data.data.catId;
+                var url = APP_SERVER + '/page/search/'+SCODE+'/'+parentId + '/'+ text;
+                window.location.href = toDetailPage(url);
+            })
+        })
+
+        $.get(BASE_HOST + '/front/template/findSchool/' + SCODE, function (data) {
+            $('body').attr('id', data.style);
+            $('#school-logo').attr('src', IMG_HOST + data.logoUrl);
+            $('#professor').html(data.professor)
+        })
+
+
+        $.get(BASE_HOST + '/front/template/' + SCODE + '/v3.2/UserDefined', function (data) {
+            var m02 = '';
+            data = data.data;
+            if (data != null) {
+                for (var i = 0; i < data.length; i++) {
+                    m02 += '<li><p class="icon-container"><i class="themeColor ' + data[i].icon + '"></i></p>'
+                        + '<a target="_blank" href="' + data[i].refUrl + '">' + data[i].name + '</a><span class="line"></span>'
+                        + '</li>'
+                }
+                $('.m01-links').html(m02);
+                $('.m01-links li:last .line').remove();
+            }
+
+        })
+
+
+        $.get(BASE_HOST + '/front/template/' + SCODE + '/v3.2/TopNav', function (data) {
+            var m02 = '<li class="active current"><p class="line themeBackgroundColor"></p><a class="nav-item themeColor">首页</a></li>';
+            data = data.data;
+            if (data != null) {
+                for (var i = 0; i < data.length; i++) {
+                    var parentId = data[i].catId;
+                    m02 += '<li><p class="line themeBackgroundColor"></p><a class="nav-item" data-ntype="' + data[i].ntype + '" data-refurl="' + data[i].refUrl + '" data-catid="' + data[i].catId + '" data-infoid="' + data[i].infoId + '">' + data[i].name + '</a>';
+                    m02 += '<div class="slide-menu-container"><div class="opacity-flag themeBackgroundColor"></div><ul class="slide-menu">';
+                    if (data[i].children && data[i].children.length) {
+
+                        var child = data[i].children
+                        for (var x = 0; x < child.length; x++) {
+                            m02 += '<li><div class="li-flag themeBackgroundColor"></div><a data-ntype="' + child[x].ntype + '" data-refUrl="' + child[x].refUrl + '" data-catid="' + child[x].catId + '" data-infoid="' + child[x].id + '">' + (child[x].children ? '> ' : '• ') + child[x].name + '</a>'
+                                + '<div class="next-menu-container"><div class="opacity-flag themeBackgroundColor"></div>'
+                                + '<ul class="next-menu">'
+
+                            if (child[x].children && child[x].children.length) {
+                                var str = '';
+                                var children = child[x].children;
+                                for (var j = 0; j < children.length; j++) {
+                                    str += '<li><a data-ntype="' + children[j].ntype + '" data-refUrl="' + children[j].refUrl + '" data-catid="' + children[j].catId + '" data-infoid="' + children[j].id + '">' + children[j].name + '</a></li>'
+                                }
+                                m02 += str;
+                            }
+                            m02 += '</ul></div></li>'
+
+                        }
+                    }
+
+
+                    m02 += '</ul></div></li>';
+                }
+                $('#headerNav').html(m02)
+
+                /*设置top值*/
+                $('#headerNav .next-menu-container').each(function(){
+                    var index=$(this).parent().index();
+                    var height=40*(index+1);
+                    var top=-40*index;
+                    $(this).css('min-height',height+'px');
+                    $(this).css('top',top+'px');
+                })
+
+                /*鼠标悬浮第一层子菜单*/
+                $('#headerNav>li').hover(function () {
+
+                    $(this).addClass('active');
+                    $(this).find('.nav-item').addClass('themeColor');
+                    $(this).find('.slide-menu-container').show();
+
+
+                    var index = $(this).index();
+                    var in_width = 0;
+                    var menu_width = $(this).find('.slide-menu-container').outerWidth();
+                    var WINDOW_WIDTH = window.innerWidth || document.body.clientWidth;
+                    if (WINDOW_WIDTH < 1200) {
+                        WINDOW_WIDTH = 1200;
+                    }
+                    var out_width = (WINDOW_WIDTH - 1200) / 2;
+                    var sub_length = $('#headerNav>li').length;
+                    for (var x = index; x < sub_length; x++) {
+                        in_width += $('#headerNav>li').eq(x).outerWidth();
+                    }
+                    if (menu_width > in_width + out_width) {
+                        var distance = menu_width - (in_width + out_width);
+                        $(this).find('.slide-menu-container').css('left', -1 * distance + 'px').addClass('moved');
+                    } else {
+                        $(this).find('.slide-menu-container').css('left', 0).removeClass('moved');
+                    }
+
+                }, function () {
+                    if (!$(this).hasClass('current')) {
+                        $(this).removeClass('active');
+                        $(this).find('.nav-item').removeClass('themeColor');
+                    }
+                    $(this).find('.slide-menu-container').hide();
+                })
+
+                /*鼠标悬浮第二层子菜单*/
+                $('#headerNav .slide-menu>li').hover(function () {
+                    $('#headerNav .slide-menu .li-flag').hide();
+                    $(this).find('.li-flag').show();
+                    $(this).find('.next-menu-container').show();
+
+                    if ($(this).closest('.slide-menu-container').hasClass('moved')) {
+                        $(this).find('.next-menu-container').addClass('reverse');
+                    } else {
+
+                        var index = $('#headerNav .nav-item.themeColor').parent().index();
+                        var in_width = 0;
+                        var menu_width = $(this).find('.next-menu-container').outerWidth();
+                        var WINDOW_WIDTH = window.innerWidth || document.body.clientWidth;
+                        if (WINDOW_WIDTH < 1200) {
+                            WINDOW_WIDTH = 1200;
+                        }
+                        var out_width = (WINDOW_WIDTH - 1200) / 2;
+                        var sub_length = $('#headerNav>li').length;
+
+
+                        for (var x = index; x < sub_length; x++) {
+                            in_width += $('#headerNav>li').eq(x).outerWidth();
+                        }
+                        var leave_width = in_width + out_width - $('.slide-menu-container').outerWidth();
+                        if ($(this).find('.next-menu-container').outerWidth() > leave_width) {
+                            $(this).find('.next-menu-container').addClass('reverse');
+                        } else {
+                            $(this).find('.next-menu-container').removeClass('reverse');
+                        }
+
+                    }
+
+
+                }, function () {
+                    $(this).find('.li-flag').hide();
+                    $(this).find('.next-menu-container').hide();
+                })
+            }
+
+
+            $('#headerNav a').eq(0).attr('href', toDetailPage(APP_SERVER + '/' + $('#header').data('identify')))
+
+
+            $('#headerNav>li>a:gt(0)').each(function () {
+                var catid = $(this).parent().find('.slide-menu>li>a').eq(0).data('catid');
+                if (!catid) {
+                    catid = $(this).data('catid');
+                }
+                var url = APP_SERVER + '/page/list/' + SCODE + '/' + catid;
+                $(this).attr({
+                    'href': toDetailPage(url),
+                    'target': '_blank'
+                })
+            })
+            $('#headerNav>li>div a').each(function () {
+                if ($(this).data('ntype') == 2) {
+                    /*
+                    window.open(toDetailPage($(this).data('refurl')));
+                    */
+                    $(this).attr({
+                        'href': toDetailPage($(this).data('refurl')),
+                        'target': '_blank'
+                    })
+                } else if ($(this).data('ntype') == 3) {
+                    var url = APP_SERVER + '/page/photo/'+SCODE;
+                    /*
+                    window.open(toDetailPage(url));
+                    */
+                    $(this).attr({
+                        'href': toDetailPage(url),
+                        'target': '_blank'
+                    })
+
+                } else if ($(this).data('ntype') == 4) {
+                    var url = APP_SERVER + '/page/video/'+SCODE;
+                    /*
+                    window.open(toDetailPage(url));
+                    */
+                    $(this).attr({
+                        'href': toDetailPage(url),
+                        'target': '_blank'
+                    })
+                } else if ($(this).data('ntype') == 1) {
+                    var url = APP_SERVER + '/page/detail/' + SCODE + '/' + $(this).data('infoid') + '/' + $(this).data('catid');
+                    /* window.open(toDetailPage(url)); */
+                    $(this).attr({
+                        'href': toDetailPage(url),
+                        'target': '_blank'
+                    })
+
+                } else if ($(this).data('ntype') == 0) {
+                    var parentId = $(this).data('catid');
+                    var _this = this;
+                    /*
+                    $.get(BASE_HOST + '/front/template/getFirstSubCatId?catId=' + parentId, function (data) {
+                        if (data.code == '000000') {
+
+                            var url = APP_SERVER + '/page/list/'+SCODE+'/'+data.data;
+
+                            $(_this).attr({
+                                'href': toDetailPage(url),
+                                'target': '_blank'
+                            })
+                        }
+                    })
+                    */
+                    var url = APP_SERVER + '/page/list/' + SCODE + '/' + $(this).data('catid');
+                    $(_this).attr({
+                        'href': toDetailPage(url),
+                        'target': '_blank'
+                    })
+                }
+            })
+        })
+
+
+    })

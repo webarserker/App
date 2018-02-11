@@ -1,0 +1,32 @@
+//
+   Created by abbydu on 17/7/26.
+
+extends ../components/layout01
+block content
+      // 首页导航栏
+      include ../components/navNew
+      // 文章详情
+      div(class="details")
+         div(class="details_container")
+            include ../components/sidebar
+            div(class="Article_details")
+                //常见问题
+                div(class="Article_details_container")
+                    div(class="Article_details_tltle")
+                        span(class="Article_details_tips") 您的当前位置：
+                        a(class="aur") 故事
+                        a(class="cur") 快讯
+                        a(class="sur") 常见问题
+                    div(class="commonProblem_content")
+                        if data
+                            each item in data
+                                div(class="block",secCatId="#{item.id}")
+                                    h2(class="block_title") #{item.name}
+                                    div(class="block_content")
+                                        if item.infoList
+                                            each list in item.infoList
+                                                a(catId="#{list.id}") #{list.title}
+
+
+
+      include ../components/footer

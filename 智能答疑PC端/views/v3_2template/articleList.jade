@@ -1,0 +1,339 @@
+extends layout.jade
+block content
+    link(rel="stylesheet" href="/stylesheets/v3_2template/articleList.css")
+    link(rel="stylesheet" href="/javascripts/paging/paging.css")
+    include ./components/headerNew
+
+    div.containers.articleListPage
+        include ./components/sidebar
+
+        div#main3
+            div#footprint2
+            div.main3
+
+        div#main2
+            div#footprint3
+            ul#articleList
+            div#pagination
+                p.iconContainer.themeBorder
+                    i.icon-prev.themeColor
+                p#pages
+                p.iconContainer.themeBorder
+                    i.icon-next.themeColor
+        include ./components/rightBooks
+        div.clear
+    include ./components/footer
+
+    script.
+
+        var SCODE = '#{sCode}', PARENTID = '#{parentId}', curPage = '#{curPage}', pageSize = '#{pageSize}';
+        var APP_SERVER = '';
+
+        $(function () {
+
+
+            $('#main3').on('click', '.cat-item-detail>.head', function () {
+                if ($(this).parent().hasClass('half')) {
+                    if ($(this).parent().find('.noneData').length == 0) {
+                        $(this).parent().find('.articleList3>a').show();
+                        $(this).parent().find('.page-control').show();
+                        $(this).find('.status').html('收起').addClass('themeColor');
+                        $(this).find('.icon').removeClass('icon-toopen icon-toclose themeColor').addClass('icon-toclose themeColor');
+                        $(this).parent().removeClass('half slideUp slideDown').addClass('slideDown');
+                        $(this).parent().siblings('.cat-item-detail').removeClass('half slideUp slideDown').addClass('slideUp');
+                        $(this).parent().siblings('.cat-item-detail').find('.status').html('加载更多').removeClass('themeColor');
+                        $(this).parent().siblings('.cat-item-detail').find('.icon').removeClass('icon-toopen icon-toclose themeColor').addClass('icon-toopen');
+                        $(this).parent().siblings('.cat-item-detail').find('.body,.page-control').hide();
+
+
+                        var id = $(this).parent().attr('id');
+                        $('html,body').animate({scrollTop: $('#' + id).offset().top - 100}, 300)
+                    }
+
+                } else if ($(this).parent().hasClass('slideUp')) {
+                    $(this).parent().find('.articleList3>a').show();
+                    $(this).parent().find('.body').show();
+                    if($(this).parent().find('.noneData').length==0){
+                        $(this).parent().find('.page-control').show();
+                    }
+                    $(this).find('.status').html('收起').addClass('themeColor');
+                    $(this).find('.icon').removeClass('icon-toopen icon-toclose themeColor').addClass('icon-toclose themeColor');
+                    $(this).parent().removeClass('half slideUp slideDown').addClass('slideDown');
+                    $(this).parent().siblings('.cat-item-detail').removeClass('half slideUp slideDown').addClass('slideUp');
+                    $(this).parent().siblings('.cat-item-detail').find('.status').html('加载更多').removeClass('themeColor');
+                    $(this).parent().siblings('.cat-item-detail').find('.icon').removeClass('icon-toopen icon-toclose themeColor').addClass('icon-toopen');
+                    $(this).parent().siblings('.cat-item-detail').find('.body,.page-control').hide();
+
+
+                    var id = $(this).parent().attr('id');
+                    $('html,body').animate({scrollTop: $('#' + id).offset().top - 100}, 300)
+
+                } else if ($(this).parent().hasClass('slideDown')) {
+                    $(this).parent().find('.articleList3>a:gt(2),.page-control').hide();
+                    $(this).parent().siblings('.cat-item-detail').find('.body').show();
+                    $(this).parent().siblings('.cat-item-detail').find('.articleList3>a:gt(2),.page-control').hide();
+                    $(this).find('.status').html('加载更多').removeClass('themeColor');
+                    $(this).find('.icon').removeClass('icon-toopen icon-toclose themeColor').addClass('icon-toopen');
+                    $(this).parent().removeClass('half slideUp slideDown').addClass('half');
+
+                    var id = $(this).parent().attr('id');
+                    $('html,body').animate({scrollTop: $('#' + id).offset().top - 100}, 0)
+                }
+            })
+
+            //首先判断该分类下是否有第三级子分类
+            $.get(BASE_HOST + '/front/template/getInfoCatChildren?catId=' + PARENTID, function (data) {
+                if (data.data && data.data.length) {
+                    $('#main3').show();
+                    $('#main3').on('mouseover', '.articleList3 a', function () {
+                        $(this).find('span').addClass('themeColor');
+                    })
+                    $('#main3').on('mouseout', '.articleList3 a', function () {
+                        $(this).find('span').removeClass('themeColor');
+                    })
+                    var STR = '';
+                    data = data.data;
+                    for (var i = 0; i < data.length; i++) {
+                        STR += '<div id="listItem'+i+'" class="cat-item-detail half" data-catid="' + data[i].catId + '">'
+                            + '<div class="head">'
+                            + '<h3 class="themeBorderLeft3">'
+                            + '<span class="themeColor">' + data[i].name
+                            + '</span>'
+                            + '</h3>'
+                            + '<span class="icon-toopen icon rt"></span>'
+                            + '<span class="status rt">加载更多</span>'
+                            + '</div>'
+                            + '<div class="body">'
+                            + '<ul class="articleList3"></ul>'
+                            + '</div>'
+                            + '<div class="page-control"></div>'
+                            + '</div>'
+                    }
+                    $('#main3 .main3').html(STR);
+
+                    $('#main3 .main3 .head').each(function(){
+                        $(this).hover(function(){
+                            $(this).find('span.rt').addClass('themeColor');
+                        },function(){
+                            $(this).find('span.rt').removeClass('themeColor');
+                        })
+                    })
+
+                    $('.cat-item-detail').each(function () {
+                        var itemCatId = $(this).data('catid');
+                        var _this = this;
+                        $.get(BASE_HOST + '/front/template/getInfoContentlist', {
+                            sCode: SCODE,
+                            catId: itemCatId,
+                            curPage: curPage,
+                            pageSize: pageSize
+                        }, function (data) {
+                            var totalRows = data.totalRows;
+                            data = data.data;
+                            var articleList = '';
+                            if (!data || data.length == 0) {
+                                articleList = '<div class="noneData">抱歉，暂无数据</div>'
+                            } else {
+                                for (var i = 0; i < data.length; i++) {
+                                    articleList += '<a  data-contentlink="' + data[i].contentLink + '" data-catid="' + itemCatId + '" data-infoid="' + data[i].id + '">';
+                                    articleList += '<span class="date">' + data[i].pulishTimeStr + '</span>' + '<span class="title">' + data[i].title + '</span>';
+                                    articleList += '</a>'
+                                }
+                            }
+                            $(_this).find('.articleList3').html(articleList);
+
+                            $(_this).find('.articleList3>a').each(function () {
+                                $(this).click(function () {
+                                    sessionStorage.setItem('fromWhichPage','2');
+                                    var url = APP_SERVER + '/page/detail/' + SCODE + '/' + $(this).data('infoid') + '/' + $(this).data('catid');
+                                    window.location.href = toDetailPage(url);
+                                })
+
+                            })
+
+                            $(_this).find('.articleList3>a:gt(2)').hide();
+
+                            /*   if (totalRows > 10) { */
+                            $(_this).find(".page-control").Paging({
+                                pageSize: 10,
+                                count: totalRows,
+                                callback: function (page, size, count) {
+                                    $.get(BASE_HOST + '/front/template/getInfoContentlist', {
+                                        sCode: SCODE,
+                                        catId: itemCatId,
+                                        curPage: page,
+                                        pageSize: pageSize
+                                    }, function (data) {
+                                        data = data.data;
+                                        var articleList = '';
+                                        if (!data || data.length == 0) {
+                                            articleList = '<div class="noneData">抱歉，暂无数据</div>'
+                                        } else {
+                                            for (var i = 0; i < data.length; i++) {
+                                                articleList += '<a  data-contentlink="' + data[i].contentLink + '" data-catid="' + itemCatId + '" data-infoid="' + data[i].id + '">';
+                                                articleList += '<span class="date">' + data[i].pulishTimeStr + '</span>' + '<span class="title">' + data[i].title + '</span>';
+                                                articleList += '</a>'
+                                            }
+                                        }
+                                        $(_this).find('.articleList3').html(articleList);
+                                        $(_this).find('.articleList3>a').each(function () {
+                                            $(this).click(function () {
+                                                var url = APP_SERVER + '/page/detail/' + SCODE + '/' + $(this).data('infoid') + '/' + $(this).data('catid');
+                                                window.location.href = toDetailPage(url);
+                                            })
+
+                                        })
+                                    })
+                                }
+                            })
+                            /*} */
+                            $(_this).find(".page-control").hide();
+
+                        })
+                    })
+
+
+                } else {
+                    $('#main2').show();
+                    $('#articleList').on('mouseover', 'a', function () {
+                        $(this).find('span').addClass('themeColor');
+                    })
+                    $('#articleList').on('mouseout', 'a', function () {
+                        $(this).find('span').removeClass('themeColor');
+                    })
+
+                    $('.iconContainer').on('mouseover', function () {
+                        $(this).addClass('themeBackgroundColor').find('i').addClass('active');
+                    })
+                    $('.iconContainer').on('mouseout', function () {
+                        $(this).removeClass('themeBackgroundColor').find('i').removeClass('active');
+                    })
+
+                    $.get(BASE_HOST + '/front/template/getInfoContentlist', {
+                        sCode: SCODE,
+                        catId: PARENTID,
+                        curPage: curPage,
+                        pageSize: pageSize
+                    }, function (data) {
+                        if (data.data || data.data.length > 0) {
+                            $('#pagination').show();
+                            if (data.totalPage == 1) {
+                                $('.iconContainer').hide();
+                            }
+                        }
+                        //分页器的拼接逻辑
+                        var pages = '';
+                        var totalPage = data.totalPage;
+
+                        var pageStart = '';
+
+                        if (totalPage <= 5) {
+                            pageStart = 1;
+                            for (var x = pageStart; x <= totalPage; x++) {
+                                if (x == Number(curPage)) {
+                                    pages += '<a class="themeColor">' + x + '</a>'
+                                } else {
+                                    pages += '<a>' + x + '</a>'
+                                }
+                            }
+                        } else {
+                            if (Number(curPage) + 2 > totalPage) {
+
+                                for (var x = totalPage - 4; x <= totalPage; x++) {
+                                    if (x == Number(curPage)) {
+                                        pages += '<a class="themeColor">' + x + '</a>'
+                                    } else {
+                                        pages += '<a>' + x + '</a>'
+                                    }
+                                }
+                            } else {
+
+                                if(Number(curPage)>=3){
+                                    for (var x = Number(curPage) - 2; x <= Number(curPage) + 2; x++) {
+                                        if (x == Number(curPage)) {
+                                            pages += '<a class="themeColor">' + x + '</a>'
+                                        } else {
+                                            pages += '<a>' + x + '</a>'
+                                        }
+                                    }
+                                }else{
+                                    for (var x = 1; x <= 5; x++) {
+                                        if (x == Number(curPage)) {
+                                            pages += '<a class="themeColor">' + x + '</a>'
+                                        } else {
+                                            pages += '<a>' + x + '</a>'
+                                        }
+                                    }
+                                }
+
+                            }
+                        }
+
+                        $('#pages').html(pages);
+                        $('#pages>a').each(function () {
+                            $(this).click(function () {
+                                var pageIndex = $(this).text();
+                                if (pageIndex == Number(curPage)) {
+                                    return;
+                                }
+                                var url = APP_SERVER + '/page/list/' + SCODE + '/' + PARENTID + '?curPage=' + pageIndex + '&pageSize=' + pageSize;
+                                window.location.href = toDetailPage(url);
+                            })
+                        })
+
+                        $('#pagination p.iconContainer:first-child').click(function () {
+                            if (Number(curPage) == 1) {
+
+                            }
+                            else {
+                                curPage=Number(curPage)-1;
+                                var url = APP_SERVER + '/page/list/' + SCODE + '/' + PARENTID + '?curPage=' + curPage + '&pageSize=' + pageSize;
+                                window.location.href = toDetailPage(url);
+                            }
+                        })
+
+                        $('#pagination p.iconContainer:last-child').click(function () {
+                            if (Number(curPage) == totalPage) {
+
+                            }
+                            else {
+                                curPage=Number(curPage)+1;
+                                var url = APP_SERVER + '/page/list/' + SCODE + '/' + PARENTID + '?curPage=' + curPage + '&pageSize=' + pageSize;
+                                window.location.href = toDetailPage(url);
+                            }
+                        })
+
+
+                        var articleList = '';
+                        data = data.data;
+
+                        if (!data || data.length == 0) {
+                            $('#pagination').hide();
+                            articleList = '<div class="noneData">抱歉，暂无数据</h2>'
+                        } else {
+                            for (var i = 0; i < data.length; i++) {
+                                articleList += '<a  data-contentlink="' + data[i].contentLink + '" data-catid="' + PARENTID + '" data-infoid="' + data[i].id + '">';
+                                articleList += '<span class="date">' + data[i].pulishTimeStr + '</span>' + '<span class="title">' + data[i].title + '</span>';
+                                articleList += '</a>'
+                            }
+                        }
+
+                        $('#articleList').html(articleList);
+                        $('#articleList a').each(function () {
+                            $(this).on('click', function () {
+                                if ($(this).data('contentlink')) {
+                                    window.open(toDetailPage($(this).data('contentlink')))
+                                } else {
+                                    sessionStorage.setItem('fromWhichPage','3');
+                                    var url = APP_SERVER + '/page/detail/' + SCODE + '/' + $(this).data('infoid') + '/' + $(this).data('catid');
+                                    window.location.href = toDetailPage(url);
+                                }
+                            })
+                        })
+                    })
+                }
+            })
+
+
+        })
+

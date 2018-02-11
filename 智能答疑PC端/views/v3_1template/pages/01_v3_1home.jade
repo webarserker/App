@@ -1,0 +1,868 @@
+extends ../components/layout01
+block content
+    // 首页导航栏
+    include ../components/nav
+    // 轮播图
+    div(class="banner_lunbo")
+        div(class="banner_prevBg")
+        div(class="banner")
+            if m03
+                ul(class="img")
+                    if m03 && m03.data && m03.data.length > 0
+                        if m03.data.length > 0 && m03.data[0]
+                            li
+                                a(link="#{m03.data[0].link}")
+                                    img(src="#{locals.global.img_sever_url}#{m03.data[0].imgUrl}",width="1200",height="492",border="0")
+                        if m03.data.length > 1 && m03.data[1]
+                            li
+                                a(link="#{m03.data[1].link}")
+                                    img(src="#{locals.global.img_sever_url}#{m03.data[1].imgUrl}",width="1200",height="492",border="0")
+                        if m03.data.length > 2 && m03.data[2]
+                            li
+                                a(link="#{m03.data[2].link}")
+                                    img(src="#{locals.global.img_sever_url}#{m03.data[2].imgUrl}",width="1200",height="492",border="0")
+                        if m03.data.length > 3 && m03.data[3]
+                            li
+                                a(link="#{m03.data[3].link}")
+                                    img(src="#{locals.global.img_sever_url}#{m03.data[3].imgUrl}",width="1200",height="492",border="0")
+
+            ul(class="num")
+                if m03 && m03.data && m03.data.length > 0
+                    if m03.data.length > 0 && m03.data[0]
+                            li(index="0")
+                                div(class="banner_tips")
+                                    span(class="msg01",link="#{m03.data[0].link}") #{m03.data[0].title}
+                                    a(class="msg02",title="#{m03.data[0].desc}") #{m03.data[0].desc}
+                        if m03.data.length > 1 && m03.data[1]
+                            li(index="1")
+                                div(class="banner_tips")
+                                    span(class="msg01",link="#{m03.data[1].link}") #{m03.data[1].title}
+                                    a(class="msg02",title="#{m03.data[1].desc}") #{m03.data[1].desc}
+                        if m03.data.length > 2 && m03.data[2]
+                            li(index="2")
+                                div(class="banner_tips")
+                                    span(class="msg01",link="#{m03.data[2].link}") #{m03.data[2].title}
+                                    a(class="msg02",title="#{m03.data[2].desc}") #{m03.data[2].desc}
+                        if m03.data.length > 3 && m03.data[3]
+                            li(index="3")
+                                div(class="banner_tips")
+                                    span(class="msg01",link="#{m03.data[3].link}") #{m03.data[3].title}
+                                    a(class="msg02",title="#{m03.data[3].desc}") #{m03.data[3].desc}
+
+            div(class="btn")
+                span(class="prev comicon-arrow-left")
+                span(class="next comicon-arrow-right")
+        div(class="banner_nextBg")
+    //热点信息  m04
+    div(class="hot")
+        div(class="hot_container")
+            //左边  热点信息
+            div(class="hot_left")
+                // 标题
+                if m04
+                    div(class="hot_message_title")
+                        if m04 && m04.icon && m04.icon.length > 0
+                            i(class="#{m04.icon}")
+                        else
+                            i(class="icon usericon usericon-webicon-74")
+                        span(class="tips") #{m04.modelName}
+                        a(class="more icon-jia")
+                    // 主体信息
+                    if m04 && m04.data && m04.data.length > 0
+                        div(class="hot_message_content")
+                            ul
+                                if m04.data[0].children
+                                    each module04 in m04.data[0].children
+                                        li
+                                            a(ntype="#{module04.ntype}",id="#{module04.id}",catId="#{module04.catId}",refUrl="#{module04.refUrl}")
+                                                div(class="hot_message_time",time = "#{module04.date}")
+                                                    span(class="date",style ="background:#{themeColor}")
+                                                    span(class="month",style ="background:#{themeColor}")
+                                                div(class="hot_message_desc")
+                                                    span(class="hot_message_title",title="#{module04.name}") #{module04.name}
+                                                    span(class="hot_message_content",title="#{module04.desc}") #{module04.desc}
+            // 右边 快捷入口 m05 热点信息
+            div(class="hot_quick")
+                div(class="hot_quick_container")
+                    ul
+                        if m05 && m05.data && m05.data.length > 0
+                            each module05 in m05.data
+                                li(class="hot_quick_first")
+                                    div(class="hot_quick_item")
+                                        if module05 && module05.icon && module05.icon.length > 0
+                                            i(class="hot_quick_icon #{module05.icon}",style="color:#{themeColor}")
+                                        else
+                                            i(class="hot_quick_icon usericon usericon-webicon-74",style="color:#{themeColor}")
+                                        span(class="hot_quick_msg") #{module05.name}
+                                        span(class="hot_quick_tip01") ——
+                                        if module05.children && module05.children.length > 0
+                                            span(class="hot_quick_tip02") #{module05.children[0].name}
+                                    div(class="hot_quick_itemList",style="display:none;background:#{themeColor}",ntype="#{module05.ntype}",catId="#{module05.catId}",refUrl="#{module05.refUrl}")
+                                        span(class="tips01") #{module05.name}
+                                        ul(class="itemList_msg")
+                                            if module05.children
+                                                each module05Child in module05.children
+                                                    li(class="itemList_msg_second")
+                                                        a(title="#{module05Child.name}",id="#{module05Child.id}",ntype="#{module05Child.ntype}",catId="#{module05Child.catId}",refUrl="#{module05Child.refUrl}") #{module05Child.name}
+                                        a(class="itemList_more")
+                                            i(class="icon-shuangxia")
+    //第三个模块
+    div(class="Module03")
+        div(class="Module03_container")
+            //招生快讯 m06
+            if m06
+            div(class="admissionsNews")
+                ul(class="admissionsNews_firstItems")
+                   if m06&& m06.data && m06.data.length > 0
+                       each module06 in m06.data
+                            li
+                                div(class="admissionsNews_firstItemsPage")
+                                    a(class="title",ntype="#{module06.ntype}",catId = "#{module06.catId}",refUrl="#{module06.refUrl}") #{module06.name}
+                                    if module06.children
+                                        div(class="admissionsNews_second")
+                                            if  module06.children.length>0 && module06.children[0]
+                                                div(class="admissionsNews_second01")
+                                                    if module06.children[0] && module06.children[0].img && module06.children[0].img.length>0
+                                                        img(class="admissionsNews_second01_pic",src="#{locals.global.img_sever_url}#{module06.children[0].img}")
+                                                    else
+                                                        img(class="admissionsNews_second01_pic",src="../../images/v3_1template/moren01.png")
+                                                    div(class="admissionsNews_second01_message")
+                                                        a(class="msg01",title="#{module06.children[0].name}",ntype="#{module06.children[0].ntype}",id="#{module06.children[0].id}",catId="#{module06.children[0].catId}",refUrl="#{module06.children[0].refUrl}") #{module06.children[0].name}
+                                                        div(class="msg02")
+                                                            span(class="time") #{module06.children[0].date}
+                                                            span(class="new",style="background:#{themeColor}") new
+                                                        span(class="msg03") #{module06.children[0].desc}
+                                                div(class="admissionsNews_second02")
+                                                    ul(class="admissionsNews_second02_content")
+                                                        if module06.children && module06.children.length>1
+                                                            if module06.children.length>1 && module06.children[1]
+                                                                li
+                                                                    a(ntype="#{module06.children[1].ntype}",id="#{module06.children[1].id}",catId="#{module06.children[1].catId}",refUrl="#{module06.children[1].refUrl}")
+                                                                        span(class="tips01",title="#{module06.children[1].name}") #{module06.children[1].name}
+                                                                        span(class="time") #{module06.children[1].date}
+                                                            if module06.children.length>2 && module06.children[2]
+                                                                li
+                                                                    a(ntype="#{module06.children[2].ntype}",id="#{module06.children[2].id}",catId="#{module06.children[2].catId}",refUrl="#{module06.children[2].refUrl}")
+                                                                        span(class="tips01",title="#{module06.children[2].name}") #{module06.children[2].name}
+                                                                        span(class="time") #{module06.children[2].date}
+                                                            if module06.children.length>3 && module06.children[3]
+                                                                li
+                                                                    a(ntype="#{module06.children[3].ntype}",id="#{module06.children[3].id}",catId="#{module06.children[3].catId}",refUrl="#{module06.children[3].refUrl}")
+                                                                        span(class="tips01",title="#{module06.children[3].name}") #{module06.children[3].name}
+                                                                        span(class="time") #{module06.children[3].date}
+                                                            if module06.children.length>4 && module06.children[4]
+                                                                li
+                                                                    a(ntype="#{module06.children[4].ntype}",id="#{module06.children[4].id}",catId="#{module06.children[4].catId}",refUrl="#{module06.children[4].refUrl}")
+                                                                        span(class="tips01",title="#{module06.children[4].name}") #{module06.children[4].name}
+                                                                        span(class="time") #{module06.children[4].date}
+
+            // 招生简章 m07
+            div(class="admissionBrochures")
+                if m07
+                    div(class="admissionBrochures_title",style="border-bottom:2px solid #{themeColor}")
+                        span(class="msg") #{m07.modelName}
+                        span(class="icon icon-jia")
+                    if m07 && m07.data && m07.data.length >0
+                        div(class="admissionBrochures_itemList")
+                            ul
+                                if m07.data[0].children
+                                    each module07 in m07.data[0].children
+                                        li
+                                            a(ntype="#{module07.ntype}",id="#{module07.id}",catId="#{module07.catId}",refUrl="#{module07.refUrl}")
+                                                div(class="icon01_bg")
+                                                    i(class="icon01 comicon-hat")
+                                                div(class="title01",title="#{module07.name}") #{module07.name}
+                                                div(class="time01") #{module07.date}
+            // 视频在线 m08
+            div(class="videoList")
+                if m08
+                    div(class="videoList_title")
+                        span(class="msg01") #{m08.modelName}
+                        span(class="msg02 icon-jia")
+                    div(class="videoList_item")
+                        if m08 && m08.data && m08.data.length >0
+                            each module08 in m08.data
+                                if module08.videoUrl && module08.videoUrl.indexOf('http') != -1
+                                    a(class="video_content01",href-link="#{module08.videoUrl}",title="#{module08.title} #{module08.desc}")
+                                        img(src="#{locals.global.img_sever_url}#{module08.imgUrl}")
+                                        span(class="cops01")
+                                        span(class="cops02 icon-next")
+                                else
+                                    a(class="video_content01",href-link="#{locals.global.img_sever_url}#{module08.videoUrl}",title="#{module08.title} #{module08.desc}")
+                                        img(src="#{locals.global.img_sever_url}#{module08.imgUrl}")
+                                        span(class="cops01")
+                                        span(class="cops02 icon-next")
+
+    // 机器人
+    div(class="robot")
+        div(class="robot_container",style="background:#{themeColor}")
+            // 左边
+            div(class="robot_left")
+                span(class="icon comicon-robot")
+                span(class="msg01") 智能在线答疑
+                span(class="msg02") 365*24小时，有问必答, 不漏掉每一个考生的声音
+            a(class="robot_btn") 答疑快速通道
+            // 咨询电话
+            div(class="robot_advisory")
+                ul
+                    li
+                        a
+                            span(class="icons")
+                                i(class="comicon-phone")
+                            span(class="tips01") 电话咨询
+                            div(class="contactItem",style="display:none")
+                                div(class="contactItem_msg_phone")
+                                    span(class="icon",style="background:#{themeColor}")
+                                        i(class="comicon-phone")
+                                    span(class="msg01") 咨询电话
+                                    span(class="msg02")
+                                div(class="contactItem_content") 电话答疑，高峰时期会有占线！建议尽量使用智能答疑解决常见问题，高效便捷！
+                    li
+                        a
+                            span(class="icons")
+                                i(class="comicon-mail")
+                            span(class="tips01") 邮件咨询
+                            div(class="contactItem",style="display:none")
+                                div(class="contactItem_msg_email")
+                                    span(class="icon",style="background:#{themeColor}")
+                                        i(class="comicon-mail")
+                                    span(class="msg01") 邮箱地址
+                                    span(class="msg02")
+                                div(class="contactItem_content") 招办会定时查看邮件并回复！
+                    li
+                        a
+                            span(class="icons")
+                                i(class="comicon-message")
+                            span(class="tips01") 留言咨询
+                            div(class="contactItem",style="display:none")
+                                div(class="contactItem_msg")
+                                    span(class="msg01") 招办人工在线回复，有延时或未回复请理解，建议您尽量采用自助解疑或智能答疑
+                                div(class="message_btn",style="color:#{themeColor}") 点击进入留言咨询
+
+    // 教师风采轮播图
+    div(class="teacher")
+        div(class="teacher_container")
+            if m09 && m09.data && m09.data.length>0
+                div(id="slide-box")
+                    b(class="corner")
+                    div(class="slide-content",id="temp4")
+                        div(class="wrap",catId="#{m09.data[0].catId}")
+                            ul(class="JQ-slide-content")
+                                if m09.data[0].children
+                                    each module09,i in m09.data[0].children
+                                        li(id="#{module09.id}",index="#{i}",ntype="#{module09.ntype}",catId="#{module09.catId}",refUrl="#{module09.refUrl}")
+                                            a
+                                                if module09 && module09.img && module09.img.length > 0
+                                                    img(src="#{locals.global.img_sever_url}#{module09.img}",alt="#{module09.name}")
+                                                else
+                                                    img(src="../../images/v5template/57-pic.png")
+                                                span(class="desc01") #{module09.name}
+                                                div(class="content_tips")
+                                                    div(class="descDetailBg")
+                                                    div(class="descDetail")
+                                                        span(class="name") #{module09.name}
+                                                        span(class="more_btn",style="background:#{themeColor}") 了解更多
+
+
+
+                        div(class="JQ-slide-nav")
+                            a(class="prev" href="#")
+                                b(class="corner")
+                                span &#8249;
+                                b(class="corner")
+                            a(class="next",href="#")
+                                b(class="corner")
+                                span &#8250;
+                                b(class="corner")
+                    b(class="corner")
+    // 故事 m10
+    div(class="story")
+        if m10
+        div(class="story_container")
+            // 左边
+            div(class="culture")
+                // 上边
+                div(class="culture_title")
+                    //图片
+                    if m10 && m10.img && m10.img.length > 0
+                        img(class="culture_title_img",src="#{locals.global.img_sever_url}#{m10.img}")
+                    else
+                        img(class="culture_title_img",src="../../images/v3_1template/moren03.png")
+                    div(class="culture_title_content")
+                        img(class="culture_title_contentBg",src="#{locals.global.img_sever_url}#{schoolInfo.schoolIcon}")
+                        span(class="msg01") #{m10.modelName}
+                //文字信息部分
+                if m10 && m10.data && m10.data.length >0
+                    div(class="culture_content")
+                        if  m10.data[0].children.length>0 && m10.data[0].children[0]
+                            span(class="title01",title="#{m10.data[0].children[0].name}",ntype="#{m10.data[0].children[0].ntype}",id="#{m10.data[0].children[0].id}",catId="#{m10.data[0].children[0].catId}",refUrl="#{m10.data[0].children[0].refUrl}") #{m10.data[0].children[0].name}
+                            span(class="msg") #{m10.data[0].children[0].desc}
+                            div(class="msg02")
+                                ul
+                                    if m10.data[0].children.length>1 && m10.data[0].children[1]
+                                        li
+                                            a(title="#{m10.data[0].children[1].name}",ntype="#{m10.data[0].children[1].ntype}",id="#{m10.data[0].children[1].id}",catId="#{m10.data[0].children[1].catId}",refUrl="#{m10.data[0].children[1].refUrl}") #{m10.data[0].children[1].name}
+                                    if m10.data[0].children.length > 2 && m10.data[0].children[2]
+                                        li
+                                            a(title="#{m10.data[0].children[2].name}",ntype="#{m10.data[0].children[2].ntype}",id="#{m10.data[0].children[2].id}",catId="#{m10.data[0].children[2].catId}",refUrl="#{m10.data[0].children[2].refUrl}") #{m10.data[0].children[2].name}
+                                    if m10.data[0].children.length > 3 && m10.data[0].children[3]
+                                        li
+                                            a(title="#{m10.data[0].children[3].name}",ntype="#{m10.data[0].children[3].ntype}",id="#{m10.data[0].children[3].id}",catId="#{m10.data[0].children[3].catId}",refUrl="#{m10.data[0].children[3].refUrl}") #{m10.data[0].children[3].name}
+            // 右边
+            if m11
+                div(class="Scenery")
+                    if m11 && m11.data && m11.data.length >0
+                        img(class="Scenery_bg",src="../../images/v3_1template/moren02.png")
+                        div(class="Scenery_content")
+                            div(class="Scenery_contentImgBg")
+                            div(class="msg")
+                                img(class="msg_icon",src="#{locals.global.img_sever_url}#{schoolInfo.schoolIcon}")
+                                span(class="Scenery_tips01") 校园风采
+                                span(class="Scenery_tips02") 进入欣赏
+
+
+    // 页尾
+    include ../components/footer
+
+    script.
+        var themeColor = "#{themeColor}";
+        var objWin = null;
+        $(function(){
+            //首页banner轮播图  m03
+            // 获取轮播图的个数
+            var num = $(".num li:last-child").index();
+            var weightbtn = 1200 / (num + 1);
+            // 设置下面LI的宽度
+            $(".num li").css("width", weightbtn + "px");
+            // 首页banner 轮播图点击事件
+            $(".img li a,.num li .banner_tips .msg01").click(function () {
+                var url = $(this).attr('link');
+                if (url && url.length > 0) {
+                    window.open(url);
+                } else {
+                    return;
+                }
+            })
+
+            // 轮播图左右遮罩层设置宽度
+            var s = $(".banner_lunbo").outerWidth();
+            var bgWidth = (s - 1200) / 2;
+            $(".banner_prevBg").css("width", bgWidth + "px");
+            $(".banner_nextBg").css("width", bgWidth + "px");
+
+
+
+
+
+
+
+
+
+
+
+            // m09 导师风采轮播图点击事件
+
+            $("#temp4").Slide({
+                effect: "scroolLoop",
+                autoPlay: false,
+                timer: 3000,
+                steps: 1
+            });
+
+            // 导师风采轮播图m09 样式交互
+
+            $("#slide-box .JQ-slide-content li a img,#slide-box li a span.desc01").hover(function () {
+                $(this).parent().find(".desc01").hide();
+                $(this).parent().find(".content_tips").show();
+            },function (){
+                $(this).parent().parent().siblings().find(".desc01").show();
+                $(this).parent().parent().siblings().find(".content_tips").hide();
+            })
+            $("#slide-box .JQ-slide-nav span").hover(function(){
+                $("#slide-box .JQ-slide-content li a span.desc01").show();
+                $("#slide-box .JQ-slide-content li a .content_tips").hide();
+            })
+            $(".JQ-slide-content").mouseleave(function(){
+                $("#slide-box .JQ-slide-content li a span.desc01").show();
+                $("#slide-box .JQ-slide-content li a .content_tips").hide();
+            })
+            $(".JQ-slide-content li a .content_tips .descDetail .name,.JQ-slide-content li a .content_tips .descDetail .more_btn").click(function(){
+                var ntype = $(this).parent().parent().parent().parent().attr('ntype');
+                var infoId = $(this).parent().parent().parent().parent().attr('id');
+                var parentId = $(this).parent().parent().parent().parent().attr('catId');
+                var refUrl = $(this).parent().parent().parent().parent().attr('refUrl');
+                if (ntype == "0") {
+                    // 跳转到文章列表
+                    var url = getAppServer() + '/page/list/' + sCode + "/"  + parentId+"?curPage=1&pageSize=10";
+                    //var url = getAppServer() + '/secondPage/secondPageArticleList?' + "catId=" + infoId + "&sCode=" + sCode + "&curPage=1&pageSize=10";
+                    window.open(toDetailPage(url));
+                } else if (ntype == "1") {
+                    // 跳转到文章详情
+                    var url = getAppServer() + '/page/detail/' + sCode + "/" + infoId + "/" + parentId;
+                    window.open(toDetailPage(url));
+                } else if (ntype == "2") {
+                    var url = refUrl;
+                    window.open(toDetailPage(url));
+                } else if (ntype == "3") {
+                    // 跳转到校园风采
+                    var url = getAppServer() + '/page/photo/' + sCode;
+                    window.open(toDetailPage(url));
+                } else if (ntype == "4") {
+                    // 跳转到 视频在线
+                    var url = getAppServer() + '/page/video/' + sCode;
+                    window.open(toDetailPage(url));
+                } else if(ntype == "9"){
+                    // 跳转到 招录公告
+                    var url = getAppServer() + '/page/notice/' + sCode +"?curPage=1&pageSize=10";
+                    window.open(toDetailPage(url));
+
+                }
+            })
+
+
+
+
+
+            // 招生公共  m04 模块
+             $(".hot_left").hover(function(){
+                 $(this).find("a.more").show();
+             },function(){
+                 $(this).find("a.more").hide();
+             })
+             $(".hot_message_time").each(function(){
+                 var time = $(this).attr('time');
+                 var datefirst = time.substr(0, 4);
+                 var datelast = time.substring(5);
+                 $(this).find(".date").html(datelast);
+                 $(this).find(".month").html(datefirst);
+             })
+            // 招生公告 m4 点击交互事件
+            var m04 = !{m04};
+            // 标题点击事件
+            $(".hot_message_title span.tips,.hot_message_title a.more").click(function(){
+                if (m04 && m04.data) {
+                    var ntype = m04.data[0].ntype;
+                    if (ntype == "0") {
+                        // 跳转到文章列表
+                        var parentId = m04.data[0].catId;
+                        // 跳转到文章详情
+                        var url = getAppServer() + '/page/list/' + sCode + "/"  + parentId+"?curPage=1&pageSize=10";
+                        window.open(toDetailPage(url));
+                    } else if (ntype == "1") {
+                        return;
+                    } else if (ntype == "2") {
+                        var url = m04.data[0].refUrl;
+                        window.open(toDetailPage(url));
+                    } else if (ntype == "3") {
+                        // 跳转到校园风采
+                        var url = getAppServer() + '/page/photo/' + sCode;
+                        window.open(toDetailPage(url));
+                    } else if (ntype == "4") {
+                        // 跳转到 视频在线
+                        var url = getAppServer() + '/page/video/' + sCode;
+                        window.open(toDetailPage(url));
+                    } else if(ntype == "9"){
+                        // 跳转到 招录公告
+                        var url = getAppServer() + '/page/notice/' + sCode + "?curPage=1&pageSize=10";
+                        window.open(toDetailPage(url));
+
+                    }
+                }
+            })
+            //  下面各项列表
+            $(".hot_message_desc span.hot_message_title").click(function(){
+                var ntype = $(this).parent().parent().attr('ntype');
+                var infoId = $(this).parent().parent().attr('id');
+                var parentId = $(this).parent().parent().attr('catId');
+                var refUrl = $(this).parent().parent().attr('refUrl');
+                if (ntype == "0") {
+                    // 跳转到文章列表
+                    var url = getAppServer() + '/page/list/' + sCode + "/"  + parentId+"?curPage=1&pageSize=10";
+                    window.open(toDetailPage(url));
+                } else if (ntype == "1") {
+                    // 跳转到文章详情
+                    var url = getAppServer() + '/page/detail/' + sCode + "/" + infoId + "/" + parentId;
+                    window.open(toDetailPage(url));
+                } else if (ntype == "2") {
+                    var url = refUrl;
+                    window.open(toDetailPage(url));
+                } else if (ntype == "3") {
+                    // 跳转到校园风采
+                    var url = getAppServer() + '/page/photo/' + sCode;
+                    window.open(toDetailPage(url));
+                } else if (ntype == "4") {
+                    // 跳转到 视频在线
+                    var url = getAppServer() + '/page/video/' + sCode;
+                    window.open(toDetailPage(url));
+                } else if(ntype == "9"){
+                    // 跳转到 招录公告
+                    var url = getAppServer() + '/page/notice/' + sCode + "?curPage=1&pageSize=10";
+                    window.open(toDetailPage(url));
+
+                }
+
+            })
+
+
+
+
+        })
+
+
+
+        //热点信息 m05模块
+        $(".hot_quick_container ul li:eq(4) .hot_quick_item").css("border-right","none");
+        $(".hot_quick_container ul li:eq(4) .hot_quick_itemList").css("width","160px");
+        $(".hot_quick_item").mouseenter(function(){
+            $(this).next(".hot_quick_itemList").show();
+            $(this).parent().siblings().find(".hot_quick_itemList").hide();
+
+        });
+        $(".hot_quick_container").mouseleave(function(){
+            $(this).find(".hot_quick_itemList").hide();
+        });
+
+
+        var hotNum = $(".hot_quick_container ul li.hot_quick_first").length
+        var hotWidth = 787/(hotNum);
+        $(".hot_quick_container ul li").css('width',hotWidth+"px");
+        $(".hot_quick_container ul li .hot_quick_item").css('width', hotWidth+"px");
+        $(".hot_quick_container ul li .hot_quick_itemList").css('width', hotWidth + "px");
+        var boxWidth = $(".hot_quick_container ul li .hot_quick_item").outerWidth();
+        var iconLeft = (boxWidth-40-48)/2;
+        var msgLeft = boxWidth-40;
+        $(".hot_quick_container ul li .hot_quick_item i.hot_quick_icon").css('margin-left',iconLeft+"px");
+        $(".hot_quick_container ul li .hot_quick_item span.hot_quick_msg,.hot_quick_container ul li .hot_quick_item span.hot_quick_tip01,.hot_quick_container ul li .hot_quick_item span.hot_quick_tip02").css('width',msgLeft+"px");
+
+
+        // 鼠标滑过样式的宽度
+        var secondLeft = boxWidth-30
+        $(".hot_quick_container ul li .hot_quick_itemList ul.itemList_msg li.itemList_msg_second").css('width',secondLeft);
+        $(".hot_quick_container ul li .hot_quick_itemList ul.itemList_msg li.itemList_msg_second a").css('width',secondLeft);
+        // m05 各个模块点击事件
+        $(".hot_quick_itemList span.tips01,.itemList_more").click(function(){
+            var ntype = $(this).parent().attr('ntype');
+            var parentId = $(this).parent().attr('catId');
+            var refUrl = $(this).parent().attr('refUrl');
+            if (ntype == "0") {
+                // 跳转到文章列表
+                var url = getAppServer() + '/page/list/' + sCode + "/"  + parentId+"?curPage=1&pageSize=10";
+                //var url = getAppServer() + '/secondPage/secondPageArticleList?' + "catId=" + catId + "&sCode=" + sCode + "&curPage=1&pageSize=10";
+                window.open(toDetailPage(url));
+            } else if (ntype == "1") {
+                // 跳转到文章详情
+                return;
+            } else if (ntype == "2") {
+                var url = refUrl;
+                window.open(toDetailPage(url));
+            } else if (ntype == "3") {
+                // 跳转到校园风采
+                var url = getAppServer() + '/page/photo/' + sCode;
+                window.open(toDetailPage(url));
+            } else if (ntype == "4") {
+                // 跳转到 视频在线
+                var url = getAppServer() + '/page/video/' + sCode;
+                window.open(toDetailPage(url));
+            } else if(ntype == "9"){
+                // 跳转到 招录公告
+                var url = getAppServer() + '/page/notice/' + sCode +"?curPage=1&pageSize=10";
+                window.open(toDetailPage(url));
+
+            }
+
+        })
+        // m05 各个模块 下拉列表项 点击事件
+        $(".itemList_msg li a,.admissionsNews_second01_message a.msg01,.culture_content .title01,.culture_content .msg02 ul li a").click(function(){
+            var ntype = $(this).attr('ntype');
+            var infoId = $(this).attr('id');
+            var parentId = $(this).attr('catId');
+            var refUrl = $(this).attr('refUrl');
+            if (ntype == "0") {
+                // 跳转到文章列表
+                var url = getAppServer() + '/page/list/' + sCode + "/"  + parentId+"?curPage=1&pageSize=10";
+                window.open(toDetailPage(url));
+            } else if (ntype == "1") {
+                // 跳转到文章详情
+                var url = getAppServer() + '/page/detail/' + sCode + "/" + infoId + "/" + parentId;
+                window.open(toDetailPage(url));
+            } else if (ntype == "2") {
+                var url = refUrl;
+                window.open(toDetailPage(url));
+            } else if (ntype == "3") {
+                // 跳转到校园风采
+                var url = getAppServer() + '/page/photo/' + sCode;
+                window.open(toDetailPage(url));
+            } else if (ntype == "4") {
+                // 跳转到 视频在线
+                var url = getAppServer() + '/page/video/' + sCode;
+                window.open(toDetailPage(url));
+            } else if(ntype == "9"){
+                // 跳转到 招录公告
+                var url = getAppServer() + '/page/notice/' + sCode + "?curPage=1&pageSize=10";
+                window.open(toDetailPage(url));
+
+            }
+        })
+
+
+        // 招生快讯 m06 模块  样式
+        $(".admissionsNews_firstItems li:eq(0) .admissionsNews_firstItemsPage a.title").addClass("active");
+        $(".admissionsNews ul li:eq(0) .admissionsNews_firstItemsPage .admissionsNews_second").show();
+        $(".admissionsNews ul li .admissionsNews_firstItemsPage a.active").css("border-top-color",themeColor);
+        $(".admissionsNews ul li:eq(1) .admissionsNews_firstItemsPage .admissionsNews_second").css('left',"-184px");
+        //$(".admissionsNews ul li:eq(2) .admissionsNews_firstItemsPage .admissionsNews_second").css('left',"-368px");
+        $(".admissionsNews ul li .admissionsNews_firstItemsPage a.title").hover(function(){
+            $(this).addClass("active");
+            $(this).css("border-top-color",themeColor);
+            $(this).parent().parent().siblings().find(".title").removeClass("active");
+            $(this).parent().find(".admissionsNews_second").show();
+
+            $(this).parent().parent().siblings().find(".admissionsNews_second").hide();
+        })
+
+        // 鼠标滑过 ,下面列表标题样式变成主题色
+        $(".admissionsNews_second .admissionsNews_second02 ul li a .tips01,.admissionsNews_firstItemsPage a.title").hover(function(){
+            $(this).css("color",themeColor);
+            $(this).parent().parent().siblings().find("span.tips01").css("color","#333333");
+        },function(){
+            $(this).css("color","#333333");
+        })
+        $(".admissionsNews_second01_message a.msg01").hover(function(){
+            $(this).css("color",themeColor);
+        },function(){
+            $(this).css("color","#333333");
+        })
+
+
+        // m06 两个模块交互点击事件
+        $(".admissionsNews_firstItemsPage a.title").click(function(){
+            var ntype = $(this).attr('ntype');
+            var parentId = $(this).attr('catId');
+            var refUrl = $(this).attr('refUrl');
+            if (ntype == "0") {
+                // 跳转到文章列表
+                var url = getAppServer() + '/page/list/' + sCode + "/"  + parentId+"?curPage=1&pageSize=10";
+                //var url = getAppServer() + '/secondPage/secondPageArticleList?' + "catId=" + catId + "&sCode=" + sCode + "&curPage=1&pageSize=10";
+                window.open(toDetailPage(url));
+            } else if (ntype == "1") {
+                // 跳转到文章详情
+                return;
+            } else if (ntype == "2") {
+                var url = refUrl;
+                window.open(toDetailPage(url));
+            } else if (ntype == "3") {
+                // 跳转到校园风采
+                var url = getAppServer() + '/page/photo/' + sCode;
+                window.open(toDetailPage(url));
+            } else if (ntype == "4") {
+                // 跳转到 视频在线
+                var url = getAppServer() + '/page/video/' + sCode;
+                window.open(toDetailPage(url));
+            } else if(ntype == "9"){
+                // 跳转到 招录公告
+                var url = getAppServer() + '/page/notice/' + sCode +"?curPage=1&pageSize=10";
+                window.open(toDetailPage(url));
+
+            }
+        })
+        // m06 各个模块下拉列表点击事件
+        $(".admissionsNews_second02 ul li a span.tips01,.admissionBrochures_itemList ul li a .title01").click(function(){
+            var ntype = $(this).parent().attr('ntype');
+            var infoId = $(this).parent().attr('id');
+            var parentId = $(this).parent().attr('catId');
+            var refUrl = $(this).parent().attr('refUrl');
+            if (ntype == "0") {
+                // 跳转到文章列表
+                var url = getAppServer() + '/page/list/' + sCode + "/"  + parentId+"?curPage=1&pageSize=10";
+                //var url = getAppServer() + '/secondPage/secondPageArticleList?' + "catId=" + infoId + "&sCode=" + sCode + "&curPage=1&pageSize=10";
+                window.open(toDetailPage(url));
+            } else if (ntype == "1") {
+                // 跳转到文章详情
+                var url = getAppServer() + '/page/detail/' + sCode + "/" + infoId + "/" + parentId;
+                window.open(toDetailPage(url));
+            } else if (ntype == "2") {
+                var url = refUrl;
+                window.open(toDetailPage(url));
+            } else if (ntype == "3") {
+                // 跳转到校园风采
+                var url = getAppServer() + '/page/photo/' + sCode;
+                window.open(toDetailPage(url));
+            } else if (ntype == "4") {
+                // 跳转到 视频在线
+                var url = getAppServer() + '/page/video/' + sCode;
+                window.open(toDetailPage(url));
+            } else if(ntype == "9"){
+                // 跳转到 招录公告
+                var url = getAppServer() + '/page/notice/' + sCode+"?curPage=1&pageSize=10";
+                window.open(toDetailPage(url));
+
+            }
+        })
+
+
+
+        // 招生简章 m07 模块  样式
+        $(".admissionBrochures").hover(function(){
+            $(this).find("span.icon").show();
+        },function(){
+            $(this).find("span.icon").hide();
+        })
+        $(".admissionBrochures_itemList ul li:first a .icon01_bg").addClass("themeBackgroundColor")
+        $(".admissionBrochures_itemList ul li:eq(1) a .icon01_bg").addClass("themeBackgroundColor")
+        // 鼠标滑过,标题 颜色变成主题色
+        $(".admissionBrochures .admissionBrochures_title span.msg").hover(function(){
+            $(this).css("color", themeColor);
+        },function(){
+            $(this).css("color","#333333");
+        })
+        // m07 模块标题点击事件
+        var m07 = !{m07};
+        $(".admissionBrochures_title").click(function(){
+            if (m07 && m07.data) {
+                var ntype = m07.data[0].ntype;
+                if (ntype == "0") {
+                    // 跳转到文章列表
+                    var parentId = m07.data[0].catId;
+                    var url = getAppServer() + '/page/list/' + sCode + "/"  + parentId+"?curPage=1&pageSize=10";
+                    //var url = getAppServer() + '/secondPage/secondPageArticleList?' + "catId=" + catId + "&sCode=" + sCode + "&curPage=1&pageSize=10";
+                    window.open(toDetailPage(url));
+                } else if (ntype == "1") {
+                    return;
+                } else if (ntype == "2") {
+                    var url = m07.data[0].refUrl;
+                    window.open(toDetailPage(url));
+                } else if (ntype == "3") {
+                    // 跳转到校园风采
+                    var url = getAppServer() + '/page/photo/' + sCode;
+                    window.open(toDetailPage(url));
+                } else if (ntype == "4") {
+                    // 跳转到 视频在线
+                    var url = getAppServer() + '/page/video/' + sCode;
+                    window.open(toDetailPage(url));
+                } else if(ntype == "9"){
+                    // 跳转到 招录公告
+                    var url = getAppServer() + '/page/notice/' + sCode + "?curPage=1&pageSize=10";
+                    window.open(toDetailPage(url));
+
+                }
+            }
+        })
+        //  m08 视频在线 标题点击事件
+        $(".videoList").hover(function(){
+            $(this).find("span.msg02").show();
+        },function(){
+            $(this).find("span.msg02").hide();
+        })
+        $(".videoList_title").click(function(){
+            var url = getAppServer() + '/page/video/' + sCode;
+            window.open(toDetailPage(url));
+        })
+        // 视频在线点击事件
+        $("a.video_content01").click(function(){
+            var url = $(this).attr('href-link');
+            window.open(toDetailPage(url));
+        })
+
+
+
+        // 智能在线机器人
+        $(".robot_advisory ul li").hover(function(){
+            $(this).find(".contactItem").show();
+            $(this).find(".contactItem").addClass("themeBorder")
+            $(this).siblings().find(".contactItem").hide();
+        },function(){
+            $(this).find(".contactItem").hide();
+        })
+
+        $(".contactItem .message_btn").click(function(){
+            var userId = $(".fast_login_msg").attr('userId');
+            if (userId && userId.length > 0){
+                var url = getAppServer() + '/page/online/' + sCode;
+                window.open(url);
+            }else{
+                $(".advice_box01").show()
+                window.setTimeout("$('.advice_box01').hide()", 3000);
+
+            }
+        })
+        // 留言咨询对话框中点击注册
+        $(".advice_box01 .contents01 .v3tips02 .v3mag02").click(function () {
+            var url = getAppServer() + '/page/register/' + sCode;
+            window.location.href = toDetailPage(url);
+        })
+        // 留言咨询对话框中点击登录
+        $(".advice_box01 .contents01 .v3tips01 .v3mag02").click(function () {
+            var url = getAppServer() + '/page/login/' + sCode;
+            window.location.href= toDetailPage(url);
+        })
+
+
+
+
+
+
+
+        // m10 故事
+        $(".culture_content .msg02 ul li a,.culture_content .title01").hover(function(){
+            $(this).css("color", themeColor);
+        },function(){
+            $(this).css("color", "#333333");
+        })
+        var m10 = !{m10};
+        //m10 模块标题跳转
+        $(".culture_title .culture_title_content span.msg01").click(function(){
+            if (m10 && m10.data) {
+                var ntype = m10.data[0].ntype;
+                if (ntype == "0") {
+                    // 跳转到文章列表
+                    var parentId = m10.data[0].catId;
+                    var url = getAppServer() + '/page/list/' + sCode + "/"  + parentId+"?curPage=1&pageSize=10";
+                    //var url = getAppServer() + '/secondPage/secondPageArticleList?' + "catId=" + catId + "&sCode=" + sCode + "&curPage=1&pageSize=10";
+                    window.open(toDetailPage(url));
+                } else if (ntype == "1") {
+                    return;
+                } else if (ntype == "2") {
+                    var url = m10.data[0].refUrl;
+                    window.open(toDetailPage(url));
+                } else if (ntype == "3") {
+                    // 跳转到校园风采
+                    var url = getAppServer() + '/page/photo/' + sCode;
+                    window.open(toDetailPage(url));
+                } else if (ntype == "4") {
+                    // 跳转到 视频在线
+                    var url = getAppServer() + '/page/video/' + sCode;
+                    window.open(toDetailPage(url));
+                } else if(ntype == "9"){
+                    // 跳转到 招录公告
+                    var url = getAppServer() + '/page/notice/' + sCode +"?curPage=1&pageSize=10";
+                    window.open(toDetailPage(url));
+
+                }
+            }
+        })
+        // m11  校园风采
+        $(".Scenery").click(function () {
+            var url = getAppServer() + '/page/photo/' + sCode;
+            window.open(toDetailPage(url));
+        })
+        //  机器人中的电话和邮箱
+        $(".footer_msg_center01 .mobile").each(function(){
+            if($(this).attr("contacttype")==1){
+                var contact = $(this).attr("contact");
+                $(".contactItem_msg_phone .msg02").html(contact);
+            }
+            if($(this).attr("contacttype")==2){
+                var contact = $(this).attr("contact");
+                $(".contactItem_msg_email .msg02").html(contact);
+            }
+
+        })
+
+
+
+
+
+
+
+
+

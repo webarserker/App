@@ -1,0 +1,385 @@
+extends ../components/layout01
+block content
+      // 首页导航栏
+      include ../components/navNew
+      // 文章详情
+      div(class="details")
+         div(class="details_container")
+            include ../components/sidebar
+            div(class="Article_details")
+                // 文件预览 下载提示框
+                div(class="preView_box")
+                    div(class="prews",style="background:#{themeColor}") 预览
+                    div(class="download",style="background:#{themeColor}") 下载
+                    a(class="quxiao icon-close",style="color:#{themeColor}")
+                div(class="Article_details_container")
+                    // data 为空的判断
+                    div(class="Article_details_tltle")
+                        span(class="Article_details_tips") 您的当前位置：
+                        if contentInfo && contentInfo.firstCatName && contentInfo.firstCatName.length >0
+                            a(class="aur",firstCatId="#{contentInfo.firstCatId}") #{contentInfo.firstCatName}
+                        else
+                            a(class="aur")
+                        if contentInfo && contentInfo.secondCatName && contentInfo.secondCatName.length >0
+                            a(class="cur",secondCatId="#{contentInfo.secondCatId}") #{contentInfo.secondCatName}
+                        else
+                            a(class="cur")
+                        if contentInfo && contentInfo.threeCatName && contentInfo.threeCatName.length > 0
+                            a(class="sur",threeCatId = "#{contentInfo.threeCatId}") #{contentInfo.threeCatName}
+                        else
+                            a(class="sur")
+
+                    // 文章详情
+                    div(class="Article_details_content")
+                        div(class="Article_details_content_artical",id="container")
+                            if contentInfo && contentInfo.title && contentInfo.title.length > 0
+                                h1(class="tips01") #{contentInfo.title}
+                            else
+                                h1(class="tips01")
+                            if contentInfo && contentInfo.subHead && contentInfo.subHead.length > 0
+                                span(class="fubiaoti") —— #{contentInfo.subHead}
+                            else
+                                span(class="fubiaoti")
+                            div(class="contents")
+                                span(class="contents_msg01")
+                                if contentInfo && contentInfo.viewTimes && contentInfo.viewTimes != null
+                                    span(class="contents_msg02") 浏览量: #{contentInfo.viewTimes}
+                                else
+                                    span(class="contents_msg02")
+                            if contentInfo && contentInfo.content && contentInfo.content.length >0
+                                span(class="tips02") !{contentInfo.content}
+                            else
+                                span(class="tips02")
+
+                        div(class="Article_details_content_artical01")
+                            // specType =1 时 请求学校基本信息
+                            if contentInfo.specType == 0
+
+                            else if contentInfo.specType == 1
+                                include 09_schoolProfile
+                            else if contentInfo.specType == 6
+                                include 05_professionalList
+                            else if contentInfo.specType == 14
+                                include 19_facultyList
+                        // 上一篇 下一篇
+                        div(class="Article_details_footer")
+                            if contentInfo && contentInfo.preInfoId
+                                span(class="Article_details_prev",preInfoId="#{contentInfo.preInfoId}") 上一篇
+                            if contentInfo && contentInfo.nextInfoId
+                                span(class="Article_details_next",nextInfoId="#{contentInfo.nextInfoId}") 下一篇
+                            if contentInfo && contentInfo.preInfoId !== null || contentInfo.nextInfoId !==null || contentInfo && contentInfo.infoId
+                                span(class="Article_details_listHome") 返回列表页
+            include ../components/rightMode
+      include ../components/footer
+      script.
+          $(document).ready(function(){
+              $(document).on('click', function (e) {
+                  if ($(".preView_box")[0].style.display != 'none') {
+                      if (e.target.className != "preView_box" && e.target.className != "prews" && e.target.className != "download"&&e.target.nodeName!='A') {
+                          $(".preView_box").hide();
+                      }
+                  }
+              })
+
+              // 获取地址栏参数
+              function GetQueryString(name) {
+                  var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                  var r = window.location.search.substr(1).match(reg);
+                  if (r != null)return unescape(r[2]);
+                  return null;
+              }
+              //文章详情ID
+              var infoId = "#{infoId}";
+              // 父级id
+              var parentId = "#{parentId}";
+
+              // 前端加入统计代码
+              // 用户省份
+              var userProvince = remote_ip_info.province;
+              // 用户城市
+              var userCity = remote_ip_info.city;
+              // 学校唯一标识
+              var sCode = $(".main_container").attr('sCode');
+              // 访问来源
+              //var viewSourceUrl = document.referrer;
+              // 访问来源
+              var viewSourceUrl = sessionStorage.getItem('viewSourceUrl') ? sessionStorage.getItem('viewSourceUrl') : document.referrer;
+              sessionStorage.setItem('viewSourceUrl', viewSourceUrl);
+              // 当前页面 url
+              var pageUrl = location.href;
+              $.ajax({
+                  type: "post",
+                  url: getApiServer() + "/front/addUserViewLog",
+                  data: {
+                      'userProvince': userProvince,
+                      'userCity': userCity,
+                      'sCode': sCode,
+                      'viewSourceUrl': viewSourceUrl,
+                      'pageUrl': pageUrl,
+                      'infoId':infoId,
+                      'parentId':parentId
+                  },
+                  success: function (data) {
+                      if (data && data.code == '000000') {
+                          return;
+                      } else {
+                          return;
+                      }
+                  }
+              })
+
+
+
+
+              var contentInfo = !{contentInfo};
+              // 侧边栏分类列表点击事件-->跳转列表页即可
+              sidebarManager.setClassClickCallback(function (catId) {
+                  var parentId = catId;
+                  var sCode = $(".main_container").attr('sCode');
+                  var url = getAppServer() + '/page/list/' + sCode + "/"  + parentId+"?curPage=1&pageSize=10";
+                  window.location.href = toDetailPage(url);
+              });
+
+                //-------------------专业列表 点击专业跳转到06专业详情点击事件
+              // 专业详情点击事件
+              $(".majorInfoTable tbody.majorInfoTable_body tr td a.major").click(function () {
+                  var parentId = $(".cur").attr('secondCatId');
+                  var majorId = $(this).attr('majorId');
+                  var sCode = $(".main_container").attr('sCode');
+                  var url = getAppServer() + '/page/major/' + sCode + "/" + majorId + "/" + parentId;
+                  window.location.href = toDetailPage(url);
+              })
+              //--------------------专业列表  点击 院系跳转到院系详情 点击事件
+              $(".majorInfoTable tbody.majorInfoTable_body tr td a.depart").click(function(){
+                  var parentId = $(".cur").attr('secondCatId');
+                  var departmentId = $(this).attr('departId');
+                  var sCode = $(".main_container").attr('sCode');
+                  var url = getAppServer() + '/page/faculty/' + sCode + "/" + departmentId + "/" + parentId;
+                  window.location.href = toDetailPage(url);
+              })
+                // ----------------专业列表 点击 专业详解跳转到专业详情页面----------------
+              $(".majorInfoTable tbody.majorInfoTable_body tr td a.detailPage").click(function(){
+                  var parentId = $(".cur").attr('secondCatId');
+                  var majorId = $(this).parent().parent().find(".major").attr('majorId');
+                  var sCode = $(".main_container").attr('sCode');
+                  var url = getAppServer() + '/page/major/' + sCode + "/" + majorId + "/" + parentId;
+                  window.location.href = toDetailPage(url);
+              })
+
+
+              //--------------------专业列表 点击招生计划 跳转招生计划页面 点击事件
+
+              $(".majorInfoTable tbody.majorInfoTable_body tr td a.enrollmentPage").click(function(){
+                  var parentId = $(".cur").attr('secondCatId');
+                  var sCode = $(".main_container").attr('sCode');
+                  var url = getAppServer() + '/page/enrollment/' + sCode + "/" + parentId;
+                  window.location.href = toDetailPage(url);
+              })
+              //------------------- 专业列表 点击历史录取页面 跳转历史录取页面 点击事件------------------------------------
+              $(".majorInfoTable tbody.majorInfoTable_body tr td a.admissionPage").click(function () {
+                  var parentId = $(".cur").attr('secondCatId');
+                  var sCode = $(".main_container").attr('sCode');
+                  var url = getAppServer() + '/page/admission/' + sCode + "/" + parentId;
+                  window.location.href = toDetailPage(url);
+              })
+
+
+              //---------------------院系列表，点击 院系跳转到院系详情点击事件
+
+              $(".facultyInfoTable tbody.facultyInfoTable_body tr td a.departId").click(function(){
+                  var parentId = $(".cur").attr('secondCatId');
+                  var sCode = $(".main_container").attr('sCode');
+                  var departmentId = $(this).attr('departid');
+                  var url = getAppServer() + '/page/faculty/' + sCode + "/" + departmentId + "/" + parentId;
+                  window.location.href = toDetailPage(url);
+              })
+
+              //---------------------院系列表   点击专业跳转到专业详情点击事件
+              $(".facultyInfoTable tbody.facultyInfoTable_body tr td a.major").click(function () {
+                  var parentId = $(".cur").attr('secondCatId');
+                  var sCode = $(".main_container").attr('sCode');
+                  var majorId = $(this).attr('id');
+                  var url = getAppServer() + '/page/major/' + sCode + "/" + majorId + "/" + parentId;
+                  window.location.href = toDetailPage(url);
+              })
+
+
+
+              //--------- 右侧引入旧页面处理 begin -------------------
+              var url = "";
+              if(contentInfo.specType == 0) {
+
+              } else if(contentInfo.specType == 1) {
+                  // 学校基本信息,已写
+
+              }else if(contentInfo.specType == 6){
+                  // 专业列表 已写
+
+              } else if(contentInfo.specType == 8) {
+                  // 引入specType == 8招生计划页面
+                  var sCode = $(".main_container").attr('sCode');
+                  url = getApiServer()+"/front/info/form/enrollPlan?" + "sCode="+sCode;
+                  $.ajax({
+                      type: "get",
+                      url: url,
+                      success: function (data) {
+                          $(".Article_details_content_artical01").html(data);
+                      }
+                  })
+              }else if(contentInfo.specType == 9){
+                  // 引入specType == 9录取规则页面
+                  var sCode = $(".main_container").attr('sCode');
+                  url = getApiServer()+"/front/info/form/enrollRule?" + "sCode="+sCode;
+                  $.ajax({
+                      type: "get",
+                      url: url,
+                      success: function (data) {
+                          $(".Article_details_content_artical01").html(data);
+                      }
+                  })
+              }else if(contentInfo.specType == 10){
+                  //引入 spectype==10 学校录取历史
+                  var sCode = $(".main_container").attr('sCode');
+                  url = getApiServer()+"/front/info/form/schoolEnroll?" + "sCode="+sCode;
+                  $.ajax({
+                      type: "get",
+                      url: url,
+                      success: function (data) {
+                          $(".Article_details_content_artical01").html(data);
+                      }
+                  })
+              }else if(contentInfo.specType == 11){
+                  // 引入spectype==11 专业录取历史
+                  var sCode = $(".main_container").attr('sCode');
+                  url = getApiServer()+"/front/info/form/majorScore?" + "sCode="+sCode;
+                  $.ajax({
+                      type: "get",
+                      url: url,
+                      success: function (data) {
+                          $(".Article_details_content_artical01").html(data);
+                      }
+                  })
+
+              }else if(contentInfo.specType == 12){
+                  // 引入spectype =12 填报参考
+                  var sCode = $(".main_container").attr('sCode');
+                  url = getApiServer()+"/front/info/preScore2/" + sCode;
+                  $.ajax({
+                      type: "get",
+                      url: url,
+                      success: function (data) {
+                          $(".Article_details_content_artical01").html(data);
+                      }
+                  })
+              }
+              else if(contentInfo.specType == 13){
+                  // 引入spectype==13 专业研究方向
+                  var sCode = $(".main_container").attr('sCode');
+                  var parentId = $(".cur").attr('secondCatId');
+                  url = getApiServer()+"/front/info/form/majorResearch2?" + "sCode="+sCode + "&parentId=" + parentId;
+                  $.ajax({
+                      type: "get",
+                      url: url,
+                      success: function (data) {
+                          $(".Article_details_content_artical01").html(data);
+                      }
+                  })
+              }
+              //--------- 右侧引入旧页面处理 end -------------------
+
+
+              //  文章底部  上一篇 下一篇  返回列表 点击事件
+              if(contentInfo && contentInfo.threeCatName && contentInfo.threeCatName.length > 0){
+                  var parentId = $(".sur").attr('threeCatId');
+              }else{
+                  var parentId = $(".cur").attr('secondCatId');
+              }
+              // 上一篇 点击事件
+              $(".Article_details_prev").click(function(){
+                  // 跳转到文章详情
+                  var infoId = $(this).attr('preInfoId');
+                  var sCode = $(".main_container").attr('sCode');
+                  //调转到文章详情
+                  var url = getAppServer() + '/page/detail/' + sCode + "/" + infoId + "/" + parentId;
+                  window.location.href = toDetailPage(url);
+              })
+              // 下一篇 点击事件
+              $(".Article_details_next").click(function(){
+                  // 跳转到文章详情
+                  var infoId = $(this).attr('nextInfoId');
+                  var sCode = $(".main_container").attr('sCode');
+                  //调转到文章详情
+                  var url = getAppServer() + '/page/detail/' + sCode + "/" + infoId + "/" + parentId;
+                  window.location.href = toDetailPage(url);
+              })
+              // 返回列表点击事件
+              $(".Article_details_listHome").click(function(){
+                  // 跳转到文章列表
+                  var sCode = $(".main_container").attr('sCode');
+                  var url = getAppServer() + '/page/list/' + sCode + "/"  + parentId +"?curPage=1&pageSize=10";
+                  window.location.href = toDetailPage(url);
+              })
+
+
+
+              //上一篇,下一篇,返回列表 鼠标滑过样式变化
+              var themeColor ="#{themeColor}";
+              $(".Article_details_footer span").hover(function(){
+                  $(this).css("color",themeColor);
+                  $(this).css("border-color",themeColor);
+              },function(){
+                  $(this).css("color","#666666");
+                  $(this).css("border-color","#d9d9d9");
+              })
+
+
+              // 日期去掉时分秒
+              if (contentInfo && contentInfo.publishTime && contentInfo.publishTime.length > 0) {
+                  var date = "#{contentInfo.publishTime}";
+                  var new_date = date.substr(0, 10)
+                  $(".Article_details_content_artical .contents .contents_msg01").html("发布时间" + "：" + new_date);
+              }
+
+              // 详情页面 文件预览功能
+              $(".preViewClass a").each(function(){
+                  var hrefUrl = $(this).attr('href');
+                  $(this).attr('href-url',hrefUrl);
+                  $(this).removeAttr('href');
+                  $(this).click(function(){
+                      $(".preView_box").show();
+                      var fileUrl = $(this).attr('href-url');
+                      var onlineViewUrl = fileUrl;
+                      // 当文件格式为Office 格式时
+                      if($(this).parent().hasClass("preViewOffice")) {
+                          onlineViewUrl = 'http://view.officeapps.live.com/op/view.aspx?src=' + fileUrl;
+                          $(".preView_box").attr('data-viewUrl',onlineViewUrl);
+                          $(".preView_box").attr('data-downloadUrl',fileUrl);
+                          return;
+                      }else if($(this).parent().hasClass("preViewPdf")){
+                          $(".preView_box").attr('data-viewUrl', onlineViewUrl);
+                          $(".preView_box").attr('data-downloadUrl', fileUrl);
+                          return;
+                      }
+                  })
+              })
+              // 预览
+              $(".prews").click(function () {
+                  var viewUrl = $(this).parent().attr('data-viewUrl');
+                  $(".preView_box").hide();
+                  window.open(viewUrl);
+              })
+              // 下载
+              $(".download").click(function () {
+                  var viewUrl = $(this).parent().attr('data-downloadUrl');
+                  $(".preView_box").hide();
+                  var downloadUrl = getApiServer() + '/file/download?fileUrl=' + viewUrl;
+                  window.location.href = toDetailPage(downloadUrl);
+              })
+              // 取消
+              $(".quxiao").click(function(){
+                  $(".preView_box").hide();
+              })
+
+              uParse('#container .tips02');
+
+          });

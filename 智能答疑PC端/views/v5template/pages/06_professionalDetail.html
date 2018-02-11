@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>地大研招系统</title><link href="../stylesheets/v5template/layout01.css" rel="stylesheet" type="text/css"/><link href="../stylesheets/v5template/pages/01_graduateStudentRecruiting.css" rel="stylesheet" type="text/css"/><link href="../stylesheets/v5template/pages/02_v5templateDetail.css" rel="stylesheet" type="text/css"/><link href="../stylesheets/v5template/themecolor.css" rel="stylesheet" type="text/css"/><script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js"></script><script type="text/javascript" src="../javascripts/v5template/layout01.js"></script></head><body><div class="wrapper"><div class="main_container themeBlue"><!--头部导航栏--><div class="header_container"><div class="header_content"><!--导航栏左边蓝色部分--><div class="header_half_left"><div class="header_left"><a class="header_left_school"><img src="../../images/v5template/27-pic.png"/><span>(武汉) ·研招智能咨询系统</span></a></div><div class="af_10"></div></div><!--导航栏右边白色部分--><div class="header_half_right"><div class="header_right"><div class="header_msg"><ul><li><a class="mobile"><img src="../../images/v5template/02.png"/><span class="mobile_msg">移动版</span></a></li><li><a class="fast_login"><img src="../../images/v5template/03-pic.png"/><span class="fast_login_msg">快捷登录</span></a></li><li><a href="undefined" class="fast_register"><span class="fast_register_msg">免费注册</span></a></li><li><a class="SignUp"><img src="../../images/v5template/04-pic.png"/><span class="SignUp_msg">网上报名系统</span></a></li><li><a class="inquiry"><img src="../../images/v5template/05-pic.png"/><span class="inquiry_msg">录取查询系统</span></a></li></ul></div><div class="search_content"><input type="text" placeholder="请搜索相关内容" class="search_msg"/><span class="search_btn"></span></div></div></div></div></div><div class="nav"><div class="nav_container"><ul><li><a class="active">首页</a></li><li><a>学校概况</a></li><li><a>导师信息</a></li><li><a>专业介绍</a></li><li><a>硕士报考信息</a></li><li><a>博士报考信息</a></li><li><a>联系方式</a></li></ul></div></div><div class="details"><div class="details_container"><!--Created by abbydu on 17/7/24.--><!-- 侧边栏一级和二级分类--><div class="sidebar"><!--  一级分类名称--><div class="side_bar themeBlueBackgroundColor">快讯</div><!-- 二级分类列表--><div id="side_content" class="side_content"><ul class="side_content_container"></ul><div class="sidebar_menu_level2Items none"><!--  单个二级分类下的三级分类--><div class="sidebar_menu_level2Msg"><ul class="sidebar_menu_level2"><li><a>学校信息</a></li><li><a>学校信息</a></li><li><a>学校信息</a></li><li><a>学校信息</a></li><li><a>学校信息</a></li><li><a>学校信息</a></li></ul></div></div></div></div><link href="../stylesheets/v5template/layout01.css" rel="stylesheet" type="text/css"/><link href="../stylesheets/v5template/pages/01_graduateStudentRecruiting.css" rel="stylesheet" type="text/css"/><link href="../stylesheets/v5template/pages/02_v5templateDetail.css" rel="stylesheet" type="text/css"/><link href="../stylesheets/v5template/themecolor.css" rel="stylesheet" type="text/css"/><script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js"></script><script type="text/javascript" src="../javascripts/v5template/layout01.js"></script><script>$(document).ready(function () {
+
+// 二级分类 和 三级分类数据处理
+   /**
+    * 数据转换, 便于后续处理
+    * 原始数据: {"secondCatId":708,"threeCatId":88,"menu":[{"flag":1,"name":"外语类保送生","catId":214,"children":[]},{"flag":1,"name":"招生计划","catId":83,"children":[]},{"flag":1,"name":"经世学府 寰宇绽放","catId":368,"children":[]},{"flag":1,"name":"历年录取","catId":86,"children":[]},{"flag":0,"name":"招生分类信息","catId":708,"children":[{"name":"自主招生","catId":88,"icon":"usericon-webicon-01","imgUrl":""},{"name":"测试三级分类","catId":1251,"icon":"usericon-webicon-01","imgUrl":""},{"name":"招生计划查询","catId":823,"icon":"usericon-webicon-14","imgUrl":""},{"name":"高水平艺术团","catId":90,"icon":"usericon-webicon-01","imgUrl":""},{"name":"博士研究生招录","catId":336,"icon":"icon-33","imgUrl":""}]}]}
+    * 转换数据: {"83":{"flag":1,"name":"招生计划","catId":83,"children":[]},"86":{"flag":1,"name":"历年录取","catId":86,"children":[]},"214":{"flag":1,"name":"外语类保送生","catId":214,"children":[]},"368":{"flag":1,"name":"经世学府 寰宇绽放","catId":368,"children":[]},"708":{"88":{"name":"自主招生","catId":88,"icon":"usericon-webicon-01","imgUrl":""},"90":{"name":"高水平艺术团","catId":90,"icon":"usericon-webicon-01","imgUrl":""},"336":{"name":"博士研究生招录","catId":336,"icon":"icon-33","imgUrl":""},"823":{"name":"招生计划查询","catId":823,"icon":"usericon-webicon-14","imgUrl":""},"1251":{"name":"测试三级分类","catId":1251,"icon":"usericon-webicon-01","imgUrl":""},"flag":0,"name":"招生分类信息","catId":708,"children":[{"name":"自主招生","catId":88,"icon":"usericon-webicon-01","imgUrl":""},{"name":"测试三级分类","catId":1251,"icon":"usericon-webicon-01","imgUrl":""},{"name":"招生计划查询","catId":823,"icon":"usericon-webicon-14","imgUrl":""},{"name":"高水平艺术团","catId":90,"icon":"usericon-webicon-01","imgUrl":""},{"name":"博士研究生招录","catId":336,"icon":"icon-33","imgUrl":""}]}}
+    *
+    * */
+   var classifyData = ;            // 将menu 下面的数组，重新组合成一个对象
+   console.log(JSON.stringify(classifyData));
+   var classify = {};
+   for(var i=0; i < classifyData.menu.length; i++){
+      var secClass = classifyData.menu[i];
+      classify[secClass.catId] = secClass || {};
+      for(var j=0; j<secClass.children.length; j++) {
+         var thirdCalss = secClass.children[j];
+         classify[secClass.catId][thirdCalss.catId]=thirdCalss;
+      }
+   }
+   console.log(JSON.stringify(classify));
+
+   /**
+    * 绑定事件
+    *
+    * */
+
+
+   // 定时隐藏任务的定时器, 声明到全局便于特殊情况隐藏
+   var timer = null;
+
+   /*
+    * 鼠标滑过二级分类时选中二级分类, 显示三级分类(此处仅为示意, 关键点在二级分类唯一标识)
+    * @param catId 鼠标当前所在标签对应二级分类的唯一标识
+    * */
+   function mouseOnSecClass(catId) {
+      // 三级列表的长度
+      var j = $(".sidebar_menu_level2Msg ul li").length;
+      // 1. 清空三级分类列表, 若需要显示三级分类则取消全局定时器的任务
+      // todo
+      $(".sidebar_menu_level2Items").html("");
+
+      // 2. 选中二级分类
+      // todo
+      // 选中二级分类就  这里好像有点问题？
+      $(this)
+
+      // 3. 按需显示三级分类
+      // 3.1 取出二级分类数据, 若没有三级分类或者不需要显示三级分类, 直接 return
+      var secClass = classify[catId];
+      if(!secClass.children || secClass.children.length == 0 || secClass.flag==1) return null;
+
+      // 3.2 拼接三级分类列表的 html(绑定事件等均在此做)
+      var html = "";
+      for(var i in secClass.children) {
+         var thirdClass = secClass.children[i];
+         html += thirdClass.name + thirdClass.catId + thirdClass.icon;
+      }
+      // 3.3 显示三级分类列表
+      // todo
+      // 将三级分类的id 绑定在动态创建的li 上
+      for(var i = 0; i < thirdClass.length; i++){
+         var li = $("<li thirdClassId="+ thirdClass[i].catId +">");
+         li.html("<a>" + thirdClass[i].name + "<a>")
+         $(".sidebar_menu_level2").append(li);
+         j++;
+      }
+
+      // 3.4 初始化三级分类列表
+      setupThirdClass();
+   }
+
+   // 鼠标离开二级分类时, 延时隐藏三级分类列表
+   function mouseLeaveSecClass(){
+      // 延时隐藏, 并将定时器赋予全局的定时器, 便于特殊情况取消隐藏, 如: 滑动到另一个二级分类, 或者三级分类列表
+   }
+
+   // 初始化三级分类列表
+   function setupThirdClass() {
+      // 1. 设定鼠标移动事件, 取消延时隐藏任务 todo
+      // 2. 绑定每个三级分类的事件, 鼠标移动时的选中, 鼠标点击时的请求等
+      // 3. 当鼠标移出三级分类是, 也设定延时隐藏任务, 并赋予全局定时器, 便于取消
+   }
+
+
+
+
+
+
+
+});</script><div class="Article_details"><!--常见问题--><div class="Article_details_container"><div class="Article_details_tltle"><span class="Article_details_tips">您的当前位置：</span><a class="aur">报考指南</a><a class="cur">学院&专业</a><a class="sur">专业详情</a></div><div class="professionalDetail_content"><div class="professionalDetail_head"><h1 class="info_title">建筑学</h1><h2>所属院系: 建筑与城市规划学院</h2><h2>学制：5年</h2><h2>授予学位：建筑学学士</h2></div><div class="professionalDetail_item01"><h2>核心目标</h2><div class="professionalDetail_item01Msg">以“卓越建筑师人才”培养为主要目的，以企业和社会需求为导向，培养学生成为城乡建设系统中从事公共建筑设计、居住建筑设计、城市设计、历史建筑保护、绿色技能技术和虚拟仿真数字化技术等方向的复合型专门人才。专业培养注重强调“厚基础、宽口径、强能力、高素质、重实践”，以建筑设计及其理论为主干，兼修建筑历史与理论、城市规划与设计、建筑技术科学、艺术学、文学、美学等内容。</div></div><div class="professionalDetail_item01"><h2>核心课程</h2><div class="professionalDetail_item01Msg">理论与设计环节有建筑学概论、建筑心理学、建筑制图、设计初步、美术、数字化设计、建筑设计、建筑构造、建筑结构、建筑物理环境、建筑设备系统、建筑师业务基础、绿色建筑设计、中国建筑史、外国建筑史等系列课程；多层面的专业实践环节有数字化设计实验、影响实验、色彩管理实验、工程材料实验等实验类课程，和建筑设计实习、美术实习、建筑力学实习、模型与工艺、建筑构造实习、建筑师业务实习、厅堂音质设计实习、设计创新科技活动等系列实习类课程。</div></div><div class="professionalDetail_item02"><span class="name">招生计划 :</span><a class="look_detail">点击查看详情</a></div><div class="professionalDetail_item02"><span class="name">历史录取 :</span><a class="look_detail">点击查看详情</a></div></div></div></div></div></div></div></div></body></html>

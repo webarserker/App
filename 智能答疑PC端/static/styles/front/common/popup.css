@@ -1,0 +1,92 @@
+﻿@charset "utf-8";
+#g-tanchu-box{
+    font-family:"微软雅黑"
+}
+#g-tanchu-box .tanchu-bg{
+    position:fixed;
+    top:0px;
+    left:0px;
+    bottom:0px;
+    right:0px;
+    overflow:hidden;
+    background-color:#000000;
+    filter:alpha(opacity=50);
+    -moz-opacity:0.5;
+    -khtml-opacity: 0.5;
+    opacity: 0.5;
+    z-index:9997;
+}
+#g-tanchu-box .tanchu-page-box{
+    position:fixed;
+    _position:absolute;
+    z-index:9997;
+    left:0px;
+    right:0px;
+    text-align:center;
+}
+#g-tanchu-box .tanchu-page-box .tanchu-page-box-sty{
+    display:inline-block;
+    *zoom:1;
+}
+#g-tanchu-box .tanchu-page-box-nr{
+    position:relative;
+    z-index:9996;
+    text-align:left;
+    margin:0px auto;
+    background-color:#FFF;
+    color:#666666;
+    font-size:12px;
+    border-radius: 2px;
+}
+#g-tanchu-box .til{
+    color: #333;
+    font-size: 18px;
+    padding: 20px;
+    margin: 0 20px;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+}
+#g-tanchu-box .tilTxt{
+    display:inline-block;
+    *display:inline;
+    *zoom:1;
+    margin-left:15px;
+    border-bottom: #008bcb solid 1px;
+    padding:0px 5px;
+}
+#g-tanchu-box .close-tanchu{
+    position:absolute;
+    top:25px;
+    right:25px;
+    width:15px;
+    height:15px;
+    cursor:pointer;
+    background-image: url(../../../image/front/common/close.png);
+    background-image: -webkit-image-set(url(../../../image/front/common/close.png) 1x,url(../../../image/front/common/close.png) 2x);
+    background-repeat: no-repeat;
+}
+#g-tanchu-box a.close-tanchu:hover{
+    text-decoration: none;
+}
+#g-tanchu-box .tanchu-append-obj{
+    padding:20px;
+    padding-top: 0;
+}
+#g-tanchu-box .tanchu-btn-confirm, #g-tanchu-box .tanchu-btn-cancle{
+    display: inline-block;
+    font-size: 18px;
+    text-align: center;
+    border: #3b8df7 solid 1px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 120px;
+    height: 40px;
+    line-height: 40px;
+    margin-left: 10px;
+    background: #3b8df7;
+    color: #fff;
+}
+#g-tanchu-box .tanchu-btn-cancle{
+    background: #fff;
+    color: #3b8df7;
+}

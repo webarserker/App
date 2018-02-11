@@ -1,0 +1,159 @@
+extends layout.jade
+block content
+    link(rel="stylesheet" href="/stylesheets/v4template/noticeList.css")
+    include ./components/headerNew
+
+    div.containers
+        include ./components/sidebar
+
+        div#main2
+            div#footprint 您的当前位置：招录公告
+            ul#articleList
+            div#pagination
+                p.iconContainer.themeBorder
+                    i.icon-prev.themeColor
+                p#pages
+                p.iconContainer.themeBorder
+                    i.icon-next.themeColor
+        include ./components/rightBooks
+        div.clear
+    include ./components/footer
+
+    script.
+
+        var BASE_HOST = '!{locals.global.api_sever_url}'
+        var HOST = BASE_HOST + '/weixin/api';
+        var SCODE = '#{sCode}', PARENTID = '#{parentId}', curPage = '#{curPage}', pageSize = '#{pageSize}';
+        var APP_SERVER = '';
+
+        $(function () {
+            $('#menu .themeMenuHead').html('招录公告')
+
+            $('#articleList').on('mouseover', 'a', function () {
+                $(this).find('span').addClass('themeColor');
+            })
+            $('#articleList').on('mouseout', 'a', function () {
+                $(this).find('span').removeClass('themeColor');
+            })
+
+            $('.iconContainer').on('mouseover', function () {
+                $(this).addClass('themeBackgroundColor').find('i').addClass('active');
+            })
+            $('.iconContainer').on('mouseout', function () {
+                $(this).removeClass('themeBackgroundColor').find('i').removeClass('active');
+            })
+
+            $.get(BASE_HOST + '/front/template/getInfoContentlist', {
+                sCode: SCODE,
+                isNotice: 0,
+                curPage: curPage,
+                pageSize: pageSize
+            }, function (data) {
+                if (data.data || data.data.length > 0) {
+                    $('#pagination').show();
+                }
+
+                //分页器的拼接逻辑
+                var pages = '';
+                var totalPage = data.totalPage;
+
+                var pageStart = '', num = totalPage;
+
+                if (curPage <= 5) {
+                    while (num % 5 !== 0) {
+                        num--;
+                    }
+                    pageStart = num + 1;
+                    for (var x = pageStart; x <= totalPage; x++) {
+                        if (x == curPage) {
+                            pages += '<a class="themeColor">' + x + '</a>'
+                        } else {
+                            pages += '<a>' + x + '</a>'
+                        }
+                    }
+                } else {
+                    if (curPage + 2 > totalPage) {
+                        for (var x = totalPage - 4; x <= totalPage; x++) {
+                            if (x == curPage) {
+                                pages += '<a class="themeColor">' + x + '</a>'
+                            } else {
+                                pages += '<a>' + x + '</a>'
+                            }
+                        }
+                    } else {
+                        for (var x = curPage - 2; x <= curPage + 2; x++) {
+                            if (x == curPage) {
+                                pages += '<a class="themeColor">' + x + '</a>'
+                            } else {
+                                pages += '<a>' + x + '</a>'
+                            }
+                        }
+                    }
+                }
+
+                $('#pages').html(pages);
+                $('#pages>a').each(function () {
+                    $(this).click(function () {
+                        var pageIndex = $(this).text();
+                        if (pageIndex == curPage) {
+                            return;
+                        }
+                        var url = 'secondNoticeList?sCode=' + SCODE + '&curPage=' + pageIndex + '&pageSize=' + pageSize;
+                        window.location.href = toDetailPage(APP_SERVER + url);
+                    })
+                })
+
+
+                $('#pagination p.iconContainer:first-child').click(function () {
+                    if (curPage == 1) {
+
+                    }
+                    else {
+                        curPage--;
+                        var url = 'secondNoticeList?sCode=' + SCODE + '&curPage=' + curPage + '&pageSize=' + pageSize;
+                        window.location.href = toDetailPage(APP_SERVER + url);
+                    }
+                })
+                $('#pagination p.iconContainer:last-child').click(function () {
+                    if (curPage == totalPage) {
+
+                    }
+                    else {
+                        curPage++;
+                        var url = 'secondNoticeList?sCode=' + SCODE + '&curPage=' + curPage + '&pageSize=' + pageSize;
+                        window.location.href = toDetailPage(APP_SERVER + url);
+                    }
+                })
+
+
+                var articleList = '';
+                data = data.data;
+
+                if (!data || data.length == 0) {
+                    $('#pagination').hide();
+                    articleList = '<div class="noneData">抱歉，暂无数据</h2>'
+                } else {
+                    for (var i = 0; i < data.length; i++) {
+                        articleList += '<a  data-contentlink="' + data[i].contentLink + '" data-catid="' + data[i].catId + '" data-infoid="' + data[i].id + '">';
+                        articleList += '<span class="date">' + data[i].pulishTimeStr + '</span>' + '<span class="title">' + data[i].title + '</span>';
+                        articleList += '</a>'
+                    }
+                }
+
+                $('#articleList').html(articleList);
+
+                $('#articleList a').each(function () {
+                    $(this).on('click', function () {
+                        if ($(this).data('contentlink')) {
+                            window.open(toDetailPage($(this).data('contentlink')))
+                        } else {
+                            var url=APP_SERVER + '/page/detail/'+SCODE+'/'+$(this).data('infoid')+'/'+$(this).data('catid');
+                            window.location.href = toDetailPage(url);
+                        }
+                    })
+                })
+            })
+        })
+
+
+

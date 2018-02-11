@@ -1,0 +1,128 @@
+div(class="schoolProfile_content",sCode="#{schoolInfo.code}")
+    //文字信息部分
+    div(class="schoolProfile_form")
+        div(class="schoolProfile_forms")
+            a(class="schoolProfile_Basic current") 基本信息
+            a(class="schoolProfile_Faculty") 师资力量
+            a(class="schoolProfile_Range") 学生规模
+        div(class="school_Basic")
+            table
+                tbody
+                    tr
+                        th(class="tips01") 学校类型
+                        th #{schoolInfo.type}
+                    tr
+                        th(class="tips01") 隶属部门
+                        th #{schoolInfo.belongDepart}
+                    tr
+                        th(class="tips01") 办学性质
+                        th #{schoolInfo.property}
+                    tr
+                        th(class="tips01") 建设平台
+                        th #{schoolInfo.platform}
+        div(class="school_Faculty",style="display:none;")
+            table
+                tbody
+        div(class="school_Range",style="display:none;")
+            table
+                tbody
+link(href='/stylesheets/v4template/components/basicInfo.css',rel="stylesheet",type="text/css")
+script(type="text/javascript",src="../javascripts/v5template/layout01.js")
+script.
+    //参数声明
+    var j = $(".school_Faculty table tbody tr").length;
+    var f = $(".school_Range table tbody tr").length;
+    function getAppServer() {
+        return '!{host}'
+    }
+    function getApiServer() {
+        return '!{locals.global.api_sever_url}'
+    }
+    // 学校基本信息 师资力量 学生规模点击事件
+    $(document).ready(function () {
+        $("a.schoolProfile_Basic").click(function () {
+            $(this).addClass("current").siblings().removeClass("current");
+            $(".school_Basic").show();
+            $(".school_Faculty").hide();
+            $(".school_Range").hide();
+        });
+        //师资力量
+        $("a.schoolProfile_Faculty").click(function () {
+            $(this).addClass("current").siblings().removeClass("current");
+            $(".school_Faculty").show();
+            getFaculty();
+            $(".school_Basic").hide();
+            $(".school_Range").hide();
+
+        });
+        // 学生规模
+        $("a.schoolProfile_Range").click(function () {
+            $(this).addClass("current").siblings().removeClass("current");
+            $(".school_Range").show();
+            getStudentSize();
+            $(".school_Faculty").hide();
+            $(".school_Basic").hide();
+        });
+    });
+
+
+    // 获取师资力量列表信息
+    function getFaculty() {
+        var sCode = $(".schoolProfile_content").attr('sCode');
+        $.ajax({
+            type: "get",
+            url: '' + "/v5templateHome/studentInformation_json",
+            data: {
+                sCode: sCode
+            },
+            success: function (ret) {
+                if (ret) {
+                    $(".school_Faculty table tbody").html("");
+                    var teacher = ret.teacher;
+                    if (teacher.length > 0) {
+                        for (var i = 0; i < teacher.length; i++) {
+                            var tr = $("<tr>");
+                            tr.html('<th class="tips01">' + teacher[i].title + '</th><th>' + teacher[i].number + '人</th>');
+                            $(".school_Faculty table tbody").append(tr);
+                            j++;
+                        }
+
+                    } else {
+                        alert("学校师资力量请求错误");
+                    }
+                } else {
+                    alert("学校师资力量请求错误");
+                }
+            }
+        });
+    }
+    //获得学生信息列表信息
+    function getStudentSize() {
+        var sCode = $(".schoolProfile_content").attr('sCode');
+        $.ajax({
+            type: "get",
+            url: '' + "/v5templateHome/studentInformation_json",
+            data: {
+                sCode: sCode
+            },
+            success: function (ret) {
+                if (ret) {
+                    $(".school_Range table tbody").html("");
+                    var student = ret.student;
+                    if (student.length > 0) {
+                        for (var i = 0; i < student.length; i++) {
+                            var tr = $("<tr>");
+                            tr.html('<th class="tips01">' + student[i].title + '</th><th>' + student[i].number + '人</th>');
+                            $(".school_Range table tbody").append(tr);
+                            f++;
+                        }
+                    } else {
+                        alert("学校基本信息学生规模请求错误");
+                    }
+                } else {
+                    alert("学校基本信息学生规模请求错误");
+                }
+            }
+        });
+    }
+

@@ -1,0 +1,86 @@
+//
+   Created by abbydu on 17/7/26.
+
+extends ../components/layout02
+block content
+    // 在线留言
+    div(class="online")
+        div(class="online_container")
+            div(class="online_content")
+                //左边选择项
+                div(class="online_left")
+                    ul
+                        li
+                            a(class="online_personal") 我的资料
+                        li
+                            a(class="online_huifu") 招办回复
+                            if NoticeNum && NoticeNum.num && NoticeNum.num !==0
+                                span(class="online_tips03") #{NoticeNum.num}
+                        li
+                            a(class="online_message active") 在线留言
+                div(class="online_right")
+                    textarea(class="online_message_input",id="online_message_input",placeholder="请输入您要咨询的问题")
+                    span(class="online_error")
+                    a(class="online_btn",style="color:#{themeColor};border-color:#{themeColor}") 提交
+    script.
+        function getAppServer() {
+            return "";
+        }
+        function getApiServer() {
+            return '!{locals.global.api_sever_url}'
+        }
+        $(function () {
+            // 提交按钮
+            $(".online_btn").click(function(){
+                var question = $("#online_message_input").val();
+                var onlineTips = $(".online_error");
+
+                if (!question || question.length == 0) {
+                    return onlineTips.html('请输入您要咨询的问题');
+                }
+                if (question.length>100||question.length<0) {
+                    return onlineTips.html('长度不超过100个字符');
+                }
+                var sCode = $(".new_header").attr('sCode');
+                $.ajax({
+                    type: "post",
+                    url: getAppServer()+ "/v5users/saveQuestion_json",
+                    data: {
+                        'question': question,
+                        'schoolCode': sCode
+                    },
+                    success: function (data) {
+                        // 错误提示
+                        var onlineTips = $('.online_error');
+                        if (data) {
+                            onlineTips.html("提交成功")
+                            var sCode = $(".new_header").attr('sCode');
+                            window.location.href = getAppServer() + '/page/online/' + sCode;
+                        } else {
+                            onlineTips.html("保存失败，请联系运营人员");
+                        }
+                    }
+                })
+            })
+
+            //  点击消息列表15
+            $(".online_huifu").click(function(){
+                var sCode = $(".new_header").attr('sCode');
+                $(this).addClass("active").siblings().removeClass("active");
+                window.location.href= getAppServer() + '/page/message/' + sCode;
+            });
+            // 点击我的资料16
+            $(".online_personal").click(function () {
+                var sCode = $(".new_header").attr('sCode');
+                $(this).addClass("active").siblings().removeClass("active");
+                window.location.href = getAppServer() + '/page/personal/' + sCode;
+            });
+        })
+
+
+
+
+
+
+
+

@@ -1,0 +1,82 @@
+link(rel="stylesheet" href="/stylesheets/v4template/components/researchInfo.css")
+
+div#footprint
+div.info-box
+    h1#researchName
+    div.majorName
+        span.label 专业名称：
+        span#majorName
+    div.majorCode
+        span.label 专业代码：
+        span#majorCode
+    div.department
+        span.label 所属院系：
+        span#department
+
+    div.mentors
+        span.label 指导老师：
+        span#mentors
+
+    div.typeStr
+        span.label 类别：
+        span#typeStr
+
+    div.enrollPlanNum
+        span.label 拟招人数：
+        span#enrollPlanNum
+
+    div.recommendNoTest
+        span.label 推免：
+        span#recommendNoTest
+
+
+
+    div.preTestSubject
+        span.label 初试科目
+        p#preTestSubject
+    div.reTestSubject
+        span.label 复试科目
+        p#reTestSubject
+
+    div.addTestSubject
+        span.label 加试科目
+        p#addTestSubject
+    div.remark
+        span.label 备注
+        p#remark
+
+    div.summary
+        span.label 研究方向简介
+        p#summary
+
+    div.reTestPlan
+        span.label 复试方案
+        p#reTestPlan
+
+
+
+script.
+    $(function () {
+        $.get(BASE_HOST + '/front/info/getMajorResearchDetail?majorResearchId=' + RESEARCHID, function (data) {
+            data = data.data;
+            $('#researchName').html(data.name)
+            $('#majorName').html(data.majorName);
+            $('#majorCode').html(data.majorCode);
+            $('#department').html(data.department);
+            $('#mentors').html(data.mentors);
+            $('#typeStr').html(data.typeStr);
+            $('#enrollPlanNum').html(data.enrollPlanNum);
+            $('#recommendNoTest').html(data.recommendNoTest);
+
+            $('#preTestSubject').html(data.preTestSubject);
+            $('#reTestSubject').html(data.reTestSubject);
+            $('#addTestSubject').html(data.addTestSubject);
+            $('#remark').html(data.remark);
+            $('#summary').html(data.summary);
+            $('#reTestPlan').html(data.reTestPlan);
+
+        })
+
+    })
+
+<!--script(src="/javascripts/v4template/components/collegeInfo.js")-->

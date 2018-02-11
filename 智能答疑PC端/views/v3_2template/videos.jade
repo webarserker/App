@@ -1,0 +1,93 @@
+extends layout.jade
+block content
+    link(rel="stylesheet" href="/stylesheets/v3_2template/videos.css")
+    include ./components/headerNew
+
+    div.containers.videoPage
+        div#toTop
+            img(src="/images/v4template/backtop.png")
+        include ./components/sidebar
+
+        div#main
+            div#footprint
+                | 您的当前位置：
+                a 首页
+                | &nbsp;|&nbsp; 视频在线
+
+            div#main-body
+
+            if video.data.length
+                div(class="videoOnline_content")
+                    ul
+                        if video.data
+                            each item in video.data
+                                li
+                                    p(class="video_title") #{item.title}
+                                    if item.vidoUrl && item.vidoUrl.indexOf('http') != -1
+                                        a(class="sub_video",target="_blank",href="#{item.vidoUrl}")
+                                            img(src="#{locals.global.img_sever_url}#{item.imgUrl}")
+                                    else
+                                        a(class="sub_video",target="_blank",href="#{locals.global.img_sever_url}#{item.vidoUrl}")
+                                            img(src="#{locals.global.img_sever_url}#{item.imgUrl}")
+                                    p(class="video_msg" title="#{item.desc}") #{item.desc.length<=30?item.desc:(item.desc.substring(0,30)+'…')}
+            else
+                p 很抱歉,暂无数据....
+
+        include ./components/rightBooks
+        div.clear
+    include ./components/footer
+
+    script.
+        var SCODE = '#{sCode}'
+        var BASE_HOST = '!{locals.global.api_sever_url}'
+        var HOST = BASE_HOST + '/weixin/api';
+        var IMG_HOST = '!{locals.global.img_sever_url}'
+        var APP_SERVER = ''
+
+
+
+        function addEvent(elem, event, fn) {
+            if (elem.addEventListener) {
+                elem.addEventListener(event, fn, false);
+            } else if (elem.attachEvent) {
+                elem.attachEvent('on' + event, fn);
+            } else {
+                elem['on' + event] = fn;
+            }
+        }
+
+        $(function () {
+            $('#footprint a').attr('href', APP_SERVER + '/' + $('#header').data('identify')).hover(function () {
+                $(this).addClass('themeColor');
+            }, function () {
+                $(this).removeClass('themeColor');
+            });
+
+            $('#menu .menu-head .icon-container').html('<i class="usericon-webicon-79"></i>')
+
+
+            $('#toTop').click(function () {
+                $('html,body').animate({scrollTop: 0}, 500);
+            })
+            $('#menu .menu-head h5').html('视频在线')
+
+            /*
+            $.get(BASE_HOST+'/front/info/form/vido/'+SCODE,function(data){
+                $('#main-body').html(data);
+            })
+            */
+
+
+            addEvent(window, 'scroll', function () {
+                var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+                if (scrollTop > 110) {
+                    $('#toTop').show();
+                } else {
+                    $('#toTop').hide();
+                }
+            })
+
+        })
+
+
+

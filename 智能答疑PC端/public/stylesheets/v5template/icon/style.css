@@ -1,0 +1,53 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?gofzo3');
+  src:  url('fonts/icomoon.eot?gofzo3#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?gofzo3') format('truetype'),
+    url('fonts/icomoon.woff?gofzo3') format('woff'),
+    url('fonts/icomoon.svg?gofzo3#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-top:before {
+  content: "\e900";
+}
+.icon-bottom:before {
+  content: "\e901";
+}
+.icon-weChat:before {
+  content: "\e905";
+}
+.icon-qq:before {
+  content: "\e906";
+}
+.icon-m08_sanjiao:before {
+  content: "\e904";
+}
+.icon-next:before {
+  content: "\e902";
+}
+.icon-prev:before {
+  content: "\e903";
+}
+.icon-huojian:before {
+  content: "\e914";
+}
+.icon-mobile:before {
+  content: "\e915";
+}

@@ -1,0 +1,38 @@
+.pagination{
+	padding: 20px 0;
+	text-align: center;
+	font-size:12px!important;
+}
+.pagination a {
+	text-decoration: none;
+	border: 1px solid #c7cacc;
+	color: #7f8c97;
+	background-color: #f3f5f8;
+}
+
+.pagination a, .pagination span {
+	display: inline-block;
+	*display:inline;
+	*zoom:1;
+	padding: 0.3em 0.6em;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	border-radius: 3px;
+	line-height:18px!important;
+}
+
+.pagination .current {
+    background: #008bcb;
+    color: #fff;
+	border: 1px solid #AAE;
+}
+
+.pagination .current.prev, .pagination .current.next{
+	color:#008bcb;
+	border-color:#999;
+	background-color: #f3f5f8;
+}
+
+.bigpage-ajax-loading{
+	background:url("../../../images/pagination/loading.gif") no-repeat scroll center center transparent;
+}

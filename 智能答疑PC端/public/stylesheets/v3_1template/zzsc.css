@@ -1,0 +1,238 @@
+@charset "utf-8";
+* {
+	margin:0;
+	padding:0;
+}
+ul, li {
+	list-style:none;
+}
+img {
+	border:none;
+}
+.slider-container {
+	margin: 0 auto;
+	overflow:hidden;
+	position:relative;
+	background: #e1e1e1;
+	height:492px;
+	overflow:hidden;
+	z-index:9;
+	min-width:1200px
+}
+.slider {
+	width:100%;
+	height:100%;
+	float:left
+}
+.slider-container ul {
+}
+#_slide li {
+	width:1200px;
+	height:492px;
+	float:left;
+	position:relative;
+	text-align: center;
+}
+.slider-container .pic {
+	width:1200px;
+	height:492px;
+	display:block;
+	position: relative;
+}
+.slider-container .pic img {
+	width:1200px;
+	height:492px;
+	display:block;
+	border:0 none;
+}
+
+.slider-container .slide_thumb {
+	display:none;
+}
+.cur .slide_Bg {
+	display:none
+}
+#slide_list {
+	position:absolute;
+	left:0
+}
+#topPic {
+	display:none
+}
+.slider-container li img {
+	position:relative
+}
+.slider-container li p {
+	width:100%;
+	height:50px;
+	line-height: 50px;
+	font-family: "微软雅黑", "黑体";
+	font-size: 21px;
+	color: #fff;
+	position:absolute;
+	bottom:0;
+	left:0;
+	z-index:100;
+	display:none!important;
+}
+.slider-container li dd p {
+	font-size:16px;
+}
+.cur .st_ty {
+	display:block;
+}
+#focus_dot {
+	width: 1200px;
+	height: 86px;
+	position: absolute;
+	bottom:0px;
+	margin:0px auto;
+	left:30px;
+}
+.bannerDescBg{
+	width: 1200px;
+	height: 86px;
+	position: absolute;
+	bottom:0px;
+	margin:0px auto;
+	background: rgba(0,0,0,0.5);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#7f000000,endColorstr=#7f000000);
+	zoom: 1;
+}
+#focus_dot li {
+	padding: 16px 30px;
+	height: 86px;
+	float: left;
+	overflow: hidden;
+	cursor: pointer;
+	display: inline;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+
+}
+#focus_dot li div{
+	width: 100%;
+	height: 100%;
+	color: #ffffff;
+}
+#focus_dot li div span{
+	display: inline-block;
+	width: 100%;
+	height: 26px;
+	line-height: 26px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	color: #ffffff;
+	font-size: 16px;
+	cursor: pointer;
+}
+#focus_dot li div span:hover{
+	text-decoration: underline;
+}
+#focus_dot li div a{
+	display: inline-block;
+	width: 100%;
+	height: 26px;
+	line-height: 26px;
+	font-size: 14px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	color: #ffffff;
+	cursor: pointer;
+}
+#focus_dot li.current {
+	background: rgba(80,80,78,0.7);
+	filter: alpha(opacity=70);
+}
+.slider-container .pic:hover, .twC3 a:hover, .gqsjMod .bd a:hover {
+	text-decoration:none;
+}
+.st_ty {
+	cursor:pointer;
+}
+.slide_Bg {
+	width:1200px;
+	height:492px;
+	position:absolute;
+	top:0;
+	background:#000000;
+	filter:alpha(opacity=50);
+	opacity: 0.5;
+}
+#focusMain li .text {
+	display: block;
+	width:100%;
+	height:80px;
+	position:absolute;
+	bottom:20px;
+	background:rgba(255, 255, 255, 0.8);
+filter: progid:DXImageTransform.Microsoft.gradient( GradientType = 0, startColorstr = "#ccffffff", endColorstr = "#ccffffff");
+}
+.gqsjMod .bd a:hover p {
+	background:rgba(3, 107, 170, 0.6);
+filter: progid:DXImageTransform.Microsoft.gradient( GradientType = 0, startColorstr = "#99036baa", endColorstr = "#99036baa")
+}
+.twC3 .pic {
+	text-align:center;
+}
+#cardBody1 .tabBody {
+	overflow:hidden;
+	zoom:1;
++padding-bottom:20px;
+}
+.mrjxMod .ft a p {
+	text-align:center;
+}
+.slider-wrap {
+	width:5100px;
+	height:492px;
+	font-size:0;
+	position:absolute;
+	top:0;
+	margin:0px auto;
+	left:30px;
+	margin-left:-1200px;
+	overflow:hidden;
+}
+.hzlxMod .hd h2 {
+	background-position:left -6px;
+}
+.slider-btn {
+	position: absolute;
+	WIDTH: 60px;
+	height: 80px;
+	overflow: hidden;
+	top: 150px;
+	cursor: pointer;
+	background-color: #000;
+	opacity: 0.5;
+	cursor:pointer;
+	font-size: 40px;
+	padding: 20px 10px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	color: #ffffff;
+	display: none;
+}
+.slider-btn-l {
+	left:0;
+}
+.slider-btn-r {
+	right:0;
+}
+.slider-btn-l {
+	background-position:0px 0px;
+}
+.slider-btn-l:hover {
+	background-position:0px -54px;
+}
+.slider-btn-r {
+	background-position:-54px 0px;
+}
+.slider-btn-r:hover {
+	background-position:-54px -54px;
+}

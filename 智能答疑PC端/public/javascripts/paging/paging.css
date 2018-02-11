@@ -1,0 +1,32 @@
+.ui-paging-container{color:#666;font-size: 12px;}
+.ui-paging-container ul{overflow: hidden;text-align: center;}
+.ui-paging-container ul,.ui-paging-container li{list-style: none;}
+.ui-paging-container li{display: inline-block;padding:3px 6px;margin-left: 5px;color:#666;}
+.ui-paging-container li.ui-pager{cursor: pointer; border:1px solid #ddd;border-radius: 2px;}
+.ui-paging-container li.ui-pager:hover,.ui-paging-container li.focus{color:#FFFFFF;}
+
+
+
+#cobaltBlue .ui-paging-container li.ui-pager:hover,#cobaltBlue .ui-paging-container li.focus{background-color:#018fa3}
+#peacockBlue .ui-paging-container li.ui-pager:hover,#peacockBlue .ui-paging-container li.focus{background-color:#01a4c5}
+#glazedBlue .ui-paging-container li.ui-pager:hover,#glazedBlue .ui-paging-container li.focus{background-color:#1d50a2}
+#blackishGreen .ui-paging-container li.ui-pager:hover,#blackishGreen .ui-paging-container li.focus{background-color:#006450}
+#tenderGreen .ui-paging-container li.ui-pager:hover,#tenderGreen .ui-paging-container li.focus{background-color:#76a32d}
+#brightRed .ui-paging-container li.ui-pager:hover,#brightRed .ui-paging-container li.focus{background-color:#c8161d}
+#deepRed .ui-paging-container li.ui-pager:hover,#deepRed .ui-paging-container li.focus{background-color:#c24631}
+#skyBlue .ui-paging-container li.ui-pager:hover,#skyBlue .ui-paging-container li.focus{background-color:#369de4}
+#sunOrange .ui-paging-container li.ui-pager:hover,#sunOrange .ui-paging-container li.focus{background-color:#f18d00}
+#green .ui-paging-container li.ui-pager:hover,#green .ui-paging-container li.focus{background-color:#05955d}
+#ChinaRed .ui-paging-container li.ui-pager:hover,#ChinaRed .ui-paging-container li.focus{background-color:#d7000f}
+
+
+
+
+
+
+.ui-paging-container li.ui-paging-ellipse{border:none;}
+.ui-paging-container li.ui-paging-toolbar{padding:0;}
+.ui-paging-container li.ui-paging-toolbar select{height:22px;border:1px solid #ddd;color: #666;}
+.ui-paging-container li.ui-paging-toolbar input{line-height: 20px; height:20px;padding:0;border:1px solid #ddd;text-align: center;width: 30px;margin:0 0 0 5px;vertical-align: middle;}
+.ui-paging-container li.ui-paging-toolbar a{vertical-align: middle; text-decoration: none;display: inline-block;height:20px;border:1px solid #ddd;vertical-align: top;border-radius: 2px;line-height: 20px;padding:0 3px;cursor: pointer;margin-left: 5px;color: #666;}
+.ui-paging-container li.ui-pager-disabled,.ui-paging-container li.ui-pager-disabled:hover{background-color: #f6f6f6;;cursor: default;border:none;color:#ddd;}

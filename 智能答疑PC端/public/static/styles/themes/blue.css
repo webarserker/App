@@ -1,0 +1,24 @@
+/* .content .titTxt{
+	color: #5d69f8 !important;
+} */
+.hot-qus-class li.cur{
+  background-color: #2196f3 !important;
+  border: 1px solid #2196f3 !important;
+  /* border: 1px solid #3b90f1 !important; */
+}
+
+.hot-qus-class li.cur,
+.hot-qus-list-wrap{
+  border-color: #2196f3 !important;
+}
+
+.menu .m-head {
+	background-color: #2196f3 !important;
+}
+.iconSize,
+.w3-text-theme {
+  color:#2196f3 !important;
+}
+/* .top .notice-bar .notice-tit{
+	color:#5d69f8 !important;
+} */

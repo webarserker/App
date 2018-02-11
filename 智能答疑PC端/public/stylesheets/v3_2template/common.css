@@ -1,0 +1,481 @@
+.user-menu {
+  position: absolute;
+  z-index: 100;
+  display: none;
+  width: 140px;
+  left: 0;
+  top: 30px;
+  background-color: #000;
+  opacity: 0.7;
+  text-align: center;
+  padding: 10px 0;
+  border-radius: 3px;
+}
+.user-menu a {
+  display: block;
+  line-height: 30px;
+  color: #fff;
+}
+.containers {
+  display: block;
+  margin: 0 auto;
+  width: 1200px;
+}
+.lf {
+  float: left;
+}
+.rt {
+  float: right;
+}
+.clear {
+  clear: both;
+}
+.nav-item {
+  color: #333;
+}
+.search-box i {
+  color: #999;
+}
+.search-box i:hover {
+  cursor: pointer;
+}
+.outside > ul.lf > li > a {
+  color: #666;
+}
+.secondPage {
+  margin-top: 10px;
+}
+#header {
+  height: 136px;
+  min-width: 1200px;
+  background-color: #fff;
+  width: 100%;
+}
+#header > .themeBackgroundColor {
+  height: 6px;
+}
+#header .outside {
+  height: 30px;
+}
+#header .outside #mobile-qrcode {
+  position: relative;
+}
+#header .outside #mobile-qrcode #qrcode {
+  display: none;
+  background-color: #fff;
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  top: 28px;
+  left: -20px;
+  z-index: 150;
+}
+#header .outside #mobile-qrcode #qrcode img {
+  width: 100%;
+  height: 100%;
+}
+#header .outside ul.lf li {
+  float: left;
+  height: 30px;
+  line-height: 30px;
+  position: relative;
+}
+#header .outside ul.lf li a {
+  font-size: 14px;
+}
+#header .outside ul.lf li a:hover {
+  text-decoration: none !important;
+}
+#header .outside ul.lf li a i {
+  font-size: 14px;
+  position: relative;
+  bottom: -2px;
+}
+#header .outside > div.rt p.search-box {
+  margin-top: 4px;
+  width: 210px;
+  border: 1px solid #ddd;
+  height: 26px;
+  border-radius: 12px;
+  float: left;
+  position: relative;
+}
+#header .outside > div.rt p.search-box input::-webkit-input-placeholder,
+#header .outside > div.rt p.search-box textarea::-webkit-input-placeholder {
+  /* WebKit browsers */
+  color: #999;
+}
+#header .outside > div.rt p.search-box input:-moz-placeholder,
+#header .outside > div.rt p.search-box textarea:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: #999;
+}
+#header .outside > div.rt p.search-box input::-moz-placeholder,
+#header .outside > div.rt p.search-box textarea::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: #999;
+}
+#header .outside > div.rt p.search-box input:-ms-input-placeholder,
+#header .outside > div.rt p.search-box textarea:-ms-input-placeholder {
+  /* Internet Explorer 10+ */
+  color: #999;
+}
+#header .outside > div.rt p.search-box input {
+  font-size: 14px;
+  height: 24px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  padding: 5px 10px;
+  width: 185px;
+}
+#header .outside > div.rt p.search-box i {
+  font-size: 20px;
+  font-weight: bold;
+  position: absolute;
+  right: 6px;
+  top: 3px;
+}
+#header .outside > div.rt ul.m01-links {
+  float: left;
+  height: 30px;
+  margin-left: 20px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  padding-top: 6px;
+}
+#header .outside > div.rt ul.m01-links li {
+  float: left;
+  padding-left: 7px;
+}
+#header .outside > div.rt ul.m01-links li p.icon-container {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background-color: #fff;
+  vertical-align: middle;
+  text-align: center;
+  margin-right: 6px;
+  border-radius: 9px;
+}
+#header .outside > div.rt ul.m01-links li p.icon-container i {
+  line-height: 18px;
+  font-size: 13px;
+}
+#header .outside > div.rt ul.m01-links li a {
+  color: #fff;
+  vertical-align: middle;
+  padding-right: 7px;
+}
+#header .outside > div.rt ul.m01-links li .line {
+  display: inline-block;
+  width: 1px;
+  height: 12px;
+  background-color: #fff;
+  vertical-align: middle;
+  position: relative;
+  bottom: -1px;
+}
+#header .outside > div.rt ul.m01-links li a:hover {
+  text-decoration: underline;
+}
+#header .header-nav-container {
+  height: 100px;
+  padding-top: 15px;
+}
+#header .header-nav {
+  height: 70px;
+  background-color: #fff;
+}
+#header .header-nav.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 500;
+  box-shadow: 0 0 15px #ddd;
+}
+#header .header-nav span#professor {
+  color: #333;
+  font-size: 16px;
+  margin-left: 12px;
+  float: right;
+}
+#header .header-nav > .containers > div.lf {
+  height: 70px;
+  line-height: 70px;
+}
+#header .header-nav > .containers > div.lf a.logo-target {
+  float: left;
+}
+#header .header-nav > .containers > div.lf img {
+  max-height: 70px;
+}
+#header .header-nav #headerNav {
+  height: 70px;
+}
+#header .header-nav #headerNav a {
+  text-decoration: none;
+}
+#header .header-nav #headerNav a :hover {
+  text-decoration: none;
+}
+#header .header-nav #headerNav > li {
+  float: left;
+  position: relative;
+  height: 85px;
+}
+#header .header-nav #headerNav > li.active > .line {
+  display: block;
+}
+#header .header-nav #headerNav > li > .line {
+  display: none;
+  position: absolute;
+  bottom: 34px;
+  width: 22px;
+  height: 2px;
+  left: 50%;
+  margin-left: -12px;
+}
+#header .header-nav #headerNav > li > a {
+  line-height: 70px;
+  padding: 0 15px;
+  text-align: center;
+  font-size: 18px;
+  display: block;
+}
+#header .header-nav #headerNav > li > a:hover {
+  text-decoration: none;
+}
+#header .header-nav #headerNav > li > .slide-menu-container {
+  display: none;
+  position: absolute;
+  z-index: 10;
+  min-width: 100%;
+  top: 85px;
+  text-align: left;
+  left: 0;
+  width: auto;
+  color: #fff;
+}
+#header .header-nav #headerNav > li > .slide-menu-container.fixed {
+  top: 70px;
+}
+#header .header-nav #headerNav > li > .slide-menu-container > .opacity-flag {
+  position: absolute;
+  z-index: 15;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: .7;
+  filter: alpha(opacity=70);
+}
+#header .header-nav #headerNav > li > .slide-menu-container ul.slide-menu > li {
+  position: relative;
+  z-index: 20;
+  height: 40px;
+  padding: 0 15px;
+}
+#header .header-nav #headerNav > li > .slide-menu-container ul.slide-menu > li .li-flag {
+  display: none;
+  opacity: .7;
+  filter: alpha(opacity=70);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+#header .header-nav #headerNav > li > .slide-menu-container ul.slide-menu > li > a {
+  white-space: nowrap;
+  line-height: 40px;
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 25;
+  font-size: 16px;
+  color: #fff;
+}
+#header .header-nav #headerNav > li > .slide-menu-container ul.slide-menu > li div.next-menu-container {
+  display: none;
+  position: absolute;
+  z-index: 20;
+  left: 100%;
+  width: auto;
+  text-align: left;
+  color: #fff;
+}
+#header .header-nav #headerNav > li > .slide-menu-container ul.slide-menu > li div.next-menu-container.reverse {
+  left: auto;
+  right: 100%;
+}
+#header .header-nav #headerNav > li > .slide-menu-container ul.slide-menu > li div.next-menu-container > .opacity-flag {
+  position: absolute;
+  z-index: 15;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: .9;
+  filter: alpha(opacity=90);
+}
+#header .header-nav #headerNav > li > .slide-menu-container ul.slide-menu > li div.next-menu-container ul.next-menu li {
+  height: 40px;
+  position: relative;
+  z-index: 200;
+}
+#header .header-nav #headerNav > li > .slide-menu-container ul.slide-menu > li div.next-menu-container ul.next-menu li > a {
+  white-space: nowrap;
+  line-height: 40px;
+  display: block;
+  width: auto;
+  height: 40px;
+  font-size: 14px;
+  color: #fff;
+  padding: 0 15px;
+}
+#footer {
+  min-width: 1200px;
+  height: 330px;
+  position: relative;
+  background: url(../../images/v3_2template/footer_bg.jpg) 0 0 no-repeat;
+  background-size: 100% 100%;
+  color: #fff;
+}
+#footer .flag {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: .5;
+  filter: alpha(opacity=50);
+}
+#footer .containers {
+  position: relative;
+  z-index: 5;
+}
+#footer .containers .level1 {
+  height: 266px;
+  padding-top: 35px;
+  padding-bottom: 15px;
+}
+#footer .containers .level1 .d1 {
+  float: left;
+  min-width: 300px;
+  height: 100%;
+}
+#footer .containers .level1 .d1 .head {
+  position: relative;
+}
+#footer .containers .level1 .d1 .head .big-img {
+  display: none;
+  position: absolute;
+  bottom: 37px;
+  left: 0;
+}
+#footer .containers .level1 .d1 .head h2 {
+  font-size: 18px;
+  color: #fff;
+  font-weight: normal;
+  float: left;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #fff;
+  padding-right: 30px;
+  padding-left: 5px;
+}
+#footer .containers .level1 .d1 .body {
+  margin-top: 30px;
+}
+#footer .containers .level1 .d1 .body img {
+  height: 130px;
+}
+#footer .containers .level1 .d2 {
+  float: left;
+  width: 300px;
+  height: 100%;
+  margin-left: 30px;
+}
+#footer .containers .level1 .d2 .head {
+  font-size: 18px;
+  color: #fff;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #fff;
+}
+#footer .containers .level1 .d2 .body {
+  padding-top: 10px;
+  width: 300px;
+  height: 180px;
+  overflow: hidden;
+}
+#footer .containers .level1 .d2 .body ul {
+  margin-top: 22px;
+}
+#footer .containers .level1 .d2 .body ul li {
+  width: 290px;
+  line-height: 2;
+  font-size: 12px;
+  color: #fff;
+}
+#footer .containers .level1 .d3 {
+  float: right;
+  width: 325px;
+  height: 100%;
+}
+#footer .containers .level1 .d3 .head {
+  font-size: 18px;
+  color: #fff;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #fff;
+}
+#footer .containers .level1 .d3 .body {
+  padding-top: 20px;
+  overflow: hidden;
+}
+#footer .containers .level1 .d3 .body a {
+  float: left;
+  font-size: 14px;
+  color: #fff;
+  line-height: 1.8;
+  margin-right: 40px;
+  margin-bottom: 10px;
+}
+#footer .containers .level1 .d3 .body a:hover {
+  text-decoration: underline;
+}
+#footer .containers .bottom2 {
+  text-align: center;
+  height: 64px;
+  border-top: 1px solid #fff;
+  padding-top: 10px;
+}
+#footer .containers .bottom2 p {
+  line-height: 1.8;
+}
+#footer .containers .bottom2 a {
+  color: #fff;
+}
+#footer .containers .bottom2 a:hover {
+  text-decoration: underline;
+}
+/*滚动条样式美化插件的css配置*/
+.zUIpanelScrollBox,
+.zUIpanelScrollBar {
+  width: 6px;
+  top: 4px;
+  right: 2px;
+  border-radius: 5px;
+}
+.zUIpanelScrollBox {
+  background: black;
+  opacity: 0.3;
+  filter: alpha(opacity=10);
+}
+.zUIpanelScrollBar {
+  background: #eee;
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+}

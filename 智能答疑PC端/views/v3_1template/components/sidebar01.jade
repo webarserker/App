@@ -1,0 +1,241 @@
+//
+   Created by abbydu on 17/7/24.
+// 侧边栏一级和二级分类
+div(class="sidebar")
+   div(class="side_bar")
+       img(class="side_bg_img",src="#{host}#{sidebarBgImg}")
+       img(class="side_icon_img",src="#{locals.global.img_sever_url}#{schoolInfo.schoolIcon}")
+       if sidebarData && sidebarData.firstCatName && sidebarData.firstCatName.length > 0
+        span(class="side_bar_tips",firstCatId="#{sidebarData.firstCatId}") #{sidebarData.firstCatName}
+   // 二级分类列表
+   div(class="side_content",id="side_content")
+      ul(class="side_content_container")
+         if sidebarData
+            each item in sidebarData.menu
+               li(class="sidebar_menu",catId="#{item.catId}")
+                  a(class="sidebar_menu_level1 collapse")
+                      span(class="side_content")
+                      span(class="side_tips",style="color:#333333") #{item.name}
+                      if item.flag == "0"
+                          i(class="greyBgBottom")
+                  div(class="sidebar_menu_level2Items none")
+                    ul(class="sidebar_menu_level2")
+                        if item.children && item.children.length > 0
+                            each threeItem in item.children
+                                li(threeCatId = "#{threeItem.catId}")
+                                    a #{threeItem.name}
+
+script.
+   //-------------------sidebar 事件管理开始---------------------------
+    var sidebarManager = {}; // 事件管理器
+    var classifyData = !{sidebarData};
+   /**
+    * 设置侧边栏分类列表点击事件
+    * @param callback 二级分类点击回调
+    *            catId 当前分类id
+    * */
+   sidebarManager.setClassClickCallback = function(callback){
+      if(!callback || typeof callback != 'function') return;
+      sidebarManager.classClickCallback = callback;
+   };
+
+   /**
+    * 获取当前选中的二级, 三级分类id
+    * */
+   sidebarManager.getCurrentSelectId = function () {
+       return {
+           'secondCatId' : classifyData.secondCatId,
+           'threeCatId' : classifyData.threeCatId
+       };
+   };
+
+
+   sidebarManager.initSidebar = function(){
+       /**
+        * 数据转换, 便于后续处理
+        * 原始数据: {"secondCatId":708,"threeCatId":88,"menu":[{"flag":1,"name":"外语类保送生","catId":214,"children":[]},{"flag":1,"name":"招生计划","catId":83,"children":[]},{"flag":1,"name":"经世学府 寰宇绽放","catId":368,"children":[]},{"flag":1,"name":"历年录取","catId":86,"children":[]},{"flag":0,"name":"招生分类信息","catId":708,"children":[{"name":"自主招生","catId":88,"icon":"usericon-webicon-01","imgUrl":""},{"name":"测试三级分类","catId":1251,"icon":"usericon-webicon-01","imgUrl":""},{"name":"招生计划查询","catId":823,"icon":"usericon-webicon-14","imgUrl":""},{"name":"高水平艺术团","catId":90,"icon":"usericon-webicon-01","imgUrl":""},{"name":"博士研究生招录","catId":336,"icon":"icon-33","imgUrl":""}]}]}
+        * 转换数据: {"83":{"flag":1,"name":"招生计划","catId":83,"children":[]},"86":{"flag":1,"name":"历年录取","catId":86,"children":[]},"214":{"flag":1,"name":"外语类保送生","catId":214,"children":[]},"368":{"flag":1,"name":"经世学府 寰宇绽放","catId":368,"children":[]},"708":{"88":{"name":"自主招生","catId":88,"icon":"usericon-webicon-01","imgUrl":""},"90":{"name":"高水平艺术团","catId":90,"icon":"usericon-webicon-01","imgUrl":""},"336":{"name":"博士研究生招录","catId":336,"icon":"icon-33","imgUrl":""},"823":{"name":"招生计划查询","catId":823,"icon":"usericon-webicon-14","imgUrl":""},"1251":{"name":"测试三级分类","catId":1251,"icon":"usericon-webicon-01","imgUrl":""},"flag":0,"name":"招生分类信息","catId":708,"children":[{"name":"自主招生","catId":88,"icon":"usericon-webicon-01","imgUrl":""},{"name":"测试三级分类","catId":1251,"icon":"usericon-webicon-01","imgUrl":""},{"name":"招生计划查询","catId":823,"icon":"usericon-webicon-14","imgUrl":""},{"name":"高水平艺术团","catId":90,"icon":"usericon-webicon-01","imgUrl":""},{"name":"博士研究生招录","catId":336,"icon":"icon-33","imgUrl":""}]}}
+        *
+        * */
+       // 将menu 下面的数组，重新组合成一个对象
+
+       var classify = {};
+       for (var i = 0; i < classifyData.menu.length; i++) {
+           var secClass = classifyData.menu[i];
+           classify[secClass.catId] = secClass || {};
+           for (var j = 0; j < secClass.children.length; j++) {
+               var thirdCalss = secClass.children[j];
+               classify[secClass.catId][thirdCalss.catId] = thirdCalss;
+           }
+       }
+       // 遍历二级分类
+       $(".sidebar_menu").each(function(){
+           var sta = $(this).find(".side_tips").html();
+           if(sta.length>10){
+               $(this).find(".side_tips").css("line-height","25px");
+           }
+       })
+       var themeColor ="#{themeColor}";
+       $(".side_content ul li.active span.side_content").css("background",themeColor);
+       $(".side_content ul li.active span.side_tips").css("color",themeColor);
+       $(".side_content ul li.active i").css("color",themeColor);
+       //$(".side_content ul li.active i").removeClass("icon-top");
+       $(".side_content ul li.active i").removeClass(".greyBgBottom").addClass("themeBottomBg");
+       // 二级分类下的三级分类鼠标划过事件。字体变色
+       $(".sidebar_menu").each(function(){
+           $(this).hover(function () {
+               if(!$(this).hasClass("active")) {
+                   $(this).find("span.side_content").css("background", themeColor);
+                   $(this).find("span.side_tips").css("color", themeColor);
+                   //当二级分类有下拉菜单,且展开时 为上箭头
+                   if (!$(this).find(".sidebar_menu_level1").hasClass("collapse")) {
+                       //
+                       if ($(this).find("i")) {
+                           $(this).find("i").removeClass("themeTopBg themeBottomBg greyBgBottom greyBgTop").addClass("themeTopBg");
+                       }
+                   } else {
+                       //当二级分类有下拉菜单,且折叠时 为上箭头
+                       if ($(this).find("i")) {
+                           $(this).find("i").removeClass("themeTopBg themeBottomBg greyBgBottom greyBgTop").addClass("themeBottomBg");
+                       }
+                   }
+               }
+           },function(){
+               if(!$(this).hasClass("active")) {
+                   $(this).find("span.side_content").css("background", "#a3a3a3");
+                   $(this).find("span.side_tips").css("color", "#333333");
+                   if (!$(this).find(".sidebar_menu_level1").hasClass("collapse")) {
+                       // 展开时. 为上箭头的蓝色变成灰色
+                       if ($(this).find("i")) {
+                           $(this).find("i").removeClass("themeTopBg themeBottomBg greyBgBottom greyBgTop").addClass("gregBgTop");
+                       }
+                   } else {
+                       //当二级分类有下拉菜单,且折叠时 为下箭头的蓝色变成灰色
+                       if ($(this).find("i")) {
+                           $(this).find("i").removeClass("themeTopBg themeBottomBg greyBgBottom greyBgTop").addClass("greyBgBottom");
+                       }
+                   }
+               }
+
+           })
+
+       })
+
+
+
+       $(".side_content_container").mouseleave(function () {
+           $(".side_content ul li.active span.side_content").css("background", themeColor);
+           $(".side_content ul li.active span.side_tips").css("color", themeColor);
+           //$(".side_content ul li.active i").css("color",themeColor);
+           //$(".side_content ul li.active i").addClass("themeBottomBg");
+       })
+
+
+
+       /**
+        * 二级列表鼠标点击事件响应
+        * */
+
+           // 二级, 三级列表伸缩事件
+       $('.sidebar_menu_level1').each(function () {
+           $(this).click(function () {
+               if (!$(this).parent().hasClass("active") && $(this).hasClass('collapse')) {
+                   $('.sidebar_menu:not(".active") i').removeClass('themeTopBg themeBottomBg greyBgBottom greyBgTop').addClass('greyBgBottom')
+                   $('.sidebar_menu.active i').removeClass('themeTopBg themeBottomBg greyBgBottom greyBgTop').addClass('themeBottomBg')
+                   $('.sidebar_menu_level1').addClass('collapse');
+                   $('.sidebar_menu_level2Items ').slideUp(1);
+                   $(this).removeClass('collapse').removeClass("themeColor").find("i")[0].className = "themeTopBg";
+                   $(this).next().slideDown(1);
+               } else if (!$(this).parent().hasClass("active") && !$(this).hasClass('collapse')) {
+
+                   $('.sidebar_menu:not(".active") i').removeClass('themeTopBg themeBottomBg greyBgBottom greyBgTop').addClass('greyBgBottom')
+                   $('.sidebar_menu.active i').removeClass('themeTopBg themeBottomBg greyBgBottom greyBgTop').addClass('themeBottomBg')
+                   $(this).addClass('collapse').removeClass('themeColor').find('i')[0].className="themeBottomBg";
+                   $(this).next().slideUp(1);
+               } else if ($(this).parent().hasClass("active")&& !$(this).hasClass('collapse')) {
+                   $('.sidebar_menu:not(".active") i').removeClass('themeTopBg themeBottomBg greyBgBottom greyBgTop').addClass('greyBgBottom')
+                   $('.sidebar_menu.active i').removeClass('themeTopBg themeBottomBg greyBgBottom greyBgTop').addClass('themeBottomBg')
+                   $(this).addClass('collapse').find('i')[0].className='themeBottomBg';
+                   $(this).next().slideUp(1);
+               } else if ($(this).parent().hasClass("active") && $(this).hasClass('collapse')) {
+
+                   $('.sidebar_menu_level1 i').removeClass('themeTopBg themeBottomBg greyBgBottom greyBgTop').addClass('greyBgBottom')
+                   $(this).removeClass('collapse').find('i')[0].className="themeTopBg";
+                   $('.sidebar_menu_level2Items').slideUp(1);
+                   $(this).next().slideDown(1);
+               }
+           })
+       })
+
+
+
+
+
+       // 二级列表 鼠标点击事件
+       $(".sidebar_menu_level2 li").click(function () {
+           if (sidebarManager.classClickCallback && typeof sidebarManager.classClickCallback == 'function') {
+               var thirdCatId = $(this).attr('threeCatId');
+               sidebarManager.classClickCallback(thirdCatId);
+           }
+       });
+
+
+       // 遍历 三级分类中的子分类的 三级分类id
+
+       $(".sidebar_menu_level2 li").each(function(){
+           var parentId = GetQueryString("parentId");
+           if(!parentId){
+               parentId = classifyData.threeCatId;
+           }
+           if($(this).attr('threeCatId') == parentId){
+               flag1 = false;
+               $(this).parent().parent().show();
+               $(this).find("a").css("color", themeColor);
+               $(this).parent().parent().parent().find(".sidebar_menu_level1").removeClass("collapse");
+               $(this).parent().parent().parent().find("i").addClass("themeTopBg").removeClass("themeBottomBg");
+
+           }
+
+
+       })
+
+
+
+       // 二级分类点击事件
+       $('.side_content_container li').click(function(){
+           var catId = $(this).attr('catId');
+           var secClass = classify[catId];
+           // 不为1, 可能有三级分类需要展示
+           if(secClass.flag != 1) return null;
+           if(sidebarManager.classClickCallback && typeof sidebarManager.classClickCallback == 'function') {
+               sidebarManager.classClickCallback(catId);
+           }
+           $(".sidebar_menu_level2Items").hide();
+       });
+
+
+       // 遍历三级分类中的子分类
+       $(".sidebar_menu_level2 li").each(function () {
+           if ($(this).attr('threeCatId') != classifyData.threeCatId) {
+               $(this).hover(function () {
+                   $(this).find("a").css("color", themeColor);
+               }, function () {
+                   $(this).find("a").css("color", "#333333");
+               })
+           }
+       })
+
+
+   };
+
+   //-------------------sidebar 事件管理结束---------------------------
+   $(document).ready(function () {
+       // 二级分类 和 三级分类数据处理
+       sidebarManager.initSidebar();
+
+       // 二级侧边栏一级分类背景图处理
+
+   });
+
+
+

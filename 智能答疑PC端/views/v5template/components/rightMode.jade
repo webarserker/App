@@ -1,0 +1,65 @@
+//
+   Created by abbydu on 17/11/15.
+
+link(href='#{host}/stylesheets/v5template/layout01.css',rel="stylesheet",type="text/css")
+link(href='#{host}/stylesheets/v5template/pages/01_graduateStudentRecruiting.css',rel="stylesheet",type="text/css")
+link(href='#{host}/stylesheets/v5template/pages/02_v5templateDetail.css',rel="stylesheet",type="text/css")
+link(href='#{host}/stylesheets/v5template/themecolor.css',rel="stylesheet",type="text/css")
+script(type="text/javascript",src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js")
+script(type="text/javascript",src="#{host}/javascripts/v5template/layout01.js")
+div(class="rightMode",id="rightBooks")
+   div(class="rightMode_robot")
+      img(src="#{host}/images/v5template/jiqiren2.gif")
+   div(class="rightMode_book",sCode="#{schoolInfo.code}")
+      div(class="rightMode_book02")
+         img(class="rightMode_btn02",src="#{host}#{sidebarBookImg}")
+         span(class="rightMode_btn02Msg") 视频在线
+      div(class="rightMode_book03")
+         img(class="rightMode_btn03",src="#{host}#{sidebarBookImg}")
+         span(class="rightMode_btn03Msg") 校园风采
+script.
+   // 视频在线跳转
+   $(".rightMode_btn02Msg").click(function(){
+      var sCode = $(".rightMode_book").attr('sCode');
+      var url = getAppServer() + '/page/video/' + sCode;
+      window.location.href = toDetailPage(url);
+   })
+   // 校园风采
+   $(".rightMode_btn03Msg").click(function(){
+      var sCode = $(".rightMode_book").attr('sCode');
+      var url = getAppServer() + '/page/photo/' + sCode;
+      window.location.href = toDetailPage(url);
+   })
+   //右侧机器人浮动
+   function addEvent(elem, event, fn) {
+       if (elem.addEventListener) {
+           elem.addEventListener(event, fn, false);
+       } else if (elem.attachEvent) {
+           elem.attachEvent('on' + event, fn);
+       } else {
+           elem['on' + event] = fn;
+       }
+   }
+   //右侧机器人浮动
+   $(function () {
+       addEvent(window, 'scroll', function () {
+           var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+           if (scrollTop > 110) {
+               $('#rightBooks').addClass('fix');
+               var windowWidth = window.offsetWidth || document.body.clientWidth;
+               if (windowWidth > 1200) {
+                   var left = (windowWidth - 1200) / 2 + 230 + 820;
+                   $('#rightBooks').css('left', left + 'px');
+               } else {
+                   var scrollLeft = document.body.scrollLeft || document.documentElement.scrollLeft;
+                   $('#rightBooks').css('left', '');
+                   var right = (-1) * (1200 - windowWidth - scrollLeft)
+                   $('#rightBooks').css('right', right + 'px');
+               }
+
+           } else {
+               $('#rightBooks').removeClass('fix');
+           }
+       })
+
+   })

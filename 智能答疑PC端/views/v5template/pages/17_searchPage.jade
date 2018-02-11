@@ -1,0 +1,67 @@
+//
+   Created by abbydu on 17/8/20.
+extends ../components/layout03
+block content
+   div(class="details")
+      div(class="details_container")
+         include ../components/sidebar
+         div(class="Article_details")
+            if reasch.data && reasch.data.length> 0
+               div(class="reasch_right")
+                  ul
+                     each reaschResult, i in reasch.data
+                        li
+                           div(class="reasch_item_top",catId="#{reaschResult.catId}",infoId="#{reaschResult.infoId}")
+                              span(class="reasch_msg") #{i + 1}.
+                              span(class="reasch_tips01") !{reaschResult.title}
+                              span(class="reasch_tips02") !{reaschResult.content}
+               div(class="reasch_content_pages")
+                  div(class="reasch_content_pagesbtn")
+                     a(class="icon-zuo_page",onclick="toPage(#{(reasch.curPage - 1) < 1 ? 1 : (reasch.curPage - 1)})",style="color:#{themeColor};border:1px solid #{themeColor}")
+                     if reasch.bottomPageNum
+                        - each item in reasch.bottomPageNum
+                           a(class="subList_content_pagesNumber",href="javascript:toPage(#{item})",class=(reasch.curPage) == item ? 'page_active' : '', style=(reasch.curPage) == item ? 'color: #{themeColor};' : '') #{(item)}
+                     a(class="icon-you_page",onclick="toPage(#{(reasch.curPage + 1) >= reasch.totalPage ? reasch.totalPage : (reasch.curPage + 1)})",style="color:#{themeColor};border:1px solid #{themeColor}")
+
+            else
+               div(class="reasch_content") 很抱歉,暂无数据
+         include ../components/rightMode
+   include ../components/footer
+   script.
+      sidebarManager.setClassClickCallback(function(catId){
+         var sCode = $(".header_container").attr('sCode');
+         var parentId = catId;
+         var url = getAppServer() + '/page/list/' + sCode + "/" + parentId + "?curPage=1&pageSize=10";
+         window.location.href = url;
+      });
+      // 点击搜索结果列表跳转到专业详情
+      $(".reasch_item_top").click(function(){
+         var parentId = $(this).attr('catId');
+         var infoId = $(this).attr('infoId');
+         var sCode = $(".header_container").attr('sCode');
+         if(infoId == "" && infoId.length == 0){
+            return;
+         }else{
+            var url = getAppServer() + '/page/detail/' + sCode + "/" + infoId + "/" + parentId;
+            window.location.href = url;
+         }
+      })
+      //页码点击跳转事件
+      function toPage(pageNum) {
+         var curPage = pageNum;
+         var sCode = $(".header_container").attr('sCode');
+         var parentId = $(".search_content").attr('catId');
+         var question ="!{question01}";
+         var url = getAppServer() + '/page/search/' + sCode + "/" + parentId + "/" + question+"?curPage="+curPage+"&pageSize=10";
+         window.location.href = url;
+      }
+      // 当页码个数为1时，左右箭头不显示
+      $(".subList_content_pagesNumber").each(function () {
+         if ($(".subList_content_pagesNumber").length == 1) {
+            $("a.icon-zuo_page").hide();
+            $("a.icon-you_page").hide();
+         } else {
+            $("a.icon-zuo_page").show();
+            $("a.icon-you_page").show();
+         }
+      })

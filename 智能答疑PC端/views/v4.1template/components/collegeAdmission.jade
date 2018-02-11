@@ -1,0 +1,94 @@
+link(rel="stylesheet" href="/stylesheets/v4template/components/collegeAdmission.css")
+div.footprint 您的当前位置：报考指南 | 学校录取
+
+- var data=[{"id":1030,"score":520.0,"scienceClass":"文科","enrollNum":5,"year":2016,"sCode":"NLGYFE","type":"普通招生","batch":"国家专项计划","hightScore":595.0,"lowScore":589.0,"minScore":589.0,"avgScore":592.2,"provinceScore":null,"cityId":null,"cityName":"湖北","isDelete":null,"creator":null,"createTime":null,"modifier":null,"modifyTime":null,"enrollPlan":28,"pagination":null,"ids":null},{"id":1078,"score":520.0,"scienceClass":"文科","enrollNum":13,"year":2016,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","hightScore":619.0,"lowScore":610.0,"minScore":589.0,"avgScore":615.6153846153846,"provinceScore":null,"cityId":null,"cityName":"湖北","isDelete":null,"creator":null,"createTime":null,"modifier":null,"modifyTime":null,"enrollPlan":28,"pagination":null,"ids":null},{"id":1006,"score":520.0,"scienceClass":"文科","enrollNum":8,"year":2016,"sCode":"NLGYFE","type":"普通招生","batch":"提前批","hightScore":607.0,"lowScore":596.0,"minScore":589.0,"avgScore":599.25,"provinceScore":null,"cityId":null,"cityName":"湖北","isDelete":null,"creator":null,"createTime":null,"modifier":null,"modifyTime":null,"enrollPlan":28,"pagination":null,"ids":null},{"id":309,"score":521.0,"scienceClass":"文科","enrollNum":18,"year":2015,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","hightScore":601.0,"lowScore":589.0,"minScore":575.0,"avgScore":595.1111111111111,"provinceScore":null,"cityId":null,"cityName":"湖北","isDelete":null,"creator":null,"createTime":null,"modifier":null,"modifyTime":null,"enrollPlan":28,"pagination":null,"ids":null},{"id":464,"score":521.0,"scienceClass":"文科","enrollNum":3,"year":2015,"sCode":"NLGYFE","type":"普通招生","batch":"国家专项计划","hightScore":584.0,"lowScore":575.0,"minScore":575.0,"avgScore":580.0,"provinceScore":null,"cityId":null,"cityName":"湖北","isDelete":null,"creator":null,"createTime":null,"modifier":null,"modifyTime":null,"enrollPlan":28,"pagination":null,"ids":null},{"id":474,"score":521.0,"scienceClass":"文科","enrollNum":7,"year":2015,"sCode":"NLGYFE","type":"普通招生","batch":"提前批","hightScore":587.0,"lowScore":583.0,"minScore":575.0,"avgScore":585.714285714286,"provinceScore":null,"cityId":null,"cityName":"湖北","isDelete":null,"creator":null,"createTime":null,"modifier":null,"modifyTime":null,"enrollPlan":28,"pagination":null,"ids":null},{"id":403,"score":535.0,"scienceClass":"文科","enrollNum":5,"year":2014,"sCode":"NLGYFE","type":"普通招生","batch":"国家专项计划","hightScore":585.0,"lowScore":578.0,"minScore":578.0,"avgScore":582.2,"provinceScore":null,"cityId":null,"cityName":"湖北","isDelete":null,"creator":null,"createTime":null,"modifier":null,"modifyTime":null,"enrollPlan":29,"pagination":null,"ids":null},{"id":435,"score":535.0,"scienceClass":"文科","enrollNum":6,"year":2014,"sCode":"NLGYFE","type":"普通招生","batch":"提前批","hightScore":586.0,"lowScore":579.0,"minScore":578.0,"avgScore":582.3333333333334,"provinceScore":null,"cityId":null,"cityName":"湖北","isDelete":null,"creator":null,"createTime":null,"modifier":null,"modifyTime":null,"enrollPlan":29,"pagination":null,"ids":null},{"id":249,"score":535.0,"scienceClass":"文科","enrollNum":18,"year":2014,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","hightScore":613.0,"lowScore":597.0,"minScore":578.0,"avgScore":606.6111111111111,"provinceScore":null,"cityId":null,"cityName":"湖北","isDelete":null,"creator":null,"createTime":null,"modifier":null,"modifyTime":null,"enrollPlan":29,"pagination":null,"ids":null},{"id":359,"score":531.0,"scienceClass":"文科","enrollNum":1,"year":2013,"sCode":"NLGYFE","type":"普通招生","batch":"国家专项计划","hightScore":561.0,"lowScore":561.0,"minScore":559.0,"avgScore":561.0,"provinceScore":null,"cityId":null,"cityName":"湖北","isDelete":null,"creator":null,"createTime":null,"modifier":null,"modifyTime":null,"enrollPlan":39,"pagination":null,"ids":null},{"id":381,"score":531.0,"scienceClass":"文科","enrollNum":6,"year":2013,"sCode":"NLGYFE","type":"普通招生","batch":"提前批","hightScore":586.0,"lowScore":559.0,"minScore":559.0,"avgScore":574.0,"provinceScore":null,"cityId":null,"cityName":"湖北","isDelete":null,"creator":null,"createTime":null,"modifier":null,"modifyTime":null,"enrollPlan":39,"pagination":null,"ids":null},{"id":187,"score":531.0,"scienceClass":"文科","enrollNum":26,"year":2013,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","hightScore":607.0,"lowScore":586.0,"minScore":559.0,"avgScore":595.0,"provinceScore":null,"cityId":null,"cityName":"湖北","isDelete":null,"creator":null,"createTime":null,"modifier":null,"modifyTime":null,"enrollPlan":39,"pagination":null,"ids":null}]
+
+div#show-collegeData
+
+
+    div.by-table
+        div.selects
+            span.label 生源地
+            select(id="city" name="city")
+
+
+            span.label 科类
+            select(id="science" name="science")
+
+
+
+            span.label 类型
+            select(id="type" name="type")
+
+
+            span.label 录取批次
+            select(id="batch" name="batch")
+
+
+
+        table.score-table
+            thead
+                tr
+                    th 年度
+                    th 类型
+                    th 批次
+                    th 省线
+                    th 最低分
+                    th 平均分
+                    th 最高分
+                    th 最低分分差
+                    th 平均分分差
+            tbody#tbody1
+
+
+    div.by-lines
+        h1 学校录取分差纵向走势
+            span （选择招生类型及录取批次后可查看走势图）
+
+        div#lines(style={width:'836px',height:'280px'})
+
+
+script.
+    $(function(){
+        $.get(HOST+'/majorScore',{scode:'NLGYFE'},function(data){
+            var city='',science='',type='',batch='';
+            for(var i=0;i< data.cityList.length;i++){
+                city+='<option value="'+data.cityList[i].name+'">'+data.cityList[i].name+'</option>'
+            }
+            $('#city').html(city);
+            for(var i=0;i< data.scienceList.length;i++){
+                science+='<option value="'+data.scienceList[i]+'">'+data.scienceList[i]+'</option>'
+            }
+            $('#science').html(science);
+            for(var i=0;i< data.typeList.length;i++){
+                type+='<option value="'+data.typeList[i]+'">'+data.typeList[i]+'</option>'
+            }
+            $('#type').html(type);
+            for(var i=0;i< data.batchList.length;i++){
+                batch+='<option value="'+data.batchList[i]+'">'+data.typeList[i]+'</option>'
+            }
+            $('#batch').html(batch);
+
+
+            $.get(HOST+'/findSchoolEnrollList',{sCode:'NLGYFE',cityName:$('#city').val(),type:$('#type').val(),scienceClass:$('#science').val(),batch:$('#batch').val()},function(data){
+                var findSchoolEnrollList=''
+                for(var i=0; i< data.length;i++){
+                    findSchoolEnrollList+='<tr>'
+                                        +'<td>'+data[i].year+'</td>'
+                                        +'<td>'+data[i].type+'</td>'
+                                        +'<td>'+data[i].batch+'</td>'
+                                        +'<td>'+data[i].score+'</td>'
+                                        +'<td>'+data[i].lowScore+'</td>'
+                                        +'<td>'+Math.floor(data[i].avgScore)+'</td>'
+                                        +'<td>'+data[i].hightScore+'</td>'
+                                        +'<td>'+Math.floor(data[i].lowScore-data[i].score)+'</td>'
+                                        +'<td>'+Math.floor(data[i].avgScore-data[i].score)+'</td>'
+                                        +'</tr>'
+                }
+                $('#tbody1').html(findSchoolEnrollList)
+            })
+        })
+    })
+
+
+script(src="/javascripts/v4template/components/collegeAdmission.js")

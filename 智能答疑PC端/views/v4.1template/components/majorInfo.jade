@@ -1,0 +1,63 @@
+link(rel="stylesheet" href="/stylesheets/v4template/components/majorInfo.css")
+
+div#footprint
+div.info-box
+    h1#majorName
+    div.depart-name
+        span.label 所属院系：
+        span#departmentName
+    div.school-year
+        span.label 学制：
+        span#schoolYear
+    div.degree
+        span.label 授予学位：
+        span#degree
+    div.characteristic
+        span.label 专业特色
+        p#characteristic
+    div.target
+        span.label 培养目标
+        p#target
+
+    div.curriculum
+        span.label 核心课程
+        p#curriculum
+
+    div.enrollment-plan
+        span.label 招生计划：
+        a#enrollmentPlan 点击查看详情
+
+    div.history-enrollment
+        span.label 历史录取：
+        a#historyEnrollment 点击查看详情
+
+
+
+
+script.
+
+    $(function(){
+        $.get(HOST+'/majorDetail?majorId='+MAJORID,function(data){
+            $('#majorName').html(data.name)
+            $('#departmentName').html(data.departName);
+            $('#schoolYear').html(data.schoolYear);
+            $('#degree').html(data.degree);
+            $('#characteristic').html(data.feature);
+            $('#target').html(data.target);
+            $('#curriculum').html(data.mainClass);
+        })
+
+        $('#enrollmentPlan').on('click',function(){
+            $.get(BASE_HOST + '/front/template/getInfoContentBySptype?sCode=' + SCODE + '&specType=8', function (data) {
+                window.location.href =toDetailPage(APP_SERVER + "/secondPage/secondPageArticleDetail?parentId=" + data.data.catId + '&infoId=' + data.data.id + "&sCode=" + SCODE);
+            })
+        })
+
+        $('#historyEnrollment').on('click',function(){
+            $.get(BASE_HOST + '/front/template/getInfoContentBySptype?sCode=' + SCODE + '&specType=11', function (data) {
+                window.location.href =toDetailPage(APP_SERVER + "/secondPage/secondPageArticleDetail?parentId=" + data.data.catId + '&infoId=' + data.data.id + "&sCode=" + SCODE);
+            })
+        })
+    })
+
+<!--script(src="/javascripts/v4template/components/collegeInfo.js")-->

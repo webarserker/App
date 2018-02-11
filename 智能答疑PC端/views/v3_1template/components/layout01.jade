@@ -1,0 +1,394 @@
+doctype html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+html
+    head
+        meta(http-equiv="Content-Type", content="text/html; charset=utf-8")
+        if schoolInfo.isPostGraduate == "1"
+            meta(name ="keywords",content="#{schoolInfo.name},#{schoolInfo.name}研究生招生信息网,#{schoolInfo.name}介绍,#{schoolInfo.name}分数线,#{schoolInfo.name}自主招生,#{schoolInfo.name}招生计划,#{schoolInfo.name}专业介绍")
+        else
+            meta(name ="keywords",content="#{schoolInfo.name},#{schoolInfo.name}本科生招生信息网,#{schoolInfo.name}介绍,#{schoolInfo.name}分数线,#{schoolInfo.name}自主招生,#{schoolInfo.name}招生计划,#{schoolInfo.name}专业介绍")
+        title #{title}
+        meta(name = "description",content="#{schoolInfo.name}介绍")
+        meta(name = "robots" content = "all")
+        link(href='#{host}/stylesheets/v3_1template/layout01.css',rel="stylesheet",type="text/css")
+        link(href='#{host}/stylesheets/v3_1template/themecolor.css',rel="stylesheet",type="text/css")
+        link(href='#{host}/stylesheets/v3_1template/zzsc.css',rel="stylesheet",type="text/css")
+        link(href='#{host}/stylesheets/v3_1template/font/bjfu/common/style.css',rel="stylesheet",type="text/css")
+        link(href='#{host}/stylesheets/v3_1template/font/bjfu/user/style.css',rel="stylesheet",type="text/css")
+        link(href='#{host}/stylesheets/v3_1template/icon/style.css',rel="stylesheet",type="text/css")
+        link(href='#{host}/stylesheets/v3_1template/v3_1home.css',rel="stylesheet",type="text/css")
+        link(href='#{host}/stylesheets/v3_1template/v3_1articleDetails.css',rel="stylesheet",type="text/css")
+        link(href='#{host}/stylesheets/v3_1template/v3_1sidebar.css',rel="stylesheet",type="text/css")
+        link(href='#{host}/stylesheets/v3_1template/v3_1users.css',rel="stylesheet",type="text/css")
+        if schoolInfo && schoolInfo.yrScholar
+            link(rel="shortcut icon",href="#{locals.global.img_sever_url}#{schoolInfo.yrScholar}")
+        script(type="text/javascript",src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js")
+        script(type="text/javascript",src="#{host}/javascripts/v5template/layout01.js")
+        script(type="text/javascript",src="#{host}/javascripts/jquery.cookie.js")
+        script(type="text/javascript",src="#{host}/javascripts/jq.Slide.js")
+        script(type="text/javascript",src="#{host}/javascripts/v3_1template/banner.js")
+        script(type="text/javascript",src="#{host}/static/ueditor/ueditor.parse.js")
+        script(src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js" type="text/javascript")
+        script.
+            (function () {
+                var hm = document.createElement("script");
+                hm.src = "//hm.baidu.com/hm.js?5da3b86d8f4fb163154ef561d3aa860b";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+            })();
+
+
+    body
+        div(class="wrapper",style="min-width:1200px;")
+            div(class="main_container",sCode="#{schoolInfo.code}",identify="#{schoolInfo.identify}")
+                // 机器人判断登录对话框
+                div(class="advice_box",style="border:1px solid #{themeColor}")
+                    span(class="error_icon",style="background:#{themeColor}") !
+                    div(class="contents")
+                        div(class="tips01")
+                            span(class="mag01") 您还未登录,请先
+                            span(class="mag02",style="color:#{themeColor}")  登录
+                        div(class="tips02")
+                            span(class="mag01") 如果还没有账户,需要先
+                            span(class="mag02",style="color:#{themeColor}") 注册
+                            span(class="mag03") 哦!
+                // 留言咨询对话框
+                div(class="advice_box01",style="border:1px solid #{themeColor}")
+                    span(class="error_icon01",style="background:#{themeColor}") !
+                    div(class="contents01")
+                        div(class="v3tips01")
+                            span(class="v3mag01") 您还未登录,请先
+                            span(class="v3mag02",style="color:#{themeColor}")  登录
+                        div(class="v3tips02")
+                            span(class="v3mag01") 如果还没有账户,需要先
+                            span(class="v3mag02",style="color:#{themeColor}") 注册
+                            span(class="v3mag03") 哦!
+                //头部导航栏
+                div(class="header",identify="#{schoolInfo.identify}")
+                    div(class="header_container")
+                        //左边logo部分
+                        div(class="header_left")
+                            img(class="school_logo",src="#{locals.global.img_sever_url}#{schoolInfo.logoUrl}")
+                            span #{schoolInfo.professor}
+                        // 右边搜索部分
+                        div(class="header_right")
+                            if userInfo && userInfo.userToken && userInfo.userToken.length > 0
+                                div(class="login_box")
+                                    div(class="login_first")
+                                        span(class="tips01") 您好,
+                                        span(class="fast_login_msg",userId="#{userInfo.id}",userToken="#{userInfo.userToken}",title="#{userInfo.nickName}") #{userInfo.nickName}
+                                        i(class="comicon-user",style="color:#{themeColor}")
+                                    div(class="login_list",style="border:1px solid #{themeColor}")
+                                        ul
+                                            li
+                                                a(class="my_personalFile") 我的资料
+                                            li
+                                                a(class="my_messageList") 招办回复
+                                                if NoticeNum && NoticeNum.num && NoticeNum.num !== 0
+                                                    span(class="notice_number") #{NoticeNum.num}
+                                            li
+                                                a(class="my_onlineMessage") 在线留言
+                                            li
+                                                a(class="my_loginOut") 退出登录
+
+                            else
+                                div(class="header_msg")
+                                    span(class="tips01") 请登录查询
+                                    span(class="tips02",style="background:#{themeColor}") 登录
+                                    span(class="icon-weChat")
+                                    span(class="icon-qq")
+                            div(class="search",catId="#{question.data.catId}")
+                                input(class="search_import",type="text",placeholder="站内搜索")
+                                span(class="search_btn")
+                                    i(class="comicon-search")
+                block content
+        script.
+            var objWin = null;
+            var styleColor = "#{schoolInfo.style}";
+            $('body').attr('id', styleColor);
+            function getAppServer() {
+                return "";
+            }
+            function getApiServer() {
+                return '!{locals.global.api_sever_url}'
+            }
+            // 机器人
+            function getRobotServer(){
+                return '!{locals.global.robot_sever_url}'
+            }
+            // 学校code 学校唯一分类 主题颜色
+            var sCode = $(".main_container").attr('sCode');
+            var identify = $(".header").attr('identify');
+            var themeColor ="#{themeColor}";
+
+            // 跳转页面，统一处理参数
+            function toDetailPage(url){
+                if(sessionStorage.getItem("spreadToken")) {
+                    if(url.indexOf("?") > -1) {
+                        url += "&spreadToken="+sessionStorage.getItem("spreadToken");
+                    }else{
+                        url += "?spreadToken="+sessionStorage.getItem("spreadToken");
+                    }
+                }
+                return url;
+            }
+            $(function() {
+                // 机器人登陆后,跳转到首页且同时打开机器人窗口
+                if (localStorage.needOpen == "1") {
+                    var userId = $(".fast_login_msg").attr('userId');
+                    if (userId) {
+                        var username = $(".fast_login_msg").html();
+                        var scodename = "#{schoolInfo.name}";
+                        localStorage.needOpen = "";
+                        var url = getRobotServer() + "/users?" + 'id=' + userId + '&name=' + username + '&sCode=' + sCode + '&school=' + scodename;
+                        if (objWin == null || objWin.closed) {
+                            objWin = window.open(url,'_blank');
+                            if (objWin == null || typeof(objWin) == 'undefined') {
+                                alert("智能机器人聊天窗口被浏览器阻止，请点击允许弹出窗口");
+                            }
+                        } else {
+                            objWin.focus();
+                        }
+                    }
+                }
+
+            });
+            // 页面右侧三个固定按钮.机器人,二维码和常见问题三个按钮事件
+            $(".floatItem02").hover(function(){
+                $(this).find(".float_codeMsg").show();
+            },function(){
+                $(this).find(".float_codeMsg").hide();
+            })
+            // 点击常见问题按钮.跳转到常见问题页面  其实是跳转到文章列表页面
+            $(".floatItem03").click(function(){
+                var parentId = $(this).attr('catId');
+                var url = getAppServer() + '/page/list/' + sCode + "/" + parentId+"?curPage=1&pageSize=10";
+                //var url = getAppServer() + '/secondPage/secondPageArticleList?' + "catId=" + catId + "&sCode=" + sCode + "&curPage=1&pageSize=10";
+                window.open(toDetailPage(url));
+            })
+
+
+
+            // 点击首页的学校logo 部分跳转到首页
+            $(".header_left").click(function () {
+                var identify = $(".header").attr('identify');
+                var url = getAppServer() + "/" + identify;
+                window.location.href = toDetailPage(url);
+            });
+
+            // 搜索按钮触发enter键
+            document.onkeydown = function (e) {
+                var theEvent = window.event || e;
+                //获取键盘上当前按下的键
+                var code = theEvent.keyCode || theEvent.which;
+                if (code == 13) {
+                    //这里调用下面的搜索按钮点击事件方法.触发键盘上的enter键
+                    $(".search_btn").click();
+                }
+            }
+
+            //  微信 qq鼠标划过样式改变
+            $(".header_msg .icon-weChat,.header_msg .icon-qq").hover(function(){
+                $(this).css('background',themeColor);
+            },function(){
+                $(this).css('background',"#c7c8c9");
+            });
+            //登录按钮点击事件
+            $(".header_msg span.tips02").click(function () {
+                var sCode = $(".main_container").attr('sCode');
+                var url = getAppServer() + '/page/login/' + sCode;
+                window.location.href = toDetailPage(url);
+            });
+
+            // 微信登录点击事件
+            $(".header_msg .icon-weChat").click(function () {
+                var sCode = $(".main_container").attr('sCode');
+                var url = getApiServer() + "/front/user/weixinlogin?systemId=3&sCode=" + sCode;
+                window.location.href = toDetailPage(url);
+            });
+
+            // QQ登录点击事件
+            $(".header_msg .icon-qq").click(function () {
+                var sCode = $(".main_container").attr('sCode');
+                var url = getApiServer() + "/front/user/qqLogin?systemId=3&sCode=" + sCode;
+                window.location.href = toDetailPage(url);
+            });
+            // 搜索按钮点击事件
+            $(".search_btn").click(function () {
+                var sCode = $(".main_container").attr('sCode');
+                var parentId = $(this).parent().attr('catId');
+                var question = $(".search_import").val();
+                if (!question && question.length == 0) {
+                    return;
+                }
+                var url = getAppServer() + '/page/search/' + sCode + "/" + parentId + "/" + question+"?curPage=1&pageSize=10";
+                url = encodeURI(url);
+                window.open(toDetailPage(url));
+            })
+            // 个人中心 鼠标滑过事件
+            $(".login_box").hover(function(){
+                $(this).find(".login_list").show()
+            },function(){
+                $(this).find(".login_list").hide()
+            })
+            $(".login_list ul li a").hover(function(){
+                $(this).css("color",themeColor)
+            },function(){
+                $(this).css("color","#333333");
+            })
+            // 个人中心 下拉框点击事件
+            // 点击我的资料 跳转到我的资料页面  16
+            $(".my_personalFile").click(function(){
+                var url = getAppServer() + '/page/personal/' + sCode;
+                //var url = getAppServer() + "/secondPage/secondPagePersonalPage?"+ "sCode=" + sCode;
+                window.open(toDetailPage(url));
+            })
+            // 点击 招办回复 跳转到消息列表页面  15
+            $(".my_messageList").click(function(){
+                var url = getAppServer() + '/page/message/' + sCode;
+                //var url = getAppServer() + "/secondPage/messageList?"+ "sCode=" + sCode;
+                window.open(toDetailPage(url));
+            })
+            // 点击 在线留言 跳转到在线留言页面 14
+            $(".my_onlineMessage").click(function(){
+                var url = getAppServer() + '/page/online/' + sCode;
+                //var url = getAppServer() + "/secondPage/onlineMsg?"+ "sCode=" + sCode;
+                window.open(toDetailPage(url));
+            })
+            // 点击 退出登录 清空缓存
+            $(".my_loginOut").click(function(){
+                var url = getAppServer() + "/v5users/logOut?"+ "identify=" + identify;
+                window.location.href = toDetailPage(url);
+            })
+
+
+            // 机器人点击登录 出现对话框
+            $(".robot_btn,.floatItem01,.rightMode_robot").click(function(){
+                var userId = $(".fast_login_msg").attr('userId');
+                if (userId && userId.length > 0) {
+                    var userId = $(".fast_login_msg").attr('userId');
+                    var username = $(".fast_login_msg").html();
+                    var scodename = "#{schoolInfo.name}";
+                    var url = getRobotServer() + "/users?" + 'id=' + userId + '&name=' + username + '&sCode=' + sCode + '&school=' + scodename;
+                    if (objWin == null || objWin.closed) {
+                        objWin = window.open(url,'_blank');
+                        if (objWin == null || typeof(objWin) == 'undefined') {
+                            alert("智能机器人聊天窗口被浏览器阻止，请点击允许弹出窗口")
+                            ;
+                        }
+                    } else {
+                        objWin.focus();
+                    }
+                }else{
+                    $(".advice_box").show()
+                    window.setTimeout("$('.advice_box').hide()",3000);
+                }
+            })
+            // 对话框中点击登录
+            $(".advice_box .contents .tips01 .mag02").click(function() {
+                // 判断是否已登录
+                var userId = $(".fast_login_msg").attr('userId');
+                if (userId && userId.length > 0) {
+                    var userId = $(".fast_login_msg").attr('userId');
+                    var username = $(".fast_login_msg").html();
+                    var scodename = "#{schoolInfo.name}";
+                    var url = getRobotServer() + "/users?" + 'id=' + userId + '&name=' + username + '&sCode=' + sCode + '&school=' + scodename;
+                    if (objWin == null || objWin.closed) {
+                        objWin = window.open(url,'_blank');
+                        if (objWin == null || typeof(objWin) == 'undefined') {
+                            alert("智能机器人聊天窗口被浏览器阻止，请点击允许弹出窗口");
+                        }
+                    } else {
+                        objWin.focus();
+                    }
+                } else {
+                    localStorage.needOpen = 1;
+                    var url = getAppServer() + '/page/login/' + sCode;
+                    window.location.href= toDetailPage(url);
+                }
+            });
+            // 留言咨询对话框中点击注册
+            $(".advice_box .contents .tips02 .mag02").click(function(){
+                var url = getAppServer() + '/page/register/' + sCode;
+                window.location.href = toDetailPage(url);
+            })
+
+             // 前端加入统计代码
+             // 用户省份
+             var userProvince = remote_ip_info.province;
+             // 用户城市
+             var userCity = remote_ip_info.city;
+             // 学校唯一标识
+             var sCode = $(".main_container").attr('sCode');
+             // 用户token
+             var userToken = $(".fast_login_msg").attr('userToken');
+             // 访问来源
+             var viewSourceUrl = sessionStorage.getItem('viewSourceUrl') ? sessionStorage.getItem('viewSourceUrl') : document.referrer;
+             sessionStorage.setItem('viewSourceUrl', viewSourceUrl);
+             // 当前页面 url
+             var pageUrl = location.href;
+             $.ajax({
+                 type: "post",
+                 url: getApiServer() + "/front/addUserViewLog",
+                 data: {
+                     'userToken': userToken,
+                     'userProvince': userProvince,
+                     'userCity': userCity,
+                     'sCode': sCode,
+                     'viewSourceUrl':viewSourceUrl,
+                     'pageUrl':pageUrl
+                 },
+                 success: function (data) {
+                     if (data && data.code == '000000') {
+                         return;
+                     } else {
+                         return;
+                     }
+                 }
+             })
+            //用户宣传检测获取地址栏的userToken
+            // 获取地址栏参数
+            function GetQueryString(name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null)return unescape(r[2]);
+                return null;
+            }
+            function getSpreadToken() {
+                var frontUserId = $('.fast_login_msg').attr('userid') && $('.fast_login_msg').attr('userid') != '' ? $('.fast_login_msg').attr('userid') : $('.fast-login-msg').attr('userid');
+                var sCode = $(".main_container").attr('sCode');
+                $.ajax({
+                    url: getApiServer() + '/front/spread/getSpreaderByUserId',
+                    data: {'frontUserId': frontUserId, 'sCode': sCode},
+                    type: "POST",
+                    dataType: 'json',
+                    success: function (res) {
+                        var spreadToken = GetQueryString("spreadToken");
+                        var userToken = GetQueryString("userToken");
+                        if (res.code == '000000' && !res.data && spreadToken) {
+                            $.ajax({
+                                type: "get",
+                                url: getApiServer() + "/front/spread/bindUserAndSpread",
+                                data: {
+                                    'spreadToken': spreadToken,
+                                    'userToken': userToken,
+                                    'frontUserId': frontUserId
+                                },
+                                success: function (res) {
+                                    if (res && res.code == '000000') {
+                                        sessionStorage.setItem('spreadToken', res.data ? res.data : '');
+                                    }
+                                }
+                            })
+                        } else {
+                            sessionStorage.setItem('spreadToken', res.data ? res.data : '');
+                        }
+                    }
+                });
+            }
+            getSpreadToken();
+
+
+
+
+
+

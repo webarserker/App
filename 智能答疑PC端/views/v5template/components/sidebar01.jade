@@ -1,0 +1,192 @@
+//
+   Created by abbydu on 17/7/24.
+// 侧边栏一级和二级分类
+div(class="sidebar")
+   div(class="side_bar")
+       img(class="side_bg_img",src="#{host}#{sidebarBgImg}")
+       img(class="side_icon_img",src="#{locals.global.img_sever_url}#{schoolInfo.yrScholar}")
+       if sidebarData && sidebarData.firstCatName && sidebarData.firstCatName.length > 0
+        span(class="side_bar_tips",firstCatId="#{sidebarData.firstCatId}") #{sidebarData.firstCatName}
+   // 二级分类列表
+   div(class="side_content",id="side_content")
+      ul(class="side_content_container")
+         if sidebarData
+            each item in sidebarData.menu
+               li(class="sidebar_menu",catId="#{item.catId}",class=item.catId == sidebarData.secondCatId ? 'active' : '',style=(item.catId == sidebarData.secondCatId) ? 'background: #{themeColor};' : '')
+                  a(class="sidebar_menu_level1")
+                      span(class="side_content")
+                      span(class="side_tips",style="color:#{themeColor}") #{item.name}
+                      if item.flag == "0"
+                          i(class="icon-m08_sanjiao")
+                  div(class="sidebar_menu_level2Items none")
+                    ul(class="sidebar_menu_level2")
+link(href='#{host}/stylesheets/v5template/layout01.css',rel="stylesheet",type="text/css")
+link(href='#{host}/stylesheets/v5template/pages/01_graduateStudentRecruiting.css',rel="stylesheet",type="text/css")
+link(href='#{host}/stylesheets/v5template/pages/02_v5templateDetail.css',rel="stylesheet",type="text/css")
+link(href='#{host}/stylesheets/v5template/themecolor.css',rel="stylesheet",type="text/css")
+script(type="text/javascript",src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js")
+script(type="text/javascript",src="#{host}/javascripts/v5template/layout01.js")
+script.
+   //-------------------sidebar 事件管理开始---------------------------
+    var sidebarManager = {}; // 事件管理器
+    var classifyData = !{sidebarData};
+   /**
+    * 设置侧边栏分类列表点击事件
+    * @param callback 二级分类点击回调
+    *            catId 当前分类id
+    * */
+   sidebarManager.setClassClickCallback = function(callback){
+      if(!callback || typeof callback != 'function') return;
+      sidebarManager.classClickCallback = callback;
+   };
+
+   /**
+    * 获取当前选中的二级, 三级分类id
+    * */
+   sidebarManager.getCurrentSelectId = function () {
+       return {
+           'secondCatId' : classifyData.secondCatId,
+           'threeCatId' : classifyData.threeCatId
+       };
+   };
+
+
+   sidebarManager.initSidebar = function(){
+      /**
+      * 数据转换, 便于后续处理
+      * 原始数据: {"secondCatId":708,"threeCatId":88,"menu":[{"flag":1,"name":"外语类保送生","catId":214,"children":[]},{"flag":1,"name":"招生计划","catId":83,"children":[]},{"flag":1,"name":"经世学府 寰宇绽放","catId":368,"children":[]},{"flag":1,"name":"历年录取","catId":86,"children":[]},{"flag":0,"name":"招生分类信息","catId":708,"children":[{"name":"自主招生","catId":88,"icon":"usericon-webicon-01","imgUrl":""},{"name":"测试三级分类","catId":1251,"icon":"usericon-webicon-01","imgUrl":""},{"name":"招生计划查询","catId":823,"icon":"usericon-webicon-14","imgUrl":""},{"name":"高水平艺术团","catId":90,"icon":"usericon-webicon-01","imgUrl":""},{"name":"博士研究生招录","catId":336,"icon":"icon-33","imgUrl":""}]}]}
+      * 转换数据: {"83":{"flag":1,"name":"招生计划","catId":83,"children":[]},"86":{"flag":1,"name":"历年录取","catId":86,"children":[]},"214":{"flag":1,"name":"外语类保送生","catId":214,"children":[]},"368":{"flag":1,"name":"经世学府 寰宇绽放","catId":368,"children":[]},"708":{"88":{"name":"自主招生","catId":88,"icon":"usericon-webicon-01","imgUrl":""},"90":{"name":"高水平艺术团","catId":90,"icon":"usericon-webicon-01","imgUrl":""},"336":{"name":"博士研究生招录","catId":336,"icon":"icon-33","imgUrl":""},"823":{"name":"招生计划查询","catId":823,"icon":"usericon-webicon-14","imgUrl":""},"1251":{"name":"测试三级分类","catId":1251,"icon":"usericon-webicon-01","imgUrl":""},"flag":0,"name":"招生分类信息","catId":708,"children":[{"name":"自主招生","catId":88,"icon":"usericon-webicon-01","imgUrl":""},{"name":"测试三级分类","catId":1251,"icon":"usericon-webicon-01","imgUrl":""},{"name":"招生计划查询","catId":823,"icon":"usericon-webicon-14","imgUrl":""},{"name":"高水平艺术团","catId":90,"icon":"usericon-webicon-01","imgUrl":""},{"name":"博士研究生招录","catId":336,"icon":"icon-33","imgUrl":""}]}}
+      *
+      * */
+      // 将menu 下面的数组，重新组合成一个对象
+
+       var classify = {};
+       for (var i = 0; i < classifyData.menu.length; i++) {
+           var secClass = classifyData.menu[i];
+           classify[secClass.catId] = secClass || {};
+           for (var j = 0; j < secClass.children.length; j++) {
+               var thirdCalss = secClass.children[j];
+               classify[secClass.catId][thirdCalss.catId] = thirdCalss;
+           }
+       }
+
+        var themeColor ="#{themeColor}";
+        $(".side_content ul li.active a").css("background",themeColor);
+        $(".side_content ul li.active span.side_content").css("background","#FFFFFF");
+        $(".side_content ul li.active span.side_tips").css("color","#FFFFFF");
+        $(".side_content ul li.active i").css("color","#FFFFFF");
+        $(".side_content ul li.active i").removeClass("fanzhuan");
+        // 二级分类下的三级分类鼠标划过事件。字体变色
+
+
+
+
+
+
+
+
+
+       /**
+        * 二级列表鼠标点击事件响应
+        * */
+        var flag1 = true;
+
+
+
+
+       $(".side_content_container li a.sidebar_menu_level1").click(function () {
+           //$(this).addClass("active").siblings().removeClass("active");
+           if(flag1){
+               $(this).css("background",themeColor);
+               $(this).find(".side_tips").css("color","#FFFFFF");
+               $(this).find(".side_content").css("background","#ffffff");
+               $(this).find("i").css("color","#ffffff");
+
+               $(this).parent().siblings().find("a").css("background","#f4f4f4");
+               $(this).parent().siblings().find(".side_tips").css("color",themeColor);
+               $(this).parent().siblings().find(".side_content").css("background","#a3a3a3");
+               $(this).parent().siblings().find("i").css("color","#666666");
+               $(this).parent().find("i").removeClass("fanzhuan");
+               // 三级分类信息
+               var catId = $(this).parent().attr('catId');
+               var secClass = classify[catId];
+               if (!secClass || !secClass.children || secClass.children.length == 0 || secClass.flag == 1) {
+                   $(".sidebar_menu_level2Items").hide();
+                   return;
+               }
+               // 三级分类项目列表
+               $(".sidebar_menu_level2").html("");
+               for (var i in secClass.children) {
+                   var child = secClass.children[i];
+                   var li = $("<li thirdClassId=" + child.catId + ">");
+                   li.html("<a>"+child.name+"</a>");
+                   $(this).parent().find(".sidebar_menu_level2").append(li);
+
+               }
+
+
+               // 三级分类列表显示
+               $(this).parent().find(".sidebar_menu_level2Items").show();
+               $(this).parent().siblings().find(".sidebar_menu_level2Items").hide();
+               $(this).parent().find("i").addClass("fanzhuan");
+
+
+               $(".sidebar_menu_level2Items ul.sidebar_menu_level2 li a").hover(function () {
+                   $(this).css("color", themeColor);
+               }, function () {
+                   $(this).css("color", "#333333");
+               })
+
+               // 设置三级分类点击事件， 刷新右侧列表
+               $(".sidebar_menu_level2 li").click(function(){
+                   if(sidebarManager.classClickCallback && typeof sidebarManager.classClickCallback == 'function') {
+                       var thirdCatId = $(this).attr('thirdClassId');
+                       sidebarManager.classClickCallback(thirdCatId);
+                   }
+               });
+
+
+
+
+
+
+
+
+
+
+
+               flag1 = false;
+           }else{
+               $(".sidebar_menu_level2Items").hide();
+               flag1 = true;
+           }
+       });
+
+
+
+
+
+
+
+        // 二级分类点击事件
+       $('.side_content_container li').click(function(){
+            var catId = $(this).attr('catId');
+            var secClass = classify[catId];
+            // 不为1, 可能有三级分类需要展示
+            if(secClass.flag != 1) return null;
+            if(sidebarManager.classClickCallback && typeof sidebarManager.classClickCallback == 'function') {
+                sidebarManager.classClickCallback(catId);
+            }
+       });
+
+   };
+
+   //-------------------sidebar 事件管理结束---------------------------
+   $(document).ready(function () {
+   // 二级分类 和 三级分类数据处理
+      sidebarManager.initSidebar();
+
+       // 二级侧边栏一级分类背景图处理
+
+   });
+

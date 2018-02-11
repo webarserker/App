@@ -1,0 +1,54 @@
+.books a {
+  color: #333;
+}
+.books a:hover {
+  text-decoration: none !important;
+}
+#rightBooks {
+  width: 100px;
+  height: 180px;
+  float: right;
+  text-align: center;
+  background: url(../../../images/v3_2template/rightBook.png) 0 0 no-repeat;
+  margin-top: 90px;
+  position: relative;
+}
+#rightBooks.fix {
+  position: fixed;
+  top: 188px;
+  z-index: 400;
+  margin: 0;
+}
+#rightBooks > a {
+  width: 80px;
+  position: absolute;
+  top: -52px;
+  left: 10px;
+}
+#rightBooks > a img {
+  width: 100%;
+}
+#rightBooks #books {
+  position: absolute;
+  width: 100%;
+  height: 84px;
+  top: 51px;
+}
+#rightBooks #books a {
+  display: block;
+  height: 28px;
+  width: 100%;
+  line-height: 28px;
+}
+#rightBooks .toTop {
+  position: absolute;
+  top: 135px;
+  left: 0;
+  width: 100%;
+  height: 45px;
+  padding-top: 8px;
+}
+#rightBooks .toTop h4 {
+  font-weight: normal;
+  font-size: 12px;
+}

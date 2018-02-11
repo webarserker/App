@@ -1,0 +1,50 @@
+
+.containers.majorInfo{
+    /*margin-top:136px;*/
+}
+
+
+.footprint{
+    border-bottom:1px dashed #ddd;
+    color:#555;
+    font-size:13px;
+    padding-bottom:8px;
+}
+#majorName{
+    width:80%;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:30px;
+    text-align:center;
+    color:#000;
+    font-size:18px;
+    font-weight:normal;
+}
+#main .info-box #article-date{
+    text-align:center;
+    width:90%;
+    padding-bottom: 10px;
+    border-bottom:1px solid #ddd;
+}
+#characteristic,#target,#curriculum{
+    margin-top:25px;
+    text-indent:2em;
+}
+.depart-name,.school-year,.degree,.characteristic,.target,.requirement,.curriculum,.info-detail,.enrollment-plan,.history-enrollment{
+    margin-top:25px;
+    font-size:15px;
+}
+#characteristic,#target,#requirement,#curriculum,#enrollmentPlan,#historyEnrollment{
+    color:#666;
+    font-size:14px;
+}
+#enrollmentPlan,#historyEnrollment{
+    color:#0000EE;
+}
+#info-content{
+    margin-top:15px;
+}
+
+.history-enrollment{
+    display:none;
+}

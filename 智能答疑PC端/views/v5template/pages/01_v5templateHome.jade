@@ -1,0 +1,1404 @@
+extends ../components/layout01
+block content
+        //  第一个模块
+        //script(type="text/javascript",src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js")
+
+        div(class="v5module_01")
+            div(class="v5module_01_container")
+                //左边自适应轮播图
+                div(class="v5module_01_left")
+                    div(class="container",id="container_lunbo")
+                        ul(id="list",class="img")
+                            if banner
+                                each item in banner
+                                    li
+                                        a(linkUrl="#{item.link}",title="#{item.title}——#{item.desc}")
+                                            img(alt="5",src="#{locals.global.img_sever_url}#{item.imgUrl}")
+                        ul(class="num")
+
+
+                //右边切割各个小模块
+                div(class="v5module_01_right")
+                    //m04返回data对象里为4时,引用此模块
+                    if m04.data && m04.data.length == 4
+                        div(class="Quick_entry_container")
+                            if m04.data && m04.data.length > 0
+                                a(class="fore_entry_01",catId="#{m04.data[0].catId}",index="0",title="#{m04.data[0].name}")
+                                    if m04.data[0].icon && m04.data[0].icon.length >0
+                                        i(class="#{m04.data[0].icon}",style="color:#{themeColor}")
+                                    else
+                                        i(class="usericon usericon-webicon-74",style="color:#{themeColor}")
+                                    span(style="color:#{themeColor}") #{m04.data[0].name}
+                            if m04.data && m04.data.length > 1
+                                a(class="fore_entry_02",catId="#{m04.data[1].catId}",index="1",style="background:#{themeColor}",title="#{m04.data[1].name}")
+                                div(class="fore_entry_02_container",catId="#{m04.data[1].catId}",index="1")
+                                    if m04.data[1].icon && m04.data[1].icon.length > 0
+                                        i(class="#{m04.data[1].icon}",style="color:#{themeColor}")
+                                    else
+                                        i(class="usericon usericon-webicon-74",style="color:#{themeColor}")
+                                    span(style="color:#{themeColor}") #{m04.data[1].name}
+                            if m04.data && m04.data.length > 2
+                                a(class="fore_entry_03",catId="#{m04.data[2].catId}",index="2",title="#{m04.data[2].name}")
+                                    if m04.data[2].icon && m04.data[2].icon.length > 0
+                                        i(class="#{m04.data[2].icon}",style="color:#{themeColor}")
+                                    else
+                                        i(class="usericon usericon-webicon-74",style="color:#{themeColor}")
+                                    span(style="color:#{themeColor}") #{m04.data[2].name}
+                            if m04.data && m04.data.length > 3
+                                a(class="fore_entry_04",catId="#{m04.data[3].catId}",index="3",style="background:#{themeColor}",title="#{m04.data[3].name}")
+                                    if m04.data[3].icon && m04.data[3].icon.length > 0
+                                        i(class="#{m04.data[3].icon}")
+                                    else
+                                        i(class="usericon usericon-webicon-74")
+                                    span #{m04.data[3].name}
+                            div(class="Quick_entry_06")
+                                a(class="robot")
+                                    img(src="../../../images/v5template/12-pic.gif")
+                                span(class="Quick_entry_06_tips01",style="color:#{themeColor}") 365*24h有问必答
+                                span(class="Quick_entry_06_tips02",style="color:#{themeColor}") 不漏掉每一个考生的声音
+                                a(class="Quick_entry_06_btn",style="color:#{themeColor};border:1px solid #{themeColor}") 智能咨询 >>
+                    // m04 返回data对象里为5 时
+                    if m04.data && m04.data.length == 5
+                        //快速入口
+                        div(class="Quick_entry_container")
+                            if m04.data && m04.data.length > 0
+                                a(class="fast_entry_01",catId="#{m04.data[0].catId}",index="0",title="#{m04.data[0].name}")
+                                    if m04.data[0].icon && m04.data[0].icon.length > 0
+                                        i(class="#{m04.data[0].icon}",style="color:#{themeColor}")
+                                    else
+                                        i(class="usericon usericon-webicon-74",style="color:#{themeColor}")
+                                    span(style="color:#{themeColor}") #{m04.data[0].name}
+                            if m04.data && m04.data.length > 1
+                                a(class="fast_entry_02",catId="#{m04.data[1].catId}",index="1",style="background:#{themeColor}",title="#{m04.data[1].name}")
+                                div(class="fast_entry_02_container",catId="#{m04.data[1].catId}",index="1")
+                                    if m04.data[1].icon && m04.data[1].icon.length > 0
+                                        i(class="#{m04.data[1].icon}",style="color:#{themeColor}")
+                                    else
+                                        i(class="usericon usericon-webicon-74",style="color:#{themeColor}")
+                                    span(style="color:#{themeColor}") #{m04.data[1].name}
+                            if m04.data && m04.data.length > 2
+                                a(class="fast_entry_03",catId="#{m04.data[2].catId}",index="2",title="#{m04.data[2].name}")
+                                    if m04.data[2].icon && m04.data[2].icon.length > 0
+                                        i(class="#{m04.data[2].icon}",style="color:#{themeColor}")
+                                    else
+                                        i(class="usericon usericon-webicon-74",style="color:#{themeColor}")
+                                    span(style="color:#{themeColor}") #{m04.data[2].name}
+                            if m04.data && m04.data.length > 3
+                                a(class="fast_entry_04",catId="#{m04.data[3].catId}",index="3",style="background:#{themeColor}",title="#{m04.data[3].name}")
+                                    if m04.data[3].icon && m04.data[3].icon.length > 0
+                                        i(class="#{m04.data[3].icon}")
+                                    else
+                                        i(class="usericon usericon-webicon-74")
+                                    span #{m04.data[3].name}
+                            if m04.data && m04.data.length > 4
+                                a(class="fast_entry_05",catId="#{m04.data[4].catId}",index="4",style="background:#{themeColor}",title="#{m04.data[4].name}")
+                                div(class="fast_entry_05_container",catId="#{m04.data[4].catId}",index="4")
+                                    if m04.data[4].icon && m04.data[4].icon.length > 0
+                                        i(class="#{m04.data[4].icon}",style="color:#{themeColor}")
+                                    else
+                                        i(class="usericon usericon-webicon-74",style="color:#{themeColor}")
+                                    span(style="color:#{themeColor}") #{m04.data[4].name}
+                            div(class="fast_entry_06")
+                                a(class="robot")
+                                    img(src="../../../images/v5template/12-pic.gif")
+                                span(class="Quick_entry_06_tips01",style="color:#{themeColor}") 365*24h有问必答
+                                span(class="Quick_entry_06_tips02",style="color:#{themeColor}") 不漏掉每一个考生的声音
+                                a(class="Quick_entry_06_btn",style="color:#{themeColor};border:1px solid #{themeColor}") 智能咨询 >>
+                    //m04返回data对象里为6时,引用此模块
+                    if m04.data && m04.data.length == 6
+                        //快速入口
+                        div(class="Quick_entry_container")
+                            if m04.data && m04.data.length > 0
+                                a(class="Quick_entry_01",catId="#{m04.data[0].catId}",index="0",style="background:#{themeColor}",title="#{m04.data[0].name}")
+                                    if m04.data[0].icon && m04.data[0].icon.length > 0
+                                        i(class="#{m04.data[0].icon}")
+                                    else
+                                        i(class="usericon usericon-webicon-74")
+                                    span #{m04.data[0].name}
+                            if m04.data && m04.data.length > 1
+                                a(class="Quick_entry_02",catId="#{m04.data[1].catId}",index="1",style="color:#{themeColor}",title="#{m04.data[1].name}")
+                                    if m04.data[1].icon && m04.data[1].icon.length > 0
+                                        i(class="#{m04.data[1].icon}")
+                                    else
+                                        i(class="usericon usericon-webicon-74")
+                                    span(style="color:#{themeColor}") #{m04.data[1].name}
+                            if m04.data && m04.data.length > 2
+                                a(class="Quick_entry_03",catId="#{m04.data[2].catId}",index="2",style="background:#{themeColor}",title="#{m04.data[2].name}")
+                                div(class="Quick_entry_03_container",catId="#{m04.data[2].catId}",index="2")
+                                    if m04.data[2].icon && m04.data[2].icon.length > 0
+                                        i(class="#{m04.data[2].icon}",style="color:#{themeColor}")
+                                    else
+                                        i(class="usericon usericon-webicon-74",style="color:#{themeColor}")
+                                    span(style="color:#{themeColor}") #{m04.data[2].name}
+                            if m04.data && m04.data.length > 3
+                                a(class="Quick_entry_04",catId="#{m04.data[3].catId}",index="3",title="#{m04.data[3].name}")
+                                    if m04.data[3].icon && m04.data[3].icon.length > 0
+                                        i(class="#{m04.data[3].icon}",style="color:#{themeColor}")
+                                    else
+                                        i(class="usericon usericon-webicon-74",style="color:#{themeColor}")
+                                    span(style="color:#{themeColor}") #{m04.data[3].name}
+                            if m04.data && m04.data.length > 4
+                                a(class="Quick_entry_05",catId="#{m04.data[4].catId}",index="4",style="background:#{themeColor}",title="#{m04.data[4].name}")
+                                div(class="Quick_entry_05_container",catId="#{m04.data[4].catId}",index="4")
+                                    if m04.data[4].icon && m04.data[4].icon.length > 0
+                                        i(class="#{m04.data[4].icon}",style="color:#{themeColor}")
+                                    else
+                                        i(class="usericon usericon-webicon-74",style="color:#{themeColor}")
+                                    span(style="color:#{themeColor}") #{m04.data[4].name}
+                            div(class="Quick_entry_06")
+                                a(class="robot")
+                                    img(src="../../../images/v5template/12-pic.gif")
+                                span(class="Quick_entry_06_tips01",style="color:#{themeColor}") 365*24h有问必答
+                                span(class="Quick_entry_06_tips02",style="color:#{themeColor}") 不漏掉每一个考生的声音
+                                a(class="Quick_entry_06_btn",style="color:#{themeColor};border:1px solid #{themeColor}") 智能咨询 >>
+                            if m04.data && m04.data.length > 5
+                                a(class="Quick_entry_07",catId="#{m04.data[5].catId}",index="5",style="background:#{themeColor}",title="#{m04.data[5].name}")
+                                    if m04.data[5].icon && m04.data[5].icon.length > 0
+                                        i(class="#{m04.data[5].icon}")
+                                    else
+                                        i(class="usericon usericon-webicon-74")
+                                    span #{m04.data[5].name}
+
+        //第二个模块
+        div(class="v5module_02")
+            div(class="v5module_02_container")
+                //左边公告通知蓝色部分
+                div(class="v5module_02_left")
+                    div(class="notice_content",style="background:#{themeColor}")
+                        if m05
+                            div(class="notice_content_title")
+                                if m05 && m05.icon && m05.icon.length > 0
+                                    i(class="#{m05.icon}")
+                                else
+                                    i(class="usericon usericon-webicon-74")
+                                span(class="xiegang01")
+                                span(class="content_title_tips01")
+                                span(class="content_title_tips02")
+                            if m05 && m05.data && m05.data.length >0
+                                div(class="notice_content_msg")
+                                    ul
+                                        if m05.data[0].children
+                                            each module05, i in m05.data[0].children
+                                                li
+                                                    a(id="#{module05.id}", index="#{i}")
+                                                        span(class="content_msg_time") #{module05.date}
+                                                        span(class="content_msg_title") #{module05.name}
+                                a(class="notice_content_more icon-rightRow")
+
+
+                //右边公共通知白色部分
+                div(class="v5module_02_right")
+                    div(class="advice_content")
+                        if m06
+                            div(class="advice_content_title")
+                                if m06 && m06.icon && m06.icon.length > 0
+                                    i(class="#{m06.icon} themeColor")
+                                else
+                                    i(class="usericon usericon-webicon-74 themeColor")
+                                span(class="xiegang02")
+                                span(class="content_title_tips01",style="color:#{themeColor}")
+                                span(class="content_title_tips02",style="color:#{themeColor}")
+                            if m06 && m06.data && m06.data.length >0
+                                div(class="advice_content_msg")
+                                    ul
+                                        if m06.data[0].children
+                                            each module06, i in m06.data[0].children
+                                                li
+                                                    a(id="#{module06.id}",index="#{i}")
+                                                        span(class="content_msg_time") #{module06.date}
+                                                        span(class="content_msg_title") #{module06.name}
+                                a(class="advice_content_more icon-rightRow")
+        //第三个模块
+        div(class="v5module_03")
+            div(class="v5module_03_container")
+                //左边公告通知白色部分
+                div(class="v5module_03_left")
+                    div(class="advice02_content")
+                        if m07
+                            div(class="advice02_content_title")
+                                if m07&& m07.icon && m07.icon.length > 0
+                                    i(class="#{m07.icon} themeColor")
+                                else
+                                    i(class="usericon usericon-webicon-74 themeColor")
+                                span(class="xiegang02")
+                                span(class="content_title_tips01",style="color:#{themeColor}") #{m07.modelName}
+                            if m07 && m07.data && m07.data.length > 0
+                                div(class="advice02_content_msg")
+                                    ul
+                                        if m07.data[0].children
+                                            each module07, i in m07.data[0].children
+                                                li
+                                                    a(id="#{module07.id}",index = "#{i}")
+                                                        span(class="content_msg_time") #{module07.date}
+                                                        span(class="content_msg_title") #{module07.name}
+                                a(class="advice02_content_more icon-rightRow")
+
+                //右边公共通知蓝色部分
+                div(class="v5module_03_right")
+                    div(class="service_content",style="background:#{themeColor}")
+                        if m08
+                            div(class="service_content_title")
+                                if m08.icon && m08.icon.length > 0
+                                    i(class="#{m08.icon}")
+                                else
+                                    i(class="usericon usericon-webicon-74")
+                                span(class="xiegang01")
+                                span(class="content_title_tips01") #{m08.modelName}
+                            if m08.data
+                                div(class="service_content_msg")
+                                    div(class="service_test")
+                                        ul
+                                            if m08.data
+                                                each module08,i in m08.data
+                                                    li(catId="#{module08.catId}",index="#{i}",ntype="#{module08.ntype}")
+                                                        a
+                                                            if module08.icon && module08.icon.length
+                                                                i(class="#{module08.icon}")
+                                                            else
+                                                                i(class="usericon usericon-webicon-74")
+                                                            span(class="service_content_msg_tips") #{module08.name}
+                                                        i(class="icon-m08_sanjiao")
+                                    div(class="itemMsgList")
+                                        ul
+                                a(class="service_content_more icon-rightRow")
+        //模块4
+        div(class="v5module_04")
+            div(class="v5module_04_container")
+                div(class="v5module_04_left")
+                    if m09
+                        div(class="style_title")
+                            if m09.icon && m09.icon.length > 0
+                                i(class="#{m09.icon}")
+                            else
+                                i(class="usericon usericon-webicon-74")
+                            span(class="style_title_01") #{m09.modelName}
+                            span(class="style_title_02") #{m09.englishName}
+                            span(class="style_title_03") 更多...
+                        div(class="style_content")
+                            if m09 && m09.data && m09.data.length>0
+                                div(id="slide-box")
+                                    b(class="corner")
+                                    div(class="slide-content",id="temp4")
+                                        div(class="wrap",catId="#{m09.data[0].catId}")
+                                            ul(class="JQ-slide-content")
+                                                if m09.data[0].children
+                                                    each module09,i in m09.data[0].children
+                                                        li(id="#{module09.id}",index="#{i}",ntype="#{module09.ntype}")
+                                                            a
+                                                                if module09 && module09.img && module09.img.length > 0
+                                                                    img(src="#{locals.global.img_sever_url}#{module09.img}",alt="#{module09.name}")
+                                                                else
+                                                                    img(src="../../images/v5template/57-pic.png")
+                                                                span #{module09.name}
+
+                                        div(class="JQ-slide-nav")
+                                            a(class="prev" href="#")
+                                                b(class="corner")
+                                                span &#8249;
+                                                b(class="corner")
+                                            a(class="next",href="#")
+                                                b(class="corner")
+                                                span &#8250;
+                                                b(class="corner")
+                                    b(class="corner")
+                //右边研招动态
+                div(class="v5module_04_move")
+                    if m10
+                        div(class="move_title")
+                            if m10.icon && m10.icon.length > 0
+                                i(class="#{m10.icon}",style="color:#{themeColor}")
+                            else
+                                i(class="usericon usericon-webicon-74",style="color:#{themeColor}")
+                            span(class="move_title_tips01") #{m10.modelName}
+                            span(class="move_title_tips02") #{m10.englishName}
+                            a(class="move_title_more") 更多...
+                    div(class="move_content")
+                        //轮播图
+                        if m10 && m10.data && m10.data.length>0 && m10.data[0].children
+                            div#move-carousel-wrapper
+                                ul.view
+                                    if  m10.data[0].children.length>0 && m10.data[0].children[0]
+                                        li
+                                            a(class="move_listItems",id="#{m10.data[0].children[0].id}",index="0")
+                                                if m10.data[0].children[0].img && m10.data[0].children[0].img.length > 0
+                                                    img(class="move_listItems_pic",src="#{locals.global.img_sever_url}#{m10.data[0].children[0].img}")
+                                                else
+                                                    img(class="move_listItems_pic",src="../../images/v5template/lunbo_04.png")
+                                                div(class="move_listItems_msg")
+                                                    div(class="move_listItems_msg_tips01")
+                                                        div(class="time")
+                                                            span(class="date01")
+                                                            span(class="year01")
+                                                        div(class="titles") #{m10.data[0].children[0].name}
+                                                    div(class="move_listItems_msg_tips02") #{m10.data[0].children[0].desc}
+                                    if m10.data[0].children.length>1 && m10.data[0].children[1]
+                                        li
+                                            a(class="move_listItems",id="#{m10.data[0].children[1].id}",index="1")
+                                                if m10.data[0].children[1].img && m10.data[0].children[1].img.length > 0
+                                                    img(class="move_listItems_pic",src="#{locals.global.img_sever_url}#{m10.data[0].children[1].img}")
+                                                else
+                                                    img(class="move_listItems_pic",src="../../images/v5template/lunbo_04.png")
+                                                div(class="move_listItems_msg")
+                                                    div(class="move_listItems_msg_tips01")
+                                                        div(class="time")
+                                                            span(class="date02")
+                                                            span(class="year02")
+                                                        div(class="titles") #{m10.data[0].children[1].name}
+                                                    div(class="move_listItems_msg_tips02") #{m10.data[0].children[1].desc}
+                                    if m10.data[0].children.length>2 && m10.data[0].children[2]
+                                        li
+                                            a(class="move_listItems",id="#{m10.data[0].children[2].id}",index="2")
+                                                if m10.data[0].children[2].img && m10.data[0].children[2].img.length > 0
+                                                    img(class="move_listItems_pic",src="#{locals.global.img_sever_url}#{m10.data[0].children[2].img}")
+                                                else
+                                                    img(class="move_listItems_pic",src="../../images/v5template/lunbo_04.png")
+                                                div(class="move_listItems_msg")
+                                                    div(class="move_listItems_msg_tips01")
+                                                        div(class="time")
+                                                            span(class="date03")
+                                                            span(class="year03")
+                                                        div(class="titles") #{m10.data[0].children[2].name}
+                                                    div(class="move_listItems_msg_tips02") #{m10.data[0].children[2].desc}
+
+
+                                ul.circle
+                                    li.themeBackgroundColor
+                                    li
+                                    li
+                    div(class="move_tipsItems")
+                        ul
+                            if m10 && m10.data && m10.data.length>0 && m10.data[0].children
+                                if m10.data[0].children.length>3 && m10.data[0].children[3]
+                                    li
+                                        a(id="#{m10.data[0].children[3].id}",index="3")
+                                            span(class="move_tipsItems_title") #{m10.data[0].children[3].name}
+                                            span(class="move_tipsItems_time") #{m10.data[0].children[3].date}
+                                if m10.data[0].children.length>4  && m10.data[0].children[4]
+                                    li
+                                        a(id="#{m10.data[0].children[4].id}",index="4")
+                                            span(class="move_tipsItems_title") #{m10.data[0].children[4].name}
+                                            span(class="move_tipsItems_time") #{m10.data[0].children[4].date}
+                                if m10.data[0].children.length>5  && m10.data[0].children[5]
+                                    li
+                                        a(id="#{m10.data[0].children[5].id}",index="5")
+                                            span(class="move_tipsItems_title") #{m10.data[0].children[5].name}
+                                            span(class="move_tipsItems_time")  #{m10.data[0].children[5].date}
+                                if m10.data[0].children.length>6 && m10.data[0].children[6]
+                                    li
+                                        a(id="#{m10.data[0].children[6].id}",index="6")
+                                            span(class="move_tipsItems_title") #{m10.data[0].children[6].name}
+                                            span(class="move_tipsItems_time") #{m10.data[0].children[6].date}
+        include ../components/footer
+        script(type="text/javascript",src="../javascripts/v5template/01_grauateStustentRecruiting.js")
+        script.
+            var objWin = null;
+            $(function(){
+
+                if(localStorage.needOpen == "1"){
+                    var userId = $(".fast_login_msg").attr('id');
+                    if(userId){
+                        var username = $(".fast_login_msg").html();
+                        var sCode  = $(".header_container").attr('sCode');
+                        var scodename = "#{schoolInfo.name}";
+                        localStorage.needOpen = "2";
+                        var url =getRobotServer()+"/users?"+'id='+userId+'&name='+username+'&sCode='+sCode +'&school='+scodename;
+                        if (objWin == null || objWin.closed) {
+                             return objWin = window.open(url,'_blank');
+
+                            if (objWin == null || typeof(objWin) == 'undefined') {
+                                alert("智能机器人聊天窗口被浏览器阻止，请点击允许弹出窗口");
+                            }
+                        } else {
+                            objWin.focus();
+                        }
+                    }
+                }
+
+                // 前端加入统计代码
+                // 用户省份
+                var userProvince = remote_ip_info.province;
+                // 用户城市
+                var userCity = remote_ip_info.city;
+                // 学校唯一标识
+                var sCode = $(".header_container").attr('sCode');
+                // 访问来源
+                var viewSourceUrl = document.referrer;
+                // 当前页面 url
+                var pageUrl = location.href;
+                $.ajax({
+                    type: "post",
+                    url: getApiServer() + "/front/addUserViewLog",
+                    data: {
+                        'userProvince': userProvince,
+                        'userCity': userCity,
+                        'sCode': sCode,
+                        'viewSourceUrl': viewSourceUrl,
+                        'pageUrl': pageUrl
+                    },
+                    success: function (data) {
+                        if (data && data.code == '000000') {
+                            return;
+                        } else {
+                            return;
+                        }
+                    }
+                })
+
+
+                // 首页上面轮播图修改
+                var themeColor = "#{themeColor}";
+                $(".num li").css("border-color",themeColor);
+
+
+                // 快捷入口点击事件
+                var m04 = !{m04};
+                // 当快捷入口为4个模块时
+                $(".fore_entry_01").click(function () {
+                    var index = $(this).attr('index');
+                    fastTrackClickWithIndex(index);
+                });
+                $(".fore_entry_02_container").click(function () {
+                    var index = $(this).attr('index');
+                    fastTrackClickWithIndex(index);
+                });
+                $(".fore_entry_03").click(function () {
+                    var index = $(this).attr('index');
+                    fastTrackClickWithIndex(index);
+                });
+                $(".fore_entry_04").click(function () {
+                    var index = $(this).attr('index');
+                    fastTrackClickWithIndex(index);
+                });
+                // 当快捷入口为5个模块时
+                $(".fast_entry_01").click(function () {
+                    var index = $(this).attr('index');
+                    fastTrackClickWithIndex(index);
+                });
+                $(".fast_entry_02_container").click(function () {
+                    var index = $(this).attr('index');
+                    fastTrackClickWithIndex(index);
+                });
+                $(".fast_entry_03").click(function () {
+                    var index = $(this).attr('index');
+                    fastTrackClickWithIndex(index);
+                });
+                $(".fast_entry_04").click(function () {
+                    var index = $(this).attr('index');
+                    fastTrackClickWithIndex(index);
+                });
+                $(".fast_entry_05_container").click(function () {
+                    var index = $(this).attr('index');
+                    fastTrackClickWithIndex(index);
+                });
+                // 当快捷入口为6个模块时
+                $(".Quick_entry_01").click(function () {
+                    var index = $(this).attr('index');
+                    fastTrackClickWithIndex(index);
+                });
+                $(".Quick_entry_02").click(function () {
+                    var index = $(this).attr('index');
+                    fastTrackClickWithIndex(index);
+                });
+                $(".Quick_entry_03_container").click(function () {
+                    var index = $(this).attr('index');
+                    fastTrackClickWithIndex(index);
+                });
+                $(".Quick_entry_04").click(function () {
+                    var index = $(this).attr('index');
+                    fastTrackClickWithIndex(index);
+                });
+                $(".Quick_entry_05_container").click(function () {
+                    var index = $(this).attr('index');
+                    fastTrackClickWithIndex(index);
+                });
+                $(".Quick_entry_07").click(function () {
+                    var index = $(this).attr('index');
+                    fastTrackClickWithIndex(index);
+                });
+                /**
+                 * 快捷入口点击事件汇总
+                 * */
+                function fastTrackClickWithIndex(index) {
+                    var entity = m04.data[index];
+                    if (entity.ntype == '0') {
+                        // 跳转到文章列表
+                        var parentId = entity.catId;
+                        var sCode = $(".header_container").attr('sCode');
+                        var url = getAppServer() + '/page/list/' + sCode + "/"  + parentId+"?curPage=1&pageSize=10";
+                        window.open(toDetailPage(url));
+                    } else if (entity.ntype == 1) {
+                        var parentId = m04.data[index].catId;
+                        var sCode = $(".header_container").attr('sCode');
+                        var infoId = m04.data[index].children[0].id;
+                        //调转到文章详情
+                        var url = getAppServer() + '/page/detail/' + sCode + "/" + infoId + "/" + parentId;
+                        window.open(toDetailPage(url));
+
+                    } else if (entity.ntype == 2) {
+                        var url = entity.refUrl;
+                        window.open(toDetailPage(url));
+                    } else if (entity.ntype == 3) {
+                        // 跳转到校园风采
+                        var sCode = $(".header_container").attr('sCode');
+                        var url = getAppServer() + '/page/photo/' + sCode;
+                        window.open(toDetailPage(url));
+
+                    } else if (entity.ntype == 4) {
+                        //跳转到在线视频页面
+                        var sCode = $(".header_container").attr('sCode');
+                        var url = getAppServer() + '/page/video/' + sCode;
+                        window.open(toDetailPage(url));
+                    }
+                }
+
+
+                // m05 事件跳转   左边蓝色模块
+                var m05 = !{m05};
+                if (m05) {
+                    var title = "#{m05.modelName}";
+                    var len = title.length;
+                    if (len < 2) {
+                        var titlefirst = title.substr(0, 1);
+                        $(".notice_content_title span.content_title_tips01").html(titlefirst);
+
+                    } else {
+                        var titlefirst = title.substr(0, 1);
+                        var titlelast = title.substring(1);
+                        $(".notice_content_title span.content_title_tips01").html(titlefirst);
+                        $(".notice_content_title span.content_title_tips02").html(titlelast);
+                    }
+                }
+                $('.notice_content_msg ul li a').click(function () {
+                    var index = $(this).attr('index');
+                    if (m05.data && m05.data) {
+                        var entity = m05.data[0].children[index];
+                        var parentId = m05.data[0].catId;
+                        if (entity.ntype == '0') {
+                            //跳转到文章列表
+                            var parentId = entity.id;
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/list/' + sCode + "/" + parentId + "?curPage=1&pageSize=10";
+                            window.open(toDetailPage(url));
+                        } else if (entity.ntype == "1") {
+                            //调转到文章详情
+                            var infoId = entity.id;
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/detail/' + sCode + "/" + infoId + "/" + parentId;
+                            window.open(toDetailPage(url));
+
+                        } else if (entity.ntype == "2") {
+                            var url = entity.refUrl;
+                            window.open(toDetailPage(url));
+                        } else if (entity.ntype == "3") {
+                            // 跳转到 校园风采
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/photo/' + sCode;
+                            window.open(toDetailPage(url));
+                        } else if (entity.ntype == "4") {
+                            // 跳转到 视频在线
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/video/' + sCode;
+                            window.open(toDetailPage(url));
+                        }
+                    }
+                });
+
+
+                // 点击m05标题 跳转到二级页面
+                $(".notice_content_title").click(function(){
+                    var sCode = $(".header_container").attr('sCode');
+                    if (m05 && m05.data){
+                        var ntype = m05.data[0].ntype;
+                        if (ntype == "0") {
+                            // 跳转到文章列表
+                            var parentId = m05.data[0].catId;
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/list/' + sCode + "/" + parentId + "?curPage=1&pageSize=10";
+                            window.open(toDetailPage(url));
+
+                        } else if (ntype == "1") {
+                            //调转到文章详情
+                            return;
+                        } else if (ntype == "2") {
+                            var url = m05.data[0].refUrl;
+                            window.open(toDetailPage(url));
+                        } else if (ntype == "3") {
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/photo/' + sCode;
+                            window.open(toDetailPage(url));
+                        } else if (ntype == "4") {
+                            // 跳转到 视频在线
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/video/' + sCode;
+                            window.open(toDetailPage(url));
+                        }
+                    }
+                })
+
+                // 点击m05模块下面的圆圈小箭头,跳转到文章列表页面
+                $(".notice_content_more").click(function () {
+                    var sCode = $(".header_container").attr('sCode');
+                    if (m05 && m05.data){
+                        var ntype = m05.data[0].ntype;
+                        if (ntype == "0") {
+                            // 跳转到文章列表
+                            var parentId = m05.data[0].catId;
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/list/' + sCode + "/" + parentId + "?curPage=1&pageSize=10";
+                            window.open(toDetailPage(url));
+
+                        } else if (ntype == "1") {
+                            //调转到文章详情
+                            return;
+                        } else if (ntype == "2") {
+                            var url = m05.data[0].refUrl;
+                            window.open(toDetailPage(url));
+                        } else if (ntype == "3") {
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/photo/' + sCode;
+                            window.open(toDetailPage(url));
+                        } else if (ntype == "4") {
+                            // 跳转到 视频在线
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/video/' + sCode;
+                            window.open(toDetailPage(url));
+                        }
+                    }
+                });
+
+
+
+
+                // m06 事件跳转   右边白色模块
+                var m06 = !{m06};
+                if (m06){
+                    var title = "#{m06.modelName}";
+                    var len = title.length;
+                    if (len < 2) {
+                        var titlefirst = title.substr(0, 1);
+                        $(".advice_content_title span.content_title_tips01").html(titlefirst);
+
+                    } else {
+                        var titlefirst = title.substr(0, 1);
+                        var titlelast = title.substring(1);
+                        $(".advice_content_title span.content_title_tips01").html(titlefirst);
+                        $(".advice_content_title span.content_title_tips02").html(titlelast);
+                    }
+                }
+                $(".advice_content_msg ul li a").click(function () {
+                    var index = $(this).attr('index');
+                    if(m06 && m06.data){
+                        var entity = m06.data[0].children[index];
+                        var parentId = m06.data[0].catId;
+                        if (entity.ntype == '0') {
+                            // 跳转到文章列表
+                            var parentId = entity.id;
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/list/' + sCode + "/" + parentId + "?curPage=1&pageSize=10";
+                            window.open(toDetailPage(url));
+                        } else if (entity.ntype == 1) {
+                            var infoId = entity.id;
+                            var sCode = $(".header_container").attr('sCode');
+                            //调转到文章详情
+                            var url = getAppServer() + '/page/detail/' + sCode + "/" + infoId + "/" + parentId;
+                            window.open(toDetailPage(url));
+
+                        } else if (entity.ntype == 2) {
+                            var url = entity.refUrl;
+                            window.open(toDetailPage(url));
+                        } else if (entity.ntype == 3) {
+                            // 跳转到 校园风采
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/photo/' + sCode;
+                            window.open(toDetailPage(url));
+                        } else if (entity.ntype == 4) {
+                            // 跳转到 视频在线
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/video/' + sCode;
+                            window.open(toDetailPage(url));
+                        }
+                    }
+
+                });
+                // 点击m06 标题,跳转到二级页面
+                $(".advice_content_title").click(function(){
+                    var sCode = $(".header_container").attr('sCode');
+                    if (m06 && m06.data){
+                        var ntype = m06.data[0].ntype;
+                        if (ntype == "0") {
+                            // 跳转到文章列表
+                            var parentId = m06.data[0].catId;
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/list/' + sCode + "/" + parentId + "?curPage=1&pageSize=10";
+                            window.open(toDetailPage(url));
+
+                        } else if (ntype == "1") {
+                            //调转到文章详情
+                            return;
+                        } else if (ntype == "2") {
+                            var url = m06.data[0].refUrl;
+                            window.open(toDetailPage(url));
+                        } else if (ntype == "3") {
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/photo/' + sCode;
+                            window.open(toDetailPage(url));
+                        } else if (ntype == "4") {
+                            // 跳转到 视频在线
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/video/' + sCode;
+                            window.open(toDetailPage(url));
+                        }
+                    }
+                })
+
+
+                // 点击m06 模块下面的圆圈小箭头,跳转到文章列表页面
+                $(".advice_content_more").click(function () {
+                    var sCode = $(".header_container").attr('sCode');
+                    if (m06 && m06.data){
+                        var ntype = m06.data[0].ntype;
+                        if (ntype == "0") {
+                            // 跳转到文章列表
+                            var parentId = m06.data[0].catId;
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/list/' + sCode + "/" + parentId + "?curPage=1&pageSize=10";
+                            window.open(toDetailPage(url));
+
+                        } else if (ntype == "1") {
+                            //调转到文章详情
+                            return;
+                        } else if (ntype == "2") {
+                            var url = m06.data[0].refUrl;
+                            window.open(toDetailPage(url));
+                        } else if (ntype == "3") {
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/photo/' + sCode;
+                            window.open(toDetailPage(url));
+                        } else if (ntype == "4") {
+                            // 跳转到 视频在线
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/video/' + sCode;
+                            window.open(toDetailPage(url));
+                        }
+                    }
+                });
+
+
+
+                // m07 事件调转,  左边白色模块
+                var m07 = !{m07};
+                $(".advice02_content_msg ul li a").click(function () {
+                    var index = $(this).attr('index');
+                    if(m07 && m07.data ){
+                        var entity = m07.data[0].children[index];
+                        var parentId = m07.data[0].catId;
+                        if (entity.ntype == '0') {
+                            //调转到文章列表
+                            var parentId = entity.id;
+                            var sCode = $('.header_container').attr('sCode');
+                            var url = getAppServer() + '/page/list/' + sCode + "/" + parentId + "?curPage=1&pageSize=10";
+                            window.open(toDetailPage(url));
+                        } else if (entity.ntype == 1) {
+                            var infoId = entity.id;
+                            var sCode = $(".header_container").attr('sCode');
+                            // 调转到文章详情
+                            var url = getAppServer() + '/page/detail/' + sCode + "/" + infoId + "/" + parentId;
+                            window.open(toDetailPage(url));
+                        } else if (entity.ntype == 2) {
+                            var url = entity.refUrl;
+                            window.open(toDetailPage(url));
+                        } else if (entity.ntype == 3) {
+                            // 跳转到 校园风采
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/photo/' + sCode;
+                            window.open(toDetailPage(url));
+                        } else if (entity.ntype == 4) {
+                            // 跳转到 视频在线
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/video/' + sCode;
+                            window.open(toDetailPage(url));
+                        }
+                    }
+                })
+                // 点击m07 标题 跳转到二级文章页面
+                $(".advice02_content_title").click(function () {
+                    var sCode = $(".header_container").attr('sCode');
+                    if(m07 && m07.data){
+                        var ntype = m07.data[0].ntype;
+                        if (ntype == "0") {
+                            // 跳转到文章列表
+                            var parentId = m07.data[0].catId;
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/list/' + sCode + "/" + parentId + "?curPage=1&pageSize=10";
+                            window.open(toDetailPage(url));
+
+                        } else if (ntype == "1") {
+                            //调转到文章详情
+                            return;
+                        } else if (ntype == "2") {
+                            var url = m07.data[0].refUrl;
+                            window.open(toDetailPage(url));
+                        } else if (ntype == "3") {
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/photo/' + sCode;
+                            window.open(toDetailPage(url));
+                        } else if (ntype == "4") {
+                            // 跳转到 视频在线
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/video/' + sCode;
+                            window.open(toDetailPage(url));
+                        }
+                    }
+                });
+                // 点击m07 模块下面的圆圈小箭头,跳转到文章列表页面
+                $(".advice02_content_more").click(function () {
+                    var sCode = $(".header_container").attr('sCode');
+                    if(m07 && m07.data){
+                        var ntype = m07.data[0].ntype;
+                        if (ntype == "0") {
+                            // 跳转到文章列表
+                            var parentId = m07.data[0].catId;
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/list/' + sCode + "/" + parentId + "?curPage=1&pageSize=10";
+                            window.open(toDetailPage(url));
+
+                        } else if (ntype == "1") {
+                            //调转到文章详情
+                            return;
+                        } else if (ntype == "2") {
+                            var url = m07.data[0].refUrl;
+                            window.open(toDetailPage(url));
+                        } else if (ntype == "3") {
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/photo/' + sCode;
+                            window.open(toDetailPage(url));
+                        } else if (ntype == "4") {
+                            // 跳转到 视频在线
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/video/' + sCode;
+                            window.open(toDetailPage(url));
+                        }
+                    }
+                });
+
+
+
+                // m08 ,右边蓝色模块
+                var m08 = !{m08};
+                var themeColor = "#{themeColor}";
+                // 鼠标滑过事件
+                $(".service_test ul li").mouseenter(function () {
+                    $(this).find("a").css("background", "#FFFFFF");
+                    $(this).find("i").css("color", themeColor);
+                    $(this).find("span").css("color", themeColor);
+                    $(this).find(".icon-m08_sanjiao").show();
+                    $(this).find(".icon-m08_sanjiao").css("top","-40px");
+                    $(this).find(".icon-m08_sanjiao").css("color", "#FFFFFF");
+                    $(this).siblings().find("i").css("color", "#FFFFFF");
+                    $(this).siblings().find("span").css("color", "#FFFFFF");
+                    $(this).siblings().find("a").css("background", themeColor);
+                    $(this).siblings().find(".icon-m08_sanjiao").hide();
+                    // 提取鼠标滑过时对应的 item 数据
+                    var catId = $(this).attr('catId');
+                    var item = null;
+                    for (var i in m08.data) {
+                        if (m08.data[i].catId == catId) {
+                            item = m08.data[i];
+                            break;
+                        }
+                    }
+
+                    //样式变化
+                    $(".service_content_msg").css("top", '120px');
+                    $(this).addClass("active").siblings().removeClass("active");
+
+                    //$(this).find("i").addClass("themeBackColor").siblings().removeClass("themeBackColor");
+                    if (!item || !item.children || item.children.length <= 0)
+                        return $(".itemMsgList ul").html("");
+                    var html = "";
+                    // <li><a id="791" href="null"><span class="itemMsgList_title">填报专业都无法录取怎么办？</span></a></li>
+                    for (var i in item.children) {
+                        html += "<li><a index='" + i + "' id='" + item.children[i].id + "'><span class='time'>" + item.children[i].date + "</span><span class=\"itemMsgList_title\">" + item.children[i].name + "</span></a></li>";
+
+                    }
+
+                    $(".itemMsgList ul").html("");
+                    $(".itemMsgList ul").html(html);
+                    $(".service_content,.itemMsgList").show();
+                    // 对二级下面的下拉项的时间做判断
+
+                    // 给展示的列表项, 添加点击事件
+                    $(".itemMsgList ul li a").click(function () {
+
+                        var i1 = $('.service_test ul li.active').attr('index');
+                        var i2 = $(this).attr('index');
+
+                        var dataItem = m08.data[i1];
+                        var entity = dataItem.children[i2];
+                        var parentId = m08.data[i1].catId;
+                        if (entity.ntype == '0') {
+                            //调转到文章列表 需要父级id parentId
+                            var parentId = entity.id;
+                            var sCode = $('.header_container').attr('sCode');
+                            var url = getAppServer() + '/page/list/' + sCode + "/" + parentId + "?curPage=1&pageSize=10";
+                            window.open(toDetailPage(url));
+                        } else if (entity.ntype == 1) {
+                            var infoId = entity.id;
+                            var sCode = $(".header_container").attr('sCode');
+                            // 调转到文章详情
+                            var url = getAppServer() + '/page/detail/' + sCode + "/" + infoId + "/" + parentId;
+                            window.open(toDetailPage(url));
+                        } else if (entity.ntype == 2) {
+                            var url = entity.refUrl;
+                            window.open(toDetailPage(url));
+                        } else if (entity.ntype == 3) {
+                            // 跳转到 校园风采
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/photo/' + sCode;
+                            window.open(toDetailPage(url));
+                        } else if (entity.ntype == 4) {
+                            // 跳转到 视频在线
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/video/' + sCode;
+                            window.open(toDetailPage(url));
+                        }
+
+
+                    });
+
+
+                });
+                // 鼠标离开事件
+                $(".service_test li").mouseleave(function () {
+                    //$(this).css("background", themeColor);
+                    //$(this).find("i").css("color","#ffffff");
+                    //$(this).find("span").css("color","#FFFFFF");
+                    $(this).siblings().find("i").css("color", "#FFFFFF");
+                    $(this).siblings().find("span").css("color", "#FFFFFF");
+                    $(".itemMsgList").show();
+                    $(this).find(".icon-m08_sanjiao").show();
+                });
+                $(".service_content_msg").mouseleave(function () {
+                    $(".itemMsgList").hide();
+                    $(".service_content_msg").css("top", '150px');
+                    //$(".service_test ul li").removeClass("active");
+                    $(".service_test ul li").find("i").css("color", "#FFFFFF");
+                    $(".service_test ul li").find("span").css("color", "#FFFFFF");
+                    $(".service_test ul li a").css("background", themeColor);
+                    $(this).find(".icon-m08_sanjiao").hide();
+                });
+
+                // m08 模块标题点击跳转,跳转到二级页面
+                $(".service_content_title").click(function(){
+                    // 第一个模块为ntype = 0 跳转到文章列表 需要catId
+                    var catId = m08.data[0].catId;
+                    var sCode = $(".header_container").attr('sCode');
+                    var ntype = m08.data[0].ntype;
+                    if (ntype == "0") {
+                        // 跳转到文章列表
+                        var parentId = m08.data[0].catId;
+                        var sCode = $(".header_container").attr('sCode');
+                        var url = getAppServer() + '/page/list/' + sCode + "/" + parentId + "?curPage=1&pageSize=10";
+                        window.open(toDetailPage(url));
+                    } else if (ntype == "1") {
+                        //调转到文章详情
+                        return;
+                    } else if (ntype == "2") {
+                        var url = m07.data[0].refUrl;
+                        window.open(toDetailPage(url));
+                    } else if (ntype == "3") {
+                        var sCode = $(".header_container").attr('sCode');
+                        var url = getAppServer() + '/page/photo/' + sCode;
+                        window.open(toDetailPage(url));
+                    } else if (ntype == "4") {
+                        // 跳转到 视频在线
+                        var sCode = $(".header_container").attr('sCode');
+                        var url = getAppServer() + '/page/video/' + sCode;
+                        window.open(toDetailPage(url));
+                    }
+
+                })
+
+
+
+                // m08 模块 下面的圆圈小箭头,跳转到文章列表页面
+                $(".service_content_more").click(function () {
+                    // 第一个模块为ntype = 0 跳转到文章列表 需要catId
+                    var catId = m08.data[0].catId;
+                    var sCode = $(".header_container").attr('sCode');
+                    var ntype = m08.data[0].ntype;
+                    if (ntype == "0") {
+                        // 跳转到文章列表
+                        var parentId = m08.data[0].catId;
+                        var sCode = $(".header_container").attr('sCode');
+                        var url = getAppServer() + '/page/list/' + sCode + "/" + parentId + "?curPage=1&pageSize=10";
+                        window.open(toDetailPage(url));
+
+                    } else if (ntype == "1") {
+                        //调转到文章详情
+                        return;
+                    } else if (ntype == "2") {
+                        var url = m07.data[0].refUrl;
+                        window.open(toDetailPage(url));
+                    } else if (ntype == "3") {
+                        var sCode = $(".header_container").attr('sCode');
+                        var url = getAppServer() + '/page/photo/' + sCode;
+                        window.open(toDetailPage(url));
+                    } else if (ntype == "4") {
+                        // 跳转到 视频在线
+                        var sCode = $(".header_container").attr('sCode');
+                        var url = getAppServer() + '/page/video/' + sCode;
+                        window.open(toDetailPage(url));
+                    }
+
+                });
+                // m08 模块,5个列表项的点击事件
+                $(".service_test ul li").click(function(){
+                    var catId = $(this).attr('catId');
+                    var sCode = $(".header_container").attr('sCode');
+                    var ntype = $(this).attr('ntype');
+                    var item = null;
+                    for (var i in m08.data) {
+                        if (m08.data[i].catId == catId) {
+                            item = m08.data[i];
+                            break;
+                        }
+                    }
+                    if (ntype == "0") {
+                        // 跳转到文章列表
+                        var sCode = $(".header_container").attr('sCode');
+                        var parentId = $(this).attr('catId');
+                        var url = getAppServer() + '/page/list/' + sCode + "/" + parentId + "?curPage=1&pageSize=10";
+                        window.open(toDetailPage(url));
+
+                    } else if (ntype == "1") {
+                        //调转到文章详情
+                        return;
+                    } else if (ntype == "2") {
+                        var url = item.refUrl;
+                        window.open(toDetailPage(url));
+                    } else if (ntype == "3") {
+                        var sCode = $(".header_container").attr('sCode');
+                        var url = getAppServer() + '/page/photo/' + sCode;
+                        window.open(toDetailPage(url));
+                    } else if (ntype == "4") {
+                        // 跳转到 视频在线
+                        var sCode = $(".header_container").attr('sCode');
+                        var url = getAppServer() + '/page/video/' + sCode;
+                        window.open(toDetailPage(url));
+                    }
+                })
+
+
+
+                // m10 轮播图JS
+                var i = 0;
+                var timer = null;
+                var firstimg = $('.view>li').first().clone();
+                $('.view').append(firstimg).width($('.view>li').length * ($('.view>li').width()));
+                $('.circle li').mouseover(function () {
+                    var _index = $(this).index();
+                    $('.view').stop().animate({left: -_index * 570}, 300);
+                    $('.circle li').eq(_index).addClass('themeBackgroundColor').siblings().removeClass('themeBackgroundColor');
+                })
+                timer = setInterval(function () {
+                    i++;
+                    if (i == $('.view li').length) {
+                        i = 1;
+                        $('.view').css({left: 0});
+                    }
+                    ;
+                    $('.view').stop().animate({left: -i * 570}, 300);
+                    if (i == $('.view li').length - 1) {
+                        $('.circle li').eq(0).addClass('themeBackgroundColor').siblings().removeClass('themeBackgroundColor');
+                    } else {
+                        $('.circle li').eq(i).addClass('themeBackgroundColor').siblings().removeClass('themeBackgroundColor');
+                    }
+                }, 3000)
+                $('#move-carousel-wrapper').hover(function () {
+                    clearInterval(timer);
+                }, function () {
+                    timer = setInterval(function () {
+                        i++;
+                        if (i == $('.view>li').length) {
+                            i = 1;
+                            $('.view').css({left: 0});
+                        }
+                        ;
+                        $('.view').stop().animate({left: -i * 570}, 300);
+                        if (i == $('.view li').length - 1) {
+                            $('.circle li').eq(0).addClass('themeBackgroundColor').siblings().removeClass('themeBackgroundColor');
+                        } else {
+                            $('.circle li').eq(i).addClass('themeBackgroundColor').siblings().removeClass('themeBackgroundColor');
+                        }
+                    }, 3000)
+                })
+                $(".move_listItems_msg_tips01 .titles").hover(function(){
+                    $(this).css("color",themeColor);
+                },function(){
+                    $(this).css("color","#333333");
+                })
+                // 下面列表项
+                $(".move_tipsItems li a").hover(function(){
+                    $(this).find(".move_tipsItems_title").css("color",themeColor);
+                    $(this).find(".move_tipsItems_time").css("color",themeColor);
+                },function(){
+                    $(this).find(".move_tipsItems_title").css("color","#444444");
+                    $(this).find(".move_tipsItems_time").css("color","#666666");
+                })
+
+                // m10点击事件跳转
+                var m10 = !{m10};
+
+                $(".move_listItems").click(function () {
+                    var index = $(this).attr('index');
+                    var entity = m10.data[0].children[index];
+                    var parentId = m10.data[0].catId;
+                    if (entity.ntype == '0') {
+                        //跳转到文章列表
+                        var sCode = $(".header_container").attr('sCode');
+                        var url = getAppServer() + '/page/list/' + sCode + "/" + parentId + "?curPage=1&pageSize=10";
+                        window.open(toDetailPage(url));
+                    } else if (entity.ntype == 1) {
+                        //调转到文章详情
+                        var infoId = entity.id;
+                        var sCode = $(".header_container").attr('sCode');
+                        var url = getAppServer() + '/page/detail/' + sCode + "/" + infoId + "/" + parentId;
+                        window.open(toDetailPage(url));
+                    } else if (entity.ntype == 2) {
+                        var url = entity.refUrl;
+                        window.open(toDetailPage(url));
+                    } else if (entity.ntype == 3) {
+                        // 跳转到 校园风采
+                        var sCode = $(".header_container").attr('sCode');
+                        var url = getAppServer() + '/page/photo/' + sCode;
+                        window.open(toDetailPage(url));
+                    } else if (entity.ntype == 4) {
+                        // 跳转到 视频在线
+                        var sCode = $(".header_container").attr('sCode');
+                        var url = getAppServer() + '/page/video/' + sCode;
+                        window.open(toDetailPage(url));
+
+                    }
+                });
+                // 点击m10  更多 按钮跳转到文章列表   因为这个模块ntype = 0
+                $(".move_title").click(function () {
+                    var sCode = $(".header_container").attr('sCode');
+                    if(m10 && m10.data){
+                        var ntype = m10.data[0].ntype;
+                        if (ntype == "0") {
+                            // 跳转到文章列表
+                            var parentId = m10.data[0].catId;
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/list/' + sCode + "/" + parentId + "?curPage=1&pageSize=10";
+                            window.open(toDetailPage(url));
+
+                        } else if (ntype == "1") {
+                            //调转到文章详情
+                            return;
+                        } else if (ntype == "2") {
+                            var url = m10.data[0].refUrl;
+                            window.open(toDetailPage(url));
+                        } else if (ntype == "3") {
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/photo/' + sCode;
+                            window.open(toDetailPage(url));
+                        } else if (ntype == "4") {
+                            // 跳转到 视频在线
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/video/' + sCode;
+                            window.open(toDetailPage(url));
+                        }
+                    }
+
+                })
+                // 下面的列表项
+                $(".move_tipsItems ul li a").click(function () {
+                    var index = $(this).attr('index');
+                    if (m10.data && m10.data[0]) {
+                        var entity = m10.data[0].children[index];
+                        var parentId = m10.data[0].catId;
+                        if (entity.ntype == '0') {
+                            //跳转到文章列表
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/list/' + sCode + "/" + parentId + "?curPage=1&pageSize=10";
+                            window.open(toDetailPage(url));
+                        } else if (entity.ntype == 1) {
+                            //调转到文章详情
+                            var infoId = entity.id;
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/detail/' + sCode + "/" + infoId + "/" + parentId;
+                            window.open(toDetailPage(url));
+                        } else if (entity.ntype == 2) {
+                            var url = entity.refUrl;
+                            window.open(toDetailPage(url));
+                        } else if (entity.ntype == 3) {
+                            // 跳转到 校园风采
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/photo/' + sCode;
+                            window.open(toDetailPage(url));
+                        } else if (entity.ntype == 4) {
+                            // 跳转到 视频在线
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/video/' + sCode;
+                            window.open(toDetailPage(url));
+                        }
+                    }
+
+                })
+
+
+                // m10 时间跳转
+                if(m10){
+                    if(m10 && m10.data && m10.data.length > 0 ){
+                        if(m10.data[0].children && m10.data[0].children[0]){
+                            var data01 = "#{m10.data[0].children[0].date}";
+                            var datefirst = data01.substr(0, 7);
+                            var datelast = data01.substring(7);
+                            $(".move_listItems_msg_tips01 .time .year01").html(datefirst);
+                            $(".move_listItems_msg_tips01 .time .date01").html(datelast);
+                        }
+
+                    }
+                    if(m10 && m10.data && m10.data.length > 0 ){
+                        if(m10.data[0].children && m10.data[0].children[1]){
+                            var data02 = "#{m10.data[0].children[1].date}";
+                            var datefirst = data02.substr(0, 7);
+                            var datelast = data02.substring(7);
+                            $(".move_listItems_msg_tips01 .time .year02").html(datefirst);
+                            $(".move_listItems_msg_tips01 .time .date02").html(datelast);
+                        }
+
+                    }
+                    if(m10 && m10.data && m10.data.length > 0 ){
+                        if(m10.data[0].children && m10.data[0].children[2]){
+                            var data02 = "#{m10.data[0].children[2].date}";
+                            var datefirst = data02.substr(0, 7);
+                            var datelast = data02.substring(7);
+                            $(".move_listItems_msg_tips01 .time .year03").html(datefirst);
+                            $(".move_listItems_msg_tips01 .time .date03").html(datelast);
+                        }
+
+                    }
+
+                }
+
+
+
+
+
+
+
+                // m09模块，事件跳转 左边导师风采
+                var m09 = !{m09};
+                // m09 轮播图点击事件
+                $("#temp4").Slide({
+                    effect: "scroolX",
+                    speed: "normal",
+                    timer: 3000,
+                    steps: 2
+                });
+                // m09 模块点击更多
+                $(".style_title").click(function(){
+                    var sCode = $(".header_container").attr('sCode');
+                    if(m09 && m09.data){
+                        var ntype = m09.data[0].ntype;
+                        if (ntype == "0") {
+                            // 跳转到文章列表
+                            var parentId = m09.data[0].catId;
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/list/' + sCode + "/" + parentId + "?curPage=1&pageSize=10";
+                            window.open(toDetailPage(url));
+
+                        } else if (ntype == "1") {
+                            //调转到文章详情
+                            return;
+                        } else if (ntype == "2") {
+                            var url = m09.data[0].refUrl;
+                            window.open(toDetailPage(url));
+                        } else if (ntype == "3") {
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/photo/' + sCode;
+                            window.open(toDetailPage(url));
+                        } else if (ntype == "4") {
+                            // 跳转到 视频在线
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/video/' + sCode;
+                            window.open(toDetailPage(url));
+                        }
+                    }
+                })
+                //m09 模块轮播图的点击事件
+                $(".JQ-slide-content li").click(function(){
+                    if(m09 && m09.data && m09.data.length > 0){
+                        var index = $(this).attr('index');
+                        var parentId = $(this).parent().parent().attr('catId');
+                        var sCode = $(".header_container").attr('sCode');
+                        var ntype = $(this).attr('ntype');
+                        var infoId = $(this).attr('id');
+                        var entity = m09.data[0].children[index];
+                        if (ntype == "0") {
+                            // 跳转到文章列表
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/list/' + sCode + "/" + parentId + "?curPage=1&pageSize=10";
+                            window.open(toDetailPage(url));
+
+                        } else if (ntype == "1") {
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/detail/' + sCode + "/" + infoId + "/" + parentId;
+                            window.open(toDetailPage(url));
+                        } else if (ntype == "2") {
+                            var url = entity.refUrl;
+                            window.open(url);
+                        } else if (ntype == "3") {
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/photo/' + sCode;
+                            window.open(toDetailPage(url));
+                        } else if (ntype == "4") {
+                            // 跳转到 视频在线
+                            var sCode = $(".header_container").attr('sCode');
+                            var url = getAppServer() + '/page/video/' + sCode;
+                            window.open(toDetailPage(url));
+                        }
+                    }
+                })
+
+                // 机器人点击事件
+                $(".Quick_entry_06,.fast_entry_06").click(function(){
+                    // 判断是否已登录
+                    var userId = $(".fast_login_msg").attr('id');
+                    if (userId && userId.length > 0){
+                        var userId = $(".fast_login_msg").attr('id');
+                        var username = $(".fast_login_msg").html();
+                        var sCode  = $(".header_container").attr('sCode');
+                        var scodename = "#{schoolInfo.name}";
+                        var url =getRobotServer()+"/users?"+'id='+userId+'&name='+username+'&sCode='+sCode +'&school='+scodename;
+                        if (objWin == null || objWin.closed) {
+                            objWin = window.open(url,'_blank');
+                            if (objWin == null || typeof(objWin) == 'undefined') {
+                                alert("智能机器人聊天窗口被浏览器阻止，请点击允许弹出窗口")
+                                ;
+                            }
+                        } else {
+                            objWin.focus();
+                        }
+                    }else{
+                        localStorage.needOpen = 1;
+                        var sCode  = $(".header_container").attr('sCode');
+                        var url = getAppServer() + '/page/login/' + sCode;
+                        window.open(toDetailPage(url));
+                    }
+
+                })
+
+                // 轮播图错误链接跳转
+                $("#container_lunbo .img li a").click(function(){
+                    var url = $(this).attr('linkUrl');
+                    if(url == "" && url.length ==0){
+                        return;
+                    }else{
+                        window.open(url);
+                    }
+                })
+
+            });

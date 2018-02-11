@@ -1,0 +1,110 @@
+link(rel="stylesheet" href="/stylesheets/v3_2template/components/rightbooks.css")
+div#rightBooks.books
+    if userInfo && userInfo.id
+        a(id="robot" class="hasLogin")
+            img(src="/images/v4template/jiqiren2.gif")
+        ul#books
+            a#book1 招录公告
+            a#book2 视频在线
+            a#book3 校园风采
+        div.toTop
+            i.icon-totop
+            h4 返回顶部
+    else
+        a(id="robot" class="unLogin" )
+            img(src="/images/v4template/jiqiren2.gif")
+        ul#books
+            a#book1 招录公告
+            a#book2 视频在线
+            a#book3 校园风采
+        a.toTop
+            i.icon-totop
+            h4 返回顶部
+
+
+script.
+
+    var objWin = null;
+    function addEvent(elem, event, fn) {
+        if (elem.addEventListener) {
+            elem.addEventListener(event, fn, false);
+        } else if (elem.attachEvent) {
+            elem.attachEvent('on' + event, fn);
+        } else {
+            elem['on' + event] = fn;
+        }
+    }
+    $(function () {
+        $('.toTop').click(function(){
+            $('html,body').animate({scrollTop: 0}, 500);
+        })
+        $('#books>a').hover(function(){
+            $(this).addClass('themeColor');
+        },function(){
+            $(this).removeClass('themeColor');
+        })
+        $('a.toTop').hover(function(){
+            $(this).find('i,h4').addClass('themeColor');
+        },function(){
+            $(this).find('i,h4').removeClass('themeColor');
+        })
+
+        addEvent(window, 'scroll', function () {
+            var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+            if (scrollTop > 40) {
+                $('#rightBooks').addClass('fix');
+                var windowWidth = document.body.clientWidth;
+                if (windowWidth > 1200) {
+                    var left = (windowWidth - 1200) / 2 + 200 + 840+30+30;
+                    $('#rightBooks').css('left', left + 'px');
+                } else {
+                    var scrollLeft = document.body.scrollLeft || document.documentElement.scrollLeft;
+                    $('#rightBooks').css('left', '');
+                    var right = (-1) * (1200 - windowWidth - scrollLeft)
+                    $('#rightBooks').css('right', right + 'px');
+                }
+
+            } else {
+                $('#rightBooks').removeClass('fix').css('left',0);
+            }
+        })
+
+
+
+        $('#book1').click(function () {
+
+            var url = APP_SERVER + '/page/notice/' + SCODE;
+            window.location.href = toDetailPage(url);
+
+        })
+        $('#book2').click(function () {
+            var url = APP_SERVER + '/page/video/'+SCODE;
+            window.location.href = toDetailPage(url);
+        })
+        $('#book3').click(function () {
+            var url = APP_SERVER + '/page/photo/' + SCODE;
+            window.location.href = toDetailPage(url);
+        })
+
+        /*  机器人打开新窗口*/
+        $('.hasLogin').on('click', function () {
+            var userId = $('.fast-login-msg').attr('id');
+            var username = $('.fast-login-msg').html().substring(3);
+            var scodename = "#{schoolInfo.name}"
+            var url = ROBOT_HOST + '/users?id=' + userId + '&name=' + username + '&sCode=' + SCODE + '&school=' + scodename;
+            if (objWin == null || objWin.closed) {
+                objWin = window.open(url, '_blank');
+                if (objWin == null || typeof(objWin) == 'undefined') {
+                    alert("智能机器人聊天窗口被浏览器阻止，请点击允许弹出窗口");
+                }
+            } else {
+                objWin.focus();
+            }
+        })
+
+        $('.unLogin').on('click', function () {
+            localStorage.needOpen = 1;
+            var url = APP_SERVER + '/page/login/'+SCODE;
+            window.location.href = toDetailPage(url);
+        })
+    })

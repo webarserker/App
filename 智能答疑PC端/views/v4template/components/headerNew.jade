@@ -1,0 +1,285 @@
+div(id="header" class="themeBackgroundColor" data-identify="#{schoolInfo.identify}" data-scode="#{schoolInfo.code}")
+    div.outside.themeDarkBg
+        div.containers
+            ul.lf.themeDarkBg
+                li
+                    a(id="mobile-qrcode")
+                        i.icon-mobile &nbsp;
+                        | 扫码进入移动版 &nbsp;|&nbsp;&nbsp;
+                        div#qrcode
+                            img
+                if userInfo && userInfo.id
+                    li.user-container
+                        a.fast-login#creator
+                            span(class="fast-login-msg" id="#{userInfo.id}") 您好，#{userInfo.nickName}
+                        div.user-menu
+                            a#personal-data 我的资料
+                            a#reply 招办回复
+                            a#feedback 意见反馈
+                            a#log-out 退出登录
+                else
+                    li
+                        a.fast-login
+                            i.icon-huojian &nbsp;
+                            span.fast-login-msg 快捷登录
+                            span &nbsp;&nbsp;|&nbsp;
+                    li
+                        a.fast_register
+                            i &nbsp;
+                            | &nbsp;免费注册
+            div.fright.rt
+                ul.themeDarkBg
+                    p.search-box
+                        i.comicon-search
+
+                    li#m01
+                div.input-group
+                    input(name="search" type="text" id="search")
+                    div.search-box
+                        i.comicon-search
+
+    div.containers
+        div.header-nav
+            div.lf
+                p
+                    a#logo-target
+                        img(id="school-logo")
+                    | •&nbsp;
+                    span#professor
+            ul.rt#headerNav
+
+script.
+
+    // 跳转页面，统一处理参数
+    function toDetailPage(url) {
+        if (sessionStorage.getItem("spreadToken") && sessionStorage.getItem("spreadToken") != 'null') {
+            if (url.indexOf("?") > -1) {
+                url += "&spreadToken=" + sessionStorage.getItem("spreadToken");
+            } else {
+                url += "?spreadToken=" + sessionStorage.getItem("spreadToken");
+            }
+        }
+        return url;
+    }
+
+    function getSpreadToken() {
+        var frontUserId = $('.fast_login_msg').attr('userid') && $('.fast_login_msg').attr('userid') != '' ? $('.fast_login_msg').attr('userid') : $('.fast-login-msg').attr('userid');
+        $.ajax({
+            url: BASE_HOST + '/front/spread/getSpreaderByUserId',
+            data: {frontUserId: frontUserId, sCode: $('#header').data('scode')},
+            type: "POST",
+            dataType: 'json',
+            success: function (res) {
+                var spreadToken = GetQueryString("spreadToken");
+                var userToken = GetQueryString("userToken");
+                if (res.code == '000000' && !res.data && spreadToken) {
+                    $.ajax({
+                        type: "get",
+                        url: BASE_HOST + "/front/spread/bindUserAndSpread",
+                        data: {
+                            'spreadToken': spreadToken,
+                            'userToken': userToken,
+                            'frontUserId': frontUserId
+                        },
+                        success: function (res) {
+                            if (res && res.code == '000000') {
+                                sessionStorage.setItem('spreadToken', res.data ? res.data : '');
+                            }
+                        }
+                    })
+                } else {
+                    sessionStorage.setItem('spreadToken', res.data ? res.data : '');
+                }
+            }
+        });
+    }
+
+    $(function () {
+        getSpreadToken();
+
+        $('#qrcode img').attr('src', IMG_HOST + '/imgServer/qrcode/' + $("#header").data("identify") + '.jpg');
+        $('#logo-target').attr('href', toDetailPage(APP_SERVER + '/' + $("#header").data("identify")));
+
+        $('.user-container').hover(function () {
+            $('.user-menu').show();
+        }, function () {
+            $('.user-menu').hide();
+        })
+
+        $('#mobile-qrcode').hover(function () {
+            $('#qrcode').show();
+        }, function () {
+            $('#qrcode').hide();
+        })
+
+        /*搜索框特效*/
+        $('p.search-box').hover(function () {
+            $(this).addClass('active');
+        }, function () {
+            $(this).removeClass('active');
+        })
+        var searchStatus = false;
+        $('p.search-box').click(function () {
+            $('.input-group').animate({'right': '103%', 'width': '150px'}, 200)
+            $('p.search-box').hide();
+            $('.input-group input').val('')
+            searchStatus = true;
+        })
+        $(document).on('mousedown', function (e) {
+            if (searchStatus && e.target.className != 'search-box' && e.target.className != 'comicon-search' && e.target.name != 'search') {
+                $('.input-group').animate({'right': '30px', 'width': '0px'}, 200, function () {
+                    $('p.search-box').show()
+                })
+
+            }
+        })
+        /*登陆点击*/
+        $('.fast-login').on('click', function () {
+            if ($(this).find('.fast-login-msg').html() == '快捷登录') {
+                localStorage.needOpen = "2";
+                var url = APP_SERVER + "/page/login/"+ SCODE;
+                window.location.href = toDetailPage(url);
+            }
+        })
+
+        /*我的资料点击*/
+        $('#personal-data').on('click', function () {
+            var url = APP_SERVER + "/page/personal/"+ SCODE;
+            window.location.href = toDetailPage(url);
+        })
+
+        /*招办回复点击*/
+        $('#reply').on('click', function () {
+            var url = APP_SERVER + "/v5users/v5messageList?" + "sCode=" + SCODE;
+            window.location.href = toDetailPage(url);
+        })
+
+        /*意见反馈点击 */
+        $('#feedback').on('click', function () {
+            var url = APP_SERVER + "/v5users/v5onlineMessage?" + "sCode=" + SCODE;
+            window.location.href = toDetailPage(url);
+        })
+
+        /*退出登录点击*/
+        $('#log-out').on('click', function () {
+            var identify = $("#header").data('identify');
+            var url = APP_SERVER + "/v5users/logOut?" + "identify=" + identify;
+            window.location.href = toDetailPage(url);
+        })
+
+        /*注册点击*/
+        $('.fast_register').on('click', function () {
+            var url = APP_SERVER + "/page/register/"+SCODE;
+            window.location.href = toDetailPage(url);
+        })
+
+        /*搜索点击*/
+        $('.input-group i.comicon-search').on('click', function () {
+            var text = $('#search').val();
+            $.get(BASE_HOST + '/front/template/getInfoCatByFAQ/' + SCODE, function (data) {
+                var parentId = data.data.catId;
+                var url = APP_SERVER + '/page/search/'+SCODE+'/'+parentId +'/'+ text;
+                window.location.href = toDetailPage(url);
+            })
+        })
+
+        $.get(BASE_HOST + '/front/template/findSchool/' + SCODE, function (data) {
+            $('body').attr('id', data.style);
+            $('#school-logo').attr('src', IMG_HOST + data.logoUrl);
+            $('#professor').html(data.professor)
+        })
+
+        $.get(BASE_HOST + '/front/template/' + SCODE + '/v4.0/m01', function (data) {
+            var m01 = '';
+            data = data.data;
+            if (data != null) {
+                for (var i = 0; i < data.length; i++) {
+                    m01 += '&nbsp;| &nbsp;<a href="' + toDetailPage(data[i].refUrl) + '"><i class="' + data[i].icon + '"></i>' + data[i].name + '</a>&nbsp;'
+                }
+                $('#m01').html(m01);
+            }
+
+        })
+
+
+        $.get(BASE_HOST + '/front/template/getSecondPageBarMenu?sCode=' + SCODE, function (data) {
+            var m02 = '<li><a class="nav-item">首页</a></li>';
+
+
+            data = data.data;
+
+            if (data != null) {
+                for (var i = 0; i < data.length; i++) {
+                    var parentId = data[i].catId;
+                    m02 += '<li><a class="nav-item" data-ntype="' + data[i].ntype + '" data-refurl="' + data[i].refUrl + '" data-catid="' + data[i].catId + '" data-infoid="' + data[i].infoId + '">' + data[i].name + '</a>';
+                    m02 += '<div class="slide-menu-container"><ul class="slide-menu">';
+                    if (data[i].children) {
+                        var children = data[i].children;
+                        for (var r = 0; r < children.length; r++) {
+                            m02 += '<li><a data-ntype="' + children[r].ntype + '" data-refurl="' + children[r].refUrl + '" data-catid="' + (children[r].ntype == 0 ? children[r].id : parentId) + '" data-infoid="' + (children[r].ntype == 1 ? children[r].id : null) + '"><span class="decoration"></span>' + children[r].name + '</a></li>'
+                        }
+                    }
+
+                    m02 += '</ul></div></li>';
+                }
+                $('#headerNav').html(m02)
+            }
+
+
+            $('#headerNav a').eq(0).attr('href', toDetailPage(APP_SERVER + '/' + $('#header').data('identify')))
+            $('#headerNav>li').hover(function () {
+                $(this).find('a.nav-item').addClass('active themeColor');
+                $(this).find('.slide-menu-container').show();
+                var index = $(this).index();
+                var in_width = 0;
+                var menu_width = $(this).find('.slide-menu-container').outerWidth();
+                var WINDOW_WIDTH = window.innerWidth || document.body.clientWidth;
+                if (WINDOW_WIDTH < 1200) {
+                    WINDOW_WIDTH = 1200;
+                }
+
+                var out_width = (WINDOW_WIDTH - 1200) / 2;
+                var sub_length = $('#headerNav>li').length;
+                for (var x = index; x < sub_length; x++) {
+                    in_width += $('#headerNav>li').eq(x).outerWidth();
+                }
+                if (menu_width > in_width + out_width) {
+                    var distance = menu_width - (in_width + out_width);
+                    $(this).find('.slide-menu-container').css('left', -1 * distance + 'px')
+                }
+
+            }, function () {
+                var index = $(this).index();
+                $(this).find('a').removeClass('active themeColor');
+                $(this).find('.slide-menu-container').hide();
+            })
+
+            $('#headerNav>li a').each(function () {
+                $(this).on('click', function () {
+                    if ($(this).data('ntype') == 2) {
+                        window.open(toDetailPage($(this).data('refurl')));
+                    } else if ($(this).data('ntype') == 3) {
+                        var url = APP_SERVER + '/page/photo/'+SCODE;
+                        window.location.href = toDetailPage(url);
+                    } else if ($(this).data('ntype') == 4) {
+                        var url = APP_SERVER + '/page/video/'+SCODE;
+                        window.location.href = toDetailPage(url);
+                    } else if ($(this).data('ntype') == 1) {
+                        var url = APP_SERVER + '/page/detail/'+SCODE+'/'+$(this).data('infoid')+'/'+$(this).data('catid');
+                        window.location.href = toDetailPage(url);
+                    } else if ($(this).data('ntype') == 0) {
+                        var parentId = $(this).data('catid');
+                        $.get(BASE_HOST + '/front/template/getFirstSubCatId?catId=' + parentId, function (data) {
+                            if (data.code == '000000') {
+                                var url = APP_SERVER + '/page/list/'+SCODE+'/'+data.data + '?curPage=1&pageSize=10'
+                                window.location.href = toDetailPage(url);
+                            }
+                        })
+                    }
+                })
+            })
+
+        })
+
+
+    })

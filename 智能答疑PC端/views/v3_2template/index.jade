@@ -1,0 +1,937 @@
+extends layout.jade
+block content
+    include ./components/header
+    //右侧悬浮小菜单
+    ul.fix-right
+        if userInfo && userInfo.id
+            a.icon-container.themeBackgroundColor.hasLogin
+                i.comicon-robot
+        else
+            a.icon-container.themeBackgroundColor.unLogin
+                i.comicon-robot
+        a.icon-container.themeBackgroundColor.qrcode
+            i.comicon-qrcode
+            div.big-qrcode
+                img(src="#{locals.global.img_sever_url}/imgServer/qrcode/#{schoolInfo.identify}.jpg")
+                i.icon-todetail
+
+        a.icon-container.themeBackgroundColor.question
+            i.usericon-webicon-70
+    div#index-carousel-wrapper
+        ul(class="img")
+
+        ul(class="num")
+
+        img(class="arc" src="/images/v3_2template/1000.png")
+
+    div#cat-box
+        div.containers
+            div#admission-notice
+                div.head.admission-notice-head
+                    div.title
+                        a.toMore
+                    a.icon-tomore.toMore
+                ul.admission-notice-body.news-list
+                    //li(class="li0")
+                    //    div.lf.calendar
+                    //        h1.themeBackgroundColor 12.20
+                    //        h2.themeBackgroundColor 2017
+                    //    p.lf
+                    //        a 关于邀请我校“专家导师团”赴高级中学宣讲的有关说明
+                    //li
+                    //    div.lf.calendar
+                    //        h1.themeBackgroundColor 12.20
+                    //        h2.themeBackgroundColor 2017
+                    //    p.lf
+                    //        a 2017年高考录取结果查询
+                    //li
+                    //    div.lf.calendar
+                    //        h1.themeBackgroundColor 12.20
+                    //        h2.themeBackgroundColor 2017
+                    //    p.lf
+                    //        a 2016年本科招生章程
+                    //li
+                    //    div.lf.calendar
+                    //        h1.themeBackgroundColor 12.20
+                    //        h2.themeBackgroundColor 2017
+                    //    p.lf
+                    //        a 2016年本科招生章程
+
+            div#other-cat.other-cat
+
+
+                ul.news-list
+                    //li
+                    //    a
+                    //        span.lf 2017.08.23
+                    //        span.title 2017录取查询
+
+                p
+                    a.toMore 更多&gt;&gt;
+
+    div#gray-board
+        div.containers
+            div.cat
+                div.head.themeBorderBottom.cat-head
+                    h2
+                        a.toMore
+                    a.icon-tomore.toMore
+                ul.body.news-list
+                    //li.li0
+                    //    div.icon-container.themeBackgroundColor
+                    //        i.usericon-webicon-33
+                    //    div.a-container
+                    //        a 2017年本科招生简章
+                    //    p.date 2017.12.16
+                    //li.li1
+                    //    div.icon-container.themeBackgroundColor
+                    //        i.usericon-webicon-33
+                    //    div.a-container
+                    //        a 2017年本科招生简章
+                    //    p.date 2017.12.16
+                    //li.li2
+                    //    div.icon-container
+                    //        i.usericon-webicon-33
+                    //    div.a-container
+                    //        a 2017年本科招生简章
+                    //    p.date 2017.12.16
+
+
+            if userInfo && userInfo.id
+                div#question-answering.hasLogin
+                    a(id="jiqiren")
+                        img(src="/images/v4template/jiqiren2.gif")
+            else
+                div#question-answering.unLogin
+                    a(id="jiqiren")
+                        img(src="/images/v4template/jiqiren2.gif")
+
+            div#video-box
+                div.head.video-box
+                    h2
+                        a.toMore 高校视频
+                    a.icon-tomore.toMore
+                div.body
+                    //a
+                    //    img(src="/images/v3_2template/videoBtn.png")
+                    //    p 高校视频标题
+                    //a
+                    //    img(src="/images/v3_2template/videoBtn.png")
+                    //    p 高校视频标题
+
+    div#slider
+        div#slider-wrapper.wrap
+            ul.JQ-slide-content
+                //li
+                //    div.inner
+                //        div.small-flag 人物
+                //        div.full-flag
+                //            div.cell
+                //                h2 111
+                //                a.themeBackgroundColor 了解更多
+
+        div.JQ-slide-nav
+            a.prev ‹
+            a.next ›
+
+    include ./components/footer
+
+    script.
+        var ROBOT_HOST = '!{locals.global.robot_sever_url}'
+        var BASE_HOST = '!{locals.global.api_sever_url}'
+        var HOST = BASE_HOST + '/weixin/api';
+        var IMG_HOST = '!{locals.global.img_sever_url}'
+        var APP_SERVER = ''
+        var SCODE = '#{scode}';
+        var objWin = null;
+
+
+        function dateformat(date) {
+            var m = new Date(date).getMonth() + 1;
+            var d = new Date(date).getDate();
+            return m + '月' + d + '日';
+        }
+
+        var slider = {
+            timer: null,
+            imgWidthList: [],
+            resizeCarousel: function () {
+                var me = this;
+                clearInterval(me.timer);
+                me.timer = null;
+                $('#index-carousel-wrapper ul.img').stop().css('left', 0);
+                $('.num').html('');
+
+                for(var s=0;s<$('#index-carousel-wrapper ul.img>li').length-1;s++){
+                    $('.num').append('<li></li>')
+                }
+
+                var windowWidth = document.body.clientWidth;
+                if (windowWidth < 1200) {
+                    windowWidth = 1200;
+                }
+                var wrapperHeight = 490;
+                $('#index-carousel-wrapper').height(wrapperHeight);
+                $('#index-carousel-wrapper .img>li').width(windowWidth).height(wrapperHeight);
+                var bili = windowWidth / wrapperHeight;
+
+
+                if (me.imgWidthList.length == $('#index-carousel-wrapper ul.img>li').length - 1) {
+                    me.imgWidthList[me.imgWidthList.length] = me.imgWidthList[0];
+                }
+
+
+                $('#index-carousel-wrapper .img img').unbind('load');
+                $('#index-carousel-wrapper .img img').each(function (i, v) {
+                    var imgWidth = me.imgWidthList[i].width;
+                    var imgHeight = me.imgWidthList[i].height;
+                    if (imgWidth / imgHeight > bili) {
+                        var x = parseInt(imgWidth / bili - imgHeight);
+                        var xDistance = parseInt(imgHeight * bili);
+                        var imgSrc = $('#index-carousel-wrapper .img img:eq(' + i + ')').attr('src');
+                        var newImgSrc = imgSrc.split('?')[0] + '?x-oss-process=image/crop,x_' + x + ',y_0,w_' + xDistance + ',h_' + imgHeight;
+                        $('#index-carousel-wrapper .img img:eq(' + i + ')').attr('src', newImgSrc);
+                        $('#index-carousel-wrapper .img img:eq(' + i + ')').width(windowWidth);
+                    } else if (imgWidth / imgHeight < bili) {
+                        var y = parseInt((imgHeight - imgWidth / bili) / 2);
+                        var yDistance = parseInt(imgWidth / bili);
+                        var imgSrc = $('#index-carousel-wrapper .img img:eq(' + i + ')').attr('src');
+
+                        var newImgSrc = imgSrc.split('?')[0] + '?x-oss-process=image/crop,x_0,y_' + y + ',w_' + imgWidth + ',h_' + yDistance;
+                        $('#index-carousel-wrapper .img img:eq(' + i + ')').attr('src', newImgSrc);
+                        $('#index-carousel-wrapper .img img:eq(' + i + ')').width(windowWidth);
+                    } else if (imgWidth / imgHeight == bili) {
+                        $('#index-carousel-wrapper .img img:eq(' + i + ')').width(windowWidth);
+                    }
+                })
+
+
+
+
+                var i = 0;
+                /* var timer = null; */
+                $('.num li').first().addClass('active');
+
+
+                $('.num li').click(function () {
+                    clearInterval(me.timer);
+
+                    var _index = $(this).index();
+                    $('.img').stop().animate({left: -_index * windowWidth}, 1000);
+                    $('.num li').eq(_index).addClass('active').siblings().removeClass('active');
+                    i = _index;
+
+
+                    me.timer = setInterval(function () {
+                        i++;
+                        if (i == $('.img li').length) {
+                            i = 1;
+                            $('.img').css({left: 0});
+                        }
+                        ;
+                        $('.img').stop().animate({left: -i * windowWidth}, 1000);
+                        if (i == $('.img li').length - 1) {
+                            $('.num li').eq(0).addClass('active').siblings().removeClass('active');
+                        } else {
+                            $('.num li').eq(i).addClass('active').siblings().removeClass('active');
+                        }
+                    }, 4000)
+
+                })
+
+
+                me.timer = setInterval(function () {
+                    i++;
+                    if (i == $('.img li').length) {
+                        i = 1;
+                        $('.img').css({left: 0});
+                    }
+                    ;
+                    $('.img').stop().animate({left: -i * windowWidth}, 1000);
+                    if (i == $('.img li').length - 1) {
+                        $('.num li').eq(0).addClass('active').siblings().removeClass('active');
+                    } else {
+                        $('.num li').eq(i).addClass('active').siblings().removeClass('active');
+                    }
+                }, 4000)
+
+            },
+            bannerCarousel: function () {
+                var me = this;
+                var getBanners = '';
+                $.get(BASE_HOST + '/front/template/' + SCODE + '/v3.2/Banner', function (data) {
+                    clearInterval(me.timer);
+                    me.timer = null;
+                    $('#index-carousel-wrapper ul.img').stop().css('left', 0);
+                    $('.num').html('');
+                    data = data.data;
+                    for (var i = 0; i < data.length; i++) {
+                        getBanners += '<li><a target="_blank" class="A' + (i + 1) + '" href="' + toDetailPage(data[i].link) + '"><h1 class="h' + i + '">' + data[i].title + '</h1><img class="img' + i + '" src="' + IMG_HOST + data[i].imgUrl + '"></a></li>'
+                        $('.num').append('<li></li>')
+                    }
+                    $('#index-carousel-wrapper ul.img').html(getBanners);
+
+                    var windowWidth = document.body.clientWidth;
+                    if (windowWidth < 1200) {
+                        windowWidth = 1200;
+                    }
+                    var wrapperHeight = 490;
+                    $('#index-carousel-wrapper').height(wrapperHeight);
+                    $('#index-carousel-wrapper .img li').width(windowWidth).height(wrapperHeight);
+                    var bili = windowWidth / wrapperHeight;
+
+
+                    $('#index-carousel-wrapper .img img').each(function (i, v) {
+                        $('#index-carousel-wrapper .img img').eq(i).on('load', function () {
+                            var initImgSrc = $(this).attr('src');
+                            if (initImgSrc.indexOf('x-oss-process') == -1) {
+                                me.imgWidthList.push({width: $(this).width(), height: $(this).height()});
+                            }
+
+                            if (i == 0) {
+                                var imgSrc = $('#index-carousel-wrapper .img img:eq(' + i + ')').attr('src');
+                                if (imgSrc.indexOf('x-oss-process') > -1) {
+
+                                    var firstimg = $('.img li').first().clone();
+                                    $('.img').append(firstimg).width($('.img li').length * windowWidth);
+                                }
+                            }
+
+
+                            var imgWidth = $('#index-carousel-wrapper .img img')[i].width;
+                            var imgHeight = $('#index-carousel-wrapper .img img')[i].height;
+                            if (imgWidth / imgHeight > bili) {
+                                var x = parseInt(imgWidth / bili - imgHeight);
+                                var xDistance = parseInt(imgHeight * bili);
+                                var imgSrc = $('#index-carousel-wrapper .img img:eq(' + i + ')').attr('src');
+                                if (imgSrc.indexOf('x-oss-process') == -1) {
+                                    var newImgSrc = imgSrc + '?x-oss-process=image/crop,x_' + x + ',y_0,w_' + xDistance + ',h_' + imgHeight;
+                                    $('#index-carousel-wrapper .img img:eq(' + i + ')').attr('src', newImgSrc);
+                                    $('#index-carousel-wrapper .img img:eq(' + i + ')').width(windowWidth);
+                                }
+                            } else if (imgWidth / imgHeight < bili) {
+                                var y = parseInt((imgHeight - imgWidth / bili) / 2);
+                                var yDistance = parseInt(imgWidth / bili);
+                                var imgSrc = $('#index-carousel-wrapper .img img:eq(' + i + ')').attr('src');
+
+                                if (imgSrc.indexOf('x-oss-process') == -1) {
+                                    var newImgSrc = imgSrc + '?x-oss-process=image/crop,x_0,y_' + y + ',w_' + imgWidth + ',h_' + yDistance;
+                                    $('#index-carousel-wrapper .img img:eq(' + i + ')').attr('src', newImgSrc);
+                                    $('#index-carousel-wrapper .img img:eq(' + i + ')').width(windowWidth);
+                                }
+                            } else if (imgWidth / imgHeight == bili) {
+                                $('#index-carousel-wrapper .img img:eq(' + i + ')').width(windowWidth);
+                            }
+
+
+                        })
+                    })
+
+
+                    var i = 0;
+                    /* var timer = null; */
+                    $('.num li').first().addClass('active');
+
+
+                    $('.num li').click(function () {
+                        clearInterval(me.timer);
+
+                        var _index = $(this).index();
+                        $('.img').stop().animate({left: -_index * windowWidth}, 1000);
+                        $('.num li').eq(_index).addClass('active').siblings().removeClass('active');
+                        i = _index;
+
+
+                        me.timer = setInterval(function () {
+                            i++;
+                            if (i == $('.img li').length) {
+                                i = 1;
+                                $('.img').css({left: 0});
+                            }
+                            ;
+                            $('.img').stop().animate({left: -i * windowWidth}, 1000);
+                            if (i == $('.img li').length - 1) {
+                                $('.num li').eq(0).addClass('active').siblings().removeClass('active');
+                            } else {
+                                $('.num li').eq(i).addClass('active').siblings().removeClass('active');
+                            }
+                        }, 4000)
+
+                    })
+                    me.timer = setInterval(function () {
+                        i++;
+                        if (i == $('.img li').length) {
+                            i = 1;
+                            $('.img').css({left: 0});
+                        }
+                        ;
+                        $('.img').stop().animate({left: -i * windowWidth}, 1000);
+                        if (i == $('.img li').length - 1) {
+                            $('.num li').eq(0).addClass('active').siblings().removeClass('active');
+                        } else {
+                            $('.num li').eq(i).addClass('active').siblings().removeClass('active');
+                        }
+                    }, 4000)
+                })
+            }
+        }
+
+
+        $(function () {
+            var ROBOT_HOST = '!{locals.global.robot_sever_url}'
+            var BASE_HOST = '!{locals.global.api_sever_url}'
+            var HOST = BASE_HOST + '/weixin/api';
+            var IMG_HOST = '!{locals.global.img_sever_url}'
+            var APP_SERVER = ''
+            var SCODE = '#{scode}';
+            var objWin = null;
+
+            //右侧悬浮按钮的点击逻辑
+            $.get(BASE_HOST + '/front/template/getInfoCatByFAQ/' + SCODE, function (data) {
+                console.log(data);
+                $('.fix-right a.question').data('catid', data.data.secondCatId);
+                var url = APP_SERVER + '/page/list/' + SCODE + '/' + data.data.secondCatId;
+                $('.fix-right a.question').attr({
+                    'href': toDetailPage(url),
+                    'target': '_blank'
+                })
+            })
+
+            $('.fix-right a.qrcode').hover(function () {
+                $(this).find('.big-qrcode').show();
+            }, function () {
+                $(this).find('.big-qrcode').hide();
+            })
+
+
+            /*  机器人打开新窗口*/
+            $('.hasLogin').click(function () {
+                var userId = $('.fast-login-msg').attr('id');
+                var username = $('.fast-login-msg').html().substring(3);
+                var scodename = "#{schoolInfo.name}"
+                var url = ROBOT_HOST + '/users?id=' + userId + '&name=' + username + '&sCode=' + SCODE + '&school=' + scodename;
+                if (objWin == null || objWin.closed) {
+                    objWin = window.open(url, '_blank');
+                    if (objWin == null || typeof(objWin) == 'undefined') {
+                        alert("智能机器人聊天窗口被浏览器阻止，请点击允许弹出窗口");
+                    }
+                } else {
+                    objWin.focus();
+                }
+            });
+            if (localStorage.needOpen == "1") {
+                var userId = $(".fast-login-msg").attr('id');
+                if (userId) {
+                    localStorage.needOpen = "2";
+                    $('.hasLogin').click();
+                }
+            }
+            ;
+            $('.unLogin').on('click', function () {
+                localStorage.needOpen = 1;
+                var url = APP_SERVER + '/page/login/' + SCODE;
+                window.location.href = toDetailPage(url);
+            })
+
+            $(document).on('mouseover', '.news-list a', function () {
+                $(this).addClass('themeColor')
+                $(this).parent().siblings('.date').addClass('themeColor');
+            })
+            $(document).on('mouseout', '.news-list a', function () {
+                $(this).removeClass('themeColor')
+                $(this).parent().siblings('.date').removeClass('themeColor');
+            })
+
+            /*  机器人打开新窗口*/
+            $('.hasLogin').click(function () {
+                var userId = $('.fast-login-msg').attr('id');
+                var username = $('.fast-login-msg').html().substring(3);
+                var scodename = "#{schoolInfo.name}"
+                var url = ROBOT_HOST + '/users?id=' + userId + '&name=' + username + '&sCode=' + SCODE + '&school=' + scodename;
+                if (objWin == null || objWin.closed) {
+                    objWin = window.open(url, '_blank');
+                    if (objWin == null || typeof(objWin) == 'undefined') {
+                        alert("智能机器人聊天窗口被浏览器阻止，请点击允许弹出窗口");
+                    }
+                } else {
+                    objWin.focus();
+                }
+            });
+            if (localStorage.needOpen == "1") {
+                var userId = $(".fast-login-msg").attr('id');
+                if (userId) {
+                    localStorage.needOpen = "2";
+                    $('.hasLogin').click();
+                }
+            }
+
+
+            if (Function.prototype.bind === undefined) {
+                Function.prototype.bind = function (obj) {
+                    var _this = this;
+                    var args = Array.prototype.slice.call(arguments, 1);
+                    return function () {
+                        var innerArgs = Array.prototype.slice.call(arguments);
+                        var allArgs = args.concat(innerArgs);
+                        _this.apply(obj, allArgs);
+                    }
+                }
+            }
+
+            //大图片轮播
+            slider.bannerCarousel();
+            window.onresize = function () {
+
+                slider.resizeCarousel();
+            }
+
+            //招录公告
+            $.get(BASE_HOST + '/front/template/' + SCODE + '/v3.2/EnrolNotice', function (data) {
+                $('#admission-notice .head .title a.toMore').html(data.modelName ? data.modelName : data.data[0].name);
+                data = data.data;
+                var ntype = data[0].ntype;
+                var parentId = data[0].catId;
+                $('#admission-notice .toMore').data({
+                    'ntype': ntype,
+                    'catid': data[0].catId,
+                    'refurl': data[0].refUrl,
+                    'infoid': data[0].infoId
+                });
+                var STR = '';
+                var data2 = data[0].children;
+                (data2.length > 4) && (data2 = data2.slice(0, 4));
+                for (var i = 0; i < data2.length; i++) {
+                    var _name = '';
+                    if (data2[i].name != null) {
+                        _name = data2[i].name.length > 36 ? data2[i].name.substring(0, 35) + '...' : data2[i].name;
+                    }
+                    var mm = new Date(data2[i].date).getMonth() + 1;
+                    var dd = new Date(data2[i].date).getDate();
+                    var yy = new Date(data2[i].date).getFullYear();
+                    STR += '<li class="li' + i + '"><div class="lf calendar"><h1 class="themeBackgroundColor">' + mm + '.' + dd + '</h1><h2 class="themeBackgroundColor">' + yy + '</h2></div>'
+                        + '<p class="lf"><a title="' + data2[i].name + '" data-ntype="' + data2[i].ntype + '" data-refurl="' + data2[i].refUrl + '" data-catid="' + data2[i].catId + '" data-infoid="' + data2[i].id + '">' + _name + '</a></p>'
+                        + '</li>'
+                }
+                $('#admission-notice .admission-notice-body').html(STR);
+                $('#admission-notice .toMore').hover(function () {
+                    $(this).addClass('themeColor');
+                }, function () {
+                    $(this).removeClass('themeColor');
+                })
+                $('#admission-notice .toMore').each(function () {
+                    var url = APP_SERVER + '/page/notice/' + SCODE;
+                    $(this).attr({
+                        'href': toDetailPage(url),
+                        'target': '_blank'
+                    })
+                })
+                $('#admission-notice .admission-notice-body a').each(function () {
+                    if ($(this).data('ntype') == 2) {
+                        /*   window.open(toDetailPage($(this).data('refurl')))*/
+                        $(this).attr({
+                            'href': toDetailPage($(this).data('refurl')),
+                            'target': '_blank'
+                        })
+                    } else if ($(this).data('ntype') == 3) {
+                        var url = APP_SERVER + '/page/photo/' + SCODE
+                        /*  window.open(toDetailPage(url));   */
+                        $(this).attr({
+                            'href': toDetailPage(url),
+                            'target': '_blank'
+                        })
+                    } else if ($(this).data('ntype') == 4) {
+                        var url = APP_SERVER + '/page/video/' + SCODE;
+                        /*   window.open(toDetailPage(url));   */
+                        $(this).attr({
+                            'href': toDetailPage(url),
+                            'target': '_blank'
+                        })
+                    } else if ($(this).data('ntype') == 1) {
+                        var url = APP_SERVER + '/page/detail/' + SCODE + '/' + $(this).data('infoid') + '/' + $(this).data('catid');
+                        /*  window.open(toDetailPage(url));  */
+                        $(this).attr({
+                            'href': toDetailPage(url),
+                            'target': '_blank'
+                        })
+                    } else if ($(this).data('ntype') == 0) {
+                        var parentId = $(this).data('catid');
+                        var _this = this;
+                        $.get(BASE_HOST + '/front/template/getFirstSubCatId?catId=' + parentId, function (data) {
+                            if (data.code == '000000') {
+                                var url = APP_SERVER + '/page/list/' + SCODE + '/' + data.data;
+                                /*  window.open(toDetailPage(url)); */
+                                $(_this).attr({
+                                    'href': toDetailPage(url),
+                                    'target': '_blank'
+                                })
+                            }
+                        })
+                    }
+                })
+
+            })
+
+            //快捷入口
+            $.get(BASE_HOST + '/front/template/' + SCODE + '/v3.2/QuickEnter', function (data) {
+                var childrenList = [];
+                data = data.data;
+                var STR = '';
+                for (var i = 0; i < data.length; i++) {
+                    childrenList.push(data[i].children);
+                    STR += '<a data-children="' + data[i].children + '" class="cat-item cat' + i + '" data-ntype="' + data[i].ntype + '" data-refurl="' + data[i].refUrl + '" data-catid="' + data[i].catId + '" data-infoid="' + data[i].infoid + '">'
+                        +'<div class="cell">'
+                        + '<i class="' + data[i].icon + '"></i>'
+                        + '<p>' + data[i].name + '</p></div></a>'
+                }
+
+                STR += '<ul class="news-list">';
+                var child0 = data[0].children;
+                for (var j = 0; j < child0.length; j++) {
+                    var date = new Date(child0[j].date);
+                    STR += '<li><a data-title="' + child0[j].name + '" data-ntype="' + child0[j].ntype + '" data-refurl="' + child0[j].refUrl + '" data-catid="' + child0[j].catId + '" data-infoid="' + child0[j].id + '">'
+                        + '<span class="lf">' + date.getFullYear() + '.' + ((date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '.' + date.getDate() + '</span>'
+                        + '<span class="title">' + child0[j].name + '</span>'
+                        + '</a></li>'
+                }
+                STR += '</ul><p><a class="toMore">更多&gt;&gt;&nbsp;&nbsp;&nbsp;</a></p>'
+                $('#other-cat').html(STR);
+                $('#other-cat .cat-item').eq(0).addClass('active');
+                $('#other-cat>p a.toMore').hover(function () {
+                    $(this).addClass('themeColor');
+                }, function () {
+                    $(this).removeClass('themeColor');
+                })
+
+                var curCatId = data[0].catId;
+                var url = APP_SERVER + '/page/list/' + SCODE + '/' + curCatId;
+                $('#other-cat>p a.toMore').attr({
+                    'href': toDetailPage(url),
+                    'target': '_blank'
+                })
+
+                $('#other-cat .cat-item').each(function (i, v) {
+
+                    $(this).on('click', function () {
+                        $('#other-cat .cat-item').removeClass('active');
+                        $(this).addClass('active');
+
+                        var curCatId = $(this).data('catid');
+                        var url = APP_SERVER + '/page/list/' + SCODE + '/' + curCatId;
+                        $('#other-cat>p a.toMore').attr({
+                            'href': toDetailPage(url),
+                            'target': '_blank'
+                        })
+
+
+                        var index = $(this).index();
+                        var arr = childrenList[index];
+                        var clickStr = '';
+                        for (var k = 0; k < arr.length; k++) {
+                            var date = new Date(arr[k].date);
+                            clickStr += '<li><a data-title="' + arr[k].name + '" data-ntype="' + arr[k].ntype + '" data-refurl="' + arr[k].refUrl + '" data-catid="' + arr[k].catId + '" data-infoid="' + arr[k].id + '">'
+                                + '<span class="lf">' + date.getFullYear() + '.' + ((date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '.' + date.getDate() + '</span>'
+                                + '<span class="title">' + arr[k].name + '</span>'
+                                + '</a></li>'
+                        }
+                        $('#other-cat .news-list').html(clickStr);
+
+                        $('#other-cat .news-list>li>a').each(function () {
+                            $(this).hover(function () {
+                                $(this).find('span').addClass('themeColor');
+                            }, function () {
+                                $(this).find('span').removeClass('themeColor');
+                            })
+                            if ($(this).data('ntype') == 2) {
+                                /*   window.open(toDetailPage($(this).data('refurl')))*/
+                                $(this).attr({
+                                    'href': toDetailPage($(this).data('refurl')),
+                                    'target': '_blank'
+                                })
+                            } else if ($(this).data('ntype') == 3) {
+                                var url = APP_SERVER + '/page/photo/' + SCODE
+                                /*  window.open(toDetailPage(url));   */
+                                $(this).attr({
+                                    'href': toDetailPage(url),
+                                    'target': '_blank'
+                                })
+                            } else if ($(this).data('ntype') == 4) {
+                                var url = APP_SERVER + '/page/video/' + SCODE;
+                                /*   window.open(toDetailPage(url));   */
+                                $(this).attr({
+                                    'href': toDetailPage(url),
+                                    'target': '_blank'
+                                })
+                            } else if ($(this).data('ntype') == 1) {
+                                var url = APP_SERVER + '/page/detail/' + SCODE + '/' + $(this).data('infoid') + '/' + $(this).data('catid');
+                                /*  window.open(toDetailPage(url));  */
+                                $(this).attr({
+                                    'href': toDetailPage(url),
+                                    'target': '_blank'
+                                })
+                            } else if ($(this).data('ntype') == 0) {
+                                var parentId = $(this).data('catid');
+                                var _this = this;
+                                $.get(BASE_HOST + '/front/template/getFirstSubCatId?catId=' + parentId, function (data) {
+                                    if (data.code == '000000') {
+                                        var url = APP_SERVER + '/page/list/' + SCODE + '/' + data.data;
+                                        /*  window.open(toDetailPage(url)); */
+                                        $(_this).attr({
+                                            'href': toDetailPage(url),
+                                            'target': '_blank'
+                                        })
+                                    }
+                                })
+                            }
+                        })
+
+                    })
+
+                })
+
+
+                $('#other-cat .news-list>li>a').each(function () {
+                    $(this).hover(function () {
+                        $(this).find('span').addClass('themeColor');
+                    }, function () {
+                        $(this).find('span').removeClass('themeColor');
+                    })
+                    if ($(this).data('ntype') == 2) {
+                        /*   window.open(toDetailPage($(this).data('refurl')))*/
+                        $(this).attr({
+                            'href': toDetailPage($(this).data('refurl')),
+                            'target': '_blank'
+                        })
+                    } else if ($(this).data('ntype') == 3) {
+                        var url = APP_SERVER + '/page/photo/' + SCODE
+                        /*  window.open(toDetailPage(url));   */
+                        $(this).attr({
+                            'href': toDetailPage(url),
+                            'target': '_blank'
+                        })
+                    } else if ($(this).data('ntype') == 4) {
+                        var url = APP_SERVER + '/page/video/' + SCODE;
+                        /*   window.open(toDetailPage(url));   */
+                        $(this).attr({
+                            'href': toDetailPage(url),
+                            'target': '_blank'
+                        })
+                    } else if ($(this).data('ntype') == 1) {
+                        var url = APP_SERVER + '/page/detail/' + SCODE + '/' + $(this).data('infoid') + '/' + $(this).data('catid');
+                        /*  window.open(toDetailPage(url));  */
+                        $(this).attr({
+                            'href': toDetailPage(url),
+                            'target': '_blank'
+                        })
+                    } else if ($(this).data('ntype') == 0) {
+                        var parentId = $(this).data('catid');
+                        var _this = this;
+                        $.get(BASE_HOST + '/front/template/getFirstSubCatId?catId=' + parentId, function (data) {
+                            if (data.code == '000000') {
+                                var url = APP_SERVER + '/page/list/' + SCODE + '/' + data.data;
+                                /*  window.open(toDetailPage(url)); */
+                                $(_this).attr({
+                                    'href': toDetailPage(url),
+                                    'target': '_blank'
+                                })
+                            }
+                        })
+                    }
+                })
+
+            })
+
+            $.get(BASE_HOST + '/front/template/' + SCODE + '/v3.2/EnrolRules', function (data) {
+                $('#gray-board .cat h2>.toMore').html(data.modelName ? data.modelName : data.data[0].name);
+
+                $('#gray-board .cat .toMore').each(function () {
+                    var url = APP_SERVER + '/page/list/' + SCODE + '/' + data.data[0].catId;
+                    $(this).attr({
+                        'href': toDetailPage(url),
+                        'target': '_blank'
+                    })
+                    $(this).hover(function () {
+                        $(this).addClass('themeColor');
+                    }, function () {
+                        $(this).removeClass('themeColor');
+                    })
+                })
+
+                var data = data.data[0].children;
+                var STR = '';
+                for (var i = 0; i < data.length; i++) {
+                    var date = new Date(data[i].date);
+
+                    var _name = '';
+                    if (data[i].name != null) {
+                        _name = data[i].name.length > 32 ? data[i].name.substring(0, 31) + '...' : data[i].name;
+                    }
+
+                    STR += '<li class="li' + i + '">' + '<div class="icon-container' + (i < 3 ? ' themeBackgroundColor' : '') + '"><i class="comicon-hat"></i></div>'
+                        + '<div class="a-container"><a data-title="' + data[i].name + '" data-ntype="' + data[i].ntype + '" data-refurl="' + data[i].refUrl + '" data-catid="' + data[i].catId + '" data-infoid="' + data[i].id + '">' + _name + '</a></div>'
+                        + '<p class="date">' + date.getFullYear() + '.' + ((date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '.' + date.getDate() + '</p>'
+                }
+                $('#gray-board .cat .news-list').html(STR);
+
+                $('#gray-board .cat .news-list a').each(function () {
+                    if ($(this).data('ntype') == 2) {
+                        /*   window.open(toDetailPage($(this).data('refurl')))*/
+                        $(this).attr({
+                            'href': toDetailPage($(this).data('refurl')),
+                            'target': '_blank'
+                        })
+                    } else if ($(this).data('ntype') == 3) {
+                        var url = APP_SERVER + '/page/photo/' + SCODE
+                        /*  window.open(toDetailPage(url));   */
+                        $(this).attr({
+                            'href': toDetailPage(url),
+                            'target': '_blank'
+                        })
+                    } else if ($(this).data('ntype') == 4) {
+                        var url = APP_SERVER + '/page/video/' + SCODE;
+                        /*   window.open(toDetailPage(url));   */
+                        $(this).attr({
+                            'href': toDetailPage(url),
+                            'target': '_blank'
+                        })
+                    } else if ($(this).data('ntype') == 1) {
+                        var url = APP_SERVER + '/page/detail/' + SCODE + '/' + $(this).data('infoid') + '/' + $(this).data('catid');
+                        /*  window.open(toDetailPage(url));  */
+                        $(this).attr({
+                            'href': toDetailPage(url),
+                            'target': '_blank'
+                        })
+                    } else if ($(this).data('ntype') == 0) {
+                        var parentId = $(this).data('catid');
+                        var _this = this;
+                        $.get(BASE_HOST + '/front/template/getFirstSubCatId?catId=' + parentId, function (data) {
+                            if (data.code == '000000') {
+                                var url = APP_SERVER + '/page/list/' + SCODE + '/' + data.data;
+                                $(_this).attr({
+                                    'href': toDetailPage(url),
+                                    'target': '_blank'
+                                })
+                            }
+                        })
+                    }
+                })
+            })
+
+            $('.video-box a.toMore').each(function () {
+                $(this).hover(function () {
+                    $(this).addClass('themeColor');
+                }, function () {
+                    $(this).removeClass('themeColor');
+                })
+                $(this).on('click', function () {
+                    var url = APP_SERVER + '/page/video/' + SCODE;
+                    $(this).attr({
+                        'href': toDetailPage(url),
+                        'target': '_blank'
+                    })
+                })
+            })
+            //视频接口
+            $.get(BASE_HOST + '/front/template/' + SCODE + '/v3.2/Video', function (data) {
+                console.log(data);
+                data = data.data;
+                var STR = '';
+                for (var i = 0; i < data.length; i++) {
+                    var vUrl=data[i].videoUrl.substring(0,4)=='http'?data[i].videoUrl:(IMG_HOST+data[i].videoUrl);
+                    STR += '<a target="_blank" href="' +vUrl + '"><img class="bg" src="' + IMG_HOST + data[i].imgUrl + '" ><img class="play" src="/images/v3_2template/videoBtn.png"><p>' + data[i].title + '</p></a>'
+                }
+                $('#video-box .body').html(STR);
+
+                $('#video-box .body>a').each(function(){
+                    $(this).hover(function () {
+                        $(this).find('p').css('font-weight', 'bold');
+                    }, function () {
+                        $(this).find('p').css('font-weight', 'normal');
+                    })
+                })
+            })
+
+
+            //页面底部的图片轮播
+            $('.prev,.next').each(function () {
+                $(this).hover(function () {
+                    $(this).addClass('themeBackgroundColor');
+                }, function () {
+                    $(this).removeClass('themeBackgroundColor');
+                })
+            })
+
+            $.get(BASE_HOST + '/front/template/' + SCODE + '/v3.2/People', function (data) {
+                data = data.data;
+                var STR = '';
+                if (data && data.length <= 4) {
+                    $('.prev,.next').hide();
+                }
+                for (var i = 0; i < data.length; i++) {
+                    STR += '<li><div class="inner"><img class="bg" src="' + (data[i].img?(IMG_HOST + data[i].img):('/images/v3_2template/pic'+i+'.png')) + '" ><div class="small-flag">' + data[i].name + '</div>'
+                        + '<div class="full-flag"><div class="cell"><h2>' + data[i].name + '</h2><a data-ntype="' + data[i].ntype + '" data-refurl="' + data[i].refUrl + '" data-catid="' + data[i].catId + '" data-infoid="' + data[i].id + '" class="themeBackgroundColor">了解更多</a></div></div>'
+                        + '</div></li>'
+                }
+                $('#slider ul.JQ-slide-content').html(STR);
+
+                $('#slider .inner').each(function () {
+                    $(this).hover(function () {
+                        $(this).find('.small-flag').hide();
+                        $(this).find('.full-flag').css('top', 0);
+                    }, function () {
+                        $(this).find('.full-flag').css('top', '100%');
+                        $(this).find('.small-flag').show();
+                    })
+                })
+
+                $('#slider .inner a').each(function () {
+                    if ($(this).data('ntype') == 2) {
+                        /*   window.open(toDetailPage($(this).data('refurl')))*/
+                        $(this).attr({
+                            'href': toDetailPage($(this).data('refurl')),
+                            'target': '_blank'
+                        })
+                    } else if ($(this).data('ntype') == 3) {
+                        var url = APP_SERVER + '/page/photo/' + SCODE
+                        /*  window.open(toDetailPage(url));   */
+                        $(this).attr({
+                            'href': toDetailPage(url),
+                            'target': '_blank'
+                        })
+                    } else if ($(this).data('ntype') == 4) {
+                        var url = APP_SERVER + '/page/video/' + SCODE;
+                        /*   window.open(toDetailPage(url));   */
+                        $(this).attr({
+                            'href': toDetailPage(url),
+                            'target': '_blank'
+                        })
+                    } else if ($(this).data('ntype') == 1) {
+                        var url = APP_SERVER + '/page/detail/' + SCODE + '/' + $(this).data('infoid') + '/' + $(this).data('catid');
+                        /*  window.open(toDetailPage(url));  */
+                        $(this).attr({
+                            'href': toDetailPage(url),
+                            'target': '_blank'
+                        })
+                    } else if ($(this).data('ntype') == 0) {
+                        var parentId = $(this).data('catid');
+                        var _this = this;
+                        $.get(BASE_HOST + '/front/template/getFirstSubCatId?catId=' + parentId, function (data) {
+                            if (data.code == '000000') {
+                                var url = APP_SERVER + '/page/list/' + SCODE + '/' + data.data;
+                                $(_this).attr({
+                                    'href': toDetailPage(url),
+                                    'target': '_blank'
+                                })
+                            }
+                        })
+                    }
+                })
+
+                $("#slider").Slide({
+                    effect: "scroolLoop",
+                    autoPlay: false,
+                    timer: 3000,
+                    steps: 1
+                });
+
+            })
+        })

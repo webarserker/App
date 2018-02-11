@@ -1,0 +1,63 @@
+//
+   Created by abbydu on 17/7/24.
+div(class="footers01")
+   div(class="footers_container01")
+      div(class="footer_msg_right01")
+         h4 更多平台
+         img(class="mobile_code_footer_right",src="#{locals.global.img_sever_url}/#{schoolInfo.schoolOfficeQrcode}")
+         img(class="mobile_code_footer_right01",src="#{locals.global.img_sever_url}/#{schoolInfo.schoolOfficeQrcode}")
+      div(class="footer_msg_center01")
+         span(class="mobile01") 联系方式
+         if contact
+            each contactWay in contact
+               if contactWay.isShow == 1
+                  span(class="mobile",contactType = "#{contactWay.contactType}",contact="#{contactWay.contact}") #{contactWay.contactTypeStr}&nbsp:&nbsp#{contactWay.contact}
+      // 友情链接
+      div(class="footer_msg_left01")
+         if m12
+            span(class="mobile_msg01") #{m12.modelName}
+            if m12 && m12.data && m12.data.length >0
+               ul
+                  each module12 in m12.data
+                     li
+                        a(title="#{module12.name}",hrefLink="#{module12.link}")
+                           span #{module12.name}
+div(class="v3footer_copyright",style="background:#{themeColor}")
+   span(class="v3footer_copyright_msg01") ©版权所有：#{schoolInfo.name} • 北京闻道卓越教育科技有限公司技术支持
+   span(class="v3footer_copyright_msg02") Copyright 2017 All Rights Reserved | 京ICP备16030849号
+      a(class="v3beian",target="_blank",href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802024129")
+         img(src="#{locals.global.api_sever_url}/static/image/anbei.png")
+         | 京公网安备 11010802024129号 &nbsp;&nbsp;&nbsp;&nbsp;
+      a(class="v3footer_zhaoban") 招办管理
+script.
+   $(".v3footer_zhaoban").click(function(){
+      var url = "http://www.zhinengdayi.com";
+      window.open(url);
+   });
+   $(".footer_msg_left01 ul li a").each(function(){
+      $(this).click(function(){
+         var url  = $(this).attr("hrefLink");
+         window.open(url);
+      })
+   })
+
+   $(".mobile_code_footer_right").hover(function(){
+      $(this).parent().find(".mobile_code_footer_right01").show();
+
+   },function(){
+      $(this).parent().find(".mobile_code_footer_right01").hide();
+   })
+
+   // 获取二维码的宽度
+   window.onload=function (){
+         var codeWidth = $(".footer_msg_right01 img.mobile_code_footer_right").width();
+         // 获取友情链接的宽度
+         var linkWidth = $(".footer_msg_left01").outerWidth();
+         // 获取 联系方式的宽度
+         var contactWidth = $(".footer_msg_center01").outerWidth();
+         // 联系方式偏移的宽度
+         var tWidth = (1200 - codeWidth - linkWidth - contactWidth) / 2;
+         $(".footer_msg_center01").css("left", tWidth + codeWidth + "px");
+   };
+
+

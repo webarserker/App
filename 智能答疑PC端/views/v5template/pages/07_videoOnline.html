@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>地大研招系统</title><link href="../stylesheets/v5template/layout01.css" rel="stylesheet" type="text/css"/><link href="../stylesheets/v5template/pages/01_graduateStudentRecruiting.css" rel="stylesheet" type="text/css"/><link href="../stylesheets/v5template/pages/02_v5templateDetail.css" rel="stylesheet" type="text/css"/><link href="../stylesheets/v5template/themecolor.css" rel="stylesheet" type="text/css"/><script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js"></script><script type="text/javascript" src="../javascripts/v5template/layout01.js"></script></head><body><div class="wrapper"><div class="main_container themeBlue"><!--头部导航栏--><div class="header_container"><div class="header_content"><!--导航栏左边蓝色部分--><div class="header_half_left"><div class="header_left"><a class="header_left_school"><img src="../../images/v5template/27-pic.png"/><span>(武汉) ·研招智能咨询系统</span></a></div><div class="af_10"></div></div><!--导航栏右边白色部分--><div class="header_half_right"><div class="header_right"><div class="header_msg"><ul><li><a class="mobile"><img src="../../images/v5template/02.png"/><span class="mobile_msg">移动版</span></a></li><li><a class="fast_login"><img src="../../images/v5template/03-pic.png"/><span class="fast_login_msg">快捷登录</span></a></li><li><a href="undefined" class="fast_register"><span class="fast_register_msg">免费注册</span></a></li><li><a class="SignUp"><img src="../../images/v5template/04-pic.png"/><span class="SignUp_msg">网上报名系统</span></a></li><li><a class="inquiry"><img src="../../images/v5template/05-pic.png"/><span class="inquiry_msg">录取查询系统</span></a></li></ul></div><div class="search_content"><input type="text" placeholder="请搜索相关内容" class="search_msg"/><span class="search_btn"></span></div></div></div></div></div><div class="nav"><div class="nav_container"><ul><li><a class="active">首页</a></li><li><a>学校概况</a></li><li><a>导师信息</a></li><li><a>专业介绍</a></li><li><a>硕士报考信息</a></li><li><a>博士报考信息</a></li><li><a>联系方式</a></li></ul></div></div><div class="details"><div class="details_container"><!--Created by abbydu on 17/7/24.--><!-- 侧边栏一级和二级分类--><div class="sidebar"><!--  一级分类名称--><div class="side_bar themeBlueBackgroundColor">快讯</div><!-- 二级分类列表--><div id="side_content" class="side_content"><ul class="side_content_container"></ul><div class="sidebar_menu_level2Items none"><!--  单个二级分类下的三级分类--><div class="sidebar_menu_level2Msg"><ul class="sidebar_menu_level2"><li><a>学校信息</a></li><li><a>学校信息</a></li><li><a>学校信息</a></li><li><a>学校信息</a></li><li><a>学校信息</a></li><li><a>学校信息</a></li></ul></div></div></div></div><link href="../stylesheets/v5template/layout01.css" rel="stylesheet" type="text/css"/><link href="../stylesheets/v5template/pages/01_graduateStudentRecruiting.css" rel="stylesheet" type="text/css"/><link href="../stylesheets/v5template/pages/02_v5templateDetail.css" rel="stylesheet" type="text/css"/><link href="../stylesheets/v5template/themecolor.css" rel="stylesheet" type="text/css"/><script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js"></script><script type="text/javascript" src="../javascripts/v5template/layout01.js"></script><script>$(document).ready(function () {
+
+// 二级分类 和 三级分类数据处理
+   /**
+    * 数据转换, 便于后续处理
+    * 原始数据: {"secondCatId":708,"threeCatId":88,"menu":[{"flag":1,"name":"外语类保送生","catId":214,"children":[]},{"flag":1,"name":"招生计划","catId":83,"children":[]},{"flag":1,"name":"经世学府 寰宇绽放","catId":368,"children":[]},{"flag":1,"name":"历年录取","catId":86,"children":[]},{"flag":0,"name":"招生分类信息","catId":708,"children":[{"name":"自主招生","catId":88,"icon":"usericon-webicon-01","imgUrl":""},{"name":"测试三级分类","catId":1251,"icon":"usericon-webicon-01","imgUrl":""},{"name":"招生计划查询","catId":823,"icon":"usericon-webicon-14","imgUrl":""},{"name":"高水平艺术团","catId":90,"icon":"usericon-webicon-01","imgUrl":""},{"name":"博士研究生招录","catId":336,"icon":"icon-33","imgUrl":""}]}]}
+    * 转换数据: {"83":{"flag":1,"name":"招生计划","catId":83,"children":[]},"86":{"flag":1,"name":"历年录取","catId":86,"children":[]},"214":{"flag":1,"name":"外语类保送生","catId":214,"children":[]},"368":{"flag":1,"name":"经世学府 寰宇绽放","catId":368,"children":[]},"708":{"88":{"name":"自主招生","catId":88,"icon":"usericon-webicon-01","imgUrl":""},"90":{"name":"高水平艺术团","catId":90,"icon":"usericon-webicon-01","imgUrl":""},"336":{"name":"博士研究生招录","catId":336,"icon":"icon-33","imgUrl":""},"823":{"name":"招生计划查询","catId":823,"icon":"usericon-webicon-14","imgUrl":""},"1251":{"name":"测试三级分类","catId":1251,"icon":"usericon-webicon-01","imgUrl":""},"flag":0,"name":"招生分类信息","catId":708,"children":[{"name":"自主招生","catId":88,"icon":"usericon-webicon-01","imgUrl":""},{"name":"测试三级分类","catId":1251,"icon":"usericon-webicon-01","imgUrl":""},{"name":"招生计划查询","catId":823,"icon":"usericon-webicon-14","imgUrl":""},{"name":"高水平艺术团","catId":90,"icon":"usericon-webicon-01","imgUrl":""},{"name":"博士研究生招录","catId":336,"icon":"icon-33","imgUrl":""}]}}
+    *
+    * */
+   var classifyData = ;            // 将menu 下面的数组，重新组合成一个对象
+   console.log(JSON.stringify(classifyData));
+   var classify = {};
+   for(var i=0; i < classifyData.menu.length; i++){
+      var secClass = classifyData.menu[i];
+      classify[secClass.catId] = secClass || {};
+      for(var j=0; j<secClass.children.length; j++) {
+         var thirdCalss = secClass.children[j];
+         classify[secClass.catId][thirdCalss.catId]=thirdCalss;
+      }
+   }
+   console.log(JSON.stringify(classify));
+
+   /**
+    * 绑定事件
+    *
+    * */
+
+
+   // 定时隐藏任务的定时器, 声明到全局便于特殊情况隐藏
+   var timer = null;
+
+   /*
+    * 鼠标滑过二级分类时选中二级分类, 显示三级分类(此处仅为示意, 关键点在二级分类唯一标识)
+    * @param catId 鼠标当前所在标签对应二级分类的唯一标识
+    * */
+   function mouseOnSecClass(catId) {
+      // 三级列表的长度
+      var j = $(".sidebar_menu_level2Msg ul li").length;
+      // 1. 清空三级分类列表, 若需要显示三级分类则取消全局定时器的任务
+      // todo
+      $(".sidebar_menu_level2Items").html("");
+
+      // 2. 选中二级分类
+      // todo
+      // 选中二级分类就  这里好像有点问题？
+      $(this)
+
+      // 3. 按需显示三级分类
+      // 3.1 取出二级分类数据, 若没有三级分类或者不需要显示三级分类, 直接 return
+      var secClass = classify[catId];
+      if(!secClass.children || secClass.children.length == 0 || secClass.flag==1) return null;
+
+      // 3.2 拼接三级分类列表的 html(绑定事件等均在此做)
+      var html = "";
+      for(var i in secClass.children) {
+         var thirdClass = secClass.children[i];
+         html += thirdClass.name + thirdClass.catId + thirdClass.icon;
+      }
+      // 3.3 显示三级分类列表
+      // todo
+      // 将三级分类的id 绑定在动态创建的li 上
+      for(var i = 0; i < thirdClass.length; i++){
+         var li = $("<li thirdClassId="+ thirdClass[i].catId +">");
+         li.html("<a>" + thirdClass[i].name + "<a>")
+         $(".sidebar_menu_level2").append(li);
+         j++;
+      }
+
+      // 3.4 初始化三级分类列表
+      setupThirdClass();
+   }
+
+   // 鼠标离开二级分类时, 延时隐藏三级分类列表
+   function mouseLeaveSecClass(){
+      // 延时隐藏, 并将定时器赋予全局的定时器, 便于特殊情况取消隐藏, 如: 滑动到另一个二级分类, 或者三级分类列表
+   }
+
+   // 初始化三级分类列表
+   function setupThirdClass() {
+      // 1. 设定鼠标移动事件, 取消延时隐藏任务 todo
+      // 2. 绑定每个三级分类的事件, 鼠标移动时的选中, 鼠标点击时的请求等
+      // 3. 当鼠标移出三级分类是, 也设定延时隐藏任务, 并赋予全局定时器, 便于取消
+   }
+
+
+
+
+
+
+
+});</script><div class="Article_details"><!--常见问题--><div class="Article_details_container"><div class="Article_details_tltle"><span class="Article_details_tips">您的当前位置：</span><a class="aur">视频在线</a></div><!-- 视频在线--><div class="videoOnline_content"><ul><li><p class="video_title">法学院 石静霞院长访谈</p><a target="_blank" href="https://v.qq.com/iframe/player.html?vid=h0503dz0b3b&amp;tiny=0&amp;auto=0" class="sub_video"><img src="../../images/v5template/31-pic.png"/></a><p class="video_msg">对外经济贸易大学法学院 石静霞......</p></li><li><p class="video_title">法学院 石静霞院长访谈</p><a target="_blank" href="https://v.qq.com/iframe/player.html?vid=h0503dz0b3b&amp;tiny=0&amp;auto=0" class="sub_video"><img src="../../images/v5template/31-pic.png"/></a><p class="video_msg">对外经济贸易大学法学院 石静霞......</p></li><li><p class="video_title">法学院 石静霞院长访谈</p><a target="_blank" href="https://v.qq.com/iframe/player.html?vid=h0503dz0b3b&amp;tiny=0&amp;auto=0" class="sub_video"><img src="../../images/v5template/31-pic.png"/></a><p class="video_msg">对外经济贸易大学法学院 石静霞......</p></li><li><p class="video_title">法学院 石静霞院长访谈</p><a target="_blank" href="https://v.qq.com/iframe/player.html?vid=h0503dz0b3b&amp;tiny=0&amp;auto=0" class="sub_video"><img src="../../images/v5template/31-pic.png"/></a><p class="video_msg">对外经济贸易大学法学院 石静霞......</p></li><li><p class="video_title">法学院 石静霞院长访谈</p><a target="_blank" href="https://v.qq.com/iframe/player.html?vid=h0503dz0b3b&amp;tiny=0&amp;auto=0" class="sub_video"><img src="../../images/v5template/31-pic.png"/></a><p class="video_msg">对外经济贸易大学法学院 石静霞......</p></li><li><p class="video_title">法学院 石静霞院长访谈</p><a target="_blank" href="https://v.qq.com/iframe/player.html?vid=h0503dz0b3b&amp;tiny=0&amp;auto=0" class="sub_video"><img src="../../images/v5template/31-pic.png"/></a><p class="video_msg">对外经济贸易大学法学院 石静霞......</p></li><li><p class="video_title">法学院 石静霞院长访谈</p><a target="_blank" href="https://v.qq.com/iframe/player.html?vid=h0503dz0b3b&amp;tiny=0&amp;auto=0" class="sub_video"><img src="../../images/v5template/31-pic.png"/></a><p class="video_msg">对外经济贸易大学法学院 石静霞......</p></li><li><p class="video_title">法学院 石静霞院长访谈</p><a target="_blank" href="https://v.qq.com/iframe/player.html?vid=h0503dz0b3b&amp;tiny=0&amp;auto=0" class="sub_video"><img src="../../images/v5template/31-pic.png"/></a><p class="video_msg">对外经济贸易大学法学院 石静霞......</p></li><li><p class="video_title">法学院 石静霞院长访谈</p><a target="_blank" href="https://v.qq.com/iframe/player.html?vid=h0503dz0b3b&amp;tiny=0&amp;auto=0" class="sub_video"><img src="../../images/v5template/31-pic.png"/></a><p class="video_msg">对外经济贸易大学法学院 石静霞......</p></li><li><p class="video_title">法学院 石静霞院长访谈</p><a target="_blank" href="https://v.qq.com/iframe/player.html?vid=h0503dz0b3b&amp;tiny=0&amp;auto=0" class="sub_video"><img src="../../images/v5template/31-pic.png"/></a><p class="video_msg">对外经济贸易大学法学院 石静霞......</p></li><li><p class="video_title">法学院 石静霞院长访谈</p><a target="_blank" href="https://v.qq.com/iframe/player.html?vid=h0503dz0b3b&amp;tiny=0&amp;auto=0" class="sub_video"><img src="../../images/v5template/31-pic.png"/></a><p class="video_msg">对外经济贸易大学法学院 石静霞......</p></li><li><p class="video_title">法学院 石静霞院长访谈</p><a target="_blank" href="https://v.qq.com/iframe/player.html?vid=h0503dz0b3b&amp;tiny=0&amp;auto=0" class="sub_video"><img src="../../images/v5template/31-pic.png"/></a><p class="video_msg">对外经济贸易大学法学院 石静霞......</p></li></ul></div></div></div></div></div><!--Created by abbydu on 17/7/24.--><div class="footer"><div class="footer_container"><div class="footer_msg"><div class="footer_msg_left"><ul><li><a><img src="../../images/v5template/23-pic.png"/><span>移动版</span></a></li><li><a><span>研招网旧版</span></a></li><li><a><span>硕士生招生系统</span></a></li><li><a><span>硕士生考场查询</span></a></li><li><a><span>博士生招生系统</span></a></li><li><a><span>硕士生开放日报名</span></a></li><li><a><span>学校官网</span></a></li></ul></div><div class="footer_msg_right"><a class="weixin_icon"></a><a class="qq_icon"></a><a class="weibo_icon"></a></div></div><div class="footer_copyright"><span class="footer_copyright_msg01">©版权所有：中国地质大学(武汉) • 北京闻道卓越教育科技有限公司技术支持</span><span class="footer_copyright_msg02">Copyright 2017 ALL Right Reserved</span><span class="footer_copyright_msg04"></span><span class="footer_copyright_msg03">京ICP备16030849号&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;招办管理</span></div></div></div></div></div></body></html>

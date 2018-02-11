@@ -1,0 +1,66 @@
+.footprint{
+    border-bottom:1px dashed #ddd;
+    color:#555;
+    font-size:13px;
+    padding-bottom:8px;
+}
+.search-group{
+    margin-top:40px;
+    margin-bottom: 40px;
+}
+.search-group span.label{
+    font-size:14px;
+    vertical-align: middle;
+
+}
+#search-write{
+    font-size:14px;
+    color:#aaa;
+    border: 1px solid #a9a9a9;
+    border-radius: 3px;
+    vertical-align: middle;
+    padding:2px;
+    margin-right:10px;
+    margin-left:10px;
+}
+#search-btn{
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    border-radius: 3px;
+    padding: 0 10px;
+    height: 26px;
+    line-height: 26px;
+    vertical-align: middle;
+    outline: none;
+
+}
+table.college-list{
+    width:100%;
+    text-align:center;
+    margin-top:15px;
+}
+table.college-list .td4{
+    width:50px;
+}
+table.college-list .td5{
+    width:120px;
+}
+table.college-list .td6{
+    width:80px;
+}
+table.college-list .td7{
+    width:80px;
+}
+table.college-list td,table.college-list th{
+    line-height:30px;
+    border:1px solid #d2d2d2;
+    font-size:14px;
+    vertical-align:middle;
+}
+table.college-list thead{
+    background-color:#DFE5F1;
+}
+table.college-list tbody tr.odd{
+    background-color:#F7F9FD;
+}

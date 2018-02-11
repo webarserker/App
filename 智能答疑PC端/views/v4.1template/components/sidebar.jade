@@ -1,0 +1,133 @@
+link(rel="stylesheet" href="/stylesheets/v4_1template/components/sidebar.css")
+div#menu
+    div.menu-head
+        img(src="#{locals.global.img_sever_url}#{schoolInfo.schoolIcon}")
+        div.themeMenuHead
+    ul.article-list
+        //li.article-item
+        //    a.hasNext 二级分类1
+        //        i.showSlide
+        //    div.threeCatList
+        //        a 三级分类1
+        //        a 三级分类2
+        //        a 三级分类3
+        //        a 三级分类4
+        //li.article-item
+        //    a.hasNext 二级分类2
+        //        i.showSlide
+        //    div.threeCatList
+        //        a 三级分类1
+        //        a 三级分类2
+        //        a 三级分类3
+        //        a 三级分类4
+        //li.article-item
+        //    a 二级分类3
+script.
+
+    var SCODE = '#{sCode}', INFOID = '#{infoId}', PARENTID = '#{parentId}', curPage = '#{curPage}' || 1,
+        pageSize = '#{pageSize}' || 10;
+    var APP_SERVER = '';
+    var getInfoCatlist = '';
+    if (SCODE && PARENTID) {
+        $.get(BASE_HOST + '/front/template/getInfoCatlist', {sCode: SCODE, catId: PARENTID}, function (data) {
+            console.log(data);
+            sessionStorage.setItem('firstCatId', data.data.firstCatId);
+            if ($('#headerNav').length) {
+                $('#headerNav>li').each(function () {
+                    if ($(this).find('a').data('catid') == data.data.firstCatId) {
+                        $(this).addClass('active themeNavBg');
+                        sessionStorage.setItem('firstCatId', '');
+                    }
+                })
+            }
+
+
+            if (INFOID != 'null') {
+                var breadSecond = data.data.secondCatName;
+                var breadThree = data.data.threeCatName;
+                $('#footprint').html('您的当前位置：' + data.data.firstCatName + (breadSecond ? ' | ' : '') + (breadSecond ? breadSecond : '') + (breadThree ? ' | ' : '') + (breadThree ? breadThree : ''))
+            }
+            $('.themeMenuHead').html(data.data.firstCatName);
+            var menu = data.data.menu;
+            for (var i = 0; i < menu.length; i++) {
+                getInfoCatlist += '<li class="article-item">';
+                var subCatlist = '';
+                if (menu[i].children && menu[i].children.length) {
+                    subCatlist += '<a class="hasNext" data-catid="' + menu[i].catId + '">' + menu[i].name + '<i class="icon-bottom"></i></a><div class="threeCatList">'
+                    for (var r = 0; r < menu[i].children.length; r++) {
+                        subCatlist += '<a class="lastCat" data-catid="' + menu[i].children[r].catId + '"><span>' + menu[i].children[r].name + '</span></a>';
+                    }
+                    subCatlist += '</div>'
+                } else {
+                    subCatlist += '<a class="lastCat" data-catid="' + menu[i].catId + '" href="' +toDetailPage(APP_SERVER + '/secondPage/secondPageArticleList?sCode=' + SCODE + '&parentId=' + menu[i].catId + '&curPage=' + 1 + '&pageSize=' + pageSize) + '"><span>' + menu[i].name + '</span></a>';
+                }
+                getInfoCatlist += subCatlist + '</li>'
+            }
+            $('.article-list').html(getInfoCatlist);
+            $('.hasNext').addClass('collapse');
+            $('.article-list .article-item>a').each(function () {
+                var this_catid = $(this).data('catid');
+                if (this_catid == PARENTID) {
+                    $(this).addClass('themeBackgroundColor');
+                }
+            })
+            $('.article-list .threeCatList a').each(function () {
+                var this_catid = $(this).data('catid');
+                if (this_catid == PARENTID) {
+                    $(this).addClass('themeColor');
+                    $(this).parent().siblings('.hasNext').addClass('themeBackgroundColor').removeClass('collapse').find('i').removeClass('icon-bottom').addClass('icon-top');
+                    $(this).parent().slideDown(1);
+                }
+            })
+            $('.article-list .article-item a').each(function () {
+                $(this).mouseover(function () {
+                    if (!$(this).hasClass('themeColor') && $(this).data('catid') != PARENTID) {
+                        if (!$(this).hasClass('hasNext')) {
+                            $(this).addClass('themeColor');
+                        } else {
+                            $(this).addClass('themeColor').find('i').addClass('themeColor');
+                        }
+                    }
+                });
+                $(this).mouseout(function () {
+                    if ($(this).hasClass('themeColor') && $(this).data('catid') != PARENTID) {
+                        if (!$(this).hasClass('hasNext')) {
+                            $(this).removeClass('themeColor');
+                        } else {
+                            $(this).removeClass('themeColor').find('i').removeClass('themeColor');
+                        }
+                    }
+                })
+            })
+            $('.hasNext').each(function () {
+                $(this).click(function () {
+                    if (!$(this).hasClass('themeBackgroundColor') && $(this).hasClass('collapse')) {
+                        $('.article-list .article-item>a').addClass('collapse').removeClass('themeColor').find('i').removeClass('icon-top').addClass('icon-bottom').removeClass('themeColor');
+                        $(this).removeClass('collapse').addClass('themeColor').find('i').removeClass('icon-bottom').addClass('icon-top').addClass('themeColor');
+                        $('.threeCatList').slideUp(1);
+                        $(this).next().slideDown(1);
+                    } else if (!$(this).hasClass('themeBackgroundColor') && !$(this).hasClass('collapse')) {
+                        $(this).addClass('collapse').removeClass('themeColor').find('i').removeClass('icon-top').addClass('icon-bottom').removeClass('themeColor');
+                        $(this).next().slideUp(1);
+                    } else if ($(this).hasClass('themeBackgroundColor') && !$(this).hasClass('collapse')) {
+                        $(this).addClass('collapse').find('i').removeClass('icon-top').addClass('icon-bottom');
+                        $(this).next().slideUp(1);
+                    } else if ($(this).hasClass('themeBackgroundColor') && $(this).hasClass('collapse')) {
+                        $(this).parent().siblings().find('.hasNext').each(function () {
+                            $(this).addClass('collapse').removeClass('themeColor').find('i').removeClass('themeColor icon-top').addClass('icon-bottom');
+                        })
+                        $(this).removeClass('collapse').find('i').removeClass('icon-bottom').addClass('icon-top');
+                        $('.threeCatList').slideUp(1);
+                        $(this).next().slideDown(1);
+                    }
+                })
+            })
+            $('.lastCat').each(function () {
+                $(this).click(function () {
+                    var parentId = $(this).data('catid');
+                    var url = 'secondPageArticleList?sCode=' + SCODE + '&parentId=' + parentId + '&curPage=' + 1 + '&pageSize=' + pageSize;
+                    window.location.href =toDetailPage(APP_SERVER + url);
+                })
+            })
+        })
+    }

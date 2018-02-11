@@ -1,0 +1,200 @@
+//
+   Created by abbydu on 17/7/26.
+
+extends ../components/layout01
+block content
+    div(class="login")
+        // 登录
+        div(class="login_container")
+            div(class="login_left")
+                a(class="login_tips01")
+                a(class="zhinengdayi_code")
+                    img(src="#{locals.global.img_sever_url}/imgServer/qrcode/#{schoolInfo.identify}.jpg")
+            //  登录注册模块
+            div(class="login_right")
+                p(class="login_title") 欢迎使用高校招录智能咨询平台
+                div(class="login_choose")
+                    a(class="login_fast on" ) 快捷登录
+                    a(class="login_account") 账号密码登录
+                // 快捷登录
+                div(class="login_detail",style="display:block;")
+                    div(class="login_wechat")
+                        img(class="wechat_icon",src="../../images/v5template/40-pic.png")
+                        span(class="wechat_tips01") 微信登录
+                    div(class="login_qq")
+                        img(class="qq_icon",src="../../images/v5template/41-pic.png")
+                        span(class="qq_tips01") qq登录
+                // 账号登录
+                div(class="login_content",style="display:none;")
+                    //账户
+                    div(class="login_username")
+                        span(class="username_icon")
+                        input(class="login_username_input",type="text",name="",placeholder="请输入您的邮箱")
+                    //密码
+                    div(class="login_password")
+                        span(class="password_icon")
+                        input(class="login_password_input",type="password",name="password",placeholder="请输入您的密码")
+                    div(class="login_cookie")
+                        input(type="checkbox",name="",class="remember")
+                        span(class="cookie_tips") 记住密码
+                        span(class="login_error")
+                    a(class="login_btn",id="login_btn",style="background:#{themeColor}",needOpen="#{needOpen}",hoster="#{hoster}") 登录
+                    div(class="login_atn")
+                        a(class="login_forget") 忘记密码?
+                        a(class="register_free") 免费注册
+    include  ../components/new_footer
+    script.
+        function getAppServer() {
+            return "";
+        }
+        function getApiServer() {
+            return '!{locals.global.api_sever_url}'
+        }
+        // 快捷登录和账号登录 点击切换
+        $(document).ready(function () {
+            $("a.login_fast").click(function () {
+                $(this).addClass("on").siblings().removeClass("on");
+                $(".login_content").hide();
+                $(".login_detail").show()
+
+            });
+            $("a.login_account").click(function () {
+                $(this).addClass("on").siblings().removeClass("on");
+                $(".login_detail").hide();
+                $(".login_content").show();
+
+            });
+            // 点击键盘上的enter 键  登录事件触发
+            document.onkeydown = function (e) {
+                var theEvent = window.event || e;
+                //获取键盘上当前按下的键
+                var code = theEvent.keyCode || theEvent.which;
+                if (code == 13) {
+                    //这里调用上面给button添加点击登录事件方法
+                    $("#login_btn").click();
+                }
+            }
+
+            // 点击登录点击事件
+            $('#login_btn').click(function () {
+                var sCode = $(".main_container").attr('sCode');
+                var identify = $(".main_container").attr('identify');
+                var username = $(".login_username_input").val();
+                var password = $(".login_password_input").val();
+                var errorTips = $(".login_error");
+                errorTips.html('');
+                // 账号判断
+                if (!username || username.length == 0) {
+                    return errorTips.html('请输入邮箱号');
+                }
+                if (!((/\w@\w*\.\w/).test(username))) {
+                    return errorTips.html('请输入正确的邮箱号');
+                }
+                errorTips.html('');
+                // 密码判断
+                if (!password || password.length == 0) {
+                    return errorTips.html('请输入密码');
+                }
+                if (!((/^[0-9a-zA-Z]{6,12}$/).test(password))) {
+                    return errorTips.html('请输入密码是6-12位的字母或者数字');
+                }
+                // 请求登录的接口，请求成功后跳转至首页
+                $.ajax({
+                    type: "get",
+                    url: getAppServer() + "/v5users/loginPage_json",
+                    data: {
+                        'sCode':sCode,
+                        'account':username,
+                        'password':password,
+                        'identify':identify
+                    },
+                    success: function (ret) {
+                        var errorTips = $(".login_error");
+                        if (ret && ret.retCode == "0") {
+                            var needOpen = $(".login_btn").attr('needOpen');
+                            if (needOpen && needOpen.length > 0 && needOpen=="1") {
+                                var data = ret.data;
+                                // 用户id
+                                var picodm = ret.data.id;
+                                // 用户昵称
+                                var nockdemde = ret.data.nickName
+                                var userToken = data.userToken;
+                                var hoster = "#{hoster}";
+                                var url = hoster + "?userToken=" + userToken + "&picodm=" + picodm + "&nockdemde=" + nockdemde + "&needOpen=" + needOpen;
+                                window.location.href = url;
+                            } else {
+                                window.location.href = ret.urlHomePage;
+                            }
+
+                        } else {
+                            errorTips.html(ret.message);
+                        }
+                    }
+                });
+
+            })
+            //免费注册
+            $(".register_free").click(function(){
+                var needOpen = $(".login_btn").attr('needOpen');
+                var hoster = $(".login_btn").attr('hoster');
+                var sCode = $(".main_container").attr('sCode');
+                if (needOpen&& needOpen.length>0 && hoster && hoster.length>0){
+                    var url = getAppServer() + '/page/register/' + sCode + "?needOpen=" + needOpen + "&hoster=" + hoster;
+                    window.location.href = url;
+                }else {
+                    var url = getAppServer() + '/page/register/' + sCode;
+                    window.location.href = url;
+                }
+            })
+            // 忘记密码
+            $(".login_forget").click(function(){
+                var sCode = $(".main_container").attr('sCode');
+                var url = getAppServer() + '/page/forget/' + sCode;
+                window.location.href = url;
+            })
+
+            // 获取地址栏参数
+            function GetQueryString(name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null)return unescape(r[2]);
+                return null;
+            }
+            //文章详情ID
+            var spreadToken = GetQueryString("spreadToken");
+
+
+            // 微信登录
+            $(".login_wechat").click(function(){
+                var sCode = $(".main_container").attr('sCode');
+                var needOpen = $(".login_btn").attr('needOpen');
+                var hoster = $(".login_btn").attr('hoster');
+                if(needOpen&& needOpen.length > 0 && needOpen == "1"){
+                    var url = getApiServer() + "/front/user/weixinlogin?systemId=4&sCode=" + sCode + '&spreadToken=' + spreadToken + "&needOpen=" + needOpen + "&hoster=" + hoster;
+                    window.location.href = url;
+                }else {
+                    var url = getApiServer() + "/front/user/weixinlogin?systemId=3&sCode=" + sCode + '&spreadToken=' + spreadToken;
+                    window.location.href = url;
+                }
+
+            })
+
+
+
+            // qq登录
+            $(".login_qq").click(function(){
+                var sCode = $(".main_container").attr('sCode');
+                var needOpen = $(".login_btn").attr('needOpen');
+                var hoster = $(".login_btn").attr('hoster');
+                if (needOpen && needOpen.length > 0 && needOpen == "1") {
+                    var url = getApiServer() + "/front/user/qqLogin?systemId=4&sCode=" + sCode + '&spreadToken=' + spreadToken + "&needOpen=" + needOpen + "&hoster=" + hoster;
+                    window.location.href = url;
+                }else {
+                    var url = getApiServer() + "/front/user/qqLogin?systemId=3&sCode=" + sCode + '&spreadToken=' + spreadToken;
+                    window.location.href = url;
+                }
+            })
+        })
+
+
+

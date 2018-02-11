@@ -1,0 +1,41 @@
+#rightBooks{
+    width:160px;
+    float:right;
+    padding-left:7px;
+    text-align:center;
+}
+#rightBooks.fix{
+    position:fixed;
+    top:2px;
+
+}
+#rightBooks #robot{
+    position:relative;
+    bottom:-10px;
+}
+#rightBooks #robot img{
+    height:123px;
+}
+#rightBooks #books a{
+    text-decoration:none;
+}
+#rightBooks #books a:hover{
+    text-decoration: none !important;
+}
+#rightBooks #books a{
+    display:block;
+    text-align:center;
+    width:100%;
+    height:45px;
+    line-height:45px;
+    font-size:16px;
+    color:#333;
+}
+#rightBooks #books a:first-child{
+    position:relative;
+    bottom:-5px;
+}
+#rightBooks #books a:last-child{
+    position:relative;
+    top:-5px;
+}

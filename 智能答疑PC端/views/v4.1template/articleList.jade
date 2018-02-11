@@ -1,0 +1,160 @@
+extends layout.jade
+block content
+    link(rel="stylesheet" href="/stylesheets/v4_1template/articleList.css")
+    include ./components/headerNew
+
+    div.containers
+        include ./components/sidebar
+        div#main2
+            div#footprint
+            ul#articleList
+            div#pagination
+                p.iconContainer.themeBorder
+                    i.icon-prev.themeColor
+                p#pages
+                p.iconContainer.themeBorder
+                    i.icon-next.themeColor
+        include ./components/rightBooks
+        div.clear
+    include ./components/footer
+
+    script.
+
+        var SCODE = '#{sCode}', PARENTID = '#{parentId}', curPage = '#{curPage}', pageSize = '#{pageSize}';
+        var APP_SERVER = '';
+
+        $(function () {
+            $('#articleList').on('mouseover', 'a', function () {
+                $(this).find('span').addClass('themeColor');
+            })
+            $('#articleList').on('mouseout', 'a', function () {
+                $(this).find('span').removeClass('themeColor');
+            })
+
+            $('.iconContainer').on('mouseover', function () {
+                $(this).addClass('themeBackgroundColor').find('i').addClass('active');
+            })
+            $('.iconContainer').on('mouseout', function () {
+                $(this).removeClass('themeBackgroundColor').find('i').removeClass('active');
+            })
+
+            $.get(BASE_HOST + '/front/template/getInfoContentlist', {
+                sCode: SCODE,
+                catId: PARENTID,
+                curPage: curPage,
+                pageSize: pageSize
+            }, function (data) {
+
+                if (data.data || data.data.length > 0) {
+                    $('#pagination').show();
+                    if (data.totalPage == 1) {
+                        $('.iconContainer').hide();
+                    }
+                }
+                //分页器的拼接逻辑
+                var pages = '';
+                var totalPage = data.totalPage;
+
+                var pageStart = '';
+
+                if (totalPage <= 5) {
+                    pageStart = 1;
+                    for (var x = pageStart; x <= totalPage; x++) {
+                        if (x == Number(curPage)) {
+                            pages += '<a class="themeColor">' + x + '</a>'
+                        } else {
+                            pages += '<a>' + x + '</a>'
+                        }
+                    }
+                } else {
+                    if (Number(curPage) + 2 > totalPage) {
+                        for (var x = totalPage - 4; x <= totalPage; x++) {
+                            if (x == Number(curPage)) {
+                                pages += '<a class="themeColor">' + x + '</a>'
+                            } else {
+                                pages += '<a>' + x + '</a>'
+                            }
+                        }
+                    } else {
+                        if (Number(curPage) >= 3) {
+                            for (var x = Number(curPage) - 2; x <= Number(curPage) + 2; x++) {
+                                if (x == Number(curPage)) {
+                                    pages += '<a class="themeColor">' + x + '</a>'
+                                } else {
+                                    pages += '<a>' + x + '</a>'
+                                }
+                            }
+                        } else {
+                            for (var x = 1; x <= 5; x++) {
+                                if (x == Number(curPage)) {
+                                    pages += '<a class="themeColor">' + x + '</a>'
+                                } else {
+                                    pages += '<a>' + x + '</a>'
+                                }
+                            }
+                        }
+                    }
+                }
+
+                $('#pages').html(pages);
+                $('#pages>a').each(function () {
+                    $(this).click(function () {
+                        var pageIndex = $(this).text();
+                        if (pageIndex == Number(curPage)) {
+                            return;
+                        }
+                        var url = 'secondPageArticleList?sCode=' + SCODE + '&parentId=' + PARENTID + '&curPage=' + pageIndex + '&pageSize=' + pageSize;
+                        window.location.href =toDetailPage(APP_SERVER + url) ;
+                    })
+                })
+
+                $('#pagination p.iconContainer:first-child').click(function () {
+                    if (Number(curPage) == 1) {
+
+                    }
+                    else {
+                        curPage=Number(curPage)-1;
+                        var url = 'secondPageArticleList?sCode=' + SCODE + '&parentId=' + PARENTID + '&curPage=' + curPage + '&pageSize=' + pageSize;
+                        window.location.href =toDetailPage(APP_SERVER + url) ;
+                    }
+                })
+
+                $('#pagination p.iconContainer:last-child').click(function () {
+                    if (Number(curPage) == totalPage) {
+
+                    }
+                    else {
+                        curPage=Number(curPage)+1;
+                        var url = 'secondPageArticleList?sCode=' + SCODE + '&parentId=' + PARENTID + '&curPage=' + curPage + '&pageSize=' + pageSize;
+                        window.location.href =toDetailPage(APP_SERVER + url) ;
+                    }
+                })
+
+
+                var articleList = '';
+                data = data.data;
+
+                if (!data || data.length == 0) {
+                    $('#pagination').hide();
+                    articleList = '<div class="noneData">抱歉，暂无数据</h2>'
+                } else {
+                    for (var i = 0; i < data.length; i++) {
+                        articleList += '<a  data-contentlink="' + data[i].contentLink + '" data-catid="' + PARENTID + '" data-infoid="' + data[i].id + '">';
+                        articleList += '<span class="date">' + data[i].pulishTimeStr + '</span>' + '<span class="title">' + data[i].title + '</span>';
+                        articleList += '</a>'
+                    }
+                }
+
+                $('#articleList').html(articleList);
+                $('#articleList a').each(function () {
+                    $(this).on('click', function () {
+                        if ($(this).data('contentlink')) {
+                            window.open(toDetailPage($(this).data('contentlink')))
+                        } else {
+                            window.location.href =toDetailPage(APP_SERVER + '/secondPage/secondPageArticleDetail?parentId=' + $(this).data('catid') + '&infoId=' + $(this).data('infoid') + '&sCode=' + SCODE)
+                        }
+                    })
+                })
+            })
+        })
+

@@ -1,0 +1,96 @@
+link(rel="stylesheet" href="/stylesheets/v3_2template/components/sidebar.css")
+div#menu
+    div.menu-head
+        div.themeBackgroundColor
+            div.table-cell
+                p.icon-container
+                h5
+    ul.menu-body.themeBackgroundColor
+        div.white-circle
+        ul.cat-list
+
+
+
+script.
+
+    var SCODE = '#{sCode}', INFOID = '#{infoId}', PARENTID = '#{parentId}', curPage = '#{curPage}' || 1,
+        pageSize = '#{pageSize}' || 10;
+    var APP_SERVER = '';
+    var getInfoCatlist = '';
+    if (SCODE && PARENTID) {
+        $.get(BASE_HOST + '/front/template/getInfoCatlist', {sCode: SCODE, catId: PARENTID}, function (data) {
+            if (data.data) {
+                $('#menu .menu-head p.icon-container').html(data.data.firstCatImg ? ('<img class="imgIcon" src="' + data.data.firstCatImg + '">') : ('<i class="' + data.data.firstCatIcon + '"></i>'))
+                $('#menu .menu-head h5').html(data.data.firstCatName);
+                var secondCatId = data.data.secondCatId;
+                if (INFOID != 'null') {
+                    /*面包屑的展示和点击逻辑*/
+
+                    var breadSecond = data.data.secondCatName;
+                    var breadThree = data.data.threeCatName;
+                    $('#footprint').html('您的当前位置：' + '<a href="'+toDetailPage(APP_SERVER + '/' + $('#header').data('identify'))+'">首页</a>' + ' &nbsp;|&nbsp; ' + '<a href="' + toDetailPage(APP_SERVER + '/page/list/' + SCODE + '/' + data.data.menu[0].catId) + '">' + data.data.firstCatName + '</a>'
+                        + (breadSecond ? ' &nbsp;|&nbsp; ' : '') + '<a href="' + toDetailPage(APP_SERVER + '/page/list/' + SCODE + '/' + data.data.secondCatId) + '">' + (breadSecond ? breadSecond : '') + '</a>'
+                        + '<span class="breadThree">' + (breadThree ? ' &nbsp;|&nbsp; ' : '') + '<a href="' + toDetailPage(APP_SERVER + '/page/list/' + SCODE + '/' + data.data.threeCatId) + '">' + (breadThree ? breadThree : '') + '</a></span><span> &nbsp;|&nbsp; 文章</span>')
+
+                    $('#footprint2').html('您的当前位置：' + '<a href="'+toDetailPage(APP_SERVER + '/' + $('#header').data('identify'))+'">首页</a>' + ' &nbsp;|&nbsp; ' + '<a href="' + toDetailPage(APP_SERVER + '/page/list/' + SCODE + '/' + data.data.menu[0].catId) + '">' + data.data.firstCatName + '</a>'
+                        + (breadSecond ? ' &nbsp;|&nbsp; ' : '') + '<a href="' + toDetailPage(APP_SERVER + '/page/list/' + SCODE + '/' + data.data.secondCatId) + '">' + (breadSecond ? breadSecond : '') + '</a>'
+                        + '<span class="breadThree">' + (breadThree ? ' &nbsp;|&nbsp; ' : '') + '<a href="' + toDetailPage(APP_SERVER + '/page/list/' + SCODE + '/' + data.data.threeCatId) + '">' + (breadThree ? breadThree : '') + '</a></span>')
+
+                    $('#footprint3').html('您的当前位置：' + '<a href="' + toDetailPage(APP_SERVER + '/' + $('#header').data('identify')) + '">首页</a>' + ' &nbsp;|&nbsp; ' + '<a href="' + toDetailPage(APP_SERVER + '/page/list/' + SCODE + '/' + data.data.menu[0].catId) + '">' + data.data.firstCatName + '</a>'
+                        + (breadSecond ? ' &nbsp;|&nbsp; ' : '') + '<a href="' + toDetailPage(APP_SERVER + '/page/list/' + SCODE + '/' + data.data.secondCatId) + '">' + (breadSecond ? breadSecond : '') + '</a>'
+                        + '<span class="breadThree">' + (breadThree ? ' &nbsp;|&nbsp; ' : '') + '<a href="' + toDetailPage(APP_SERVER + '/page/list/' + SCODE + '/' + data.data.threeCatId) + '">' + (breadThree ? breadThree : '') + '</a></span>')
+
+                    /* $('#footprint2').html('您的当前位置：' + data.data.firstCatName + (breadSecond ? ' | ' : '') + (breadSecond ? breadSecond : '') + (breadThree ? ' | ' : '') + (breadThree ? breadThree : '')) */
+
+                    if (data.data.secondCatId == PARENTID && data.data.threeCatId) {
+                        $('.breadThree').hide();
+                    }
+                    $('#footprint a,#footprint2 a,#footprint3 a').hover(function () {
+                        $(this).addClass('themeColor');
+                    }, function () {
+                        $(this).removeClass('themeColor');
+                    })
+
+                }
+                $('.themeMenuHead span').html(data.data.firstCatName);
+
+                var menu = data.data.menu;
+                var STR = '';
+                for (var i = 0; i < menu.length; i++) {
+                    STR += '<li data-children="' + menu[i].children + '"><a data-ntype="' + menu[i].ntype + '" data-refurl="' + menu[i].refUrl + '" data-catid="' + menu[i].catId + '" data-infoid="' + menu[i].id + '">' + menu[i].name;
+                    if (menu[i].children && menu[i].children.length) {
+                        STR += '<span><i class="icon-todetail themeColor"></i></span>'
+                    }
+                    STR += '</a>'
+                }
+                $('.cat-list').html(STR);
+
+
+                $('.cat-list>li').each(function () {
+                    $(this).hover(function () {
+                        $(this).addClass('active');
+                    }, function () {
+                        if ($(this).find('a').data('catid') != PARENTID) {
+                            $(this).removeClass('active');
+                        }
+
+                    })
+                })
+
+                $('.cat-list a').each(function () {
+                    if ($(this).data('catid') == PARENTID || $(this).data('catid') == secondCatId) {
+                        $(this).parent().addClass('active');
+                    }
+                    $(this).click(function () {
+                        var url = APP_SERVER + '/page/list/' + SCODE + '/' + $(this).data('catid') + '?curPage=1&pageSize=10';
+                        window.location.href = toDetailPage(url);
+                    })
+                })
+            }
+
+
+        })
+    }
+
+
+

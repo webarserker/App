@@ -1,0 +1,556 @@
+doctype html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+html
+    head
+        meta(http-equiv="Content-Type", content="text/html; charset=utf-8")
+        if schoolInfo.isPostGraduate == "1"
+            meta(name ="keywords",content="#{schoolInfo.name},#{schoolInfo.name}研究生招生信息网,#{schoolInfo.name}介绍,#{schoolInfo.name}分数线,#{schoolInfo.name}自主招生,#{schoolInfo.name}招生计划,#{schoolInfo.name}专业介绍")
+        else
+            meta(name ="keywords",content="#{schoolInfo.name},#{schoolInfo.name}本科生招生信息网,#{schoolInfo.name}介绍,#{schoolInfo.name}分数线,#{schoolInfo.name}自主招生,#{schoolInfo.name}招生计划,#{schoolInfo.name}专业介绍")
+        title #{title}
+        meta(name = "description",content="#{schoolInfo.name}介绍")
+        meta(name = "robots" content = "all")
+        link(href='#{host}/stylesheets/v5template/layout01.css',rel="stylesheet",type="text/css")
+        link(href='#{host}/stylesheets/v5template/pages/01_graduateStudentRecruiting.css',rel="stylesheet",type="text/css")
+        link(href='#{host}/stylesheets/v5template/pages/02_v5templateDetail.css',rel="stylesheet",type="text/css")
+        link(href='#{host}/stylesheets/v5template/themecolor.css',rel="stylesheet",type="text/css")
+        link(href='#{host}/stylesheets/v5template/font/bjfu/common/style.css',rel="stylesheet",type="text/css")
+        link(href='#{host}/stylesheets/v5template/font/bjfu/user/style.css',rel="stylesheet",type="text/css")
+        link(href='#{host}/stylesheets/v5template/icon/style.css',rel="stylesheet",type="text/css")
+        link(href='#{host}/stylesheets/v5template/pages/style.css',rel="stylesheet",type="text/css")
+        link(href='#{host}/stylesheets/v5template/base/style.css',rel="stylesheet",type="text/css")
+        if schoolInfo && schoolInfo.yrScholar
+            link(rel="shortcut icon",href="#{locals.global.img_sever_url}#{schoolInfo.yrScholar}")
+        script(type="text/javascript",src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js")
+        script(type="text/javascript",src="#{host}/javascripts/v5template/layout01.js")
+        script(type="text/javascript",src="#{host}/javascripts/jquery.cookie.js")
+        script(type="text/javascript",src="#{host}/javascripts/jq.Slide.js")
+        script(type="text/javascript",src="#{host}/static/ueditor/ueditor.parse.js")
+        script(src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js" type="text/javascript")
+        script.
+            (function () {
+                var hm = document.createElement("script");
+                hm.src = "//hm.baidu.com/hm.js?5da3b86d8f4fb163154ef561d3aa860b";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+            })();
+
+
+    body
+        div(class="wrapper",style="min-width:1200px;")
+            div(class="main_container themeBlue")
+                //头部导航栏
+                div(class="header_container",sCode="#{schoolInfo.code}")
+                    div(class="header_content",identify="#{schoolInfo.identify}")
+                        //导航栏左边蓝色部分
+                        div(class="header_half_left")
+                            div(class="header_left")
+                                img(class="header_left_school",src="#{host}#{navBgImg}")
+                                img(class="header_logo",src="#{locals.global.img_sever_url}#{schoolInfo.logoUrl}")
+                                span #{schoolInfo.professor}
+                            div(class="af_10",style="background:#{themeColor}")
+                        //导航栏右边白色部分
+                        div(class="header_half_right")
+                            div(class="header_right")
+                                div(class="header_msg")
+                                    ul(class="header_msg_content")
+                                        if m01.data
+                                            each module01 in m01.data
+                                                li
+                                                    a(class="SignUp",href="javascript:void(0);",link="#{module01.refUrl}")
+                                                        if module01.icon.length > 0
+                                                            span(class="SignUp_msg01 #{module01.icon}")
+                                                        else
+                                                            span(class="SignUp_msg01 usericon usericon-webicon-74")
+                                                        span(class="SignUp_msg") #{module01.name}
+                                        if userInfo && userInfo.userToken && userInfo.userToken.length > 0
+                                            li(class="home_login")
+                                                div(class="home_login_personal")
+                                                    a(class="fast_login_personal")
+                                                        span(class="fast_login_msg",id="#{userInfo.id}",userToken="#{userInfo.userToken}") #{userInfo.nickName}
+                                                    div(class="personal_home")
+                                                        ul(class="personal_home_content")
+                                                            li
+                                                                a(class="my_personalFile") 我的资料
+                                                            li
+                                                                a(class="my_messageList") 招办回复
+                                                                if NoticeNum && NoticeNum.num && NoticeNum.num !== 0
+                                                                    span(class="online_tips03") #{NoticeNum.num}
+                                                            li
+                                                                a(class="my_onlineMessage") 在线留言
+                                                            li
+                                                                a(class="my_loginOut") 退出登录
+
+                                        else
+                                            li
+                                                a(class="fast_register")
+                                                    span(class="fast_register_msg") 免费注册
+                                            li
+                                                a(class="fast_login")
+                                                    i(class="icon-huojian")
+                                                    span(class="fast_login_msg01") 快捷登录
+                                        li(class="mobile_top")
+                                            div(class="mobile_code_header")
+                                                a(class="mobile")
+                                                    i(class="icon-phone",style="margin-top:0px;")
+                                                    span(class="mobile_msg") 扫码进入移动版
+                                                // 鼠标滑过移动版,显示二维码
+                                                img(class="mobile_code_img",src="#{locals.global.img_sever_url}/imgServer/qrcode/#{schoolInfo.identify}.jpg")
+                                div(class="search_content",catId="#{question.data.catId}")
+                                    input(type="text",class="search_msg",placeholder="请搜索相关内容")
+                                    span(class="search_btn",style="background:#{themeColor}")
+                                        i(class="comicon-search")
+                div(class="nav",style="background:#{themeColor}")
+                    div(class="nav_container")
+                        ul(class="nav_first_items")
+                            li
+                                div(class="home_nav_first_items_tips")
+                                    a(class="nav_first_items_tips active") 首页
+                            if m02.data
+                                each module02 in m02.data
+                                    li
+                                        div(class="nav_items",catId="#{module02.catId}",ntype="#{module02.ntype}")
+                                            a(class="nav_first_items_tips") #{module02.name}
+                                            div(class="nav_second_items")
+                                                if module02.children
+                                                    each module02Child in module02.children
+                                                        div(class="nav_second_items_msg01")
+                                                            a(class="nav_second_items_list themeBackgroundColorRgba",id="#{module02Child.id}",ntype="#{module02Child.ntype}",refUrl="#{module02Child.refUrl}")
+                                                                if module02Child && module02Child.icon
+                                                                    i(class="#{module02Child.icon}")
+                                                                else
+                                                                    i(class="usericon usericon-webicon-74")
+                                                                span(class="nav_items_tips") #{module02Child.name}
+
+                block content
+
+        script.
+
+            var styleColor = "#{schoolInfo.style}";
+            $('body').attr('id', styleColor);
+            function getAppServer() {
+                return "";
+            }
+            function getApiServer() {
+                return '!{locals.global.api_sever_url}'
+            }
+            // 机器人
+            function getRobotServer(){
+                return '!{locals.global.robot_sever_url}'
+            }
+
+            // 跳转页面，统一处理参数
+            function toDetailPage(url){
+                if(sessionStorage.getItem("spreadToken")) {
+                    if(url.indexOf("?") > -1) {
+                        url += "&spreadToken="+sessionStorage.getItem("spreadToken");
+                    }else{
+                        url += "?spreadToken="+sessionStorage.getItem("spreadToken");
+                    }
+                }
+                return url;
+            }
+
+
+            var sCode = $(".header_container").attr('sCode');
+            var themeColor ="#{themeColor}";
+
+            // 点击首页的学校logo 部分跳转到首页
+            $(".header_left").click(function(){
+                var identify = $(".header_content").attr('identify');
+                var url = getAppServer() + "/" + identify;
+                window.location.href = toDetailPage(url);
+            });
+
+
+            // 点击首页的移动版出现二维码
+            $(".mobile").hover(function(){
+                $(".mobile_code_img").show();
+            },function(){
+                $(".mobile_code_img").hide();
+
+            });
+            document.onkeydown = function (e) {
+                var theEvent = window.event || e;
+                //获取键盘上当前按下的键
+                var code = theEvent.keyCode || theEvent.which;
+                if (code == 13) {
+                    //这里调用上面给button添加点击登录事件方法
+                    $(".search_btn").click();
+                }
+            }
+
+            $(".fast_login_personal").hover(function(){
+                $(this).css("color",themeColor);
+            },function(){
+                $(this).css("color","#000000");
+            })
+
+            // 自定义鼠标划过样式
+            $(".SignUp").hover(function(){
+                $(this).find("a").css("color",themeColor);
+                $(this).find("span").css("color", themeColor);
+                $(this).find("i").css("color",themeColor);
+            },function(){
+                $(this).find("a").css("color","#000000");
+                $(this).find("span").css("color", "#000000");
+                $(this).find("i").css("color","#000000");
+            })
+            // 移动版鼠标划过样式
+            $(".mobile").hover(function(){
+                $(this).find("span").css("color", themeColor);
+                $(this).find("i").css("color",themeColor);
+            },function(){
+                $(this).find("span").css("color", "#000000");
+                $(this).find("i").css("color","#000000");
+            })
+
+
+            $(function(){
+
+                // 设置, 点击空白处, 隐藏所有二级下拉菜单
+                var themeColor ="#{themeColor}";
+
+
+                // 一级导航栏点击事件 出现二级下拉菜单
+                $(".nav_first_items_tips").mouseenter(function () {
+                    //$(document).unbind('click');
+                    $(this).addClass("on").siblings().removeClass("on");
+                    $(".home_nav_first_items_tips a").removeClass("active");
+                    //$(".nav_second_items a.nav_second_items_list").css("background",themeColor);
+                    var THIS = this;
+                    $(".nav_first_items_tips").each(function () {
+                        // 不是当前的, 全部隐藏
+                        if (this != THIS) {
+                            $(this).parent().find('.nav_second_items').hide();
+                        } else {
+                            var display = $(this).css('display') == 'block';
+                            if (display) {
+                                $(this).parent().find('.nav_second_items').hide();
+                            } else {
+                                $(this).parent().find('.nav_second_items').show();
+                                $(this).parent().find('nav_second_items_list').show();
+                                //setTapHiddenList();
+                            }
+                        }
+                    });
+                });
+                $(".nav_container").mouseleave(function () {
+                    $(this).parent().find('.nav_second_items').hide();
+                    $(".home_nav_first_items_tips a").addClass("active");
+                });
+                var m02 = !{m02};
+                $(".nav_second_items_list").click(function () {
+                    var currentId = $(this).attr('id');
+                    var parentId = $(this).parent().parent().parent().attr('catId');
+
+                    var m02Item = null; // 点击下拉框对应的一级信息
+                    for (var i in m02.data) {
+                        if (m02.data[i].catId == parentId) {
+                            m02Item = m02.data[i];
+                            break;
+                        }
+                    }
+                    if (!m02Item) {
+                        return;
+                    }
+
+                    // 下拉框一级信息此处已拿到 为 m02Item
+                    var m02ChildrenItem = null; // 点击下拉框对应的二级信息
+                    for (var j in m02Item.children) {
+                        if (m02Item.children[j].id == currentId) {
+                            m02ChildrenItem = m02Item.children[j];
+                            break;
+                        }else if(!m02Item.children[j].id){
+                            m02ChildrenItem = m02Item.children[j];
+                            break;
+                        }
+                    }
+                    if (!m02ChildrenItem) {
+                        return;
+                    }
+                    // 下拉框二级信息此处已拿到 为 m02ChildrenItem
+                    var ntype = m02ChildrenItem.ntype; // ntype
+                    // 点击下拉框中的各项分类信息,跳转到二级页面
+                    if (ntype == '0') {
+                        //跳转到文章列表
+                        var sCode = $(".header_container").attr('sCode');
+                        var parentId = $(this).attr('id');
+                        var url = getAppServer() + '/page/list/' + sCode + "/" + parentId + "?curPage=1&pageSize=10";
+                        window.open(toDetailPage(url));
+                    } else if (ntype == "1") {
+                        //调转到文章详情
+                        var sCode = $(".header_container").attr('sCode');
+                        var infoId = $(this).attr('id');
+                        var parentId = $(this).parent().parent().parent().attr('catId');
+                        var url = getAppServer() + '/page/detail/' + sCode + "/" + infoId + "/" + parentId;
+                        window.open(toDetailPage(url));
+                    } else if (ntype == "2") {
+                        var url = $(this).attr('refUrl');
+                        window.open(toDetailPage(url));
+                    } else if(ntype == "3"){
+                        // 跳转到 校园风采
+                        var sCode = $(".header_container").attr('sCode');
+                        var url = getAppServer() + '/page/photo/' + sCode;
+                        window.open(toDetailPage(url));
+                    } else if(ntype =="4"){
+                        // 跳转到 视频在线
+                        var sCode = $(".header_container").attr('sCode');
+                        var url = getAppServer() + '/page/video/' + sCode;
+                        window.open(toDetailPage(url));
+                    }
+                })
+
+                //首页导航栏二级分类点击事件
+                $(".SignUp").click(function(){
+                    var url = $(this).attr('link');
+                    window.open(toDetailPage(url));
+                })
+
+                var m02 = !{m02};
+                //首页导航栏二级分类点击事件
+                $(".nav_first_items_tips").click(function(){
+                    var sCode = $(".header_container").attr('sCode');
+                    var catId = $(this).parent().attr('catId');  // 二级分类id
+                    var ntype = $(this).parent().attr('ntype'); // 二级分类ntype
+                    var m02Item02 = null;
+                    for (var i in m02.data) {
+                        if (m02.data[i].ntype == ntype) {
+                            m02Item02 = m02.data[i];
+                            break;
+                        }
+                    }
+                    if(!m02Item02){
+                        return;
+                    }
+                    var ntype02 = m02Item02.ntype; // ntype
+                    // 点击首页导航栏的各级分类,跳转到二级页面
+                    if (ntype02 == '0') {
+                        //跳转到文章列表
+                        var parentId = $(this).parent().attr('catId');
+                        var sCode = $(".header_container").attr('sCode');
+                        var url = getAppServer() + '/page/list/' + sCode + "/" + parentId + "?curPage=1&pageSize=10";
+                        window.open(toDetailPage(url));
+                    } else if (ntype02 == "1") {
+                        return;
+                    } else if (ntype02 == "2") {
+                        var url = m02Item02.refUrl;
+                        window.open(toDetailPage(url));
+                    } else if(ntype02 == "3"){
+                        // 跳转到 校园风采
+                        var sCode = $(".header_container").attr('sCode');
+                        var url = getAppServer() + '/page/photo/' + sCode;
+                        window.open(toDetailPage(url));
+                    }else if(ntype02 == "4"){
+                        // 跳转到 视频在线
+                        var sCode = $(".header_container").attr('sCode');
+                        var url = getAppServer() + '/page/video/' + sCode;
+                        window.open(toDetailPage(url));
+                    }
+
+                })
+
+                    // 点击个人昵称到个人资料页面.需要sCode和userId两个参数
+                var goPersonal= $(".fast_login_msg01").html();
+                if(goPersonal == "快捷登录"){
+                    $(".fast_login_msg01").click(function(){
+                        var sCode = $(".header_container").attr('sCode');
+                        var url = getAppServer() + '/page/login/' + sCode;
+                        window.location.href =toDetailPage(url);
+                    })
+                }else{
+                    $(".fast_login_personal").click(function () {
+                        var userId = $(this).attr('id');
+                        var sCode = $(".header_container").attr('sCode');
+                        var url = getAppServer() + '/page/personal/' + sCode;
+                        window.open(toDetailPage(url));
+                    })
+                }
+
+
+                // 鼠标滑过个人昵称.出现下列菜单
+                $(".fast_login_personal").hover(function(){
+                    var themeColor ="#{themeColor}";
+                    $(".personal_home").show();
+                    $(".personal_home ul li").find("a").css("color","#ffffff");
+                    $(".personal_home ul li").find("span").css("color", "#ffffff");
+                    $(this).find(".fast_login_msg").css("color",themeColor);
+
+                })
+                $(".home_login_personal").mouseleave(function(){
+                    $(".personal_home").hide();
+                    $(".fast_login_personal span").css("color","#000000");
+
+                })
+
+                $(".personal_home_content li").hover(function(){
+                    $(this).find("a").css("color",themeColor);
+
+                },function(){
+                    $(this).find("a").css("color","#ffffff");
+                    $(".personal_home ul li").find("span").css("color", "#ffffff");
+                })
+
+
+
+                // 免费注册和快捷登录鼠标划过样式
+                $(".fast_login,.fast_register").hover(function(){
+                    $(this).css("color",themeColor);
+                },function(){
+                    $(this).css("color","#000000");
+                })
+
+
+                // 点击我的资料 跳转到我的资料页面  16
+                $(".my_personalFile").click(function(){
+                    var sCode = $(".header_container").attr('sCode');
+                    var url = getAppServer() + '/page/personal/' + sCode;
+                    window.open(toDetailPage(url));
+                })
+                // 点击 招办回复 跳转到消息列表页面  15
+                $(".my_messageList").click(function(){
+                    var sCode = $(".header_container").attr('sCode');
+                    var url = getAppServer() + '/page/message/' + sCode;
+                    window.open(toDetailPage(url));
+                })
+                // 点击 在线留言 跳转到在线留言页面 14
+                $(".my_onlineMessage").click(function(){
+                    var sCode = $(".header_container").attr('sCode');
+                    var url = getAppServer() + '/page/online/' + sCode;
+                    window.open(toDetailPage(url));
+                })
+                // 点击 退出登录 清空缓存
+                $(".my_loginOut").click(function(){
+                    var identify = $(".header_content").attr('identify');
+                    var url = getAppServer() + "/v5users/logOut?"+ "identify=" + identify;
+                    window.location.href = toDetailPage(url);
+                })
+                // 点击首页文字跳转到首页
+                $(".home_nav_first_items_tips").click(function () {
+                    var identify = $(".header_content").attr('identify');
+                    var url = getAppServer() + "/" + identify;
+                    window.location.href = toDetailPage(url);
+                })
+                // 点击免费注册跳转到注册页面
+                $(".fast_register").click(function(){
+                    var sCode = $(".header_container").attr('sCode');
+                    var url = getAppServer() + '/page/register/' + sCode;
+                    window.open(toDetailPage(url));
+                })
+
+
+
+                // 搜索框输入后跳转新页面事件
+                $(".search_btn").click(function(){
+                    var sCode = $(".header_container").attr('sCode');
+                    var parentId = $(this).parent().attr('catId');
+                    var question = $(".search_msg").val();
+                    if(!question && question.length == 0){
+                        return;
+                    }
+                    var url = getAppServer() + '/page/search/' + sCode + "/" + parentId + "/" + question+"?curPage=1&pageSize=10";
+                    url = encodeURI(url);
+                    window.open(toDetailPage(url));
+                })
+
+                // 前端加入统计代码
+                // 用户省份
+                var userProvince = remote_ip_info.province;
+                // 用户城市
+                var userCity = remote_ip_info.city;
+                // 学校唯一标识
+                var sCode = $(".header_container").attr('sCode');
+                // 用户token
+                var userToken = $(".fast_login_msg").attr('userToken');
+                // 访问来源
+                // 访问来源
+                var viewSourceUrl = sessionStorage.getItem('viewSourceUrl') ? sessionStorage.getItem('viewSourceUrl') : document.referrer;
+                sessionStorage.setItem('viewSourceUrl', viewSourceUrl);
+                // 当前页面 url
+                var pageUrl = location.href;
+                $.ajax({
+                    type: "post",
+                    url: getApiServer() + "/front/addUserViewLog",
+                    data: {
+                        'userToken': userToken,
+                        'userProvince': userProvince,
+                        'userCity': userCity,
+                        'sCode': sCode,
+                        'viewSourceUrl':viewSourceUrl,
+                        'pageUrl':pageUrl
+                    },
+                    success: function (data) {
+                        if (data && data.code == '000000') {
+                            return;
+                        } else {
+                            return;
+                        }
+                    }
+                })
+
+
+
+
+            });
+
+
+            //用户宣传检测获取地址栏的userToken
+            // 获取地址栏参数
+            function GetQueryString(name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null)return unescape(r[2]);
+                return null;
+            }
+
+
+            function getSpreadToken() {
+                var frontUserId = $('.fast_login_msg').attr('userid') && $('.fast_login_msg').attr('userid') != '' ? $('.fast_login_msg').attr('userid') : $('.fast-login-msg').attr('userid');
+                var sCode = $(".header_container").attr('sCode');
+                $.ajax({
+                    url : getApiServer() + '/front/spread/getSpreaderByUserId',
+                    data: {'frontUserId': frontUserId, 'sCode': sCode},
+                    cache : false,
+                    async : false,
+                    type : "POST",
+                    dataType : 'json',
+                    success : function (res){
+                        var spreadToken = GetQueryString("spreadToken");
+                        var userToken = GetQueryString("userToken");
+                        if(res.code == '000000' && !res.data && spreadToken){
+                            $.ajax({
+                                type: "get",
+                                url: getApiServer() + "/front/spread/bindUserAndSpread",
+                                data: {
+                                    'spreadToken': spreadToken,
+                                    'userToken':userToken,
+                                    'frontUserId': frontUserId
+                                },
+                                success: function (res) {
+                                    if (res && res.code == '000000') {
+                                        sessionStorage.setItem('spreadToken', res.data?res.data:'');
+                                    }
+                                }
+                            })
+                        }else {
+                            sessionStorage.setItem('spreadToken', res.data?res.data:'');
+                        }
+                    }
+                });
+            }
+            getSpreadToken();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

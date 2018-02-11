@@ -1,0 +1,21 @@
+.content .titTxt{
+	color: #C2B280  !important;
+} 
+.hot-qus-class li.cur{
+  background-color: #C2B280  !important;
+  border: 1px solid #C2B280  !important;
+}
+.hot-qus-class li.cur,
+.hot-qus-list-wrap{
+  border-color: #C2B280  !important;
+}
+.menu .m-head {
+	background-color: #C2B280  !important;
+}
+.iconSize,
+.w3-text-theme {
+  color: #C2B280  !important;
+}
+.top .notice-bar .notice-tit{
+	color: #C2B280  !important;
+}

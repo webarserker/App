@@ -1,0 +1,123 @@
+//
+   Created by abbydu on 17/7/26.
+
+extends ../components/layout01
+block content
+      // 新导航栏。显示全部一级分类
+      include ../components/navNew
+      // 文章列表
+      div(class="details")
+         div(class="details_container")
+            include ../components/sidebar
+            div(class="Article_details")
+                //二级页面子列表
+                div(class="Article_details_container")
+                    if contentInfo
+                        div(class="Article_details_tltle")
+                            span(class="Article_details_tips") 您的当前位置：
+                            if contentInfo.firstCatName && contentInfo.firstCatName.length > 0
+                                a(class="aur",firstCatId ="#{contentInfo.firstCatId}") #{contentInfo.firstCatName}
+                            else
+                                a(class="aur")
+                            if contentInfo.secondCatName && contentInfo.secondCatName.length > 0
+                                a(class="cur",secondCatId="#{contentInfo.secondCatId}") #{contentInfo.secondCatName}
+                            else
+                                a(class="cur")
+                            if contentInfo.threeCatName && contentInfo.threeCatName.length > 0
+                                a(class="sur",threeCatId="#{contentInfo.threeCatId}") #{contentInfo.threeCatName}
+                            else
+                                a(class="sur")
+                        div(class="subList_content")
+                            if contentInfo && contentInfo.data && contentInfo.data.length > 0
+                                div(class="subList_content_msg")
+                                    ul
+                                        if contentInfo.data
+                                            each item, i in contentInfo.data
+                                                li
+                                                    a(infoId='#{item.id}',contentLink="#{item.contentLink}")
+                                                        span(class="time") #{item.pulishTimeStr}
+                                                        span(class="title") #{item.title}
+                                div(class="subList_content_pages")
+                                    a(class="icon-prev",onclick="toPage(#{(contentInfo.curPage-1)<1?1:(contentInfo.curPage-1)})",style="color:#{themeColor};border:1px solid #{themeColor}")
+                                    if contentInfo.bottomPageNum
+                                        - each item in contentInfo.bottomPageNum
+                                            a(class="subList_content_pagesNumber",href="javascript:toPage(#{item})",class=(contentInfo.curPage) == item ? 'page_active' : '', style=(contentInfo.curPage)==item ? 'color: #{themeColor};' : '') #{(item)}
+                                    a(class="icon-next",onclick="toPage(#{(contentInfo.curPage+1)>=contentInfo.totalPage?contentInfo.totalPage:(contentInfo.curPage+1)})",style="color:#{themeColor};border:1px solid #{themeColor}")
+                            else
+                                div(class="subList_content_msg") 很抱歉,暂无数据
+             include ../components/rightMode
+
+      include ../components/footer
+      script.
+          function getAppServer() {
+              return "";
+          }
+          function getApiServer() {
+              return '!{locals.global.api_sever_url}'
+          }
+          $(document).ready(function(){
+              // 鼠标滑过.列表样式变成主题色
+              var themeColor ="#{themeColor}";
+              $(".subList_content_msg ul li a").hover(function(){
+                  $(this).css("color",themeColor);
+              })
+              // 侧边栏分类列表点击事件-->跳转列表页即可
+              sidebarManager.setClassClickCallback(function(catId){
+                  var sCode = $(".main_container").attr('sCode');
+                  var url = getAppServer() + "/secondPage/secondPageArticleList" + "?catId="+catId + "&sCode=" + sCode;
+                  window.location.href = toDetailPage(url);
+              });
+              // 点击列表每一项,跳转到文章详情  当文章列表有链接时 先跳转链接，没有链接，就根据infoId和父级parentId 跳转
+              $(".subList_content_msg ul li a").click(function(){
+                  var contentLink = $(this).attr('contentLink');
+                  var infoId = $(this).attr('infoId');
+                  var parentId = sidebarManager.getCurrentSelectId().threeCatId || sidebarManager.getCurrentSelectId().secondCatId;
+                  var sCode = $(".main_container").attr('sCode');
+                  // 文章列表跳转 ，先跳文章链接，再根据
+                  if(contentLink &&contentLink !=="null"&&contentLink.length > 0){
+                      window.open(contentLink);
+                  }else{
+                      var url = getAppServer() + "/secondPage/secondPageArticleDetail"
+                              + "?infoId=" + infoId +
+                              "&parentId=" + parentId
+                              + "&sCode=" + sCode;
+                      window.location.href = toDetailPage(url);
+                  }
+              });
+              var firstId = $(".aur").attr("firstCatId");
+              $(".nav_items").each(function(){
+                  if($(this).attr('catId') == firstId ){
+                      $(this).find("a.nav_first_items_tips ").css("border-bottom","2px solid #ffffff");
+                      $(this).siblings().find("a.nav_first_items_tips ").css("border-bottom","none");
+
+                  }
+              })
+
+
+          });
+          //页码点击跳转事件
+          function toPage(pageNum) {
+              var sCode = $(".main_container").attr('sCode');
+              var catId = sidebarManager.getCurrentSelectId().threeCatId || sidebarManager.getCurrentSelectId().secondCatId;
+              var url = getAppServer() + "/secondPage/secondPageArticleList"
+                      + "?catId=" + catId
+                      + "&sCode=" + sCode
+                      +"&curPage="+pageNum
+                      +"&pageSize=10";
+
+              window.location.href = toDetailPage(url);
+
+          }
+
+
+
+          // 鼠标滑过.列表样式变成主题色
+          var themeColor = "#{themeColor}";
+          $(".subList_content_msg ul li a").hover(function () {
+              $(this).find(".time").css("color", themeColor);
+              $(this).find(".title").css("color", themeColor);
+          },function(){
+              $(this).find(".time").css("color", "#999999");
+              $(this).find(".title").css("color", "#555555");
+          })
+

@@ -1,0 +1,159 @@
+﻿@charset "utf-8";
+/* CSS Document */
+/*头部样式*/
+.mtb-16{
+    margin: 16px 0;
+}
+.mh70{
+    min-height: 70px;
+}
+.header{
+    color: #313233;
+    border-bottom: 1px solid #e6e6e6;
+}
+.header .position{
+    width: 50%;
+    right: 0;
+    bottom: 15px;
+}
+.header .site-name{
+    font-size: 20px;
+    font-weight: normal;
+}
+.header .site-name img{
+    vertical-align: middle;
+    height: 75px;
+    cursor: pointer;
+}
+.header .site-name a{
+    color: #313233;
+}
+.header .site-name a:hover{
+    text-decoration:none!important;
+}
+.header .login{
+    font-size: 16px;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+.header .login a{
+    color: #313233;
+}
+.header .login span, .header .login img{
+    vertical-align: middle;
+}
+.header .tool-bar{
+    font-size: 16px;
+    max-width: 490px;
+}
+.header .tool-bar a{
+    color: #333;
+    padding: 0 6px;
+}
+.header .tool-bar .userWel{
+    font-size: 14px;
+}
+.header .tool-bar .separation{
+    color: #b1b1b1;
+    font-size: 14px;
+}
+.header .tool-bar .cur, .header .tool-bar a:hover{
+    color: #3b8df7;
+    text-decoration: none;
+}
+.header .drop-down{
+    position: absolute;
+    top: 30px;
+    right: 20px;
+    z-index: 100;
+    background-color: #ffffff;
+    width: 130px;
+    border: 1px solid #e5e8ea;
+    border-radius: 3px;
+}
+.header .drop-down li{
+    border-bottom: 1px solid #e5e8ea;
+    border-right: 0;
+    line-height: 40px;
+    padding: 0 5px;
+}
+.header .drop-down li a{
+    font-size: 12px;
+    color: #333;
+}
+.header .drop-down li a:hover{
+    text-decoration: none;
+}
+.header .drop-down .before{
+    right: 10px;
+    top: -17px;
+}
+.header .drop-down .after{
+    right: 9px;
+    top: -16px;
+}
+.header .notice-no{
+    position: absolute;
+    right: -8px;
+    top: -8px;
+    width: 16px;
+    height: 16px;
+    background-color: #ff7929;
+    border: 1px solid #e4661a;
+    border-radius: 16px;
+    color: #fff;
+    line-height: 16px;
+    text-align: center;
+    font-size: 12px;
+}
+.header .drop-down li .notice-no{
+    position: static;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+.logout-pop .btn{
+    width: 164px;
+    height: 48px;
+    line-height: 48px;
+    margin-left: 10px;
+}
+.logout-pop .btn-cancle{
+    background-color: #fff;
+    color: #3b8df7;
+}
+.logout-pop a.btn-cancle:hover{
+    background-color: #fff;
+    color: #3b8df7;
+}
+.logout-pop .para{
+    font-size: 16px;
+    color: #666;
+    margin: 25px 0;
+    text-align: center;
+}
+/*重置搜索框*/
+.header .g-searchIpt{
+    width: 200px;
+    height: 28px;
+    font-size: 14px;
+    border: 1px solid #c5c5c5;
+    border-radius: 2px;
+}
+.header .g-searchIpt .ipt{
+    height: 28px;
+    line-height: 28px;
+}
+.header .g-searchIpt .btn{
+    width: 60px;
+    height: 30px;
+    line-height: 30px;
+    top: -1px;
+    border-bottom-right-radius: 2px;
+    border-top-right-radius: 2px;
+    font-size: 15px;
+}
+.header .g-searchIpt .icon{
+    top: 5px;
+}

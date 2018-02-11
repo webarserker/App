@@ -1,0 +1,71 @@
+.w1000{
+	width: 1000px;
+}
+.w980{
+	width: 980px;
+}
+.wp100{
+	width: 100%;
+}
+.fz-22{
+	font-size: 22px;
+}
+.fz-36{
+	font-size: 36px;
+}
+.fz-32{
+	font-size: 32px;
+}
+.bgf5f5f5{
+	background-color: #f5f5f5;
+}
+.color5f5f5f{
+	color: #5f5f5f;
+}
+.color6b6b6b{
+	color: #6b6b6b;
+}
+.color4c4c4c{
+	color: #4c4c4c;
+}
+.color666{
+	color: #666;
+}
+.color3b8df7{
+	color: #3b8df7;
+}
+.mt-30{
+	margin-top: 30px;
+}
+.loginFromBox{
+	margin: 45px 45px 0;
+	padding-bottom: 100px;
+}
+.wh-box{
+	width: 428px;
+	height: 410px;
+	padding: 20px;
+}
+.wh-box p{
+	line-height: 34px;
+}
+.wh-box .doc-name{
+	margin: 20px 0;
+}
+.qq-login, .weibo-login{
+	cursor: pointer;
+}
+.qq-login:hover{
+	background-position: -100px -101px;
+}
+.weibo-login:hover{
+	background-position: -100px -151px;
+}
+.valErrTip{
+	color: #f54b31;
+	padding: 5px 0;
+	font-size: 14px;
+	position: absolute;
+	top: 60px;
+	left: 0;
+}

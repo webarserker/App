@@ -1,0 +1,374 @@
+//
+   Created by abbydu on 17/7/26.
+
+extends ../components/layout02
+block content
+    // 在线留言
+    div(class="online")
+        div(class="online_container")
+            div(class="online_content")
+                //左边选择项
+                div(class="online_left")
+                    ul
+                        li
+                            a(class="online_personal active") 我的资料
+                        li
+                            a(class="online_huifu") 招办回复
+                            if NoticeNum && NoticeNum.num
+                                span(class="online_tips03") #{NoticeNum.num}
+                        li
+                            a(class="online_message") 在线留言
+                // 我的资料
+                div(class="personalProfile_right",id="#{userInfo.id}")
+                    // 头像信息
+                    div(class="personalProfile_message")
+                        img(src="../../images/v5template/47-pic.jpg")
+                        span(class="personalProfile_message_tips")
+                        input(class="personalProfile_message_input",type="text",name="",placeholder="请输入您的昵称,最多为8个字",value="#{userInfo.nickName}",maxlength="8")
+                    // 邮箱
+                    div(class="personalProfile_email")
+                        span(class="personalProfile_email_tips01")
+                        span(class="personalProfile_email_tips02") 邮箱
+                        if userInfo.email && userInfo.email.length > 0
+                            input(type="text",class="personalProfile_email_input",name="",value="#{userInfo.email}",disabled="disabled")
+                        else
+                            input(type="text",class="personalProfile_email_input",name="",disabled="disabled")
+                    // 生源地
+                    div(class="personalProfile_origin")
+                        span(class="personalProfile_origin_tips01")
+                        span(class="personalProfile_origin_tips02") 生源地
+                        div(class="personalProfile_origin_input")
+                            if userInfo && userInfo.provinceName && userInfo.provinceName.length > 0
+                                a(id="select_origin",onclick="ChangeNumber(this)",provinceId="#{userInfo.provinceId}",class="select_origin") #{userInfo.provinceName}
+                            else
+                                a(id="select_origin",onclick="ChangeNumber(this)",provinceId="#{userInfo.provinceId}",class="select_origin")
+                            div(class="origin_id")
+                                ul(class="allOrigin",style="display:none;")
+
+
+                    // 报考类型
+                    div(class="personalProfile_type")
+                        span(class="personalProfile_type_tips01")
+                        span(class="personalProfile_type_tips02") 报考类型
+                        div(class="personalProfile_type_input")
+                            if userInfo && userInfo.sourceType && userInfo.sourceType.length > 0
+                                a(id="select_type",onclick="ChangeType(this)") #{userInfo.sourceType}
+                            else
+                                a(id="select_type",onclick="ChangeType(this)") 请选择
+                            div(class="type_id")
+                                ul(class="allType",style="display:none;")
+                                    li 高考招生
+                                    li 研究生招生
+
+                    // 所在高校
+                    div(class="personalProfile_School")
+                        span(class="personalProfile_School_tips01")
+                        span(class="personalProfile_School_tips02") 所在学校
+                        div(class="personalProfile_School_input")
+                            if userInfo && userInfo.highSchoolName && userInfo.highSchoolName.length > 0
+                                if userInfo && userInfo.sourceType && userInfo.sourceType == "研究生招生"
+                                    input(id="select_school",type="text",class="personalProfile_School_inputMsg",placeholder="请选择",onkeyup="checkField(this.value)",onkeypress="checkField(this.value)",value="#{userInfo.universityName}")
+                                if userInfo && userInfo.sourceType && userInfo.sourceType == "高考招生"
+                                    input(id="select_school",type="text",class="personalProfile_School_inputMsg",placeholder="请选择",onkeyup="checkField(this.value)",onkeypress="checkField(this.value)",value="#{userInfo.highSchoolName}")
+                            else
+                                input(id="select_school",type="text",class="personalProfile_School_inputMsg",placeholder="请选择",onkeyup="checkField(this.value)",onkeypress="checkField(this.value)")
+                            span(class="school_icon")
+                            div(class="school_id")
+                                ul(class="allSchool")
+                    // 错误提示
+                    div(class="personal_error_tips")
+                    // 密码
+                    div(class="personalProfile_change")
+                        span(class="personalProfile_change_tips01")
+                        span(class="personalProfile_change_tips02") 密码
+                        a(class="personalProfile_change_password",style="color:#{themeColor}") 修改密码
+                    // 保存修改
+                    a(class="personalProfile_save",style="background:#{themeColor}") 保存修改
+    script.
+        function getAppServer() {
+            return "";
+        }
+        function getApiServer() {
+            return '!{locals.global.api_sever_url}'
+        }
+        $(function () {
+            //  点击在线留言 14
+            $(".online_message").click(function () {
+                var sCode = $(".new_header").attr('sCode');
+                $(this).addClass("active").siblings().removeClass("active");
+                var url = getAppServer() + '/page/online/' + sCode;
+                window.location.href = url;
+            });
+            // 点击招办回复,消息列表15
+            $(".online_huifu").click(function () {
+                var sCode = $(".new_header").attr('sCode');
+                $(this).addClass("active").siblings().removeClass("active");
+                window.location.href =getAppServer() + '/page/message/' + sCode;
+            });
+            //  选择生源地
+
+        });
+        // 修改密码
+        $(".personalProfile_change_password").click(function(){
+            var sCode = $(".new_header").attr('sCode');
+            var url = getAppServer() + '/page/modify/' + sCode;
+            window.location.href = url;
+        })
+        // 获取生源地省份列表
+        function ChangeNumber(THIS) {
+            $(document).unbind("click");
+            // 显示状态, 隐藏
+            var goodsCntHidden = $('.origin_id').is(":hidden");
+            if (!goodsCntHidden) {
+                return $(".origin_id").hide();
+            }
+            // 隐藏状态, 显示
+            var number = $(THIS);
+            //点击修改数量按钮出现数量列表
+            $(".origin_id,.allOrigin").show();
+            $(".allSchool").hide();
+            $("#school_id").hide();
+            $("#select_school").val("");
+            $("#type_id").hide();
+            $(".allType").hide();
+            $.ajax({
+                type: "get",
+                url: getAppServer() + "/v5users/origin_json",
+                dataType: "json",
+                success: function (ret) {
+                    if(ret.length>0){
+                        // 显示 li
+                        $(".origin_id,.allOrigin").show();
+                        var name = ret;
+                        var ul = $(".origin_id ul");
+                        ul.html("");
+                        for (var i = 0; i < name.length; i++) {
+                            var li = $("<li originId="+name[i].id+">");
+                            li.html(name[i].name);
+                            ul.append(li);
+                        }
+                        // 添加点击消失事件
+                        $(document).click(function () {
+                            $(document).unbind("click");
+                            $(".origin_id").hide();
+                        });
+                        // 给 li 绑定事件
+                        $(".origin_id ul li").click(function () {
+                            $("#select_origin").html("");
+                            $("#select_origin").html($(this).text());
+                            $('.origin_id,.allOrigin').hide();
+                            var originId = $(this).attr('originId');
+                            $("#select_origin").attr('originId',originId);
+
+                        })
+                    }else{
+                        //alert("获取省份信息列表失败");
+                    }
+
+                }
+            })
+
+        }
+        //  选择报考类型
+        // 获取生源地省份列表   除这个区域之外的其他区域有点问题
+        function ChangeType(THIS) {
+            $(document).unbind("click");
+            // 显示状态, 隐藏
+            var goodsCntHidden = $('.type_id').is(":hidden");
+            if (!goodsCntHidden) {
+                return $(".type_id").hide();
+            }
+            // 隐藏状态, 显示
+            var number = $(THIS);
+            //点击修改数量按钮出现数量列表
+            $(".type_id,.allType").show();
+            $(".origin_id,.allOrigin").hide();
+            $(".school_id,.allSchool").hide();
+            $("#select_school").val("");
+            // 给 li 绑定事件
+            $(".type_id ul li").click(function () {
+                $("#select_type").html("");
+                $("#select_type").html($(this).text());
+                $('.type_id,.allType').hide();
+            })
+            // 添加点击消失事件
+            setTimeout(function(){
+                $(document).click(function () {
+                    $(document).unbind("click");
+                    $(".type_id").hide();
+                });
+            },300);
+
+        }
+
+
+
+        function checkField(val) {
+            // 隐藏状态, 显示
+            $(document).unbind("click");
+            var province = $("#select_origin").html();
+            // 报考类型
+            var type = $("#select_type").html();
+            if(type=="请选择"){
+                $(".personal_error_tips").html("请先选择报考类型～");
+                return;
+            }
+            //点击
+            if(type=="研究生招生"){
+                $(".school_id,.allSchool").show();
+                $(".type_id,.allType").hide();
+                $(".origin_id,.allOrigin").hide();
+                $.ajax({
+                    type: "post",
+                    url: getAppServer() + "/v5users/findUniversity_json",
+                    dataType: "json",
+                    data: {
+                        'province': province,
+                        'name': val
+                    },
+                    success: function (ret) {
+                        if (ret.length > 0) {
+                            // 显示 li
+                            $(".school_id,.allSchool").show();
+                            var highSchool = ret;
+                            var ul = $(".school_id ul");
+                            ul.html("");
+                            for (var i = 0; i < highSchool.length; i++) {
+                                var li = $("<li highSchoolId=" + highSchool[i].id + ">");
+                                li.html(highSchool[i].name);
+                                ul.append(li);
+                            }
+                            // 给 li 绑定事件
+                            $(".school_id ul li").click(function () {
+                                $("#select_school").val("");
+                                $("#select_school").val($(this).text());
+                                $('.school_id,.allSchool').hide();
+                                var highSchoolId = $(this).attr('highSchoolId');
+                                $("#select_school").attr('highSchoolId',highSchoolId);
+                            })
+
+                            // 添加点击消失事件
+                            setTimeout(function(){
+                                $(document).click(function () {
+                                    $(document).unbind("click");
+                                    $(".school_id").hide();
+                                });
+                            },300);
+
+                        } else {
+                            //alert("获取高校信息列表失败");
+                        }
+                    }
+                })
+            }else if(type=="高考招生"){
+                $(".school_id,.allSchool").show();
+                $.ajax({
+                    type: "post",
+                    url: getAppServer() + "/v5users/findHighSchool_json",
+                    dataType: "json",
+                    data: {
+                        'province': province,
+                        'name': val
+                    },
+                    success: function (ret) {
+                        if (ret.length > 0) {
+                            // 显示 li
+
+                            $(".school_id").show();
+                            var highSchool = ret;
+                            var ul = $(".school_id ul");
+                            ul.html("");
+                            for (var i = 0; i < highSchool.length; i++) {
+                                var li = $("<li highSchoolId=" + highSchool[i].id + ">");
+                                li.html(highSchool[i].name);
+                                ul.append(li);
+                            }
+                            // 给 li 绑定事件
+                            $(".school_id ul li").click(function () {
+                                $("#select_school").val("");
+                                $("#select_school").val($(this).text());
+                                $('.school_id').hide();
+                                var highSchoolId = $(this).attr('highSchoolId');
+                                $("#select_school").attr('highSchoolId', highSchoolId);
+                            })
+
+                            // 添加点击消失事件
+                            setTimeout(function () {
+                                $(document).click(function () {
+                                    $(document).unbind("click");
+                                    $(".school_id").hide();
+                                });
+                            }, 300);
+
+                        } else {
+                            //alert("获取高校信息列表失败");
+                        }
+                    }
+                })
+            }
+
+        }
+        $(".personalProfile_School_inputMsg").focus(function(){
+            var province = $("#select_origin").html();
+            checkField($(this).val());
+        });
+        // 点击保存修改 按钮  更新用户个人资料
+        $(".personalProfile_save").click(function(){
+            // 学校sCode
+            var  sCode = $(".new_header").attr('sCode')
+            // 昵称
+            var nickname = $(".personalProfile_message_input").val();
+            // 账户
+            var email = $(".personalProfile_email_input").val();
+            // 生源地
+            var provinceName = $(".select_origin").html();
+            // 报考类型
+            var sourceType = $("#select_type").html();
+            // 所在高校id
+            // 高考招生
+            var highSchoolId = $("#select_school").attr('highSchoolId');
+
+            // 高校名称
+            var highSchoolName = $("#select_school").val();
+
+            var errTips = $(".personal_error_tips");
+            // 更新个人资料
+            $.ajax({
+                type: "get",
+                url: getAppServer() + "/v5users/updateUser_json",
+                data: {
+                    'sCode': sCode,
+                    'nickname': nickname,
+                    'email': email,
+                    'provinceName':provinceName,
+                    'sourceType':sourceType,
+                    'highSchoolId':highSchoolId,
+                    'highSchoolName':highSchoolName
+                },
+                success: function (data) {
+                    // 错误提示
+                    var errTips = $(".personal_error_tips");
+                    if (data && data.retCode == '0') {
+                        errTips.html("修改个人资料成功");
+                        // 报考类型
+                        var type = data.type;
+                         $(".select_type").html(type);
+                        // 所在高校
+                        var school = data.school;
+                        $(".select_school").html(school);
+                    } else {
+                        errTips.html("修改个人资料失败");
+                    }
+                }
+            })
+
+        })
+
+
+
+        // 鼠标滑过昵称输入框出现边框
+        $(".personalProfile_message_input").hover(function () {
+            $(this).css("border", "1px solid #ededed");
+        },function(){
+            $(this).css("border", "none");
+        })

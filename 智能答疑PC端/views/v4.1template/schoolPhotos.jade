@@ -1,0 +1,27 @@
+extends layout.jade
+block content
+    include ./components/headerNew
+    div.containers
+        div#toTop
+            img(src="/images/v4_1template/backtop.png")
+        include ./components/sidebar
+        div#main
+            div#footprint 您的当前位置：校园风采
+            include ./components/collegePhotos
+        include ./components/rightBooks
+        div.clear
+    include ./components/footer
+    script.
+        var SCODE = '#{sCode}'
+        var BASE_HOST = '!{locals.global.api_sever_url}'
+        var HOST = BASE_HOST + '/weixin/api';
+        var IMG_HOST = '!{locals.global.img_sever_url}'
+        var APP_SERVER = ''
+
+
+
+
+
+        $(function () {
+            $('#menu .themeMenuHead').html('校园风采')
+        })

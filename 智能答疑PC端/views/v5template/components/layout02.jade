@@ -1,0 +1,87 @@
+doctype html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+html
+    head
+        meta(http-equiv="Content-Type", content="text/html; charset=utf-8")
+        title #{title}
+        link(href='#{host}/stylesheets/v5template/layout01.css',rel="stylesheet",type="text/css")
+        link(href='#{host}/stylesheets/v5template/pages/03_v5users.css',rel="stylesheet",type="text/css")
+        link(href='#{host}/stylesheets/v5template/themecolor.css',rel="stylesheet",type="text/css")
+        link(href='#{host}/stylesheets/v5template/font/bjfu/common/style.css',rel="stylesheet",type="text/css")
+        link(href='#{host}/stylesheets/v5template/font/bjfu/user/style.css',rel="stylesheet",type="text/css")
+        link(href='#{host}/stylesheets/v5template/icon/style.css',rel="stylesheet",type="text/css")
+        script(type="text/javascript",src="#{host}/static/ueditor/ueditor.parse.js")
+        if schoolInfo && schoolInfo.yrScholar
+            link(rel="shortcut icon",href="#{locals.global.img_sever_url}#{schoolInfo.yrScholar}")
+        script(type="text/javascript",src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.js")
+
+
+    body
+        div(class="new_wrapper",style="min-width:1200px;")
+            div(class="new_container")
+                // 头部
+                div(class="new_header",sCode="#{schoolInfo.code}",style="background:#{themeColor}")
+                    div(class="new_header_container",identify="#{schoolInfo.identify}")
+                        div(class="new_header_left")
+                            if schoolInfo && schoolInfo.logoUrl && schoolInfo.logoUrl.length > 0
+                                img(src="#{locals.global.img_sever_url}#{schoolInfo.logoUrl}")
+                            if schoolInfo && schoolInfo.professor && schoolInfo.professor.length> 0
+                                span(style="color:#ffffff") #{schoolInfo.professor}
+                //分隔线
+                div(class="new_separate",style="background:#{themeColor}")
+
+                block content
+                block new_footer
+                    div(class="new_footer")
+                        div(class="new_footer_container")
+                            span(class="footer_copyright_msg01") ©版权所有：#{schoolInfo.name} • 北京闻道卓越教育科技有限公司技术支持
+                            span(class="footer_copyright_msg02") Copyright 2017 ALL Rights Reserved
+                            span(class="footer_copyright_msg04")
+                            span(class="footer_copyright_msg03") 京ICP备16030849号
+                            a(class="footer_gongan",style="width:auto;text-decoration:none;",target="_blank",href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802024129")
+                                img(src="#{locals.global.api_sever_url}/static/image/anbei.png")
+                                | 京公网安备 11010802024129号
+                            a(class="footer_zhaoban") 招办管理
+                            //span(class="msg01") Copyright 2017 ALL Right Reserved
+                            //span(class="msg02") 京ICP备16030849号 招办管理
+        script.
+            var styleColor = "#{schoolInfo.style}";
+            $('body').attr('id', styleColor);
+            function getAppServer() {
+                return "";
+            }
+            function getApiServer() {
+                return '!{locals.global.api_sever_url}'
+            }
+
+            // 跳转页面，统一处理参数
+            function toDetailPage(url){
+                if(sessionStorage.getItem("spreadToken")) {
+                    if(url.indexOf("?") > -1) {
+                        url += "&spreadToken="+sessionStorage.getItem("spreadToken");
+                    }else{
+                        url += "?spreadToken="+sessionStorage.getItem("spreadToken");
+                    }
+                }
+                return url;
+            }
+            $(".new_header_left").click(function(){
+                var identify = $(".new_header_container").attr('identify');
+                var url = getAppServer() +"/"+identify;
+                window.location.href = toDetailPage(url);
+            })
+
+            $(".footer_zhaoban").click(function(){
+                var url = "http://www.zhinengdayi.com";
+                window.location.href = toDetailPage(url);
+            });
+
+
+
+
+
+
+
+
+
+
+

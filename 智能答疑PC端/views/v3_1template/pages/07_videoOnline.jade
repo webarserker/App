@@ -1,0 +1,41 @@
+//
+   Created by abbydu on 17/7/26.
+
+extends ../components/layout01
+block content
+      // 新导航栏。显示全部一级分类
+      include ../components/navNew
+      // 详情页
+      div(class="details")
+         div(class="details_container")
+             div(class="sidebar")
+                 div(class="side_bar")
+                    img(class="side_bg_img",src="#{host}#{sidebarBgImg}")
+                    img(class="side_icon_img",src="#{locals.global.img_sever_url}#{schoolInfo.yrScholar}")
+                    span(class="side_bar_tips") 视频在线
+             div(class="Article_details")
+                 //常见问题
+                 div(class="Article_details_container")
+                     div(class="Article_details_tltle")
+                         span(class="Article_details_tips") 您的当前位置：
+                         a(class="aur") 视频在线
+                     // 视频在线
+                     if video && video.data
+                         div(class="videoOnline_content")
+                             ul
+                                 if video.data
+                                     each item in video.data
+                                         li
+                                             p(class="video_title") #{item.title}
+                                             if item.vidoUrl && item.vidoUrl.indexOf('http') != -1
+                                                 a(class="sub_video",target="_blank",href="#{item.vidoUrl}")
+                                                     img(src="#{locals.global.img_sever_url}#{item.imgUrl}")
+                                             else
+                                                 a(class="sub_video",target="_blank",href="#{locals.global.img_sever_url}#{item.vidoUrl}")
+                                                     img(src="#{locals.global.img_sever_url}#{item.imgUrl}")
+                                             p(title="#{item.desc}",class="video_msg") #{item.desc}
+                     else
+                         li 很抱歉,暂无数据....
+             include ../components/rightMode
+      include ../components/footer
+      script.

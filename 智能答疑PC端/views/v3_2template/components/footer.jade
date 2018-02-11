@@ -1,0 +1,77 @@
+div#footer
+    div.flag.themeBackgroundColor
+    div.containers
+
+        div.level1
+            div.d1
+                div.head
+                    h2 招生办微信
+                    div.clear
+                    img(class="big-img" src="#{locals.global.img_sever_url}#{schoolInfo.schoolOfficeQrcode}")
+                div.body
+                    img(src="#{locals.global.img_sever_url}#{schoolInfo.schoolOfficeQrcode}")
+
+            div.d2
+                div.head 联系方式
+                ul.body
+                    div
+                        ul.adrressList
+
+
+
+            div.d3
+                div.head 友情链接
+                div.body
+
+
+            div.clear
+        div.bottom2
+            p &copy;版权所有：#{schoolInfo.name} • 北京闻道卓越教育科技有限公司技术支持
+            p   Copyright 2017 ALL Rights Reserved | 京ICP备16030849号 | &nbsp;
+                a(target="_blank",href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802024129")
+                    img(src="#{locals.global.api_sever_url}/static/image/anbei.png")
+                    | 京公网安备 11010802024129号
+                span &nbsp;&nbsp;
+                a#footer-last 招办管理
+
+
+script.
+
+    $(function () {
+        /*
+        $('#footer-qrcode img').attr('src', IMG_HOST + '/imgServer/qrcode/' + $("#header").data("identify") + '.jpg');
+        */
+
+       /* $('.d1 .body').hover(function(){
+            $('.big-img').show();
+        },function(){
+            $('.big-img').hide();
+        })  */
+
+        //联系方式
+
+        $.get(BASE_HOST + '/front/findContactWay?sCode=' + SCODE, function (data) {
+            var str = '';
+            for (var i = 0; i < data.length; i++) {
+                str += '<li><span>' + data[i].contactTypeStr + '： </span><span>' + data[i].contact + '</span></li>'
+            }
+
+            $('#footer .d2 .adrressList').html(str);
+
+
+            $('#footer .d2 .body').panel({iWheelStep:32});
+
+        })
+
+        //友情链接
+        $.get(BASE_HOST + '/front/template/' + SCODE + '/v3.2/FriLink', function (data) {
+            data=data.data;
+            var str='';
+            for(var i=0;i<data.length;i++){
+                str+='<a target="_blank" href="'+data[i].link+'">'+data[i].name+'</a>'
+            }
+            $('#footer .d3 .body').html(str);
+        })
+
+        $('#footer-last').attr('href', 'http://www.zhinengdayi.com');
+    })

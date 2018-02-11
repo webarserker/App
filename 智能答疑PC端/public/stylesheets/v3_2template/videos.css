@@ -1,0 +1,50 @@
+.containers.videoPage{
+    /*margin-top:136px;*/
+}
+
+.videoOnline_content {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    width: 790px;
+    margin-bottom: 40px;
+    overflow: hidden;
+    padding-top: 0px;
+}
+.videoOnline_content ul {
+    width: 790px;
+}
+.videoOnline_content ul li {
+    float: left;
+    text-align: center;
+    padding: 10px;
+    margin: 15px 7px 15px 7px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+.videoOnline_content ul li p {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    line-height: 20px;
+    width:228px;
+}
+.videoOnline_content ul li p.video_title{
+    margin-top:0;
+    margin-bottom:5px;
+}
+.videoOnline_content ul li p.video_msg{
+    height: 40px;
+}
+.videoOnline_content ul li a {
+    display: inline-block;
+    width: 228px;
+    height: 178px;
+    vertical-align: middle;
+    border: 1px solid #f2f2f2;
+    color: #4d4d4d;
+    background-color: #fafafa;
+}
+.videoOnline_content ul li a img {
+    width: 228px;
+    height: 178px;
+    cursor: pointer;
+}

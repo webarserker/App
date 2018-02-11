@@ -1,0 +1,143 @@
+.dialog{
+	width: 626px;
+	margin: 0 auto;
+	-webkit-box-shadow: 1px 2px 5px rgba(0,0,0,0.1);
+	-moz-box-shadow: 1px 2px 5px rgba(0,0,0,0.1);
+	box-shadow: 1px 2px 5px rgba(0,0,0,0.1);
+	border: 1px solid #e7e7e7;
+	border-radius: 5px;
+	overflow: hidden;
+}
+.dialog .tit{
+	background-color: #3b8df7;
+	height: 50px;
+	line-height: 50px;
+	color: #fff;
+	padding: 0 10px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	font-size: 14px;
+}
+.dialog .content{
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	background-color: #f5f5fa;
+}
+.dialog .chatbox{
+	width: 626px;
+	border-right: 1px solid #e7e7e7;
+}
+.dialog .chatbox .dialogbox{
+	overflow-y: auto;
+}
+.dialogbox .text{
+	color: #2e2e2e;
+	font-size: 12px;
+	padding: 10px;
+	position: relative;
+}
+.dialogbox .system .text{
+	border: 1px solid #e0e0e0;
+	border-radius: 3px;
+	background-color: #fff;
+}
+.arrow{
+	width:0;
+	height:0;
+	font-size:0;
+	line-height:0;
+	border-width:5px;
+	display:inline-block;
+	*display:inline;
+	*zoom:1;
+	vertical-align:middle;
+	overflow:hidden;
+	position: absolute;
+	border-style: solid;
+	top: 3px;
+}
+.system .arrow{
+	border-color: #e0e0e0 #e0e0e0 transparent transparent; 
+    left: -10px;
+}
+.user .arrow{
+	border-color: #d0def7 transparent transparent #d0def7;
+    right: -10px;
+}
+.arrow.after{
+	border-color: #fff #fff transparent transparent;
+	left: -8px;
+    top: 4px;
+}
+.dialogbox .user .text{
+	border-radius: 3px;
+	background-color: #d0def7;
+	text-align: right;
+}
+.dialog .chatbox .enterbox{
+	position: relative;
+	height: 120px;
+	width: 100%;
+	border-top: 1px solid #e7e7e7;
+}
+.dialog .chatbox .enterbox textarea{
+	border: 0 none;
+	width: 530px;
+	height: 95px;
+	background-color: #f5f5fa;
+	padding: 5px 5px 20px 5px;
+	outline:0;
+	overflow: hidden;
+}
+.dialog .chatbox .postbtn{
+	position: absolute;
+	right: 0;
+	height: 120px;
+	width: 85px;
+	border-left: 1px solid #e7e7e7; 
+	background-color: #fff;
+	text-align: center;
+	line-height: 120px;
+	color: #808080;
+}
+.dialog .chatbox .mark{
+	position: absolute;
+	bottom: 5px;
+	right: 95px;
+	color: #808080;
+	font-size: 14px;
+}
+.dialog .chatbox .mark i{
+	margin-left: 10px;
+	cursor: pointer;
+}
+.dialog .chatbox .mark i.active{
+	background-position: 0 -290px;	
+}
+.dialog .chatbox .postbtn:hover{
+	text-decoration: none;
+	color: #2c84f5;
+	background-color: #f5f5f5;
+}
+.dialog .chatbox .human-service{
+	position: absolute;
+	left: 10px;
+	bottom: 5px;
+}
+.dialog .searchbox{
+	width: 333px;
+	height: 100%;
+	background-color: #fff;
+}
+.searchbox .g-searchIpt{
+	border: 1px solid #b8b8b8;
+	height: 40px;
+	font-size: 14px;
+}
+.searchbox .g-searchIpt .ipt, .searchbox .g-searchIpt .btn{
+	height: 40px;
+	line-height: 40px;
+}
+.searchbox .g-searchIpt .icon{
+	top: 11px;
+}

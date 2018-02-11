@@ -1,0 +1,53 @@
+div#footer
+    div.containers
+        div.outside
+            div#footer-qrcode
+                h2 手机官网
+                img(src="#{locals.global.img_sever_url}#{schoolInfo.schoolOfficeQrcode}")
+            div#footer_center
+                h2 友情链接
+                ul.lf#friendLinks
+            div.rt
+                h2 联系方式
+                ul#contact-information
+
+            div.clear
+        div.bottom2
+            | &copy;版权所有：#{schoolInfo.name} • 北京闻道卓越教育科技有限公司技术支持 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Copyright 2017 ALL Rights Reserved &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;京ICP备16030849号 &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+            a(target="_blank",href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802024129")
+                img(src="#{locals.global.api_sever_url}/static/image/anbei.png")
+                | 京公网安备 11010802024129号 &nbsp;&nbsp;&nbsp;&nbsp;
+            a#footer-last 招办管理
+
+script.
+
+    $(function () {
+        /*
+        $('#footer-qrcode img').attr('src', IMG_HOST + '/imgServer/qrcode/' + $("#header").data("identify") + '.jpg');
+        */
+        $('.show-qrcode').hover(function () {
+            $('#footer-qrcode').show();
+        }, function () {
+            $('#footer-qrcode').hide();
+        })
+
+        $.get(BASE_HOST + '/front/template_02/friendLink?sCode=' + SCODE, function (data) {
+            var friendLink = ''
+            for (var i = 0; i < data.length; i++) {
+                friendLink += '<li>'
+                    + '<a href="' +toDetailPage(data[i].link) + '">' + data[i].name + '</a>'
+                    + '</li>'
+            }
+            $('#friendLinks').append($(friendLink))
+        })
+
+        $.get(BASE_HOST + '/front/findContactWay?sCode=' + SCODE, function (data) {
+            var str = '';
+            for (var i = 0; i < data.length; i++) {
+                str += '<li><span>' + data[i].contactTypeStr + ' ： </span><span>' + data[i].contact + '</span></li>'
+            }
+            $('#contact-information').html(str);
+        })
+
+        $('#footer-last').attr('href', 'http://www.zhinengdayi.com');
+    })

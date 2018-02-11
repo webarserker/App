@@ -1,0 +1,151 @@
+link(rel="stylesheet" href="/stylesheets/v3_2template/components/collegeList.css")
+
+div.search-box
+    span.label 专业名称
+    input(placeholder="请输入专业名称" id="search-write")
+    input(type="button" value="查询" id="search-btn" class="themeBackgroundColor")
+
+table.college-list
+    thead
+        tr
+
+    tbody#tbody1
+
+
+
+
+
+script.
+
+    $(function () {
+        $('#tbody1').on('click', '.enrollment-plan', function () {
+            $.get(BASE_HOST + '/front/template/getInfoContentBySptype?sCode=' + SCODE + '&specType=8', function (data) {
+                if (data.data) {
+                    var url = APP_SERVER + "/page/detail/" + SCODE + '/' + data.data.id + '/' + data.data.catId;
+                    window.location.href = toDetailPage(url);
+                }
+            })
+        })
+
+        /*
+        $('#tbody1').on('click', '.history-enrollment', function () {
+            $.get(BASE_HOST + '/front/template/getInfoContentBySptype?sCode=' + SCODE + '&specType=11', function (data) {
+                console.log(data);
+                if (data.data) {
+                    var url = APP_SERVER + "/page/detail/" + SCODE + '/' + data.data.id + '/' + data.data.catId;
+                    window.location.href = toDetailPage(url);
+                }
+            })
+        })
+        */
+
+        var showHistory = 1;
+
+        $.get(BASE_HOST + '/front/template/getInfoContentBySptype?sCode=' + SCODE + '&specType=11', function (data) {
+            console.log(data);
+            if (data.data) {
+                $('#tbody1').on('click', '.history-enrollment', function () {
+                    var url = APP_SERVER + "/page/detail/" + SCODE + '/' + data.data.id + '/' + data.data.catId;
+                    window.location.href = toDetailPage(url);
+                })
+            } else {
+                showHistory = 0;
+            }
+
+            var getMajorList = '';
+            $.get(BASE_HOST + '/front/info/getMajorList', {sCode: SCODE, needPage: false, name: ''}, function (data) {
+                data = data.data;
+                $.get(HOST + '/getMajorConf', {scode: SCODE}, function (data2) {
+                    if (data2.showEntroll == 1) {
+                        $('thead tr').html('<th>序号</th><th>专业名称</th><th>院系名称</th><th>学制</th><th>授予学位</th><th>招生计划</th>' + (showHistory ? '<th>历史录取</th>' : ''))
+                        for (var i = 0; i < data.length; i++) {
+                            getMajorList += '<tr>'
+                                + '<td>' + (i + 1) + '</td><td><a class="themeColor" href="' + toDetailPage(APP_SERVER + '/page/major/' + SCODE + '/' + data[i].id + '/' + PARENTID) + '">' + (data[i].name != null ? data[i].name : '-')
+                                + '</a></td><td><a class="themeColor" href="' + toDetailPage(APP_SERVER + '/page/faculty/' + SCODE + '/' + data[i].departId + '/' + PARENTID) + '">' + (data[i].departName != null ? data[i].departName : '-') + '</a></td><td class="td4">' + (data[i].schoolYear != null ? data[i].schoolYear : '-') + '</td><td class="td5">' + (data[i].degree != null ? data[i].degree : '-') + '</td><td class="td6"><a class="enrollment-plan themeColor">点击查看</a></td>' + (showHistory ? '<td class="td7"><a class="history-enrollment themeColor">点击查看</a></td>' : '')
+                                + '</tr>'
+                        }
+                    } else {
+                        $('thead tr').html('<th>序号</th><th>专业名称</th><th>院系名称</th><th>学制</th><th>授予学位</th>')
+                        for (var i = 0; i < data.length; i++) {
+                            getMajorList += '<tr>'
+                                + '<td>' + (i + 1) + '</td><td><a class="themeColor" href="' + toDetailPage(APP_SERVER + '/page/major/' + SCODE + '/' + data[i].id + '/' + PARENTID) + '">' + (data[i].name != null ? data[i].name : '-')
+                                + '</a></td><td><a class="themeColor" href="' + toDetailPage(APP_SERVER + '/page/faculty/' + SCODE + '/' + data[i].departId + '/' + PARENTID) + '">' + (data[i].departName != null ? data[i].departName : '-') + '</a></td><td class="td4">' + (data[i].schoolYear != null ? data[i].schoolYear : '-') + '</td><td class="td5">' + (data[i].degree != null ? data[i].degree : '-') + '</td>'
+                                + '</tr>'
+                        }
+                    }
+                    $('#tbody1').html(getMajorList);
+                    $('#tbody1 tr:odd').addClass('odd');
+                    var tdNo3 = $('#tbody1 td:nth-child(3)');
+                    var rowSpan = 1;
+                    var newIndex = 0;
+                    tdNo3.each(function (i, v) {
+                        if (i >= 1) {
+                            if ($(this).text().trim() == tdNo3.eq(newIndex).text().trim()) {
+                                rowSpan++;
+                                tdNo3.eq(newIndex).attr('rowspan', rowSpan);
+                                $(this).remove();
+                            } else {
+                                rowSpan = 1;
+                                newIndex = i;
+                            }
+                        }
+                    })
+                })
+            })
+
+            $('#search-btn').on('click', function () {
+                getMajorList = '';
+                var collegeName = $('#search-write').val();
+                $.get(BASE_HOST + '/front/info/getMajorList', {
+                    sCode: SCODE,
+                    needPage: false,
+                    name: collegeName
+                }, function (data) {
+                    data = data.data;
+                    $.get(HOST + '/getMajorConf', {scode: SCODE}, function (data2) {
+                        if (data2.showEntroll == 1) {
+                            $('thead tr').html('<th>序号</th><th>专业名称</th><th>院系名称</th><th>学制</th><th>授予学位</th><th>招生计划</th>' + (showHistory ? '<th>历史录取</th>' : ''))
+                            for (var i = 0; i < data.length; i++) {
+                                getMajorList += '<tr>'
+                                    + '<td>' + (i + 1) + '</td><td><a class="themeColor" href="' + toDetailPage(APP_SERVER + '/page/major/' + SCODE + '/' + data[i].id + '/' + PARENTID) + '">' + (data[i].name != null ? data[i].name : '-')
+                                    + '</a></td><td><a class="themeColor" href="' + toDetailPage(APP_SERVER + '/page/faculty/' + SCODE + '/' + data[i].departId + '/' + PARENTID) + '">' + (data[i].departName != null ? data[i].departName : '-') + '</a></td><td class="td4">' + (data[i].schoolYear != null ? data[i].schoolYear : '-') + '</td><td class="td5">' + (data[i].degree != null ? data[i].degree : '-') + '</td><td class="td6"><a class="enrollment-plan themeColor">招生计划</a></td>' + (showHistory ? '<td class="td7"><a class="history-enrollment themeColor">点击查看</a></td>' : '')
+                                    + '</tr>'
+                            }
+                        } else {
+                            $('thead tr').html('<th>序号</th><th>专业名称</th><th>院系名称</th><th>学制</th><th>授予学位</th>')
+                            for (var i = 0; i < data.length; i++) {
+                                getMajorList += '<tr>'
+                                    + '<td>' + (i + 1) + '</td><td><a class="themeColor" href="' + toDetailPage(APP_SERVER + '/page/major/' + SCODE + '/' + data[i].id + '/' + PARENTID) + '">' + (data[i].name != null ? data[i].name : '-')
+                                    + '</a></td><td><a class="themeColor" href="' + toDetailPage(APP_SERVER + '/page/faculty/' + SCODE + '/' + data[i].departId + '/' + PARENTID) + '">' + (data[i].departName != null ? data[i].departName : '-') + '</a></td><td class="td4">' + (data[i].schoolYear != null ? data[i].schoolYear : '-') + '</td><td class="td5">' + (data[i].degree != null ? data[i].degree : '-') + '</td>'
+                                    + '</tr>'
+                            }
+                        }
+                        $('#tbody1').html(getMajorList);
+                        $('#tbody1 tr:odd').addClass('odd');
+                        var tdNo3 = $('#tbody1 td:nth-child(3)');
+                        var rowSpan = 1;
+                        var newIndex = 0;
+                        tdNo3.each(function (i, v) {
+                            if (i >= 1) {
+                                if ($(this).text().trim() == tdNo3.eq(newIndex).text().trim()) {
+                                    rowSpan++;
+                                    tdNo3.eq(newIndex).attr('rowspan', rowSpan);
+                                    $(this).remove();
+                                } else {
+                                    rowSpan = 1;
+                                    newIndex = i;
+                                }
+                            }
+                        })
+
+
+                    })
+                })
+            })
+
+
+        })
+
+
+    })
+

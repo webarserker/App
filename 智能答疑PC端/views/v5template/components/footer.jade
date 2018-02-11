@@ -1,0 +1,37 @@
+//
+   Created by abbydu on 17/7/24.
+div(class="footers")
+   div(class="footers_container")
+      div(class="footers_msg")
+         div(class="footer_msg_left")
+            span(class="mobile_msg") 友情链接
+            ul
+               if friendLink
+                  each footer in friendLink
+                     li
+                        a(href="#{footer.link}",target="_blank")
+                           //img(src="../../images/v5template/23-pic.png")
+                           span #{footer.name}
+         div(class="footer_msg_center")
+            span(class="mobile01") 联系方式
+            if contact
+               each contactWay in contact
+                  if contactWay.isShow == 1
+                     span(class="mobile") #{contactWay.contactTypeStr}&nbsp:&nbsp#{contactWay.contact}
+         div(class="footer_msg_right")
+            span 手机官网
+            img(class="mobile_code_footer_right",src="#{locals.global.img_sever_url}/imgServer/qrcode/#{schoolInfo.identify}.jpg")
+      div(class="footer_copyright")
+         span(class="footer_copyright_msg01") ©版权所有：#{schoolInfo.name} • 北京闻道卓越教育科技有限公司技术支持
+         span(class="footer_copyright_msg02") Copyright 2017 All Rights Reserved
+         span(class="footer_copyright_msg04")
+         span(class="footer_copyright_msg03") 京ICP备16030849号
+         a(class="footer_gongan",style="width:auto;text-decoration:none;",target="_blank",href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802024129")
+            img(src="#{locals.global.api_sever_url}/static/image/anbei.png")
+            | 京公网安备 11010802024129号
+         a(class="footer_zhaoban") 招办管理
+script.
+   $(".footer_zhaoban").click(function(){
+      var url = "http://www.zhinengdayi.com";
+      window.open(url);
+   });

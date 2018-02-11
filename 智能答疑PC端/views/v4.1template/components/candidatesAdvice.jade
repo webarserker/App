@@ -1,0 +1,276 @@
+link(rel="stylesheet" href="/stylesheets/v4template/components/candidatesAdvice.css")
+script(src="/javascripts/v4template/libs/js2pdf/html2canvas.min.js")
+script(src="/javascripts/v4template/libs/js2pdf/jspdf.debug.js")
+script(src="/javascripts/v4template/libs/ueditor/ueditor.parse.js")
+
+- var majorList=["阿拉伯语","朝鲜（韩）语","俄语","日语","意大利语","国际经济与贸易","金融学（国际经济贸易学院）","财政学","物流管理","金融学（金融学院）","投资学","金融工程","会计学","市场营销","保险（风险管理与保险方向）","保险（精算与风险管理方向）","劳动与社会保障","经济统计学","商务英语","翻译（英语经贸方向）","德语","法语","法学","行政管理（涉外经济事务管理）","信息管理与信息系统","电子商务","国际政治","汉语言文学","经济与金融","税收学","财务管理","工商管理（全球管理实验班）","人力资源管理","英语（财经新闻方向）","西班牙语","金融学（金融管理方向）","海关管理","行政管理（涉外行政管理方向）","行政管理（涉外经济事务管理方向）","公共事业管理","政治学与行政学","汉语国际教育","税收学（国际税务方向）","劳动与社会保障(员工福利与社会保障)","工商管理（中法兰斯“2＋3”项目）","市场营销（全球营销方向）","德语（经贸方向）","法语（经贸方向）","西班牙语（经贸方向）","日语（经贸方向）","意大利语（经贸方向）","法学（国际经济法方向）","行政管理（海关管理方向）","行政管理（涉外行政管理和涉外经济事务管理）","公共事业管理（文化事业管理方向）","电子商务（金融服务外包方向）","电子商务（国际商务方向）","国际政治（公共外交方向）","国际政治（经济外交方向）","汉语言文学（商务汉语方向）","阿拉伯语（经贸方向）","朝鲜（韩）语（经贸方向）","俄语（经贸方向）","葡萄牙语（经贸方向）","越南语（经贸方向）","保险（中外合作“2+2”双学位项目）","波斯语（经贸方向）","朝鲜(韩)语","希腊语","金融学(国际经济贸易学院)","金融学(金融学院)","保险学","精算学","翻译","行政管理","金融学(国际金融与市场)","金融学","工商管理","金融数学","数据科学与大数据技术","越南语","波斯语"]
+div.selects
+    span.label 招录类型
+    select(id="type" name="type")
+        option(value="") 普通招生
+        option(value="") 国家专项
+
+    span.label 生源地
+    select(id="city" name="city")
+        - var options=['北京','天津','重庆','上海','河北','山西','辽宁','吉林','黑龙江','江苏','浙江','安徽','福建','江西','山东','河南','湖北','湖南','广东','海南','四川','贵州','云南','陕西','甘肃','青海','内蒙古','广西','西藏','宁夏','新疆','其他'];
+        each option in options
+            option(value="#{option}")= option
+
+    span.label 科类
+    select(id="science" name="science")
+        option(value="文科") 文科
+        option(value="理科") 理科
+        option(value="综合改革") 综合改革
+
+    span.label 批次
+    select(id="batch" name="batch")
+        option(value="本科一批") 本科一批
+        option(value="提前批") 提前批
+        option(value="国家专项计划") 国家专项计划
+
+div.score-box
+    span.label 分数
+    input(type="number" name="score" class="sub-ipt")
+    a.sub-btn.themeBackgroundColor 分析参考
+    a.sub-btn.themeBackgroundColor 导出pdf
+
+
+div(id="enrollForecast" name="enrollForecast" type="text/plain")
+div#resultSms
+- var yearList=['2017','2016','2015','2014','2013']
+div.schoolEnroll
+    h2  二，我校
+        span.zheng_zs_info
+        录取情况为：
+
+    div#model1
+        ul.tabs
+            li.themeColor.themeBorderBottom2
+                span.before.themeBottomColor
+                span.after
+                | 学校录取纵向列表
+            li
+                span.before
+                span.after
+                | 学校录取纵向走势图
+
+        div#container1
+            div.by-table
+                div.selects
+                    span.label 年度
+                    select(id="year_ls" name="year")
+                        each year in yearList
+                            option(value="#{year}")= year
+                - var tableData1=[{"id":1058,"score":583.0,"scienceClass":"文科","enrollNum":63,"year":2016,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","hightScore":663.0,"lowScore":652.0,"minScore":652.0,"avgScore":656.0,"provinceScore":null,"cityId":null,"cityName":"北京","isDelete":null,"creator":null,"createTime":null,"modifier":null,"modifyTime":null,"enrollPlan":57,"pagination":null,"ids":null},{"id":289,"score":579.0,"scienceClass":"文科","enrollNum":63,"year":2015,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","hightScore":660.0,"lowScore":648.0,"minScore":648.0,"avgScore":653.4603174603175,"provinceScore":null,"cityId":null,"cityName":"北京","isDelete":null,"creator":null,"createTime":null,"modifier":null,"modifyTime":null,"enrollPlan":61,"pagination":null,"ids":null},{"id":229,"score":565.0,"scienceClass":"文科","enrollNum":61,"year":2014,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","hightScore":661.0,"lowScore":636.0,"minScore":636.0,"avgScore":645.1803278688525,"provinceScore":null,"cityId":null,"cityName":"北京","isDelete":null,"creator":null,"createTime":null,"modifier":null,"modifyTime":null,"enrollPlan":78,"pagination":null,"ids":null},{"id":167,"score":549.0,"scienceClass":"文科","enrollNum":87,"year":2013,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","hightScore":665.0,"lowScore":616.0,"minScore":616.0,"avgScore":636.0,"provinceScore":null,"cityId":null,"cityName":"北京","isDelete":null,"creator":null,"createTime":null,"modifier":null,"modifyTime":null,"enrollPlan":97,"pagination":null,"ids":null}]
+                table.table1
+                    thead
+                        tr
+                            th 年度
+                            th 类型
+                            th 批次
+                            th 省线
+                            th 最低分
+                            th 平均分
+                            th 最高分
+                            th 最低分分差
+                            th 平均分分差
+                    tbody
+
+                        each item in tableData1
+                            tr
+                                td= item.year
+                                td= item.type
+                                td= item.batch
+                                td= item.score
+                                td= item.lowScore
+                                td= Math.floor(item.avgScore)
+                                td= item.hightScore
+                                td= item.lowScore-item.score
+                                td= Math.floor(item.avgScore)-item.score
+            div.by-lines
+
+    div#model2
+        ul.tabs
+            li.themeColor.themeBorderBottom2
+                span.before.themeBottomColor
+                span.after
+                | 各年度分专业录取情况
+            li
+                span.before
+                span.after
+                | 多个专业录取横向比较图
+        div#container2
+            div.by-table
+                div.selects
+                    span.label 年度
+                    select(id="year_lm" name="year")
+                        each year in yearList
+                            option(value="#{year}") #{year}
+                    span.prompt (如需了解各专业历年录取情况，请点击具体专业名称)
+                - var tableData2=[{"id":8291,"majorName":"国际经济与贸易","year":2016,"cityId":null,"cityName":"北京","scienceClass":"文科","enrollNum":3,"hightScore":660.0,"lowScore":660.0,"avgScore":660.0,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","isDelete":0,"creator":"yangminguibe","createTime":1469203200000,"modifier":null,"modifyTime":1469203200000,"remark":null,"ids":null,"enrollPlan":9,"scoreLine":583.0,"pagination":null},{"id":8293,"majorName":"金融学（国际经济贸易学院）","year":2016,"cityId":null,"cityName":"北京","scienceClass":"文科","enrollNum":6,"hightScore":663.0,"lowScore":658.0,"avgScore":660.0,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","isDelete":0,"creator":"yangminguibe","createTime":1479052800000,"modifier":"admin_NLGYFE","modifyTime":1479052800000,"remark":null,"ids":null,"enrollPlan":null,"scoreLine":583.0,"pagination":null},{"id":8296,"majorName":"税收学","year":2016,"cityId":null,"cityName":"北京","scienceClass":"文科","enrollNum":1,"hightScore":656.0,"lowScore":656.0,"avgScore":656.0,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","isDelete":0,"creator":"yangminguibe","createTime":1469203200000,"modifier":null,"modifyTime":1469203200000,"remark":null,"ids":null,"enrollPlan":1,"scoreLine":583.0,"pagination":null},{"id":8298,"majorName":"物流管理","year":2016,"cityId":null,"cityName":"北京","scienceClass":"文科","enrollNum":2,"hightScore":656.0,"lowScore":654.0,"avgScore":655.0,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","isDelete":0,"creator":"yangminguibe","createTime":1478188800000,"modifier":"admin_NLGYFE","modifyTime":1478188800000,"remark":null,"ids":null,"enrollPlan":0,"scoreLine":583.0,"pagination":null},{"id":8300,"majorName":"财政学","year":2016,"cityId":null,"cityName":"北京","scienceClass":"文科","enrollNum":1,"hightScore":654.0,"lowScore":654.0,"avgScore":654.0,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","isDelete":0,"creator":"yangminguibe","createTime":1469203200000,"modifier":null,"modifyTime":1469203200000,"remark":null,"ids":null,"enrollPlan":1,"scoreLine":583.0,"pagination":null},{"id":8302,"majorName":"金融学（金融学院）","year":2016,"cityId":null,"cityName":"北京","scienceClass":"文科","enrollNum":5,"hightScore":659.0,"lowScore":657.0,"avgScore":658.0,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","isDelete":0,"creator":"yangminguibe","createTime":1469203200000,"modifier":null,"modifyTime":1469203200000,"remark":null,"ids":null,"enrollPlan":null,"scoreLine":583.0,"pagination":null},{"id":8304,"majorName":"投资学","year":2016,"cityId":null,"cityName":"北京","scienceClass":"文科","enrollNum":1,"hightScore":659.0,"lowScore":659.0,"avgScore":659.0,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","isDelete":0,"creator":"yangminguibe","createTime":1469203200000,"modifier":null,"modifyTime":1469203200000,"remark":null,"ids":null,"enrollPlan":1,"scoreLine":583.0,"pagination":null},{"id":8307,"majorName":"保险学","year":2016,"cityId":null,"cityName":"北京","scienceClass":"文科","enrollNum":1,"hightScore":658.0,"lowScore":658.0,"avgScore":658.0,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","isDelete":0,"creator":"yangminguibe","createTime":1469203200000,"modifier":null,"modifyTime":1469203200000,"remark":null,"ids":null,"enrollPlan":2,"scoreLine":583.0,"pagination":null},{"id":8310,"majorName":"劳动与社会保障","year":2016,"cityId":null,"cityName":"北京","scienceClass":"文科","enrollNum":1,"hightScore":653.0,"lowScore":653.0,"avgScore":653.0,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","isDelete":0,"creator":"yangminguibe","createTime":1469203200000,"modifier":null,"modifyTime":1469203200000,"remark":null,"ids":null,"enrollPlan":null,"scoreLine":583.0,"pagination":null},{"id":8312,"majorName":"经济统计学","year":2016,"cityId":null,"cityName":"北京","scienceClass":"文科","enrollNum":1,"hightScore":653.0,"lowScore":653.0,"avgScore":653.0,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","isDelete":0,"creator":"yangminguibe","createTime":1469203200000,"modifier":null,"modifyTime":1469203200000,"remark":null,"ids":null,"enrollPlan":1,"scoreLine":583.0,"pagination":null},{"id":8315,"majorName":"会计学","year":2016,"cityId":null,"cityName":"北京","scienceClass":"文科","enrollNum":7,"hightScore":661.0,"lowScore":653.0,"avgScore":656.0,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","isDelete":0,"creator":"yangminguibe","createTime":1469203200000,"modifier":null,"modifyTime":1469203200000,"remark":null,"ids":null,"enrollPlan":9,"scoreLine":583.0,"pagination":null},{"id":8317,"majorName":"财务管理","year":2016,"cityId":null,"cityName":"北京","scienceClass":"文科","enrollNum":2,"hightScore":656.0,"lowScore":656.0,"avgScore":656.0,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","isDelete":0,"creator":"yangminguibe","createTime":1469203200000,"modifier":null,"modifyTime":1469203200000,"remark":null,"ids":null,"enrollPlan":4,"scoreLine":583.0,"pagination":null},{"id":8319,"majorName":"工商管理","year":2016,"cityId":null,"cityName":"北京","scienceClass":"文科","enrollNum":1,"hightScore":662.0,"lowScore":662.0,"avgScore":662.0,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","isDelete":0,"creator":"yangminguibe","createTime":1469203200000,"modifier":null,"modifyTime":1469203200000,"remark":null,"ids":null,"enrollPlan":0,"scoreLine":583.0,"pagination":null},{"id":8321,"majorName":"市场营销","year":2016,"cityId":null,"cityName":"北京","scienceClass":"文科","enrollNum":1,"hightScore":654.0,"lowScore":654.0,"avgScore":654.0,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","isDelete":0,"creator":"yangminguibe","createTime":1469203200000,"modifier":null,"modifyTime":1469203200000,"remark":null,"ids":null,"enrollPlan":1,"scoreLine":583.0,"pagination":null},{"id":8323,"majorName":"人力资源管理","year":2016,"cityId":null,"cityName":"北京","scienceClass":"文科","enrollNum":1,"hightScore":652.0,"lowScore":652.0,"avgScore":652.0,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","isDelete":0,"creator":"yangminguibe","createTime":1469203200000,"modifier":null,"modifyTime":1469203200000,"remark":null,"ids":null,"enrollPlan":null,"scoreLine":583.0,"pagination":null},{"id":8325,"majorName":"商务英语","year":2016,"cityId":null,"cityName":"北京","scienceClass":"文科","enrollNum":4,"hightScore":657.0,"lowScore":653.0,"avgScore":654.0,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","isDelete":0,"creator":"yangminguibe","createTime":1469203200000,"modifier":null,"modifyTime":1469203200000,"remark":null,"ids":null,"enrollPlan":4,"scoreLine":583.0,"pagination":null},{"id":8327,"majorName":"翻译","year":2016,"cityId":null,"cityName":"北京","scienceClass":"文科","enrollNum":2,"hightScore":655.0,"lowScore":653.0,"avgScore":654.0,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","isDelete":0,"creator":"yangminguibe","createTime":1469203200000,"modifier":null,"modifyTime":1469203200000,"remark":null,"ids":null,"enrollPlan":0,"scoreLine":583.0,"pagination":null},{"id":8329,"majorName":"英语","year":2016,"cityId":null,"cityName":"北京","scienceClass":"文科","enrollNum":1,"hightScore":653.0,"lowScore":653.0,"avgScore":653.0,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","isDelete":0,"creator":"yangminguibe","createTime":1469203200000,"modifier":null,"modifyTime":1469203200000,"remark":null,"ids":null,"enrollPlan":null,"scoreLine":583.0,"pagination":null},{"id":8330,"majorName":"德语","year":2016,"cityId":null,"cityName":"北京","scienceClass":"文科","enrollNum":1,"hightScore":662.0,"lowScore":662.0,"avgScore":662.0,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","isDelete":0,"creator":"yangminguibe","createTime":1469203200000,"modifier":null,"modifyTime":1469203200000,"remark":null,"ids":null,"enrollPlan":null,"scoreLine":583.0,"pagination":null},{"id":8332,"majorName":"法语","year":2016,"cityId":null,"cityName":"北京","scienceClass":"文科","enrollNum":2,"hightScore":660.0,"lowScore":653.0,"avgScore":657.0,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","isDelete":0,"creator":"yangminguibe","createTime":1469203200000,"modifier":null,"modifyTime":1469203200000,"remark":null,"ids":null,"enrollPlan":null,"scoreLine":583.0,"pagination":null},{"id":8334,"majorName":"西班牙语","year":2016,"cityId":null,"cityName":"北京","scienceClass":"文科","enrollNum":2,"hightScore":657.0,"lowScore":654.0,"avgScore":656.0,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","isDelete":0,"creator":"yangminguibe","createTime":1469203200000,"modifier":null,"modifyTime":1469203200000,"remark":null,"ids":null,"enrollPlan":null,"scoreLine":583.0,"pagination":null},{"id":8336,"majorName":"葡萄牙语","year":2016,"cityId":null,"cityName":"北京","scienceClass":"文科","enrollNum":2,"hightScore":652.0,"lowScore":652.0,"avgScore":652.0,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","isDelete":0,"creator":"yangminguibe","createTime":1469203200000,"modifier":null,"modifyTime":1469203200000,"remark":null,"ids":null,"enrollPlan":null,"scoreLine":583.0,"pagination":null},{"id":8338,"majorName":"法学","year":2016,"cityId":null,"cityName":"北京","scienceClass":"文科","enrollNum":5,"hightScore":655.0,"lowScore":653.0,"avgScore":654.0,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","isDelete":0,"creator":"yangminguibe","createTime":1469203200000,"modifier":null,"modifyTime":1469203200000,"remark":null,"ids":null,"enrollPlan":6,"scoreLine":583.0,"pagination":null},{"id":8340,"majorName":"海关管理","year":2016,"cityId":null,"cityName":"北京","scienceClass":"文科","enrollNum":1,"hightScore":660.0,"lowScore":660.0,"avgScore":660.0,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","isDelete":0,"creator":"yangminguibe","createTime":1469203200000,"modifier":null,"modifyTime":1469203200000,"remark":null,"ids":null,"enrollPlan":1,"scoreLine":583.0,"pagination":null},{"id":8342,"majorName":"行政管理","year":2016,"cityId":null,"cityName":"北京","scienceClass":"文科","enrollNum":1,"hightScore":653.0,"lowScore":653.0,"avgScore":653.0,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","isDelete":0,"creator":"yangminguibe","createTime":1469203200000,"modifier":null,"modifyTime":1469203200000,"remark":null,"ids":null,"enrollPlan":0,"scoreLine":583.0,"pagination":null},{"id":8344,"majorName":"公共事业管理","year":2016,"cityId":null,"cityName":"北京","scienceClass":"文科","enrollNum":1,"hightScore":653.0,"lowScore":653.0,"avgScore":653.0,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","isDelete":0,"creator":"yangminguibe","createTime":1469203200000,"modifier":null,"modifyTime":1469203200000,"remark":null,"ids":null,"enrollPlan":0,"scoreLine":583.0,"pagination":null},{"id":8346,"majorName":"电子商务","year":2016,"cityId":null,"cityName":"北京","scienceClass":"文科","enrollNum":1,"hightScore":656.0,"lowScore":656.0,"avgScore":656.0,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","isDelete":0,"creator":"yangminguibe","createTime":1469203200000,"modifier":null,"modifyTime":1469203200000,"remark":null,"ids":null,"enrollPlan":1,"scoreLine":583.0,"pagination":null},{"id":8348,"majorName":"国际政治","year":2016,"cityId":null,"cityName":"北京","scienceClass":"文科","enrollNum":3,"hightScore":657.0,"lowScore":653.0,"avgScore":655.0,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","isDelete":0,"creator":"yangminguibe","createTime":1469203200000,"modifier":null,"modifyTime":1469203200000,"remark":null,"ids":null,"enrollPlan":0,"scoreLine":583.0,"pagination":null},{"id":8349,"majorName":"政治学与行政学","year":2016,"cityId":null,"cityName":"北京","scienceClass":"文科","enrollNum":1,"hightScore":652.0,"lowScore":652.0,"avgScore":652.0,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","isDelete":0,"creator":"yangminguibe","createTime":1469203200000,"modifier":null,"modifyTime":1469203200000,"remark":null,"ids":null,"enrollPlan":0,"scoreLine":583.0,"pagination":null},{"id":8350,"majorName":"汉语国际教育","year":2016,"cityId":null,"cityName":"北京","scienceClass":"文科","enrollNum":1,"hightScore":653.0,"lowScore":653.0,"avgScore":653.0,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","isDelete":0,"creator":"yangminguibe","createTime":1469203200000,"modifier":null,"modifyTime":1469203200000,"remark":null,"ids":null,"enrollPlan":0,"scoreLine":583.0,"pagination":null},{"id":8351,"majorName":"汉语言文学","year":2016,"cityId":null,"cityName":"北京","scienceClass":"文科","enrollNum":1,"hightScore":652.0,"lowScore":652.0,"avgScore":652.0,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","isDelete":0,"creator":"yangminguibe","createTime":1469203200000,"modifier":null,"modifyTime":1469203200000,"remark":null,"ids":null,"enrollPlan":0,"scoreLine":583.0,"pagination":null}]
+                table.table2
+                    thead
+                        tr
+                            th 专业
+                            th 年度
+                            th 批次
+                            th 省线
+                            th 最低分
+                            th 平均分
+                            th 最高分
+                            th 最低分分差
+                            th 平均分分差
+                            th 备注
+                    tbody
+                        each item in tableData2
+                            tr
+                                th= item.majorName
+                                th= item.year
+                                th= item.batch
+                                th= item.scoreLine
+                                th= item.lowScore
+                                th= item.avgScore
+                                th= item.hightScore
+                                th= item.lowScore-item.scoreLine
+                                th= item.hightScore-item.scoreLine
+                                th= ''
+            div.bars
+    div#model3
+        ul.tabs
+            li.themeColor.themeBorderBottom2
+                span.before.themeBottomColor
+                span.after
+                | 单个专业分年度录取情况
+            li
+                span.before
+                span.after
+                | 单个专业录取纵向走势图
+        div#container3
+            div.by-table
+                div.selects
+                    span.label 专业
+                    select(name="majorName" id="major_zlm")
+
+                            each item in majorList
+                                option(value="#{item}")= item
+
+                - var findMajorScoreList=[{"id":8291,"majorName":"国际经济与贸易","year":2016,"cityId":null,"cityName":"北京","scienceClass":"文科","enrollNum":3,"hightScore":660.0,"lowScore":660.0,"avgScore":660.0,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","isDelete":0,"creator":"yangminguibe","createTime":1469203200000,"modifier":null,"modifyTime":1469203200000,"remark":null,"ids":null,"enrollPlan":9,"scoreLine":583.0,"pagination":null},{"id":6174,"majorName":"国际经济与贸易","year":2015,"cityId":null,"cityName":"北京","scienceClass":"文科","enrollNum":3,"hightScore":659.0,"lowScore":659.0,"avgScore":659.0,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","isDelete":0,"creator":"admin_NLGYFE","createTime":1463846400000,"modifier":null,"modifyTime":1463846400000,"remark":null,"ids":null,"enrollPlan":3,"scoreLine":579.0,"pagination":null},{"id":5118,"majorName":"国际经济与贸易","year":2014,"cityId":null,"cityName":"北京","scienceClass":"文科","enrollNum":7,"hightScore":661.0,"lowScore":649.0,"avgScore":655.0,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","isDelete":0,"creator":"admin_NLGYFE","createTime":1463846400000,"modifier":null,"modifyTime":1463846400000,"remark":null,"ids":null,"enrollPlan":7,"scoreLine":565.0,"pagination":null},{"id":4052,"majorName":"国际经济与贸易","year":2013,"cityId":null,"cityName":"北京","scienceClass":"文科","enrollNum":11,"hightScore":660.0,"lowScore":622.0,"avgScore":647.0,"sCode":"NLGYFE","type":"普通招生","batch":"本科一批","isDelete":0,"creator":"admin_NLGYFE","createTime":1463846400000,"modifier":null,"modifyTime":1463846400000,"remark":null,"ids":null,"enrollPlan":10,"scoreLine":549.0,"pagination":null}]
+                table.table3
+                    thead
+                        tr
+                            th 专业
+                            th 年度
+                            th 批次
+                            th 省线
+                            th 最低分
+                            th 平均分
+                            th 最高分
+                            th 最低分分差
+                            th 平均分分差
+                            th 备注
+                    tbody
+                        each item in findMajorScoreList
+                            tr
+                                td= item.majorName
+                                td= item.year
+                                td= item.batch
+                                td= item.scoreLine
+                                td= item.lowScore
+                                td= item.avgScore
+                                td= item.hightScore
+                                td= item.lowScore-item.scoreLine
+                                td= item.avgScore-item.scoreLine
+                                td= ''
+            div.by-lines
+
+
+    div.three
+        h2 三，我校
+            span.sheng_zs_info
+            招生计划为：
+
+    div#model4
+        ul.tabs
+            li.themeColor.themeBorderBottom2
+                span.before.themeBottomColor
+                span.after
+                | 学校招生计划
+        div.by-table
+            div.selects
+                span.label 年度
+                select(name="year" id="year_js")
+                    each year in yearList
+                        option(value="#{year}")= year
+            - var findEnrollPlan = {"data":[{"id":484090,"majorName":null,"year":2017,"batch":"本科一批","scienceClass":null,"enrollType":"普通招生","cityId":null,"cityName":"北京","enrollNum":null,"sCode":null,"isDelete":null,"creator":null,"createTime":null,"modifier":null,"modifyTime":null,"totalNum":57,"science":"文科","preScore":null,"hopeScore":null,"hardScore":null,"remark":null,"pagination":null,"filterZero":false}],"success":true,"curPage":1,"start":0,"pageSize":10,"sort":null,"sidx":null,"needCount":false,"totalRows":1,"needPage":true,"pgNumber":1,"totalPage":1,"end":10}
+
+            table.table4
+                thead
+                    tr
+                        th 年度
+                        th 招生类型
+                        th 生源地
+                        th 科类
+                        th 招生批次
+                        th 计划招生数
+                tbody
+                    each item in findEnrollPlan.data
+                        tr
+                            th= item.year
+                            th= item.enrollType
+                            th= item.cityName
+                            th= item.science
+                            th= item.batch
+                            th= item.totalNum
+
+    div#model5
+        ul.tabs
+            li.themeColor.themeBorderBottom2
+                span.before.themeBottomColor
+                span.after
+                | 专业招生计划
+        div.by-table
+            div.selects
+                span.label 年度
+                select(id="year_jm" name="year")
+                    each year in yearList
+                        option(value="#{year}") #{year}
+                span.label 专业
+                select(id="major_jm" name="majorName")
+                    each item in majorList
+                        option(value="#{item}")= item
+                span.prompt (如需了解各专业历年录取情况，请点击具体专业名称)
+            table.table5
+                thead
+                    tr
+                        th 年度
+                        th 招生类型
+                        th 生源地
+                        th 科类
+                        th 招生批次
+                        th 专业
+                        th 计划招生数
+                        th 备注
+                tbody
+                - var findEnrollPlanDetail={"data":[{"id":484090,"majorName":"国际经济与贸易","year":2017,"batch":"本科一批","scienceClass":null,"enrollType":"普通招生","cityId":null,"cityName":"北京","enrollNum":9,"sCode":"NLGYFE","isDelete":0,"creator":"admin_NLGYFE","createTime":1497456000000,"modifier":"admin_NLGYFE","modifyTime":1497456000000,"totalNum":57,"science":"文科","preScore":null,"hopeScore":null,"hardScore":null,"remark":null,"pagination":null,"filterZero":false},{"id":484152,"majorName":"金融学(国际金融与市场)","year":2017,"batch":"本科一批","scienceClass":null,"enrollType":"普通招生","cityId":null,"cityName":"北京","enrollNum":9,"sCode":"NLGYFE","isDelete":0,"creator":"admin_NLGYFE","createTime":1497456000000,"modifier":"admin_NLGYFE","modifyTime":1497456000000,"totalNum":57,"science":"文科","preScore":null,"hopeScore":null,"hardScore":null,"remark":null,"pagination":null,"filterZero":false},{"id":484245,"majorName":"税收学","year":2017,"batch":"本科一批","scienceClass":null,"enrollType":"普通招生","cityId":null,"cityName":"北京","enrollNum":1,"sCode":"NLGYFE","isDelete":0,"creator":"admin_NLGYFE","createTime":1497456000000,"modifier":"admin_NLGYFE","modifyTime":1497456000000,"totalNum":57,"science":"文科","preScore":null,"hopeScore":null,"hardScore":null,"remark":null,"pagination":null,"filterZero":false},{"id":484338,"majorName":"财政学","year":2017,"batch":"本科一批","scienceClass":null,"enrollType":"普通招生","cityId":null,"cityName":"北京","enrollNum":1,"sCode":"NLGYFE","isDelete":0,"creator":"admin_NLGYFE","createTime":1497456000000,"modifier":"admin_NLGYFE","modifyTime":1497456000000,"totalNum":57,"science":"文科","preScore":null,"hopeScore":null,"hardScore":null,"remark":null,"pagination":null,"filterZero":false},{"id":484369,"majorName":"金融学","year":2017,"batch":"本科一批","scienceClass":null,"enrollType":"普通招生","cityId":null,"cityName":"北京","enrollNum":7,"sCode":"NLGYFE","isDelete":0,"creator":"admin_NLGYFE","createTime":1497456000000,"modifier":"admin_NLGYFE","modifyTime":1497456000000,"totalNum":57,"science":"文科","preScore":null,"hopeScore":null,"hardScore":null,"remark":null,"pagination":null,"filterZero":false},{"id":484462,"majorName":"投资学","year":2017,"batch":"本科一批","scienceClass":null,"enrollType":"普通招生","cityId":null,"cityName":"北京","enrollNum":1,"sCode":"NLGYFE","isDelete":0,"creator":"admin_NLGYFE","createTime":1497456000000,"modifier":"admin_NLGYFE","modifyTime":1497456000000,"totalNum":57,"science":"文科","preScore":null,"hopeScore":null,"hardScore":null,"remark":null,"pagination":null,"filterZero":false},{"id":484524,"majorName":"会计学","year":2017,"batch":"本科一批","scienceClass":null,"enrollType":"普通招生","cityId":null,"cityName":"北京","enrollNum":9,"sCode":"NLGYFE","isDelete":0,"creator":"admin_NLGYFE","createTime":1497456000000,"modifier":"admin_NLGYFE","modifyTime":1497456000000,"totalNum":57,"science":"文科","preScore":null,"hopeScore":null,"hardScore":null,"remark":null,"pagination":null,"filterZero":false},{"id":484586,"majorName":"财务管理","year":2017,"batch":"本科一批","scienceClass":null,"enrollType":"普通招生","cityId":null,"cityName":"北京","enrollNum":4,"sCode":"NLGYFE","isDelete":0,"creator":"admin_NLGYFE","createTime":1497456000000,"modifier":"admin_NLGYFE","modifyTime":1497456000000,"totalNum":57,"science":"文科","preScore":null,"hopeScore":null,"hardScore":null,"remark":null,"pagination":null,"filterZero":false},{"id":484648,"majorName":"市场营销","year":2017,"batch":"本科一批","scienceClass":null,"enrollType":"普通招生","cityId":null,"cityName":"北京","enrollNum":1,"sCode":"NLGYFE","isDelete":0,"creator":"admin_NLGYFE","createTime":1497456000000,"modifier":"admin_NLGYFE","modifyTime":1497456000000,"totalNum":57,"science":"文科","preScore":null,"hopeScore":null,"hardScore":null,"remark":null,"pagination":null,"filterZero":false},{"id":484772,"majorName":"保险学","year":2017,"batch":"本科一批","scienceClass":null,"enrollType":"普通招生","cityId":null,"cityName":"北京","enrollNum":2,"sCode":"NLGYFE","isDelete":0,"creator":"admin_NLGYFE","createTime":1497456000000,"modifier":"admin_NLGYFE","modifyTime":1497456000000,"totalNum":57,"science":"文科","preScore":null,"hopeScore":null,"hardScore":null,"remark":null,"pagination":null,"filterZero":false}],"success":true,"curPage":1,"start":0,"pageSize":10,"sort":null,"sidx":null,"needCount":false,"totalRows":15,"needPage":true,"pgNumber":1,"totalPage":2,"end":10}
+                    each item in findEnrollPlanDetail.data
+                        tr
+                            th= item.year
+                            th= item.enrollType
+                            th= item.cityName
+                            th= item.science
+                            th= item.batch
+                            th= item.majorName
+                            th= item.enrollNum
+                            th= ''
+
+        div.page#majorInfoListPageItem
+            a.current 1
+            a 2
+            a.next
+            a.last
+            | 共
+            span.pageNum
+            | 页 &nbsp;到第
+            input(type="text" class="pageBarText")
+            | 页
+            input(type="button" value="跳转" class="btnGo" id="paginationGo")

@@ -1,0 +1,182 @@
+extends layout.jade
+block content
+    include ./components/headerNew
+
+    div.containers
+        div#toTop
+            img(src="/images/v4_1template/backtop.png")
+        include ./components/sidebar
+        div#main
+            div#footprint
+            div#article-title
+            div#article-date
+                p.lf 发布时间：
+                    span.date
+                p.rt 浏览量：
+                    span.see
+                div.clear
+            div#main-article
+            div#main-body
+                if specType == 1
+                    include ./components/basicInfo
+                else if specType == 6
+                    include ./components/majorList
+                else if specType == 14
+                    include ./components/collegeList
+            div#article-controls
+                a.prev-article 上一篇
+                a.next-article 下一篇
+                a.back-to-list 返回列表页
+
+        include ./components/rightBooks
+        div.clear
+    include ./components/footer
+
+    script.
+
+        var SCODE = '#{sCode}', INFOID = '#{infoId}', PARENTID = '#{parentId}'
+
+        var SPECTYPE = '#{specType}'
+
+        function getAppServer() {
+            return '!{host}';
+        }
+
+
+
+        $(function () {
+            $('#toTop').click(function () {
+                $('html,body').animate({scrollTop: 0}, 500);
+            })
+
+
+            if (INFOID != 'null' && PARENTID) {
+                $.get(BASE_HOST + '/front/template' + '/getInfoContentDetail', {
+                    sCode: SCODE,
+                    infoId: INFOID,
+                    parentId: PARENTID
+                }, function (data) {
+                    data = data.data;
+
+                    $('#article-title').html(data.title)
+                    $('#article-date span.date').html(data.publishTime.substring(0, 10));
+                    $('#article-date span.see').html(data.viewTimes);
+                    $('#main-article').html(data.content)
+                    uParse('#main-article');
+
+                    if (data.preInfoId) {
+                        console.log(data.preInfoId);
+                        $('.prev-article').attr('preInfoId', data.preInfoId);
+                    } else {
+                        $('.prev-article').hide();
+                    }
+
+                    if (data.nextInfoId) {
+                        $('.next-article').attr('nextInfoId', data.nextInfoId);
+                    } else {
+                        $('.next-article').hide();
+                    }
+
+                    if (data.preInfoId || data.nextInfoId) {
+                        $('.back-to-list').click(function () {
+                            var url = 'secondPageArticleList?sCode=' + SCODE + '&parentId=' + PARENTID + '&curPage=1&pageSize=10';
+                            window.location.href =toDetailPage(APP_SERVER + url) ;
+                        })
+                    } else {
+                        $('.back-to-list').hide();
+                    }
+
+                    $('.prev-article,.next-article,.back-to-list').hover(function () {
+                        $(this).addClass('themeColor')
+                    }, function () {
+                        $(this).removeClass('themeColor');
+                    })
+
+                    $('.prev-article').click(function () {
+                        var infoId = $(this).attr('preInfoId');
+                        window.location.href =toDetailPage(APP_SERVER + '/secondPage/secondPageArticleDetail?parentId=' + PARENTID + '&infoId=' + infoId + '&sCode=' + SCODE)
+                    })
+                    $('.next-article').click(function () {
+                        var infoId = $(this).attr('nextInfoId');
+                        window.location.href =toDetailPage(APP_SERVER + '/secondPage/secondPageArticleDetail?parentId=' + PARENTID + '&infoId=' + infoId + '&sCode=' + SCODE)
+                    })
+
+
+                    if (data.specType == 14) {  //院系列表
+                        /*$.get(BASE_HOST+'/front/info/form/departmentInfo?sCode='+SCODE,function(data){-->
+                         <!--$('#main-body').html(data)-->
+                         <!--})*/
+                        /*   window.location.href= APP_SERVER + "/secondPage/secondPageCollegeList?parentId="+PARENTID+'&infoId='+INFOID+ "&sCode=" + SCODE;*/
+                    } else if (data.specType == 1) {
+                        /*
+                         $.get(BASE_HOST+'/front/info/form/schoolInfo?sCode='+SCODE,function(data){
+                         $('#main-body').html(data)
+                         })
+                         */
+                    } else if (data.specType == 6) {  //专业列表
+                        /*
+                         $.get(BASE_HOST+'/front/info/form/majorInfo?sCode='+SCODE,function(data){
+                         $('#main-body').html(data)
+                         })
+
+                         window.location.href= APP_SERVER + "/secondPage/secondPageMajorList?parentId="+PARENTID+'&infoId='+INFOID+ "&sCode=" + SCODE;
+                         */
+                    } else if (data.specType == 13) {
+                        $.get(BASE_HOST + '/front/info/form/majorResearch2?sCode=' + SCODE + '&parentId=' + PARENTID, function (data) {
+                            $('#main-body').html(data)
+                        })
+                    } else if (data.specType == 8) {
+                        $.get(BASE_HOST + '/front/info/form/enrollPlan?sCode=' + SCODE, function (data) {
+                            $('#main-body').html(data)
+                        })
+                    } else if (data.specType == 9) {
+                        $.get(BASE_HOST + '/front/info/form/enrollRule?sCode=' + SCODE, function (data) {
+                            $('#main-body').html(data)
+                        })
+                    } else if (data.specType == 10) {  //学院录取
+                        $.get(BASE_HOST + '/front/info/form/schoolEnroll?sCode=' + SCODE, function (data) {
+                            $('#main-body').html(data)
+                        })
+                    } else if (data.specType == 11) {  //专业录取
+                        $.get(BASE_HOST + '/front/info/form/majorScore?sCode=' + SCODE, function (data) {
+                            $('#main-body').html(data)
+
+                            $('.tab>ul>li').each(function () {
+                                $(this).on('click', function () {
+                                    var index = $(this).index();
+                                    $(this).addClass('cur').siblings('li').removeClass('cur');
+                                    $(this).addClass('drop-dwon').siblings('li').removeClass('drop-dwon');
+                                    $(this).addClass('g-dropDownList').siblings('li').removeClass('g-dropDownList');
+                                    $('.tab-con').hide();
+                                    $('.tab-con').eq(index).show();
+                                })
+                            })
+                        })
+                    } else if (data.specType == 12) {
+                        $.get(BASE_HOST + '/front/info/preScore2/' + SCODE, function (data) {
+                            $('#main-body').html(data)
+                        })
+                    }
+
+
+                    window.addEventListener('scroll', function () {
+                        var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+                        if (scrollTop > 110) {
+                            $('#toTop').show();
+                        } else {
+                            $('#toTop').hide();
+                        }
+                    })
+
+
+                })
+            } else if (INFOID == 'null') {
+                $('#footprint').html('抱歉，该分类下没有文章')
+            }
+
+
+        })
+
+
+
+

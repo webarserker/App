@@ -1,0 +1,82 @@
+﻿@charset "utf-8";
+/* CSS Document  */
+
+html, body{
+	height:100%;
+}
+/*footer底部定位*/
+.container{
+	position: relative;
+	width: 100%;
+	min-height: 100%;
+	padding-bottom: 350px;
+}
+
+.footer{
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	width: 100%;
+	background-color: #fafafa;
+	color: #808080;
+}
+.footer .tit{
+	font-size: 18px;
+	line-height: 36px;
+	border-bottom: 1px solid #3b8df7;
+}
+.footer .con{
+	margin-top: 20px;
+	line-height: 24px;
+}
+.footer .w130{
+	width: 130px;
+}
+.footer .w330{
+	width: 330px;
+}
+.footer .w404{
+	width: 404px;
+}
+.footer .ml80{
+	margin-left: 80px;
+}
+.footer .links li{
+	float: left;
+	font-size: 14px;
+	padding-right: 30px;
+	max-width: 100px;
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+}
+.footer .links li a{
+	color: #808080;
+}
+.footer .share{
+	margin-top: 45px;
+}
+.footer .share li{
+	float: left;
+}
+.footer .share .wechat, .footer .share .qq, .footer .share .xina{
+	font-size: 28px;
+	color: #8a93a9;
+	margin-right: 30px;
+}
+.footer .share .wechat:hover, .footer .share .qq:hover, .footer .share .xina:hover{
+	color: #02c374;
+}
+/*footer*/
+/*copyright*/
+.copyright{
+	background-color: #3b8df7;
+	color: #fff;
+	text-align: center;
+	line-height: 24px;
+	padding: 5px 0;
+}
+.copyright a{
+	color: #fff;
+	text-decoration: underline;
+}

@@ -1,0 +1,36 @@
+.footprint{
+    border-bottom:1px dashed #ddd;
+    color:#555;
+    font-size:13px;
+    padding-bottom:8px;
+}
+#majorName{
+    width:80%;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:30px;
+    border-bottom:1px solid #ddd;
+    text-align:center;
+    padding-bottom:15px;
+    color:#000;
+    font-size:18px;
+    font-weight:normal;
+}
+#characteristic,#target,#curriculum{
+    margin-top:25px;
+    text-indent:2em;
+}
+.depart-name,.school-year,.degree,.characteristic,.target,.requirement,.curriculum,.info-detail,.enrollment-plan,.history-enrollment{
+    margin-top:25px;
+    font-size:15px;
+}
+#characteristic,#target,#requirement,#curriculum,#enrollmentPlan,#historyEnrollment{
+    color:#666;
+    font-size:14px;
+}
+#enrollmentPlan,#historyEnrollment{
+    color:#0000EE;
+}
+#info-content{
+    margin-top:15px;
+}

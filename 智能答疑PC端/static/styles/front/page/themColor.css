@@ -1,0 +1,361 @@
+/*涓婚棰滆壊閲嶇疆*/
+/*閽磋摑鑹�*/
+.cobaltBlue .loggedDownlist{border: 1px solid #018fa3 !important;}
+.cobaltBlue .loggedDownlist li:hover a{color: #018fa3 !important;}
+.cobaltBlue .wechatWp:hover,.cobaltBlue .qqWp:hover{background-color: #018fa3 !important;}
+.cobaltBlue .loginBox .user{color: #018fa3 !important;}
+.cobaltBlue .loginBox .loginBtn{background-color: #018fa3 !important;}
+.cobaltBlue .menubar{background-color: #018fa3 !important;}
+.cobaltBlue .menu .menuUl{background-color: #018fa3 !important;}
+.cobaltBlue .menubar .rightArrow{border-color: transparent transparent #018fa3 #018fa3 !important;}
+.cobaltBlue .quickEntry{background-color: #196e82 !important;}
+.cobaltBlue .menubar .leftArrow{border-color: #fff #196e82 #196e82 #fff !important;}
+.cobaltBlue .infoItem .time p.date{background-color: #018fa3 !important;}
+.cobaltBlue .infoItem .time p.year{background-color: #7dc5d1 !important;}
+.cobaltBlue .infoItem.first .time p.date{background-color: #ed8632 !important;}
+.cobaltBlue .infoItem.first .time p.year{background-color: #f2aa6f !important;}
+.cobaltBlue .mainItem .usericon{color: #018fa3 !important;}
+.cobaltBlue .mainItem .itemDescList{background-color: #018fa3 !important;}
+.cobaltBlue .tabBox .tabTit li.cur{border-top: 2px solid #018fa3 !important;}
+.cobaltBlue .tabBox .tabTit li:hover a{color: #018fa3 !important;}
+.cobaltBlue .tabBox .dItem .new{color: #018fa3 !important;}
+.cobaltBlue .tabBox .dItem a:hover{color: #018fa3 !important;}
+.cobaltBlue .hotInfo .tit a:hover{color: #018fa3 !important;}
+.cobaltBlue .midBox .con .iconBg.levelA{background-color: #018fa3 !important;}
+.cobaltBlue .midBox .tit{border-bottom: 2px solid #018fa3 !important;}
+.cobaltBlue .midBox .tit a:hover{color: #018fa3 !important;}
+.cobaltBlue .vedio .tit a:hover{color: #018fa3 !important;}
+.cobaltBlue .roboBox{background-color: #018fa3 !important;}
+.cobaltBlue .roboBox .contactList .dropDown{border: 1px solid #018fa3 !important;}
+.cobaltBlue .roboBox .dropDown .topArrow1{border-bottom:10px solid #018fa3 !important;}
+.cobaltBlue .roboBox .dropDown .contactIconWp{background-color: #018fa3 !important;}
+.cobaltBlue .roboBox .messageEnter{color: #018fa3 !important;}
+.cobaltBlue .show .descDetail .moreBtn{background-color: #28a7ba !important;}
+.cobaltBlue .schStory .schIcon{color: #018fa3 !important;}
+.cobaltBlue .moreSchStory li a:hover{color: #018fa3 !important;}
+.cobaltBlue .foot .bg{background-color: #094d57 !important;opacity:0.92;filter:alpha(opacity=92);}
+.cobaltBlue .foot .tit{border-bottom: 1px solid #578487 !important;}
+.cobaltBlue .copyright{background-color: #018fa3 !important;}
+.cobaltBlue .tanchu-btn-cancle{border: 1px solid #018fa3 !important;color: #018fa3 !important;}
+.cobaltBlue .tanchu-btn-confirm{border: 1px solid #018fa3 !important;background-color: #018fa3 !important;}
+.cobaltBlue .floatRightBox .itemIconWp{background-color: #018fa3 !important;}
+/*瀛旈泙钃�*/
+.peacockBlue .loggedDownlist{border: 1px solid #01a4c5 !important;}
+.peacockBlue .loggedDownlist li:hover a{color: #01a4c5 !important;}
+.peacockBlue .wechatWp:hover,.peacockBlue .qqWp:hover{background-color: #01a4c5 !important;}
+.peacockBlue .loginBox .user{color: #01a4c5 !important;}
+.peacockBlue .loginBox .loginBtn{background-color: #01a4c5 !important;}
+.peacockBlue .menubar{background-color: #01a4c5 !important;}
+.peacockBlue .menu .menuUl{background-color: #01a4c5 !important;}
+.peacockBlue .menubar .rightArrow{border-color: transparent transparent #01a4c5 #01a4c5 !important;}
+.peacockBlue .quickEntry{background-color: #0192af !important;}
+.peacockBlue .menubar .leftArrow{border-color: #fff #0192af #0192af #fff !important;}
+.peacockBlue .infoItem .time p.date{background-color: #01a4c5 !important;}
+.peacockBlue .infoItem .time p.year{background-color: #7fd0e1 !important;}
+.peacockBlue .infoItem.first .time p.date{background-color: #ed8632 !important;}
+.peacockBlue .infoItem.first .time p.year{background-color: #f2aa6f !important;}
+.peacockBlue .mainItem .usericon{color: #01a4c5 !important;}
+.peacockBlue .mainItem .itemDescList{background-color: #01a4c5 !important;}
+.peacockBlue .tabBox .tabTit li.cur{border-top: 2px solid #01a4c5 !important;}
+.peacockBlue .tabBox .tabTit li:hover a{color: #01a4c5 !important;}
+.peacockBlue .tabBox .dItem .new{color: #01a4c5 !important;}
+.peacockBlue .tabBox .dItem a:hover{color: #01a4c5 !important;}
+.peacockBlue .hotInfo .tit a:hover{color: #01a4c5 !important;}
+.peacockBlue .midBox .con .iconBg.levelA{background-color: #01a4c5 !important;}
+.peacockBlue .midBox .tit{border-bottom: 2px solid #01a4c5 !important;}
+.peacockBlue .midBox .tit a:hover{color: #01a4c5 !important;}
+.peacockBlue .vedio .tit a:hover{color: #01a4c5 !important;}
+.peacockBlue .roboBox{background-color: #01a4c5 !important;}
+.peacockBlue .roboBox .contactList .dropDown{border: 1px solid #01a4c5 !important;}
+.peacockBlue .roboBox .dropDown .topArrow1{border-bottom:10px solid #01a4c5 !important;}
+.peacockBlue .roboBox .dropDown .contactIconWp{background-color: #01a4c5 !important;}
+.peacockBlue .roboBox .messageEnter{color: #01a4c5 !important;}
+.peacockBlue .schStory .schIcon{color: #01a4c5 !important;}
+.peacockBlue .moreSchStory li a:hover{color: #01a4c5 !important;}
+.peacockBlue .show .descDetail .moreBtn{background-color: #0abbdd !important;}
+.peacockBlue .foot .bg{background-color: #007c95 !important;opacity:0.92;filter:alpha(opacity=92);}
+.peacockBlue .foot .tit{border-bottom: 1px solid #51a2af !important;}
+.peacockBlue .copyright{background-color: #01a4c5 !important;}
+.peacockBlue .tanchu-btn-cancle{border: 1px solid #01a4c5 !important;color: #01a4c5 !important;}
+.peacockBlue .tanchu-btn-confirm{border: 1px solid #01a4c5 !important;background-color: #01a4c5 !important;}
+.peacockBlue .floatRightBox .itemIconWp{background-color: #01a4c5 !important;}
+/*鐞夌拑钃�*/
+.glazedBlue .loggedDownlist{border: 1px solid #1d50a2 !important;}
+.glazedBlue .loggedDownlist li:hover a{color: #1d50a2 !important;}
+.glazedBlue .wechatWp:hover,.glazedBlue .qqWp:hover{background-color: #1d50a2 !important;}
+.glazedBlue .loginBox .user{color: #1d50a2 !important;}
+.glazedBlue .loginBox .loginBtn{background-color: #1d50a2 !important;}
+.glazedBlue .menubar{background-color: #1d50a2 !important;}
+.glazedBlue .menu .menuUl{background-color: #1d50a2 !important;}
+.glazedBlue .menubar .rightArrow{border-color: transparent transparent #1d50a2 #1d50a2 !important;}
+.glazedBlue .quickEntry{background-color: #093273 !important;}
+.glazedBlue .menubar .leftArrow{border-color: #fff #093273 #093273 #fff !important;}
+.glazedBlue .infoItem .time p.date{background-color: #1d50a2 !important;}
+.glazedBlue .infoItem .time p.year{background-color: #8da7d0 !important;}
+.glazedBlue .infoItem.first .time p.date{background-color: #ed8632 !important;}
+.glazedBlue .infoItem.first .time p.year{background-color: #f2aa6f !important;}
+.glazedBlue .mainItem .usericon{color: #1d50a2 !important;}
+.glazedBlue .mainItem .itemDescList{background-color: #1d50a2 !important;}
+.glazedBlue .tabBox .tabTit li.cur{border-top: 2px solid #1d50a2 !important;}
+.glazedBlue .tabBox .tabTit li:hover a{color: #1d50a2 !important;}
+.glazedBlue .tabBox .dItem .new{color: #1d50a2 !important;}
+.glazedBlue .tabBox .dItem a:hover{color: #1d50a2 !important;}
+.glazedBlue .hotInfo .tit a:hover{color: #1d50a2 !important;}
+.glazedBlue .midBox .con .iconBg.levelA{background-color: #1d50a2 !important;}
+.glazedBlue .midBox .tit{border-bottom: 2px solid #1d50a2 !important;}
+.glazedBlue .midBox .tit a:hover{color: #1d50a2 !important;}
+.glazedBlue .vedio .tit a:hover{color: #1d50a2 !important;}
+.glazedBlue .roboBox{background-color: #1d50a2 !important;}
+.glazedBlue .roboBox .contactList .dropDown{border: 1px solid #1d50a2 !important;}
+.glazedBlue .roboBox .dropDown .topArrow1{border-bottom:10px solid #1d50a2 !important;}
+.glazedBlue .roboBox .dropDown .contactIconWp{background-color: #1d50a2 !important;}
+.glazedBlue .roboBox .messageEnter{color: #1d50a2 !important;}
+.glazedBlue .schStory .schIcon{color: #1d50a2 !important;}
+.glazedBlue .moreSchStory li a:hover{color: #1d50a2 !important;}
+.glazedBlue .show .descDetail .moreBtn{background-color: #326cca !important;}
+.glazedBlue .foot .bg{background-color: #152653 !important;opacity:0.92;filter:alpha(opacity=92);}
+.glazedBlue .foot .tit{border-bottom: 1px solid #687390 !important;}
+.glazedBlue .copyright{background-color: #1d50a2 !important;}
+.glazedBlue .tanchu-btn-cancle{border: 1px solid #1d50a2 !important;color: #1d50a2 !important;}
+.glazedBlue .tanchu-btn-confirm{border: 1px solid #1d50a2 !important;background-color: #1d50a2 !important;}
+.glazedBlue .floatRightBox .itemIconWp{background-color: #1d50a2 !important;}
+/*澧ㄧ豢*/
+.blackishGreen .loggedDownlist{border: 1px solid #006450 !important;}
+.blackishGreen .loggedDownlist li:hover a{color: #006450 !important;}
+.blackishGreen .wechatWp:hover,.blackishGreen .qqWp:hover{background-color: #006450 !important;}
+.blackishGreen .loginBox .user{color: #006450 !important;}
+.blackishGreen .loginBox .loginBtn{background-color: #006450 !important;}
+.blackishGreen .menubar{background-color: #006450 !important;}
+.blackishGreen .menu .menuUl{background-color: #006450 !important;}
+.blackishGreen .menubar .rightArrow{border-color: transparent transparent #006450 #006450 !important;}
+.blackishGreen .quickEntry{background-color: #024235 !important;}
+.blackishGreen .menubar .leftArrow{border-color: #fff #024235 #024235 #fff !important;}
+.blackishGreen .infoItem .time p.date{background-color: #006450 !important;}
+.blackishGreen .infoItem .time p.year{background-color: #7fb1a7 !important;}
+.blackishGreen .infoItem.first .time p.date{background-color: #ed8632 !important;}
+.blackishGreen .infoItem.first .time p.year{background-color: #f2aa6f !important;}
+.blackishGreen .mainItem .usericon{color: #006450 !important;}
+.blackishGreen .mainItem .itemDescList{background-color: #006450 !important;}
+.blackishGreen .tabBox .tabTit li.cur{border-top: 2px solid #006450 !important;}
+.blackishGreen .tabBox .tabTit li:hover a{color: #006450 !important;}
+.blackishGreen .tabBox .dItem .new{color: #006450 !important;}
+.blackishGreen .tabBox .dItem a:hover{color: #006450 !important;}
+.blackishGreen .hotInfo .tit a:hover{color: #006450 !important;}
+.blackishGreen .midBox .con .iconBg.levelA{background-color: #006450 !important;}
+.blackishGreen .midBox .tit{border-bottom: 2px solid #006450 !important;}
+.blackishGreen .midBox .tit a:hover{color: #006450 !important;}
+.blackishGreen .vedio .tit a:hover{color: #006450 !important;}
+.blackishGreen .roboBox{background-color: #006450 !important;}
+.blackishGreen .roboBox .contactList .dropDown{border: 1px solid #006450 !important;}
+.blackishGreen .roboBox .dropDown .topArrow1{border-bottom:10px solid #006450 !important;}
+.blackishGreen .roboBox .dropDown .contactIconWp{background-color: #006450 !important;}
+.blackishGreen .roboBox .messageEnter{color: #006450 !important;}
+.blackishGreen .schStory .schIcon{color: #006450 !important;}
+.blackishGreen .moreSchStory li a:hover{color: #006450 !important;}
+.blackishGreen .show .descDetail .moreBtn{background-color: #007f66 !important;}
+.blackishGreen .foot .bg{background-color: #02382d !important;opacity:0.92;filter:alpha(opacity=92);}
+.blackishGreen .foot .tit{border-bottom: 1px solid #52756c !important;}
+.blackishGreen .copyright{background-color: #006450 !important;}
+.blackishGreen .tanchu-btn-cancle{border: 1px solid #006450 !important;color: #006450 !important;}
+.blackishGreen .tanchu-btn-confirm{border: 1px solid #006450 !important;background-color: #006450 !important;}
+.blackishGreen .floatRightBox .itemIconWp{background-color: #006450 !important;}
+/*瀚╃豢鑹�*/
+.tenderGreen .loggedDownlist{border: 1px solid #76a32d !important;}
+.tenderGreen .loggedDownlist li:hover a{color: #76a32d !important;}
+.tenderGreen .wechatWp:hover,.tenderGreen .qqWp:hover{background-color: #76a32d !important;}
+.tenderGreen .loginBox .user{color: #76a32d !important;}
+.tenderGreen .loginBox .loginBtn{background-color: #76a32d !important;}
+.tenderGreen .menubar{background-color: #76a32d !important;}
+.tenderGreen .menu .menuUl{background-color: #76a32d !important;}
+.tenderGreen .menubar .rightArrow{border-color: transparent transparent #76a32d #76a32d !important;}
+.tenderGreen .quickEntry{background-color: #2c8d4d !important;}
+.tenderGreen .menubar .leftArrow{border-color: #fff #2c8d4d #2c8d4d #fff !important;}
+.tenderGreen .infoItem .time p.date{background-color: #76a32d !important;}
+.tenderGreen .infoItem .time p.year{background-color: #bad095 !important;}
+.tenderGreen .infoItem.first .time p.date{background-color: #ed8632 !important;}
+.tenderGreen .infoItem.first .time p.year{background-color: #f2aa6f !important;}
+.tenderGreen .mainItem .usericon{color: #76a32d !important;}
+.tenderGreen .mainItem .itemDescList{background-color: #76a32d !important;}
+.tenderGreen .tabBox .tabTit li.cur{border-top: 2px solid #76a32d !important;}
+.tenderGreen .tabBox .tabTit li:hover a{color: #76a32d !important;}
+.tenderGreen .tabBox .dItem .new{color: #76a32d !important;}
+.tenderGreen .tabBox .dItem a:hover{color: #76a32d !important;}
+.tenderGreen .hotInfo .tit a:hover{color: #76a32d !important;}
+.tenderGreen .midBox .con .iconBg.levelA{background-color: #76a32d !important;}
+.tenderGreen .midBox .tit{border-bottom: 2px solid #76a32d !important;}
+.tenderGreen .midBox .tit a:hover{color: #76a32d !important;}
+.tenderGreen .vedio .tit a:hover{color: #76a32d !important;}
+.tenderGreen .roboBox{background-color: #76a32d !important;}
+.tenderGreen .roboBox .contactList .dropDown{border: 1px solid #76a32d !important;}
+.tenderGreen .roboBox .dropDown .topArrow1{border-bottom:10px solid #76a32d !important;}
+.tenderGreen .roboBox .dropDown .contactIconWp{background-color: #76a32d !important;}
+.tenderGreen .roboBox .messageEnter{color: #76a32d !important;}
+.tenderGreen .schStory .schIcon{color: #76a32d !important;}
+.tenderGreen .moreSchStory li a:hover{color: #76a32d !important;}
+.tenderGreen .show .descDetail .moreBtn{background-color: #85bb2d !important;}
+.tenderGreen .foot .bg{background-color: #0c1a01 !important;opacity:0.7;filter:alpha(opacity=70);}
+.tenderGreen .foot .tit{border-bottom: 1px solid #657159 !important;}
+.tenderGreen .copyright{background-color: #76a32d !important;}
+.tenderGreen .tanchu-btn-cancle{border: 1px solid #76a32d !important;color: #76a32d !important;}
+.tenderGreen .tanchu-btn-confirm{border: 1px solid #76a32d !important;background-color: #76a32d !important;}
+.tenderGreen .floatRightBox .itemIconWp{background-color: #76a32d !important;}
+/*娣辩化绾�*/
+.brightRed .loggedDownlist{border: 1px solid #c8161d !important;}
+.brightRed .loggedDownlist li:hover a{color: #c8161d !important;}
+.brightRed .wechatWp:hover,.brightRed .qqWp:hover{background-color: #c8161d !important;}
+.brightRed .loginBox .user{color: #c8161d !important;}
+.brightRed .loginBox .loginBtn{background-color: #c8161d !important;}
+.brightRed .menubar{background-color: #c8161d !important;}
+.brightRed .menu .menuUl{background-color: #c8161d !important;}
+.brightRed .menubar .rightArrow{border-color: transparent transparent #c8161d #c8161d !important;}
+.brightRed .quickEntry{background-color: #591214 !important;}
+.brightRed .menubar .leftArrow{border-color: #fff #591214 #591214 #fff !important;}
+.brightRed .infoItem .time p.date{background-color: #c8161d !important;}
+.brightRed .infoItem .time p.year{background-color: #e38a8d !important;}
+.brightRed .infoItem.first .time p.date{background-color: #ed8632 !important;}
+.brightRed .infoItem.first .time p.year{background-color: #f2aa6f !important;}
+.brightRed .mainItem .usericon{color: #c8161d !important;}
+.brightRed .mainItem .itemDescList{background-color: #c8161d !important;}
+.brightRed .tabBox .tabTit li.cur{border-top: 2px solid #c8161d !important;}
+.brightRed .tabBox .tabTit li:hover a{color: #c8161d !important;}
+.brightRed .tabBox .dItem .new{color: #c8161d !important;}
+.brightRed .tabBox .dItem a:hover{color: #c8161d !important;}
+.brightRed .hotInfo .tit a:hover{color: #c8161d !important;}
+.brightRed .midBox .con .iconBg.levelA{background-color: #c8161d !important;}
+.brightRed .midBox .tit{border-bottom: 2px solid #c8161d !important;}
+.brightRed .midBox .tit a:hover{color: #c8161d !important;}
+.brightRed .vedio .tit a:hover{color: #c8161d !important;}
+.brightRed .roboBox{background-color: #c8161d !important;}
+.brightRed .roboBox .contactList .dropDown{border: 1px solid #c8161d !important;}
+.brightRed .roboBox .dropDown .topArrow1{border-bottom:10px solid #c8161d !important;}
+.brightRed .roboBox .dropDown .contactIconWp{background-color: #c8161d !important;}
+.brightRed .roboBox .messageEnter{color: #c8161d !important;}
+.brightRed .schStory .schIcon{color: #c8161d !important;}
+.brightRed .moreSchStory li a:hover{color: #c8161d !important;}
+.brightRed .show .descDetail .moreBtn{background-color: #ef2e36 !important;}
+.brightRed .foot .bg{background-color: #49061d !important;opacity:0.71;filter:alpha(opacity=71);}
+.brightRed .foot .tit{border-bottom: 1px solid #7e6361 !important;}
+.brightRed .copyright{background-color: #c8161d !important;}
+.brightRed .tanchu-btn-cancle{border: 1px solid #c8161d !important;color: #c8161d !important;}
+.brightRed .tanchu-btn-confirm{border: 1px solid #c8161d !important;background-color: #c8161d !important;}
+.brightRed .floatRightBox .itemIconWp{background-color: #c8161d !important;}
+/*娣辩孩*/
+.deepRed .loggedDownlist{border: 1px solid #c24631 !important;}
+.deepRed .loggedDownlist li:hover a{color: #c24631 !important;}
+.deepRed .wechatWp:hover,.deepRed .qqWp:hover{background-color: #c24631 !important;}
+.deepRed .loginBox .user{color: #c24631 !important;}
+.deepRed .loginBox .loginBtn{background-color: #c24631 !important;}
+.deepRed .menubar{background-color: #c24631 !important;}
+.deepRed .menu .menuUl{background-color: #c24631 !important;}
+.deepRed .menubar .rightArrow{border-color: transparent transparent #c24631 #c24631 !important;}
+.deepRed .quickEntry{background-color: #650000 !important;}
+.deepRed .menubar .leftArrow{border-color: #fff #650000 #650000 #fff !important;}
+.deepRed .infoItem .time p.date{background-color: #c24631 !important;}
+.deepRed .infoItem .time p.year{background-color: #e0a297 !important;}
+.deepRed .infoItem.first .time p.date{background-color: #ed8632 !important;}
+.deepRed .infoItem.first .time p.year{background-color: #f2aa6f !important;}
+.deepRed .mainItem .usericon{color: #c24631 !important;}
+.deepRed .mainItem .itemDescList{background-color: #c24631 !important;}
+.deepRed .tabBox .tabTit li.cur{border-top: 2px solid #c24631 !important;}
+.deepRed .tabBox .tabTit li:hover a{color: #c24631 !important;}
+.deepRed .tabBox .dItem .new{color: #c24631 !important;}
+.deepRed .tabBox .dItem a:hover{color: #c24631 !important;}
+.deepRed .hotInfo .tit a:hover{color: #c24631 !important;}
+.deepRed .midBox .con .iconBg.levelA{background-color: #c24631 !important;}
+.deepRed .midBox .tit{border-bottom: 2px solid #c24631 !important;}
+.deepRed .midBox .tit a:hover{color: #c24631 !important;}
+.deepRed .vedio .tit a:hover{color: #c24631 !important;}
+.deepRed .roboBox{background-color: #c24631 !important;}
+.deepRed .roboBox .contactList .dropDown{border: 1px solid #c24631 !important;}
+.deepRed .roboBox .dropDown .topArrow1{border-bottom:10px solid #c24631 !important;}
+.deepRed .roboBox .dropDown .contactIconWp{background-color: #c24631 !important;}
+.deepRed .roboBox .messageEnter{color: #c24631 !important;}
+.deepRed .schStory .schIcon{color: #c24631 !important;}
+.deepRed .moreSchStory li a:hover{color: #c24631 !important;}
+.deepRed .show .descDetail .moreBtn{background-color: #f06f59 !important;}
+.deepRed .foot .bg{background-color: #621508 !important;opacity:0.7;filter:alpha(opacity=70);}
+.deepRed .foot .tit{border-bottom: 1px solid #b18d86 !important;}
+.deepRed .copyright{background-color: #c24631 !important;}
+.deepRed .tanchu-btn-cancle{border: 1px solid #c24631 !important;color: #c24631 !important;}
+.deepRed .tanchu-btn-confirm{border: 1px solid #c24631 !important;background-color: #c24631 !important;}
+.deepRed .floatRightBox .itemIconWp{background-color: #c24631 !important;}
+/*钄氳摑*/
+.skyBlue .loggedDownlist{border: 1px solid #369de4 !important;}
+.skyBlue .loggedDownlist li:hover a{color: #369de4 !important;}
+.skyBlue .wechatWp:hover,.skyBlue .qqWp:hover{background-color: #369de4 !important;}
+.skyBlue .loginBox .user{color: #369de4 !important;}
+.skyBlue .loginBox .loginBtn{background-color: #369de4 !important;}
+.skyBlue .menubar{background-color: #369de4 !important;}
+.skyBlue .menu .menuUl{background-color: #369de4 !important;}
+.skyBlue .menubar .rightArrow{border-color: transparent transparent #369de4 #369de4 !important;}
+.skyBlue .quickEntry{background-color: #0161a4 !important;}
+.skyBlue .menubar .leftArrow{border-color: #fff #0161a4 #0161a4 #fff !important;}
+.skyBlue .infoItem .time p.date{background-color: #369de4 !important;}
+.skyBlue .infoItem .time p.year{background-color: #9acdf1 !important;}
+.skyBlue .infoItem.first .time p.date{background-color: #ed8632 !important;}
+.skyBlue .infoItem.first .time p.year{background-color: #f2aa6f !important;}
+.skyBlue .mainItem .usericon{color: #369de4 !important;}
+.skyBlue .mainItem .itemDescList{background-color: #369de4 !important;}
+.skyBlue .tabBox .tabTit li.cur{border-top: 2px solid #369de4 !important;}
+.skyBlue .tabBox .tabTit li:hover a{color: #369de4 !important;}
+.skyBlue .tabBox .dItem .new{color: #369de4 !important;}
+.skyBlue .tabBox .dItem a:hover{color: #369de4 !important;}
+.skyBlue .hotInfo .tit a:hover{color: #369de4 !important;}
+.skyBlue .midBox .con .iconBg.levelA{background-color: #369de4 !important;}
+.skyBlue .midBox .tit{border-bottom: 2px solid #369de4 !important;}
+.skyBlue .midBox .tit a:hover{color: #369de4 !important;}
+.skyBlue .vedio .tit a:hover{color: #369de4 !important;}
+.skyBlue .roboBox{background-color: #369de4 !important;}
+.skyBlue .roboBox .contactList .dropDown{border: 1px solid #369de4 !important;}
+.skyBlue .roboBox .dropDown .topArrow1{border-bottom:10px solid #369de4 !important;}
+.skyBlue .roboBox .dropDown .contactIconWp{background-color: #369de4 !important;}
+.skyBlue .roboBox .messageEnter{color: #369de4 !important;}
+.skyBlue .schStory .schIcon{color: #369de4 !important;}
+.skyBlue .moreSchStory li a:hover{color: #369de4 !important;}
+.skyBlue .show .descDetail .moreBtn{background-color: #5aaee8 !important;}
+.skyBlue .foot .bg{background-color: #0c1b44 !important;opacity:0.8;filter:alpha(opacity=80);}
+.skyBlue .foot .tit{border-bottom: 1px solid #777f96 !important;}
+.skyBlue .copyright{background-color: #369de4 !important;}
+.skyBlue .tanchu-btn-cancle{border: 1px solid #369de4 !important;color: #369de4 !important;}
+.skyBlue .tanchu-btn-confirm{border: 1px solid #369de4 !important;background-color: #369de4 !important;}
+.skyBlue .floatRightBox .itemIconWp{background-color: #369de4 !important;}
+/*澶槼姗�*/
+.sunOrange .loggedDownlist{border: 1px solid #f18d00 !important;}
+.sunOrange .loggedDownlist li:hover a{color: #f18d00 !important;}
+.sunOrange .wechatWp:hover,.sunOrange .qqWp:hover{background-color: #f18d00 !important;}
+.sunOrange .loginBox .user{color: #f18d00 !important;}
+.sunOrange .loginBox .loginBtn{background-color: #f18d00 !important;}
+.sunOrange .menubar{background-color: #f18d00 !important;}
+.sunOrange .menu .menuUl{background-color: #f18d00 !important;}
+.sunOrange .menubar .rightArrow{border-color: transparent transparent #f18d00 #f18d00 !important;}
+.sunOrange .quickEntry{background-color: #ed6d00 !important;}
+.sunOrange .menubar .leftArrow{border-color: #fff #ed6d00 #ed6d00 #fff !important;}
+.sunOrange .infoItem .time p.date{background-color: #f18d00 !important;}
+.sunOrange .infoItem .time p.year{background-color: #f2aa6f !important;}
+.sunOrange .infoItem.first .time p.date{background-color: #ed8632 !important;}
+.sunOrange .infoItem.first .time p.year{background-color: #f2aa6f !important;}
+.sunOrange .mainItem .usericon{color: #f18d00 !important;}
+.sunOrange .mainItem .itemDescList{background-color: #f18d00 !important;}
+.sunOrange .tabBox .tabTit li.cur{border-top: 2px solid #f18d00 !important;}
+.sunOrange .tabBox .tabTit li:hover a{color: #f18d00 !important;}
+.sunOrange .tabBox .dItem .new{color: #f18d00 !important;}
+.sunOrange .tabBox .dItem a:hover{color: #f18d00 !important;}
+.sunOrange .hotInfo .tit a:hover{color: #f18d00 !important;}
+.sunOrange .midBox .con .iconBg.levelA{background-color: #f18d00 !important;}
+.sunOrange .midBox .tit{border-bottom: 2px solid #f18d00 !important;}
+.sunOrange .midBox .tit a:hover{color: #f18d00 !important;}
+.sunOrange .vedio .tit a:hover{color: #f18d00 !important;}
+.sunOrange .roboBox{background-color: #f18d00 !important;}
+.sunOrange .roboBox .contactList .dropDown{border: 1px solid #f18d00 !important;}
+.sunOrange .roboBox .dropDown .topArrow1{border-bottom:10px solid #f18d00 !important;}
+.sunOrange .roboBox .dropDown .contactIconWp{background-color: #f18d00 !important;}
+.sunOrange .roboBox .messageEnter{color: #f18d00 !important;}
+.sunOrange .schStory .schIcon{color: #f18d00 !important;}
+.sunOrange .moreSchStory li a:hover{color: #f18d00 !important;}
+.sunOrange .show .descDetail .moreBtn{background-color: #ffa21e !important;}
+.sunOrange .foot .bg{background-color: #8d5302 !important;opacity:0.92;filter:alpha(opacity=92);}
+.sunOrange .foot .tit{border-bottom: 1px solid #ab8650 !important;}
+.sunOrange .copyright{background-color: #f18d00 !important;}
+.sunOrange .tanchu-btn-cancle{border: 1px solid #f18d00 !important;color: #f18d00 !important;}
+.sunOrange .tanchu-btn-confirm{border: 1px solid #f18d00 !important;background-color: #f18d00 !important;}
+.sunOrange .floatRightBox .itemIconWp{background-color: #f18d00 !important;}

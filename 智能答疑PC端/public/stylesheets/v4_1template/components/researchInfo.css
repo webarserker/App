@@ -1,0 +1,32 @@
+.footprint{
+    border-bottom:1px dashed #ddd;
+    color:#555;
+    font-size:13px;
+    padding-bottom:8px;
+}
+#researchName{
+    width:80%;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:30px;
+    border-bottom:1px solid #ddd;
+    text-align:center;
+    padding-bottom:15px;
+    color:#000;
+    font-size:18px;
+    font-weight:normal;
+}
+#preTestSubject,#reTestSubject,#addTestSubject,#remark,#summary,#reTestPlan{
+    margin-top:25px;
+    text-indent:2em;
+    color:#666;
+    font-size:14px;
+}
+.info-detail,.majorName,.majorCode,.department,.mentors,.typeStr,.enrollPlanNum,.recommendNoTest,.preTestSubject,.reTestSubject,.addTestSubject,.remark,.summary,.reTestPlan{
+    margin-top:25px;
+    font-size:15px;
+}
+
+#info-content{
+    margin-top:15px;
+}

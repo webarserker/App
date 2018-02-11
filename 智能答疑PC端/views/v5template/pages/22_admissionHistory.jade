@@ -1,0 +1,53 @@
+//
+   Created by abbydu on 17/9/21.
+extends ../components/layout03
+block content
+   div(class="details")
+      div(class="details_container")
+         include ../components/sidebar
+         div(class="Article_details")
+            div(class="Article_details_container")
+               // data 为空的判断
+               div(class="Article_details_tltle")
+                  span(class="Article_details_tips") 您的当前位置：
+                     if sidebarData && sidebarData.firstCatName && sidebarData.secondCatName.length > 0
+                        a(class="aur",firstCatId="#{sidebarData.firstCatId}") #{sidebarData.firstCatName}
+                     else
+                        a(class="aur")
+                     if sidebarData && sidebarData.secondCatName && sidebarData.secondCatName.length > 0
+                        a(class="cur",secondCatId="#{sidebarData.secondCatId}") #{sidebarData.secondCatName}
+                     else
+                        a(class="cur")
+                     if sidebarData && sidebarData.threeCatName && sidebarData.threeCatName.length > 0
+                        a(class="sur",threeCatId = "#{sidebarData.threeCatId}") #{sidebarData.threeCatName}
+                     else
+                        a(class="sur") 录取历史
+               // 招生计划
+               div(class="admissionHistory")
+                  div(class="admissionHistory_detail")
+         include ../components/rightMode
+
+   include ../components/footer
+   script.
+      $(document).ready(function () {
+         // 侧边栏分类列表点击事件-->跳转列表页即可
+         sidebarManager.setClassClickCallback(function (catId) {
+            var sCode = $(".header_container").attr('sCode');
+            var parentId = catId;
+            var url = getAppServer() + '/page/list/' + sCode + "/" + parentId + "?curPage=1&pageSize=10";
+            window.location.href = url;
+         });
+         //--------- 右侧引入旧页面处理 begin -------------------
+         //-----------// 引入spectype==11 专业录取历史--------------------------------------------
+         var url = "";
+         var sCode = $(".header_container").attr('sCode');
+         url = getApiServer() + "/front/info/form/majorScore?" + "sCode=" + sCode;
+         $.ajax({
+            type: "get",
+            url: url,
+            success: function (data) {
+               $(".admissionHistory_detail").html(data);
+            }
+         })
+      })
+

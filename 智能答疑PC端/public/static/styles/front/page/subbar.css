@@ -1,0 +1,172 @@
+/*面包屑*/
+.w1024{
+    width: 1024px;
+}
+.dot-list{
+    display: inline-block;
+    *display:inline;
+    *zoom:1;
+    width: 5px;
+    height: 5px;
+    border-radius: 1px;
+    background-color: #c1c1c1;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.menu{
+    border: 1px solid #d2d2d2;
+    background-color: #fafafa;
+    width: 198px;
+    padding: 60px 20px 20px 20px ;
+    position: relative;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    top: 30px;
+}
+.menu.sticky {
+    position: fixed;
+    z-index: 7777;
+}
+.menu .m-head{
+    width: 200px;
+    height: 18px;
+    line-height: 18px;
+    padding: 20px;
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    background-color: #3b8df7;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    font-size: 18px;
+    color: #fff;
+}
+.menu li{
+    cursor: pointer;
+}
+.menu .m-con{
+    color: #333;
+    font-size: 16px;
+    padding-top: 15px;
+}
+.menu a{
+    color: #333;
+}
+.menu .m-con ul{
+    padding: 0 15px;
+    margin-bottom: 10px;
+    color: #666;
+    font-size: 14px;
+    display: none;
+}
+.menu .sub-name{
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    width: 84%;
+}
+.menu .m-level2 ul{
+    padding-left: 15px;
+}
+.menu .m-level1 .txt{
+    background:url(../../../image/front/common/iconSptCommon.png) right -248px no-repeat;
+}
+.menu .m-level1 .txt.active{
+    background:url(../../../image/front/common/iconSptCommon.png) right -268px no-repeat;
+}
+.menu .m-level1 .m-level2 .txt, .menu .m-level1 .m-level2 .txt.active{
+    background: none;
+}
+.menu .m-level2 .txt{
+    position: relative;
+}
+.menu .m-level2 .txt .arrow{
+    border-color: #808080 transparent transparent;
+    position: absolute;
+    top: 8px;
+    right: 20px;
+}
+.menu .m-level2 .txt.active{
+    color: #3b8df7;
+}
+.menu .m-level2 .txt.active .arrow{
+    border-color: transparent transparent #3b8df7;
+    top: 4px;
+}
+.menu .m-level2, .menu .m-level3{
+    margin: 10px 0;
+}
+.menu .m-level3.active a{
+    color: #3b8df7;
+}
+.menu .m-level3.active .dot-list{
+    background-color: #3b8df7;;
+}
+.content{
+    padding: 15px;
+    width: 750px;
+}
+.content .filter-bar{
+    padding-bottom: 20px;
+    border-bottom: 1px solid #d4d4d4;
+}
+/*重置搜索框*/
+.content .search-box.g-searchIpt{
+    width: 300px;
+    height: 40px;
+    font-size: 14px;
+    border: 1px solid #c5c5c5;
+    border-radius: 2px;
+}
+.content .search-box.g-searchIpt .ipt, .search-box.g-searchIpt .btn{
+    height: 40px;
+    line-height: 40px;
+}
+.content .search-box.g-searchIpt .btn{
+    border-bottom-right-radius: 2px;
+    border-top-right-radius: 2px;
+    font-size: 18px;
+}
+.content .search-box.g-searchIpt .icon{
+    top: 12px;
+}
+.content .navigation{
+    line-height: 42px;
+    font-size: 12px;
+    padding-left: 5px;
+}
+.content .navigation .dot{
+    width: 4px;
+    height: 4px;
+    border-radius: 4px;
+    margin: 0 5px;
+}
+.content .navigation a{
+    color: #666;
+    text-decoration: none;
+}
+.content .navigation a:hover{
+    text-decoration: none;
+}
+.content .navigation a.cur{
+    color: #3b8df7;
+}
+
+#menu-conent{
+    overflow: hidden;
+    paddint-top: 20px;
+}
+.menu .scroll{
+    display: none;
+}
+.menu .scroll.active{
+    display: inline;
+}
+.menu .scroll .arrow{
+    cursor: pointer;
+}
+.menu .scroll .arrow.disabled{
+    color: #aaa;
+    cursor: default;
+}
