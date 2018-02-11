@@ -1,0 +1,51 @@
+@import "./color.scss";
+@import "./mixins.scss";
+
+  .path{
+    position: absolute;
+    z-index: 999;
+    width: 100%;
+    height: .7rem;
+    line-height: .7rem;
+    background-color: $theme-bg;
+    border-bottom: 1px solid $border-color;
+    padding: 0 pxToRem(10);
+    display: flex;
+    align-items: center;
+    color: #666;
+    font-size: .3rem;
+    a,span{
+        padding: 0 pxToRem(15);
+        font-size: 0.3rem;
+    }
+    a {
+        color: $theme-color;
+        /*color: #666;*/
+    }
+    .back{
+        padding-left:.2rem;
+        padding-right:.2rem;
+    }
+    .icon1-return{
+        font-size: 0.35rem;
+        color: #0f9e59;
+        height: .5rem;
+        display: inline-block;
+    }
+    .icon1-link{
+        font-size: pxToRem(20);
+        color: #666;
+        transform: rotate(180deg);
+    }
+    .left{
+        flex: 7;
+        display: flex;
+        align-items: center;
+    }
+    .right{
+        flex: 3;
+        display: flex;
+        align-items: center;
+        text-align: right;
+    } 
+  }

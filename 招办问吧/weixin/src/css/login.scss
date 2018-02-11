@@ -1,0 +1,143 @@
+@import "./mixins.scss";
+@import "./color.scss";
+
+.login {
+  padding-bottom: .5rem;
+  .logo {
+    text-align: center;
+    img.logo {
+      width: pxToRem(360);
+      height: pxToRem(360);
+      margin-top: pxToRem(170);
+    }
+  }
+  //input部分
+  .form {
+    padding: pxToRem(100) 0 0;
+    .list {
+      position: relative;
+      .empty {
+        position: absolute;
+        width: .50rem;
+        height: .50rem;
+        right: .20rem;
+        top: .16rem;
+      }
+    }
+    .user,.password {
+      border-top: 1px solid $border-color;
+      input {
+        width: 100%;
+        height:pxToRem(82);
+        padding-left: pxToRem(28);
+        font-size: 0.3rem;
+        border: none;
+      }
+      .warn {
+        height:pxToRem(82);
+        line-height: pxToRem(82);
+        padding-right: pxToRem(32);
+        margin-left: -5rem;
+        span {
+          @include btn(pxToRem(210), pxToRem(60), 0.26rem, 4px)
+          background-color: $error-bg;
+          border-color: $error-bg;
+          &.correct {
+            color: $theme-color;
+          }
+          &.error {
+            color: $error-red;
+          }
+        }
+      }
+    }
+    .password {
+      border-bottom: 1px solid $border-color;
+    }
+    //两个链接
+    .otherOpt {
+      padding: pxToRem(30) pxToRem(100) 0;
+      a {
+        font-size: 0.28rem;
+        text-decoration: underline;
+      }
+    }
+    .loginBtn {
+      @include btn(pxToRem(500),pxToRem(80),0.36rem,pxToRem(80));
+      display: block;
+      margin: pxToRem(86) auto pxToRem(58);
+      &.invisible {
+        margin:.4rem auto .2rem;
+      }
+      &.hover {
+        color: #fff;
+        background-color: $theme-color;
+      }    
+    }
+    //选择其他登录箭头
+    .otherLogin {
+      // position: absolute;
+      width: 100%;
+      bottom: pxToRem(24);
+      text-align: center;
+      img {
+        width: pxToRem(30);
+        height:pxToRem(16);
+      }
+      .text {
+        margin-top: pxToRem(10);
+        color:$txt-color3;
+        font-size: 0.32rem;
+        text-align: center;
+      }
+    }
+  }
+  //其他登录框
+  .otherWrap {
+    z-index: 1000;
+    text-align: center;
+    &,.otherBg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .otherBg {
+      background-color: rgba(0,0,0,0.4);
+    }
+    .otherContent {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: pxToRem(300);
+      background-color: #fff;
+      i {
+        display: inline-block;
+        margin: pxToRem(20) auto pxToRem(15);
+      }
+      .text {
+        font-size: 0.32rem;
+        color: $txt-color3;
+      }
+      .main {
+        width: pxToRem(260);
+        margin: pxToRem(36) auto 0;
+        color: $txt-color2;
+        img {
+          margin-bottom: 6px;
+          width: .8rem;
+          height: .8rem;
+        }
+      }
+    }
+  }
+  //其他登录框动画
+  .slide-enter-active,.slide-leave-active {
+    transition: all .2s ease; 
+  }
+  .slide-enter,.slide-leave-active {
+    transform: translateY(pxToRem(300));
+  }
+}

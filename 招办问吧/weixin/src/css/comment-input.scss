@@ -1,0 +1,40 @@
+/*评论输入框*/
+.comment-input-bg{
+    position:absolute;
+    z-index:1100;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background-color: $mask-bg;
+    .comment-area{
+        background-color:#FFF;
+        padding:.3rem;
+        padding-top:.1rem;
+        .comment-input{
+            padding:.2rem;
+            border:.01rem solid $border-color;
+            border-radius:.2rem;
+            textarea{
+              height:1.37rem;
+              font-size:.28rem;
+            }
+            .tips{
+                color:#686868;
+                font-size:.24rem;
+            }
+        }
+        .icon-close,.icon-sure{
+            margin-top:.2rem;
+            width:.52rem;
+            height:.52rem;
+            @include bg-size(cover);
+        }
+        .icon-close{
+            @include bg-image('../img/icon-close');
+        }
+        .icon-sure{
+            @include bg-image('../img/icon-sure');
+        }
+    }
+}

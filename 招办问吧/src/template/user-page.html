@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title id="title"></title>
+    <link rel="stylesheet" href="css/page-loading.css" />
+    <style>
+    </style>
+    <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?5da3b86d8f4fb163154ef561d3aa860b";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+
+</head>
+
+<body>
+    <!--user-page-->
+    <div id="body" class="w3-content">
+        
+    </div>
+
+    <script>
+        (function() {
+            var body = document.getElementById('body');
+            var loading = document.createElement("div");
+
+            if (!body) return;
+            body.style.display = 'none';
+            loading.id = 'page-loading';
+            loading.innerHTML = '\<div class="page-loading-icon">\
+                    <div class="rect1"></div>\
+                    <div class="rect2"></div>\
+                    <div class="rect3"></div>\
+                    <div class="rect4"></div>\
+                    <div class="rect5"></div>\
+                </div>';
+            document.body.appendChild(loading);
+        }());
+    </script>
+</body>
+
+</html>

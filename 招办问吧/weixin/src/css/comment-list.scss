@@ -1,0 +1,199 @@
+.bc-act{
+    background-color: #e5f5ec;
+}
+.path{
+    top:1.1rem !important;
+    z-index:20;
+}
+.comments{
+  margin-top:1.81rem !important;
+  padding-bottom:.9rem;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+.ell-3{
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+.back-topic{
+    margin-top:.2rem;
+    width:2rem;
+    height:.5rem;
+    color:$theme-color;
+    border:.01rem dashed $theme-color;
+    margin-right:.4rem;
+    border-radius:.1rem;
+}
+.comments-list{
+    .desc-total{
+        font-size:.28rem;
+        margin-top:.2rem;
+    }
+}
+.comments-item{
+    color:#666;
+    border-top:.01rem dashed $border-color;
+    .icon-user{
+        @include bg-size(cover);
+        width:.72rem;
+        height:.72rem;
+        background-color:#ddd;
+        border-radius:50%;
+        margin-right:.2rem;
+        .vip{
+            position:absolute;
+            bottom:0;
+            right:0;
+            font-size:.14rem;
+            background-color:$theme-color;
+            width:.2rem;
+            height:.2rem;
+            border-radius:50%;
+            border:.02rem solid #FFF;
+            color:#FFF;
+            &.creator{
+                background-color:$error-red
+            }
+        }
+    }
+    .nickname{
+        font-size:.26rem;
+        margin-bottom: .09rem;
+        .tag{
+            font-size:.2rem;
+            padding-left:.1rem;
+            padding-right:.1rem;
+            border:.02rem solid #ff0000;
+            background-color:#ff0000;
+            color:#FFF;
+            margin-left:.12rem;
+            border-radius:.05rem;
+        }
+    }
+    .time{
+        color:#999;
+        font-size:.24rem;
+        line-height: 1;
+    }
+    .txt{
+        padding-top:.16rem;
+        font-size:.24rem;
+    }
+    .question-answer{
+        padding:.4rem;
+        padding-top:.2rem;
+        padding-bottom:.2rem;
+    }
+    .answer-answer-list{
+        padding-left:.7rem;
+        // padding-bottom:.1rem;
+        .answer-answer-item{
+            font-size:.24rem;
+            padding:.4rem;
+            padding-top:.1rem;
+            padding-bottom:.1rem;
+            line-height:.3rem;
+            .nicknime{
+                color:#333;
+            }
+        }
+    }
+}
+
+.question{
+  border:none;
+  border-bottom:.01rem solid $border-color;
+  padding-left:.4rem;
+  padding-right:.4rem;
+  padding-top:.2rem;
+  padding-bottom:.2rem;
+  margin:0;
+  color:#666;
+}
+.answerIpt{
+  position:absolute;
+  bottom:.2rem;
+  border:.01rem solid $border-color;
+  background-color:#f8f8f8;
+  color:#aaa;
+  height:.7rem;
+  width:calc(100% - .6rem);
+  left:.3rem;
+  z-index:2
+}
+.order{
+    color:#666;
+    height:.70rem;
+    padding-right:.4rem;
+}
+.icon-order{
+    width:.48rem;
+    height:.48rem;
+    margin-right:.2rem;
+    @include bg-size(cover);
+    @include bg-image('../img/icon-order');
+}
+.icon-arrow-bot,.icon-share,.icon-ask,.icon-zan{
+    @include bg-size(cover);
+    width:.44rem;
+    height:.44rem;
+}
+.icon-hot,.icon-hot-act,.icon-new,.icon-new-act{
+    width:.58rem;
+    height:.38rem;
+    @include bg-size(cover);
+}
+.icon-arrow-bot{
+    margin: .1rem auto;
+    width: .30rem;
+    height: .16rem;
+}
+.icon-comment,.icon-zan{
+    margin-left:.15rem;
+    margin-right:.1rem;
+    width:.34rem;
+    height:.34rem;
+}
+/*评论输入框*/
+.comment-input-bg{
+    position:fixed;
+    z-index:1100;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background-color: $mask-bg;
+    .comment-area{
+        background-color:#FFF;
+        padding:.3rem;
+        padding-top:.1rem;
+        .comment-input{
+            padding:.2rem;
+            border:.01rem solid $border-color;
+            border-radius:.2rem;
+            textarea{
+              height:1.37rem;
+              font-size:.28rem;
+            }
+            .tips{
+                color:#686868;
+                font-size:.24rem;
+            }
+        }
+        .icon-close,.icon-sure{
+            margin-top:.2rem;
+            width:.52rem;
+            height:.52rem;
+            @include bg-size(cover);
+        }
+        .icon-close{
+            @include bg-image('../img/icon-close');
+        }
+        .icon-sure{
+            @include bg-image('../img/icon-sure');
+        }
+    }
+}

@@ -1,0 +1,59 @@
+@import "./color.scss";
+@import "./mixins.scss";
+.icon{
+  @include bg-size(cover)
+}
+
+.icon-arrow-bot{
+  @include bg-image('../img/icon-arrow-bot');
+}
+
+.icon-search{
+  @include bg-image('../img/icon-search');
+}
+.icon-search1{
+  @include bg-image('../img/icon-search1');
+}
+
+.icon-history{
+  @include bg-image('../img/icon-history');
+}
+.icon-user{
+  @include bg-image('../img/icon-user');
+}
+.icon-user-list{
+  @include bg-image('../img/icon-user-list');
+}
+
+.icon-create-topic{
+  @include bg-image('../img/icon-create-topic');
+}
+
+.icon-collect-act{
+  @include bg-image('../img/icon-collect-act');
+}
+.icon-share{
+  @include bg-image('../img/icon-share');
+}
+.icon-ask{
+  @include bg-image('../img/icon-ask');
+}
+.icon-zan{
+  @include bg-image('../img/icon-zan');
+}
+.icon-zan-act{
+  @include bg-image('../img/icon-zan-act');
+}
+.icon-comment{
+  @include bg-image('../img/icon-comment');
+}
+.icon-new-red{
+  @include bg-image('../img/icon-new-red');
+}
+.icon-collect{
+  @include bg-image('../img/icon-collect');
+}
+.icon-collect-act{
+  @include bg-image('../img/icon-collect-act');
+}
+

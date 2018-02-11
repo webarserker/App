@@ -1,0 +1,103 @@
+.topic-detail{
+    padding-left:.2rem;
+    padding-right:.2rem;
+    border-bottom:.01rem solid $border-color;  
+    .content{
+      color:#666;
+      padding:.1rem;
+      .college{
+          a{
+              font-weight:400;
+              line-height:.36rem;
+              display:block;
+              margin-left:.2rem;
+              border-bottom:.01rem solid $theme-color;
+          }
+      }
+    }
+}
+
+.banner{
+    margin:.1rem 0;
+    padding:.2rem;
+    height:4.8rem;
+    background-color: #EEE;
+    color:#FFF;
+    @include bg-size(cover); 
+    &:before{
+      position:absolute;
+      display:block;
+      left:0;
+      top:0;
+      content:"";
+      z-index:0;
+      width:100%;
+      height:100%;
+      //background:-webkit-gradient(linear,center top,center bottom,from(rgba(0,0,0,.1)), to(rgba(0,0,0,.8)));
+      @include bg-image('../img/mask-topic-detail');
+      @include bg-size(cover)
+    }
+    .create-user{
+        .icon-head{
+            background-color:#ddd;
+            width:.54rem;
+            height:.54rem;
+            border:.01rem solid #ddd;
+            border-radius:50%;
+            @include bg-size(cover)
+        }
+        .name{
+            margin-left:.2rem;
+            font-size:.26rem;
+        }
+    }
+    .link{
+        //text-decoration: underline;
+        font-size:.32rem;
+        font-weight:400;
+        line-height:.42rem;
+        display:block;
+        border-bottom:.01rem solid $theme-color;
+    }
+    .title{
+        font-size:.36rem;
+        line-height:.5rem;
+        padding-bottom:.2rem;
+    }
+    .collect{
+        .collect-area{
+            padding:.1rem;
+        }
+        .icon-collect,.icon-collect-act{
+            @include bg-size(cover);
+            width:.34rem;
+            height:.32rem;
+        }
+        .num{
+            color:#FFF;
+            margin-left:.2rem;
+        }
+    }
+    
+}
+.topic-desc{
+    //padding:.1rem;
+    font-size:.28rem;
+    text-indent: .6rem;
+    margin-bottom:.2rem;
+    word-break:break-all
+}
+.category{
+  color:$theme-color;
+  font-size:.3rem;
+  .txt{
+    line-height:.3rem;
+    border-bottom:.02rem solid $theme-color;
+  }
+}
+.icon-category{
+  @include bg-image('../img/icon-category');
+  width:.38rem;
+  height:.3rem;
+  margin-right:.1rem;
+}

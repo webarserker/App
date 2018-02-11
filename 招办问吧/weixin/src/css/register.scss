@@ -1,0 +1,87 @@
+@import '../css/color.scss';
+@import '../css/mixins.scss';
+
+  .register {
+    padding-bottom: 2rem;
+    .logo {
+      text-align: center;
+      img.logo {
+        width: 3.6rem;
+        height: 3.6rem;
+        margin-top: 1.7rem;
+      }
+    }
+    //input部分
+  .form {
+    padding: 1rem 0 0;
+    input {
+      width: 100%;
+      height:pxToRem(82);
+      padding-left: pxToRem(28);
+      font-size: 0.3rem;
+      border: none;
+
+      &.yanzheng {
+        width: auto;
+        border: none;
+      }
+    }
+    .yanzhengBtn {
+      @include btn(2.1rem, 0.6rem, 0.28rem, 4px);
+      margin:0.12rem 0.3rem 0 0.3rem;
+      color: #fff;
+      background-color: $theme-color;
+      &.grey {
+        border: 1px solid $diabled-bg;
+        background-color: $diabled-bg;
+      }
+    }
+    .error {
+      line-height: 0.6rem;
+      padding-left: 0.3rem;
+      background-color: $error-bg;
+      color:$error-red;
+      font-size: 0.26rem;
+    }
+    .regBtn {
+      @include btn(pxToRem(500),pxToRem(80),0.36rem,pxToRem(80));
+      display: block;
+      /* position: absolute; */
+      bottom: 0.7rem;
+      /* left: 50%; */
+      margin: 1rem auto -1rem;
+      /* -webkit-transform: translateX(-50%); */
+      /* transform: translateX(-50%); */
+
+      &.hover {
+        color: #fff;
+        background-color: $theme-color;
+      }
+    }
+   }
+   hr {
+    height: 1px;
+    margin: 0;
+    border: none;
+    background-color: #e0e0e0;
+   }
+   .list {
+    position: relative;
+    // border-bottom: 1px solid $border-color;
+    &:first-child {
+      // border-top: 1px solid $border-color;
+    }
+    .empty {
+      position: absolute;
+      width: .50rem;
+      height: .50rem;
+      right: .20rem;
+      top: .16rem;
+    }
+    &.box {
+      .empty {
+        right: 2.5rem;
+      }
+    }
+   }
+  }
