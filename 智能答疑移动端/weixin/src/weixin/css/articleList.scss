@@ -1,0 +1,91 @@
+@import "./common.scss";
+.second_navs {
+    // padding: 0 pxToRem(45) 0 pxToRem(30);
+    margin: 0 auto;
+    box-sizing: border-box;
+    text-align: center;
+    // border-bottom: pxToRem(3) solid $themeColor;
+    height: pxToRem(78);
+    // position: relative;
+    display: flex;
+    justify-content:space-between;
+    align-items:center;
+    position: fixed;
+    left: 0;
+    top: pxToRem(100);
+    width: 100%;
+    .second_navs_swiper{
+        flex:1;
+        overflow-x:scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+    .swiper-slide {
+        width: auto;
+        padding: 0 pxToRem(20);
+        h4 {
+            font-size: pxToRem(32);
+            line-height: pxToRem(78);
+            font-weight: normal;
+            white-space: nowrap;
+        }
+    }
+    .active {
+        h4 {
+            // color: $themeColor;
+        }
+    }
+    .second_navs_prev,
+    .second_navs_next {
+        width: pxToRem(35)!important;
+        height: pxToRem(35)!important;
+        // top: 70%;
+        background: url('../img/jif.gif') no-repeat center/cover;
+        // z-index: 999;
+        margin: 0 pxToRem(10);
+    }
+    .second_navs_prev {
+
+    }
+    .second_navs_next {
+        transform: rotate(180deg);
+    }
+}
+
+.article_list {
+    position: fixed;
+    left: 0;
+    // top: pxToRem(280);
+    width: 100%;
+    padding: 0 pxToRem(30);
+    overflow: auto;
+    box-sizing:border-box;
+    bottom: pxToRem(100);
+    &.top1{
+        top: pxToRem(300);
+    }
+    &.top2{
+        top: pxToRem(180);
+    }
+    .article_link {
+        height: pxToRem(66);
+        line-height: pxToRem(66);
+        font-size: pxToRem(26);
+        color: #333;
+        border-bottom: pxToRem(1) solid #ddd;
+        padding-left: pxToRem(5);
+        span{
+            width: 90%;
+            float: left;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow:ellipsis;
+            font-size: pxToRem(30);
+        }
+        .comicon-28 {
+            float: right;
+            font-size: pxToRem(30);
+            line-height: pxToRem(66);
+            transform:rotate(-90deg);
+        }
+    }
+}

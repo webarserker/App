@@ -1,0 +1,89 @@
+@import "./common.scss";
+header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: pxToRem(100);
+    // background: $themeColor;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 0 pxToRem(25);
+    z-index: 999;
+    .l_p{
+        color: #fff;
+        font-size: pxToRem(45);
+    }
+    .header_search_btn {
+        width: pxToRem(60);
+        height: pxToRem(60);
+        background: url('../img/search.png') center/cover;
+    }
+    .header_logo {
+        height: pxToRem(90);
+    }
+    .header_setting_btn {
+        width: pxToRem(60);
+        height: pxToRem(60);
+        background: url('../img/setting.png') center/cover;
+        position: relative;
+        .header_setting_point {
+            position: absolute;
+            width: pxToRem(15);
+            height: pxToRem(15);
+            background: #ff0000;
+            right: pxToRem(-5);
+            top: pxToRem(-3);
+            border-radius: 50%;
+        }
+    }
+    .user_items {
+        position: fixed;
+        right: pxToRem(20);
+        top: pxToRem(110);
+        z-index: 999999999999;
+        .user_item {
+            width: pxToRem(230);
+            height: pxToRem(60);
+            // background: $themeColor;
+            border-bottom: pxToRem(1) solid #666;
+            display: flex;
+            align-items: center;
+            position: relative;
+            z-index: 99999999;
+            .iconfont {
+                color: #fff;
+                font-size: pxToRem(30);
+                margin: 0 pxToRem(30);
+                font-weight: 900;
+            }
+            span {
+                color: #fff;
+                font-size: pxToRem(26);
+            }
+            s{
+                position: absolute;
+                width: pxToRem(8);
+                height: pxToRem(8);
+                border-radius: 50%;
+                background: #ff0000;
+                left: pxToRem(55);
+                top: pxToRem(17);
+            }
+        }
+        b{
+            position: absolute;
+            top: pxToRem(-10);
+            right: pxToRem(30);
+        }
+    }
+    .triangle_up {
+        width: 0;
+        height: 0;
+        border-left: pxToRem(12) solid transparent;
+        border-right: pxToRem(12) solid transparent;
+        // border-bottom: pxToRem(10) solid $themeColor;
+    }
+}

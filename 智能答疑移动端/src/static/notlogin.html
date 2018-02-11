@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>会话已过期</title>
+</head>
+<body>
+    <h1>会话已过期</h1>
+    <p>请在微信聊天窗口中重新打开链接，或者去<a id="redirect" href="login.html?redirect=">登录页面</a>进行登录。</p>
+    <script>
+
+        var decode = decodeURIComponent;
+        var _loaction = window.location;
+        var _queryString = parse(_loaction.href);
+
+        function parse(url) {
+            var result = new Array();
+            try {
+                var parts = (url.split("?")[1]).split("#");
+                url = parts[0];
+                if (parts[1]) {
+                    result["#"] = decode(parts[1]);
+                }
+                var args = url.split("&");
+                var len = args.length;
+                for (var i = 0; i < len; i++) {
+                    var param = args[i].split("=");
+                    result[param[0]] = decode(param[1]);
+                }
+            }
+            catch (e) {
+            }
+            return result;
+        }
+
+        function qs (key) {
+            if (key === "#") {
+                if (_location.hash) {
+                    return _location.hash.substr(1);
+                }
+            }
+            else {
+                return _queryString[key] || '';
+            }
+        };
+
+        var link_redirect = document.getElementById('redirect');
+        link_redirect.href += qs('redirect');
+    </script>
+</body>
+</html>

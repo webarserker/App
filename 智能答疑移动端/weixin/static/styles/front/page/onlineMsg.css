@@ -1,0 +1,47 @@
+.w560{
+	width: 560px;
+}
+.onlineMsg{
+	color: #666;
+}
+.onlineMsg .g-select{
+	width: 100%;
+}
+.onlineMsg .g-select .options{
+	width: 559px;
+	left: -9px;
+	top: 41px;
+	padding-top: 0;
+}
+.onlineMsg .g-select .value{
+	text-align: left;
+	padding-left: 5px;
+}
+.label{
+	font-size: 16px;
+}
+.label .require{
+	color: #f92c2c;
+	vertical-align: middle;
+	font-size: 18px;
+	margin-right: 3px;
+}
+.textarea{
+	width: 528px;
+	height: 88px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	font-size: 16px;
+	padding: 15px;
+}
+.btn{
+	width: 152px;
+	height: 50px;
+	line-height: 50px;
+}
+.suggestion .valErrTip{
+	top: 117px;
+}
+.pb-100{
+	padding-bottom: 100px;
+}

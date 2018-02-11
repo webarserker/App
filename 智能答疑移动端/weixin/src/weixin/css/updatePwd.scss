@@ -1,0 +1,58 @@
+@import "./common.scss";
+.container.update-pwd{
+    top: pxToRem(158);
+}
+.update-pwd{
+    color: #666;
+    padding-bottom: pxToRem(50);
+    a{
+        color: $themeColor;
+    }
+    .text img{
+        width: 100%;
+    }
+    .updatepwd-container{
+        width: pxToRem(590);
+        margin: 0 auto;
+        .mt45{
+            margin-top: pxToRem(45);
+        }
+        .mt30{
+            margin-top: pxToRem(30);
+        }
+        .ipt{
+            width: 100%;
+            border: 1px solid #a0a0a0;
+            height: pxToRem(68);
+            line-height: pxToRem(68);
+            border-radius: pxToRem(30);
+            font-size: pxToRem(26);
+            text-indent: pxToRem(25);
+        }
+        .btn{
+            width: 100%;
+            height: pxToRem(68);
+            line-height: pxToRem(68);
+            border-radius: pxToRem(30);
+            color: #fff;
+            text-align: center;
+            background-color: $themeColor;
+            font-size: pxToRem(36);
+            border: 0 none;
+        }
+        .btn.disabled{
+            opacity: 0.5;
+        }
+        .val-ipt-wp{
+            display: flex;
+        }
+        .val-ipt-wp .ipt, .val-ipt-wp .btn{
+            flex: 1;
+            vertical-align: middle;
+        }
+        .val-ipt-wp .btn{
+            font-size: pxToRem(26);
+            margin-left: pxToRem(47);
+        }
+    }
+} 

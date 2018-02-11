@@ -1,0 +1,70 @@
+@import "./common.scss";
+.msgNotice_items {
+    padding: pxToRem(30);
+    .msgNotice_item {
+        margin-bottom: pxToRem(30);
+        border-bottom: pxToRem(2) solid #ddd;
+        overflow: hidden;
+        font-size: pxToRem(28);
+        color: #666;
+        &.active {
+            .content {
+                min-height: pxToRem(100);
+                p {
+                    width: pxToRem(510);
+                    margin-bottom: pxToRem(15);
+                }
+                overflow: visible;
+            }
+        }
+        .title {
+            margin-bottom: pxToRem(15);
+            overflow: hidden;
+            span,
+            p {
+                float: left;
+            }
+            span {
+                margin-right: pxToRem(25);
+                &.unread {
+                    color: #fe3b51;
+                }
+                &.read {
+                    color: #1f9758;
+                }
+            }
+            p {
+                width: pxToRem(500);
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+        }
+        .content {
+            overflow: hidden;
+            margin-bottom: pxToRem(15);
+            position: relative;
+            height: pxToRem(40);
+            span,
+            p {
+                float: left;
+            }
+            p {
+                width: pxToRem(470);
+            }
+            span {
+                font-size: pxToRem(32);
+                color: #000;
+                position: relative;
+                top: pxToRem(-5);
+            }
+            .iconfont {
+                position: absolute;
+                z-index: 999;
+                right: pxToRem(5);
+                top: pxToRem(-5);
+                font-size: pxToRem(44);
+            }
+        }
+    }
+}

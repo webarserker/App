@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="yes" name="apple-touch-fullscreen" />
+    <meta content="telephone=no,email=no" name="format-detection" />
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <link rel="stylesheet" type="text/css" href="../lib/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="../font/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="../css/article.css">
+    <script type="text/javascript" src="../lib/jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="../lib/swiper.min.js"></script>
+</head>
+
+<body>
+    <!-- 头部 -->
+    <header>
+        <div class="header_search_btn"></div>
+        <img class="header_logo" src="http://123.56.177.92:8080/imgServer/AIGTAZ/2016-09-26/1474895929970.jpg">
+        <div class="header_setting_btn">
+            <span class="header_setting_point"></span>
+        </div>
+    </header>
+    <!-- 内容区域 -->
+    <div class="container">
+        <div class="second_navs">
+            <div class="swiper-container second_navs_swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide active">
+                        <h4>主页</h4>
+                    </div>
+                    <div class="swiper-slide">
+                        <h4>学校概况</h4>
+                    </div>
+                    <div class="swiper-slide">
+                        <h4>人才培养</h4>
+                    </div>
+                    <div class="swiper-slide">
+                        <h4>就业形势</h4>
+                    </div>
+                    <div class="swiper-slide">
+                        <h4>专业详解</h4>
+                    </div>
+                    <div class="swiper-slide">
+                        <h4>招生简章</h4>
+                    </div>
+                    <div class="swiper-slide">
+                        <h4>历年录取</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-button-prev second_navs_prev"></div>
+            <div class="swiper-button-next second_navs_next"></div>
+        </div>
+        <div class="swiper-container article_swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide active">
+                    <div class="article_list">
+                        <div class="article_link">
+                        	<span>学习简介</span>
+                        	<i class="iconfont icon-yidongduanicon-"></i>
+                        </div>
+                        <div class="article_link">
+                        	<span>基本信息</span>
+                        	<i class="iconfont icon-yidongduanicon-"></i>
+                        </div>
+                        <div class="article_link">
+                        	<span>现任领导</span>
+                        	<i class="iconfont icon-yidongduanicon-"></i>
+                        </div>
+                        <div class="article_link">
+                        	<span>学习简介</span>
+                        	<i class="iconfont icon-yidongduanicon-"></i>
+                        </div>
+                        <div class="article_link">
+                        	<span>基本信息</span>
+                        	<i class="iconfont icon-yidongduanicon-"></i>
+                        </div>
+                        <div class="article_link">
+                        	<span>现任领导</span>
+                        	<i class="iconfont icon-yidongduanicon-"></i>
+                        </div>
+                        <div class="article_link">
+                        	<span>学习简介</span>
+                        	<i class="iconfont icon-yidongduanicon-"></i>
+                        </div>
+                        <div class="article_link">
+                        	<span>基本信息</span>
+                        	<i class="iconfont icon-yidongduanicon-"></i>
+                        </div>
+                        <div class="article_link">
+                        	<span>现任领导</span>
+                        	<i class="iconfont icon-yidongduanicon-"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <h4>学校概况</h4>
+                </div>
+                <div class="swiper-slide">
+                    <h4>人才培养</h4>
+                </div>
+                <div class="swiper-slide">
+                    <h4>就业形势</h4>
+                </div>
+                <div class="swiper-slide">
+                    <h4>专业详解</h4>
+                </div>
+                <div class="swiper-slide">
+                    <h4>招生简章</h4>
+                </div>
+                <div class="swiper-slide">
+                    <h4>历年录取</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- footer -->
+    <footer>
+        <div class="footer_tab_item active">
+            <i class="iconfont icon-yidongduanicon-11"></i>
+            <span>首页</span>
+        </div>
+        <div class="footer_tab_item">
+            <i class="iconfont icon-yidongduanicon-3"></i>
+            <span>快捷查询</span>
+        </div>
+        <div class="footer_tab_item footer_tabs_item">
+            <span class="footer_tabs_icon"></span>
+        </div>
+        <div class="footer_tab_item">
+            <i class="iconfont icon-yidongduanicon-15"></i>
+            <span>特殊招生专题</span>
+        </div>
+        <div class="footer_tab_item">
+            <i class="iconfont icon-yidongduanicon-14"></i>
+            <span>常见问题</span>
+        </div>
+    </footer>
+</body>
+<script type="text/javascript">
+var second_navs_swiper = new Swiper('.second_navs_swiper', {
+    slidesPerView: 'auto',
+    watchSlidesProgress: true,
+    watchSlidesVisibility: true,
+    onTap: function() {
+        // $('.swiper-slide').eq(second_navs_swiper.clickedIndex).addClass('active').siblings().removeClass('active');
+        article_swiper.slideTo( second_navs_swiper.clickedIndex);
+    }
+})
+var article_swiper = new Swiper('.article_swiper', {
+    resistanceRatio: 0,
+    onSlideChangeStart: function() {
+        updateNavPosition();
+    }
+});
+
+function updateNavPosition() {
+    var currentIndex = article_swiper.activeIndex;
+    $('.second_navs_swiper .active').removeClass('active');
+    var activeNav = $('.second_navs_swiper .swiper-slide').eq(article_swiper.activeIndex).addClass('active');
+    if (!activeNav.hasClass('swiper-slide-visible')) {
+        if (activeNav.index() > second_navs_swiper.activeIndex) {
+            var thumbsPerNav = Math.floor(second_navs_swiper.width / activeNav.width()) - 1; 
+            second_navs_swiper.slideTo(activeNav.index() - thumbsPerNav)
+        } else {
+            second_navs_swiper.slideTo(activeNav.index())
+        }
+    }
+}
+</script>
+
+</html>

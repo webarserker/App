@@ -1,0 +1,115 @@
+@function pxToRem($px) {
+    @return $px / 75 * 1rem;
+}
+
+$themeColor: #0795e8;
+@mixin font-dpr($font-size) {
+    font-size: $font-size;
+    [data-dpr="2"] & {
+        font-size: $font-size * 2;
+    }
+    [data-dpr="3"] & {
+        font-size: $font-size * 3;
+    }
+}
+
+header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: pxToRem(100);
+    background: $themeColor;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 0 pxToRem(25);
+    .header_search_btn {
+        width: pxToRem(60);
+        height: pxToRem(60);
+        background: url('../img/search.png') center/cover;
+    }
+    .header_logo {
+        height: pxToRem(90);
+        width: pxToRem(450);
+    }
+    .header_setting_btn {
+        width: pxToRem(60);
+        height: pxToRem(60);
+        background: url('../img/setting.png') center/cover;
+        position: relative;
+        .header_setting_point {
+            position: absolute;
+            width: pxToRem(15);
+            height: pxToRem(15);
+            background: #ff0000;
+            right: pxToRem(-5);
+            top: pxToRem(-3);
+            border-radius: 50%;
+        }
+    }
+}
+
+.container {
+    position: absolute;
+    top: pxToRem(100);
+    bottom: pxToRem(98);
+    width: 100%;
+    overflow: auto;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: pxToRem(98);
+    width: 100%;
+    display: flex;
+    background: #eeeeee;
+    .footer_tab_item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        box-sizing: border-box;
+        padding: pxToRem(8) 0;
+        img {
+            width: pxToRem(45);
+            height: pxToRem(45);
+        }
+        span {
+            @include font-dpr(10);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+    .iconfont{
+        color: #000;
+        font-size: pxToRem(40);
+    }
+    .active {
+        background: $themeColor;
+        span {
+            color: #fff;
+        }
+        .iconfont{
+            color: #fff;
+        }
+    }
+    .footer_tabs_item {
+        flex: 1;
+        justify-content: center;
+        padding: 0;
+        .footer_tabs_icon {
+            width: pxToRem(98);
+            height: pxToRem(98);
+            background: url('../img/ellipsis.png') center no-repeat;
+            background-size: pxToRem(50);
+            border-radius: 50%;
+            border: pxToRem(1) solid #ddd;
+        }
+    }
+}

@@ -1,0 +1,58 @@
+@import "./common.scss";
+.onlineAsk_items {
+    padding: pxToRem(30) pxToRem(40);
+    .onlineAsk_item {
+        overflow: hidden;
+        margin-bottom: pxToRem(30);
+        img {
+            width: pxToRem(60);
+            height: pxToRem(60);
+            border-radius: pxToRem(10);
+            float: left;
+            margin-right: pxToRem(30);
+            margin-top: pxToRem(10);
+        }
+        p {
+            float: left;
+            max-width: pxToRem(500);
+            padding: pxToRem(20);
+            border-radius: pxToRem(20);
+            box-sizing: border-box;
+            background: #eee;
+            border: pxToRem(1) solid #ddd;
+            box-shadow: 0 0 pxToRem(10) #ddd;
+            font-size: pxToRem(28);
+            color: #333;
+            position: relative;
+            b {
+                position: absolute;
+                left: pxToRem(-20);
+                top: 40%;
+                width: 0;
+                height: 0;
+                border-bottom: 0.2rem solid #ddd;
+                border-left: 0.2rem solid transparent;
+                border-right: 0.2rem solid transparent;
+                transform: rotate(-90deg);
+            }
+        }
+        &.right {
+            img {
+                float: right;
+                margin-right: 0;
+                margin-left: pxToRem(30);
+            }
+            p {
+                float: right;
+                background: #0e9ff5;
+                color: #fff;
+                b {
+                    border-bottom: 0.2rem solid #0e9ff5;
+                    transform: rotate(90deg);
+                    left: auto;
+                    right: pxToRem(-20);
+                }
+            }
+        }
+    }
+}

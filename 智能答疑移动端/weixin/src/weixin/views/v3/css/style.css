@@ -1,0 +1,88 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?x74y7v');
+  src:  url('fonts/icomoon.eot?x74y7v#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?x74y7v') format('truetype'),
+    url('fonts/icomoon.woff?x74y7v') format('woff'),
+    url('fonts/icomoon.svg?x74y7v#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-xx-v2:before {
+  content: "\e913";
+}
+.icon-fcenter-v2:before {
+  content: "\e900";
+}
+.icon-zndy-v2:before {
+  content: "\e901";
+}
+.icon-f2-v2:before {
+  content: "\e902";
+}
+.icon-close-v2:before {
+  content: "\e903";
+}
+.icon-rcpy-v2:before {
+  content: "\e904";
+}
+.icon-touchmove-v2:before {
+  content: "\e905";
+}
+.icon-zuojiantou-v2:before {
+  content: "\e906";
+}
+.icon-jiuye-v2:before {
+  content: "\e907";
+}
+.icon-keji-v2:before {
+  content: "\e908";
+}
+.icon-huojian-v2:before {
+  content: "\e909";
+}
+.icon-jhlq-v2:before {
+  content: "\e90a";
+}
+.icon-shoushi-v2:before {
+  content: "\e90b";
+}
+.icon-lingdang-v2:before {
+  content: "\e90c";
+  color: #666;
+}
+.icon-f3-v2:before {
+  content: "\e90d";
+}
+.icon-f4-v2:before {
+  content: "\e90e";
+}
+.icon-yxjs-v2:before {
+  content: "\e90f";
+  color: #f120ff;
+}
+.icon-zcjd-v2:before {
+  content: "\e910";
+}
+.icon-f1-v2:before {
+  content: "\e911";
+}
+.icon-zyjs-v2:before {
+  content: "\e912";
+}

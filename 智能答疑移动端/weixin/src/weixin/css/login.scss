@@ -1,0 +1,74 @@
+@import "./common.scss";
+.container.login{
+    top: pxToRem(158);
+}
+.login{
+    color: #666;
+    padding-bottom: pxToRem(50);
+    a{
+        color: $themeColor;
+    }
+    .text img{
+        width: 100%;
+    }
+    .login-container{
+        width: pxToRem(590);
+        margin: 0 auto;
+        .ipt{
+            width: 100%;
+            border: 1px solid #a0a0a0;
+            height: pxToRem(68);
+            line-height: pxToRem(68);
+            border-radius: pxToRem(30);
+            margin-top: pxToRem(30);
+            font-size: pxToRem(26);
+            text-indent: pxToRem(25);
+        }
+        .chk-ipt, .chk-lab{
+            vertical-align: middle;
+        }
+        .chk-ipt{
+            /*-webkit-appearance: none;*/
+            width: pxToRem(25);
+            height: pxToRem(25);
+            border: 1px solid #a0a0a0;
+            vertical-align: text-bottom;
+            margin-right: pxToRem(15);
+        }
+        .btn{
+            width: 100%;
+            height: pxToRem(68);
+            line-height: pxToRem(68);
+            border-radius: pxToRem(30);
+            color: #fff;
+            text-align: center;
+            background-color: $themeColor;
+            font-size: pxToRem(36);
+            border: 0 none;
+            margin-top: pxToRem(35);
+        }
+        .btn.disabled{
+            opacity: 0.5;
+        }
+        a{
+            text-decoration: underline; 
+        }
+        .login-help, .other-link{
+            display: flex;
+            padding: 0 pxToRem(20);
+        }
+        .login-help{
+            margin-top: pxToRem(20);
+            align-items:center;
+        }
+        .other-link{
+            margin-top: pxToRem(25);
+        }
+        .chk-lab, .forget-psd, .login-webchat, .sign-up{
+            flex: 1;
+        }
+        .forget-psd, .sign-up{
+            text-align: right;
+        }
+    }
+} 

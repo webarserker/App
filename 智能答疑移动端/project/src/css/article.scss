@@ -1,0 +1,62 @@
+@import "./common.scss";
+.second_navs {
+    padding: 0 pxToRem(45) 0 pxToRem(30);
+    margin: 0 auto;
+    box-sizing: border-box;
+    text-align: center;
+    border-bottom: pxToRem(3) solid $themeColor;
+    height: pxToRem(58);
+    position: relative;
+    .swiper-slide {
+        width: 20%;
+        h4 {
+            font-size: pxToRem(28);
+            line-height: pxToRem(58);
+            font-weight: normal;
+        }
+    }
+    .active {
+        h4 {
+            color: $themeColor;
+        }
+    }
+    .second_navs_prev,
+    .second_navs_next {
+        width: pxToRem(27);
+        height: pxToRem(27);
+        background: url('../img/more.png') no-repeat center/cover;
+        top: pxToRem(46);
+        z-index: 999;
+    }
+    .second_navs_prev {
+        transform: rotate(90deg);
+    }
+    .second_navs_next {
+        transform: rotate(-90deg);
+    }
+}
+
+.article_swiper{
+	position: absolute;
+	top: pxToRem(58);
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	overflow: auto;
+	.article_list{
+		padding: 0 pxToRem(30);
+		.article_link{
+			height: pxToRem(66);
+			line-height:pxToRem(66);
+			font-size: pxToRem(26); 
+			color: #333;
+			border-bottom: pxToRem(1) solid #ddd;
+			padding-left: pxToRem(5);
+			.icon-yidongduanicon-{
+				float: right;
+				transform:rotate(180deg);
+				font-size: pxToRem(30);
+			}
+		}
+	}
+}

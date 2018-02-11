@@ -1,0 +1,131 @@
+.unslider{overflow:auto;margin:0;padding:0}.unslider-wrap{position:relative}.unslider-wrap.unslider-carousel>li{float:left}.unslider-vertical>ul{height:100%}.unslider-vertical li{float:none;width:100%}.unslider-fade{position:relative}.unslider-fade .unslider-wrap li{position:absolute;left:0;top:0;right:0;z-index:8}.unslider-fade .unslider-wrap li.unslider-active{z-index:10}.unslider li,.unslider ol,.unslider ul{list-style:none;margin:0;padding:0;border:none}.unslider-arrow{position:absolute;left:20px;z-index:2;cursor:pointer}.unslider-arrow.next{left:auto;right:20px}
+
+/**
+ *   Here's where everything gets included. You don't need
+ *   to change anything here, and doing so might break
+ *   stuff. Here be dragons and all that.
+ */
+/**
+ *   Default variables
+ *
+ *   While these can be set with JavaScript, it's probably
+ *   better and faster to just set them here, compile to
+ *   CSS and include that instead to use some of that
+ *   hardware-accelerated goodness.
+ */
+.unslider-nav ol {
+  list-style: none;
+  text-align: center;
+}
+.unslider-nav ol li {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin: 0 4px;
+  background: transparent;
+  border-radius: 5px;
+  overflow: hidden;
+  text-indent: -999em;
+  border: 2px solid #fff;
+  cursor: pointer;
+}
+.unslider-nav ol li.unslider-active {
+  background: #fff;
+  cursor: default;
+}
+
+.banner {
+  /*background: #5b4d3d none repeat scroll 0 0;*/
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 18px;
+  line-height: 24px;
+  overflow: auto;
+  position: relative;
+  text-align: center;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  overflow: hidden;
+}
+.banner ul {
+  list-style: outside none none;
+  width: 300%;
+}
+.banner ul li {
+  background-size: 100% 100%;
+  box-shadow: 0 -3px 6px rgba(0, 0, 0, 0.1) inset;
+  display: block;
+  float: left;
+  width: 33%;
+  height: 250px;
+  background-size: cover;
+  background-position: center center;
+}
+.banner ul li a{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.banner .inner {
+  padding: 160px 0 110px;
+}
+.banner h1, .banner h2 {
+  color: #fff;
+  font-size: 40px;
+  line-height: 52px;
+}
+.banner .btn {
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 5px;
+  clear: both;
+  color: #fff;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 25px 0 0;
+  padding: 9px 22px 7px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.banner .btn:hover {
+  background: rgba(255, 255, 255, 0.05) none repeat scroll 0 0;
+}
+.banner .btn:active {
+  filter: drop-shadow(0px -1px 2px rgba(0, 0, 0, 0.5));
+}
+.banner .btn, .banner .dot {
+  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+}
+.banner .dots {
+  bottom: 20px;
+  left: 0;
+  position: absolute;
+  right: 0;
+}
+.banner .dots li {
+  border: 2px solid #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-block;
+  height: 10px;
+  margin: 0 4px;
+  opacity: 0.4;
+  text-indent: -999em;
+  transition: background 0.5s ease 0s, opacity 0.5s ease 0s;
+  width: 10px;
+}
+.banner .dots li.active {
+  background: #fff none repeat scroll 0 0;
+  opacity: 1;
+}
+.banner .arrows {
+  bottom: 20px;
+  color: #fff;
+  position: absolute;
+  right: 20px;
+}
+.banner .arrow {
+  cursor: pointer;
+  display: inline;
+  padding-left: 10px;
+}

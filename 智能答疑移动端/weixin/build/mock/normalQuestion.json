@@ -1,0 +1,61 @@
+{
+    "code": "000000",
+    "message": "成功",
+    "data": {
+        "secondCatId": 1828,
+        "threeCatId": 1852,
+        "menu": [{
+                "flag": 0,
+                "name": "报告典型问题",
+                "catId": 1852,
+                "children": [{
+                        "name": "综合类典型问题",
+                        "catId": 1865,
+                        "icon": "",
+                        "imgUrl": "",
+                        "contentList": [
+                            { "title": "体检特殊要求", "infoId": "2484" },
+                            { "title": "平行志愿也有风险，最好服从专业调剂", "infoId": "2485" },
+                            { "title": "体检特殊要求2", "infoId": "2486" },
+                            { "title": "平行志愿也有风险，最好服从专业调剂2", "infoId": "2487" }
+                        ]
+                    },
+                    { "name": "工科类典型问题", "catId": 1864, "icon": "", "imgUrl": "", "contentList": null },
+                    { "name": "理科类典型问题", "catId": 1863, "icon": "", "imgUrl": "", "contentList": null },
+                    { "name": "艺术类典型问题", "catId": 1861, "icon": "", "imgUrl": "", "contentList": null },
+                    { "name": "文科类典型问题", "catId": 1862, "icon": "", "imgUrl": "", "contentList": null }, {
+                        "name": "农科典型问题",
+                        "catId": 1866,
+                        "icon": "",
+                        "imgUrl": "",
+                        "contentList": [
+                            { "title": "体检特殊要求", "infoId": "2484" },
+                            { "title": "平行志愿也有风险，最好服从专业调剂", "infoId": "2485" },
+                            { "title": "体检特殊要求2", "infoId": "2486" },
+                            { "title": "平行志愿也有风险，最好服从专业调剂2", "infoId": "2487" }
+                        ]
+                    }
+                ],
+                "contentList": null
+            }, {
+                "flag": 1,
+                "name": "最典型疑问专题",
+                "catId": 1853,
+                "children": [],
+                "contentList": [
+                    { "title": "体检特殊要求", "infoId": "2484" },
+                    { "title": "平行志愿也有风险，最好服从专业调剂", "infoId": "2485" },
+                    { "title": "体检特殊要求2", "infoId": "2486" },
+                    { "title": "平行志愿也有风险，最好服从专业调剂2", "infoId": "2487" }
+                ]
+            },
+            { "flag": 1, "name": "能否录取/可否报考", "catId": 1854, "children": [], "contentList": null },
+            { "flag": 1, "name": "单科要求（口语考试）", "catId": 1855, "children": [], "contentList": null },
+            { "flag": 1, "name": "就读条件与考试", "catId": 1856, "children": [], "contentList": null },
+            { "flag": 1, "name": "学校专业/专业介绍", "catId": 1857, "children": [], "contentList": null },
+            { "flag": 1, "name": "历史在答疑参考", "catId": 1858, "children": [], "contentList": null },
+            { "flag": 1, "name": "2018年招录在线答疑", "catId": 1859, "children": [], "contentList": null },
+            { "flag": 1, "name": "各院系相关部门咨询电话", "catId": 1860, "children": [], "contentList": null }
+        ]
+    }
+}

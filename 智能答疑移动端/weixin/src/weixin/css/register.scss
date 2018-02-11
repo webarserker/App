@@ -1,0 +1,99 @@
+@import "./common.scss";
+.container.register{
+    top: pxToRem(158);
+}
+.register{
+    color: #666;
+    padding-bottom: pxToRem(50);
+    a{
+        color: $themeColor;
+    }
+    .register-container{
+        width: pxToRem(590);
+        margin: 0 auto;
+        .mt45{
+            margin-top: pxToRem(45);
+        }
+        .mt30{
+            margin-top: pxToRem(30);
+        }
+        .ipt{
+            width: 100%;
+            border: 1px solid #a0a0a0;
+            height: pxToRem(68);
+            line-height: pxToRem(68);
+            border-radius: pxToRem(30);
+            font-size: pxToRem(26);
+            text-indent: pxToRem(25);
+        }
+        .select{
+            background-color: $themeColor;
+            color: #fff;
+            -webkit-appearance: none;
+        }
+        .btn{
+            width: 100%;
+            height: pxToRem(68);
+            line-height: pxToRem(68);
+            border-radius: pxToRem(30);
+            color: #fff;
+            text-align: center;
+            background-color: $themeColor;
+            font-size: pxToRem(36);
+            border: 0 none;
+        }
+        .btn.disabled{
+            opacity: 0.5;
+        }
+        .ipt-wp{
+            display: flex;
+            align-items: center;
+            .col-name{
+                display: flex;
+                align-items: center;
+                flex: 1;
+            }
+            .col-ipt{
+                flex: 9;
+                display: flex;
+                align-items: center;
+                .col1{
+                    flex: 2;
+                }
+                .col2{
+                    flex: 8;
+                }
+            }
+        }
+        .ipt-wp.justy{
+            .col1{
+                flex: 5;
+            }
+            .col2{
+                flex: 5;
+                margin-left: pxToRem(47);
+            }
+            .btn{
+                font-size: pxToRem(26);
+            }
+        }
+        .select-wp{
+            .col-ipt{
+                position: relative;
+            }
+            .icon1-pull{
+                position: absolute;
+                right: pxToRem(30);
+                top: 0;
+                line-height: pxToRem(68);
+                color: #fff;
+
+            }
+        }
+        .icon1-name{
+            color: $themeColor;
+            font-size: pxToRem(42);
+            margin-right: pxToRem(10);
+        }
+    }
+} 

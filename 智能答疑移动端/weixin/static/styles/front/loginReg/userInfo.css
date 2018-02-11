@@ -1,0 +1,83 @@
+.w570{
+	width: 570px;
+}
+.w1000{
+	width: 1000px;
+}
+.w182{
+	width: 202px;
+}
+.w200{
+	width: 200px;
+}
+.pb-100{
+	padding-bottom: 100px;
+}
+.iptBox.g-ipt{
+	border: 0;
+	padding: 0;
+}
+.iptBox.g-ipt .iptWp{
+	height: 50px;
+	line-height: 50px;
+}
+.iptBox.g-ipt .ipt{
+	padding: 5px;
+	width: 330px;
+}
+.iptBox .g-select{
+	height: 35px;
+	line-height: 35px;
+	width: 320px;
+	padding: 5px 15px 5px 5px;
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+	vertical-align: middle;
+}
+.iptBox .g-select .value{
+	background:url(../../../image/front/page/arrow.png) 310px center no-repeat;
+}
+.iptBox .g-select .options{
+	left: -1px;
+	width: 340px;
+}
+.iptBox .g-select.zindex1{
+	z-index: 100;
+}
+.iptBox .g-select.zindex2{
+	z-index: 99;
+}
+.iptBox .g-select.zindex3{
+	z-index: 98;
+}
+.iptBox .placeholder{
+	font-size: 18px;
+	color: #b2b2b2;
+	vertical-align: middle;
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+	width: 100px;
+}
+.iptBox .ipt{
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+.valErrTip{
+	left: 130px;
+}
+.btn{
+	width: 164px;
+	height: 48px;
+	line-height: 48px;
+	margin-left: 10px;
+}
+.btn-cancle{
+	background-color: #fff;
+	color: #3b8df7;
+}
+a.btn-cancle:hover{
+	background-color: #fff;
+	color: #3b8df7;
+}

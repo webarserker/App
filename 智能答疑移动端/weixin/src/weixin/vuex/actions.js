@@ -1,0 +1,42 @@
+// import { CHANGE_SHOWFOOTER} from "./mutation-types"
+export const actions = {
+	CHANGE_SHOWFOOTER({commit},flag){
+		commit('CHANGE_SHOWFOOTER',flag)
+	},
+	CHANGE_FOOTERTAB({commit},idx){
+		commit('CHANGE_FOOTERTAB',idx)
+	},
+	CHANGE_SECONDNAVDATA({commit},list){
+		commit('CHANGE_SECONDNAVDATA',list)
+	},
+	CHANGE_SUBNAVDATA({commit},list){
+		commit('CHANGE_SUBNAVDATA',list)
+	},
+	CHANGE_SUBCONDATA({commit},list){
+		commit('CHANGE_SUBCONDATA',list)
+	},
+	CHANGE_SCHLISTTAB({commit},list){
+		commit('CHANGE_SCHLISTTAB',list)
+	},
+	CHANGE_COLLECTEDSCHNUM({commit},num){
+		commit('CHANGE_COLLECTEDSCHNUM',num)
+	},
+	CHANGE_SEARCHHISTORUARR({commit},keyword){
+		commit('CHANGE_SEARCHHISTORUARR',keyword)
+	},
+	CHANGE_SHOWFILTER({commit},show){
+		commit('CHANGE_SHOWFILTER',show)
+	},
+	CHANGE_FILTERPROVINCE({commit},filter){
+		commit('CHANGE_FILTERPROVINCE',filter)
+	},
+	CHANGE_FILTERSHCOOL({commit},filter){
+		commit('CHANGE_FILTERSHCOOL',filter)
+	},
+	CHANGE_FILTERRECRUIT({commit},filter){
+		commit('CHANGE_FILTERRECRUIT',filter)
+	},
+	CHANGE_SEARCHKEYWORD({commit},keyword){
+		commit('CHANGE_SEARCHKEYWORD',keyword)
+	}
+}

@@ -1,0 +1,76 @@
+@import "./common.scss";
+.menuball {
+    user-select:none;
+    width: pxToRem(95);
+    height: pxToRem(95);
+    border-radius: 50%;
+    position: fixed;
+    z-index: 9999;
+    opacity: .5;
+    right: pxToRem(-50);
+    // top: pxToRem(470);
+    transition: all .4s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation:move6 1.3s infinite;
+    border: 1px solid white;
+    &.active {
+        right: pxToRem(10);
+        opacity: .7;
+        animation:none;
+    }
+    .icon_close {
+        font-size: pxToRem(30);
+        color: #fff;
+    }
+    .icon_init{
+        font-size:pxToRem(30);
+        color:#fff;
+    }
+    .icon_robot,
+    .icon_phone,
+    .icon_msg,
+    .icon2_decode {
+        position: absolute;
+        width: pxToRem(80);
+        height: pxToRem(80);
+        // color: rgba(230, 230, 230, .8);
+        color: rgb(230, 230, 230);
+        border-radius: 50%;
+        font-size: pxToRem(60);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        left: pxToRem(100);
+        top: 0;
+        transition: all .4s;
+    }
+    .icon_robot.active {
+    	opacity: .9;
+        top: pxToRem(-130);
+        left: pxToRem(-30);
+    }
+    .icon_phone.active{
+    	opacity: .9;
+    	top: pxToRem(-46);
+    	left: pxToRem(-120);
+    }
+    .icon_msg.active {
+    	opacity: .9;
+        top: pxToRem(62);
+        left: pxToRem(-120);
+    }
+    .icon2_decode.active{
+        opacity: .9;
+        top: pxToRem(142);
+        left: pxToRem(-30);
+    }
+}
+
+@keyframes move6{
+    0% {transform:translateX(0);opacity: .5;}
+    50% {transform:translateX(pxToRem(-30));opacity: .8;}
+    100% {transform:translateX(0);opacity: .5;}
+}

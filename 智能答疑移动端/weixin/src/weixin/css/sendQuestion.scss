@@ -1,0 +1,35 @@
+@import "./common.scss";
+
+.sendQuestion_container{
+	p{
+		padding: pxToRem(30);
+		font-size: pxToRem(30);
+		color: #333;
+	}
+	textarea{
+		width: pxToRem(640);
+		height: pxToRem(380);
+		box-sizing:border-box;
+		padding: pxToRem(30);
+		margin: 0 auto;
+		color: #999;
+		background: #fbfbfb;
+		border:pxToRem(2) solid #ddd;
+		border-radius: pxToRem(15);
+		display: block;
+		resize:none;
+		margin-bottom: pxToRem(280);
+	}
+	button{
+		width: pxToRem(640);
+		height: pxToRem(70);
+		text-align: center;
+		line-height: pxToRem(70);
+		color: #fff;
+		font-size: 0.48rem;
+		border-radius: pxToRem(15);
+		margin: 0 auto;
+		display: block;
+		border:0;
+	}
+}
