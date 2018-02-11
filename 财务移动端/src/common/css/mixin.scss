@@ -1,0 +1,128 @@
+@function pxToRem($px) {
+  @return $px / 75 * 1rem;
+}
+$themeColor: #A8372A;
+@mixin font-dpr($font-size) {
+  font-size: $font-size;
+  [data-dpr="2"] & {
+    font-size: $font-size * 2;
+  }
+  [data-dpr="3"] & {
+    font-size: $font-size * 3;
+  }
+}
+@mixin border-1px($color) {
+  position: relative;
+  &:after {
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid $color;
+    content: ' ';
+  }
+  //@media (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {
+  //  position: relative;
+  //  &:after {
+  //    display: block;
+  //    position: absolute;
+  //    left: 0;
+  //    bottom: 0;
+  //    width: 100%;
+  //    border-top: 1px solid $color;
+  //    content: ' ';
+  //    -webkit-transform: scaleY(0.5);
+  //    transform: scaleY(0.5);
+  //  }
+  //}
+  //@media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
+  //  position: relative;
+  //  &:after {
+  //    display: block;
+  //    position: absolute;
+  //    left: 0;
+  //    bottom: 0;
+  //    width: 100%;
+  //    border-top: 1px solid $color;
+  //    content: ' ';
+  //    -webkit-transform: scaleY(0.7);
+  //    transform: scaleY(0.7);
+  //  }
+  //}
+}
+
+@mixin borderTop-1px($color) {
+  position: relative;
+  &:before {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    border-top: 1px solid $color;
+    content: ' ';
+  }
+  //@media (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {
+  //  position: relative;
+  //  &:before {
+  //    display: block;
+  //    position: absolute;
+  //    left: 0;
+  //    top: 0;
+  //    width: 100%;
+  //    border-top: 1px solid $color;
+  //    content: ' ';
+  //    -webkit-transform: scaleY(0.5);
+  //    transform: scaleY(0.5);
+  //  }
+  //}
+  //@media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
+  //  position: relative;
+  //  &:before {
+  //    display: block;
+  //    position: absolute;
+  //    left: 0;
+  //    top: 0;
+  //    width: 100%;
+  //    border-top: 1px solid $color;
+  //    content: ' ';
+  //    -webkit-transform: scaleY(0.7);
+  //    transform: scaleY(0.7);
+  //  }
+  //}
+}
+
+@mixin border-none {
+  &:after {
+    display: none;
+  }
+}
+
+// 背景图片
+//.bg-image(@url) {
+//  background-image: url(@url + "@2x.png");
+//  @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
+//    background-image: url(@url + "@3x.png");
+//  }
+//}
+
+// 不换行
+@mixin no-wrap {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+// 扩展点击区域
+@mixin extend-click {
+  position: relative;
+  &:after {
+    content: '';
+    position: absolute;
+    top: pxToRem(-10);
+    left: pxToRem(-10);
+    right: pxToRem(-10);
+    bottom: pxToRem(-10);
+  }
+}
